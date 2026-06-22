@@ -1,0 +1,25 @@
+name: Morning Edition Auto-Generator
+on:
+  schedule:
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run generator
+        run: python generate_report.py
+        env:
+          ALPHAPAI_TOKEN: ${{ secrets.ALPHAPAI_TOKEN }}
+          ALPHAPAI_VT_TOKEN: ${{ secrets.ALPHAPAI_VT_TOKEN }}
+      - name: Update index and push
+        run: |
+          git config user.email "ally@allyhub.ai"
+          git config user.name "Ally Bot"
+          TODAY=$(TZ='Asia/Shanghai' date +%Y%m%d)
+          AM_FILE="am-${TODAY}.html"
+          if [ -f "$AM_FILE" ]; then cp "$AM_FILE" index.html && git add "$AM_FILE" index.html && git commit -m "Auto: 晨会版 $TODAY" && git push origin main; else echo "No file generated"; fi
