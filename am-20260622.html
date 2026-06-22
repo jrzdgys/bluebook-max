@@ -450,26 +450,34 @@
         // Update all stock rows
         document.querySelectorAll('[data-stock]').forEach(el => {
             const name = el.getAttribute('data-stock');
-            const field = el.getAttribute('data-field');
+            let field = el.getAttribute('data-field');
             const data = priceMap[name];
             if (!data) return;
+
+            // Find target: topic rows have data-field on child .tsc
+            let target = el;
+            if (!field) {
+                const child = el.querySelector('[data-field]');
+                if (child) { target = child; field = child.getAttribute('data-field'); }
+                else { lastPrices[name] = 0; return; }
+            }
 
             const newPct = data.pct;
             const oldPct = lastPrices[name];
 
             if (field === 'pct') {
                 const pctStr = (newPct >= 0 ? '+' : '') + newPct.toFixed(2) + '%';
-                if (el.textContent.trim() !== pctStr) {
-                    el.textContent = pctStr;
-                    el.className = el.className.replace(/\bup\b|\bdn\b/g, '').trim();
-                    el.className += ' ' + (newPct >= 0 ? 'up' : 'dn');
+                if (target.textContent.trim() !== pctStr) {
+                    target.textContent = pctStr;
+                    target.className = target.className.replace(/\bup\b|\bdn\b/g, '').trim() + ' ' + (newPct >= 0 ? 'up' : 'dn');
 
-                    // Flash effect
-                    if (oldPct !== undefined && oldPct !== newPct) {
-                        const row = el.closest('.tsr, .asc');
+                    // Visual flash on parent row
+                    if (oldPct !== undefined && Math.abs(oldPct - newPct) > 0.001) {
+                        const row = target.closest('.tsr, .asc');
                         if (row) {
-                            row.classList.add(newPct > oldPct ? 'flash-up' : 'flash-dn');
-                            setTimeout(() => row.classList.remove('flash-up', 'flash-dn'), 600);
+                            row.style.transition = 'background 0.15s';
+                            row.style.background = newPct > oldPct ? '#C4433A18' : '#3D482618';
+                            setTimeout(() => { row.style.background = ''; }, 900);
                         }
                         changes++;
                     }
