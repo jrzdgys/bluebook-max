@@ -26,4 +26,5 @@ jobs:
           git config user.name "Ally Bot"
           TODAY=$(TZ='Asia/Shanghai' date +%Y%m%d)
           AM_FILE="am-${TODAY}.html"
-          if [ -f "$AM_FILE" ]; then cp "$AM_FILE" index.html && git add "$AM_FILE" index.html && git commit -m "Auto: 晨会版 $TODAY" && git push origin main; else echo "No file generated"; fi
+          ls -la am-*.html 2>/dev/null || echo "No am-*.html files"
+          if [ -f "$AM_FILE" ]; then cp "$AM_FILE" index.html && git add "$AM_FILE" index.html && git commit -m "Auto: 晨会版 $TODAY" && git push origin main || echo "Push failed"; else echo "No file $AM_FILE generated - skipping push"; fi
