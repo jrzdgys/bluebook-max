@@ -41,7 +41,6 @@
 | `md-YYYYMMDD.html` | 午间版 |
 | `pm-YYYYMMDD.html` | 晚间版 |
 | `gl-YYYYMMDD.html` | 全球版 |
-| `wk-YYYYMMDD.html` | 周报 |
 
 **示例：** `am-20260622.html` = 2026年6月22日 晨会版
 
