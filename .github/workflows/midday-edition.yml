@@ -1,7 +1,7 @@
-name: 🌅 晨会版 Auto-Generator
+name: ☀️ 午间版 Auto-Generator
 on:
   schedule:
-    - cron: "0 23 * * *"  # 7:00 CST = 23:00 UTC
+    - cron: "0 4 * * *"  # 12:00 CST = 4:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -16,19 +16,18 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run generator
-        run: python generate_report.py --edition am
+        run: python generate_report.py --edition md
       - name: Deploy
         run: |
           git config user.email "ally@allyhub.ai"
           git config user.name "Ally Bot"
           TODAY=$(TZ='Asia/Shanghai' date +%Y%m%d)
-          AM_FILE="am-${TODAY}.html"
-          if [ -f "$AM_FILE" ]; then
-            cp "$AM_FILE" index.html
-            git add "$AM_FILE" index.html
-            git commit -m "🌅 晨会版 ${TODAY}"
+          MD_FILE="md-${TODAY}.html"
+          if [ -f "$MD_FILE" ]; then
+            git add "$MD_FILE"
+            git commit -m "☀️ 午间版 ${TODAY}"
             git push origin main
           else
-            echo "No file $AM_FILE generated - skipping push"
+            echo "No file $MD_FILE generated - skipping push"
             exit 1
           fi
