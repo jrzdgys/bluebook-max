@@ -634,8 +634,7 @@ def main():
     
     # 输出文件名
     today = datetime.now(CST).strftime("%Y%m%d")
-    output_path = Path("/out/deliverables") / f"am-{today}.html"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path = Path(f"am-{today}.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
     
