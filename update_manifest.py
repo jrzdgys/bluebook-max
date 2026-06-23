@@ -37,7 +37,7 @@ def update_manifest():
             edition = parts[0]
             date_str = parts[1]
 
-            if edition not in ("am", "md", "pm", "noon"):
+            if edition not in ("am", "md", "pm", "noon", "global"):
                 continue
 
             # 去重
@@ -46,7 +46,7 @@ def update_manifest():
                 continue
             seen.add(key)
 
-            edition_labels = {"am": "晨会版", "md": "午间版", "noon": "午间版", "pm": "晚间版"}
+            edition_labels = {"am": "晨会版", "md": "午间版", "noon": "午间版", "pm": "晚间版", "global": "全球版"}
             label = edition_labels.get(edition, edition.upper())
 
             try:
