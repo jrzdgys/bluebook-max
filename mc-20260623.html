@@ -89,7 +89,7 @@
     <div class="sh">
     <div class="sh-top">
     <span class="sh-date" id="header-date">2026年6月23日</span>
-    <span class="sh-edition" id="header-edition">☀️ 晨会版</span>
+    <span class="sh-edition" id="header-edition"></span><span id="update-time" style="font-size:10px;color:rgba(255,255,255,.4);margin-left:auto">更新 --</span>
     </div>
     <h1>机构观点快照<span class="badge">国内版 🧡</span></h1>
     <div class="stats-row">
@@ -125,7 +125,7 @@
     document.getElementById('stat-stocks').textContent=ED.stats.stocks;
     document.getElementById('market-summary').textContent='📌 '+ED.marketSummary;
     document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）';
-    document.getElementById('update-time').textContent='更新 '+(ED.edition.updateTime||'');
+    var _utEl=document.getElementById('update-time');if(_utEl)_utEl.textContent='更新 '+(ED.edition.updateTime||'');
     var C=document.getElementById('topics-container'),OP=null,LC={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};
     ED.topics.forEach(function(t,i){var r=i+1,c=ht(t.heat),b=sb(t.heat);var sc=t.scores||{};var gh='';
     t.groups.forEach(function(g){if(!g.items||!g.items.length)return;var lc=LC[g.label]||'l3';
@@ -142,8 +142,7 @@
     window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
     var TD=isTH(),RI=TD?15000:60000;else{d.className='live-dot closed';t.textContent='收盘价 · '+ts()}}
     async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var d=pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(!isTH()&&d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById(\'live-dot\');var t2=document.getElementById(\'live-text\');if(d2&&t2){if(isTH()){d2.className=\'live-dot live\';t2.textContent=\'实时行情 · \'+ts()}else{d2.className=\'live-dot closed\';t2.textContent=\'收盘价 · \'+ts()}}}catch(e){}}
-    fq();setInterval(fq,RI);setInterval(function(){},60000);
-    
+    fq();setInterval(fq,RI);
     </script>
     </body>
     </html>
