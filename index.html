@@ -1,104 +1,355 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>蓝宝书Max · 每日机构投研精华</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color:#151515;padding:24px;min-height:100vh}
-.w{max-width:720px;margin:0 auto}
-.h{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);color:#fff;padding:32px 36px;border-radius:20px 20px 0 0;text-align:center}
-.h .logo{font-size:13px;font-weight:600;letter-spacing:3px;color:rgba(255,255,255,.45);margin-bottom:8px;text-transform:uppercase}
-.h h1{font-size:28px;font-weight:700;margin-bottom:4px}
-.h .sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:6px}
-.h .date{font-size:11px;color:rgba(255,255,255,.35);margin-top:12px;font-family:monospace}
-.editions{background:#FDFCF9;border-radius:0 0 20px 20px;padding:16px 24px 24px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
-.editions .section-title{font-size:11px;font-weight:700;color:#9B8E7E;letter-spacing:2px;padding:12px 0 8px;text-transform:uppercase;border-bottom:1px solid #EBE6DE;margin-bottom:8px}
-.ed-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;text-decoration:none;color:inherit;transition:background .15s;cursor:pointer}
-.ed-card:hover{background:#F7F4EF}
-.ed-card .icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.ed-card .icon.am{background:#FFF3E0} .ed-card .icon.md{background:#FFF9E0} .ed-card .icon.ev{background:#EDE7F6} .ed-card .icon.gv{background:#E3F2FD}
-.ed-card .info{flex:1;min-width:0}
-.ed-card .name{font-size:15px;font-weight:700}
-.ed-card .desc{font-size:11px;color:#9B8E7E;margin-top:2px}
-.ed-card .arrow{font-size:16px;color:#C5BFB6;flex-shrink:0}
-.ed-card .badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;flex-shrink:0}
-.ed-card .badge.live{background:#C4433A18;color:#C4433A}
-.footer{text-align:center;padding:24px;font-size:11px;color:#9B8E7E}
-.footer a{color:#6B7B8D;text-decoration:none}
-.footer a:hover{text-decoration:underline}
-@media(max-width:480px){body{padding:12px}.h{padding:24px 20px}.editions{padding:12px 16px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝宝书Max - Alpha派蓝宝书自动抓取报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #162447 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 50%, #1565c0 100%);
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        .hero * { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .hero h1 span { color: #ffd54f; }
+        .hero p {
+            font-size: 16px;
+            opacity: 0.85;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .status-bar {
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 13px;
+            color: #7b8da6;
+        }
+        .status-bar .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .dot-live { background: #4caf50; animation: blink 1.5s infinite; }
+        .dot-auto { background: #ff9800; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* 报告卡片网格 */
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .report-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .report-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(26,115,232,0.5);
+            background: rgba(255,255,255,0.07);
+            box-shadow: 0 8px 32px rgba(26,115,232,0.15);
+        }
+        .report-card .edition-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .badge-am { background: rgba(255,152,0,0.15); color: #ffb74d; }
+        .badge-md { background: rgba(76,175,80,0.15); color: #81c784; }
+        .badge-pm { background: rgba(156,39,176,0.15); color: #ce93d8; }
+
+        .report-card .date {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .report-card .meta {
+            font-size: 12px;
+            color: #7b8da6;
+        }
+        .report-card .arrow {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            font-size: 20px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .report-card:hover .arrow { opacity: 1; }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7b8da6;
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+        .empty-state p { font-size: 14px; }
+
+        /* 摘要区 */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .summary-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .summary-card .num {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a73e8;
+        }
+        .summary-card .label {
+            font-size: 13px;
+            color: #7b8da6;
+            margin-top: 4px;
+        }
+
+        /* 架构说明 */
+        .arch-diagram {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .arch-diagram h3 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+        }
+        .arch-node {
+            background: rgba(26,115,232,0.12);
+            border: 1px solid rgba(26,115,232,0.25);
+            border-radius: 8px;
+            padding: 10px 18px;
+            color: #90caf9;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .arch-arrow { color: #7b8da6; font-size: 18px; }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #5a6d82;
+            font-size: 12px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer a { color: #1a73e8; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 28px; }
+            .report-grid { grid-template-columns: 1fr; }
+            .status-bar { flex-direction: column; gap: 8px; align-items: center; }
+        }
+    </style>
 </head>
 <body>
-<div class="w">
-<div class="h">
-<div class="logo">AlphaPai × BluebookMax</div>
-<h1>蓝宝书Max</h1>
-<div class="sub">每日机构投研精华 · 量化评分 · 实时行情</div>
-<div class="date" id="today"></div>
+
+<div class="hero">
+    <h1>蓝宝书<span>Max</span></h1>
+    <p>Alpha派蓝宝书自动抓取 · 智能行情数据 · 全链路自动化</p>
 </div>
-<div class="editions">
 
-<div class="section-title">2026年6月23日 周二</div>
-
-<a class="ed-card" href="am-20260623.html">
-<div class="icon am">🌅</div>
-<div class="info"><div class="name">晨会版 Morning Call</div><div class="desc">20个市场热点 + 2个机会前瞻 · 138只标的</div></div>
-<span class="badge live">LIVE</span>
-<span class="arrow">›</span>
-</a>
-
-<div class="section-title" style="margin-top:16px">2026年6月22日 周一</div>
-
-<a class="ed-card" href="am-20260622.html">
-<div class="icon am">🌅</div>
-<div class="info"><div class="name">晨会版 · 6月22日</div><div class="desc">20个市场热点 · 137只标的</div></div>
-<span class="arrow">›</span>
-</a>
-
-<a class="ed-card" href="md-20260622.html">
-<div class="icon md">☀️</div>
-<div class="info"><div class="name">午间版 · 6月22日</div><div class="desc">10个市场热点 · 60只标的</div></div>
-<span class="arrow">›</span>
-</a>
-
-<a class="ed-card" href="ev-20260622.html">
-<div class="icon ev">🌙</div>
-<div class="info"><div class="name">晚间版 · 6月22日</div><div class="desc">20个市场热点 + 2个机会前瞻</div></div>
-<span class="arrow">›</span>
-</a>
-
-<div class="section-title" style="margin-top:16px">更早版本</div>
-
-<a class="ed-card" href="pm-20260621.html">
-<div class="icon ev">🌙</div>
-<div class="info"><div class="name">晚间版 · 2026年6月21日（周日）</div><div class="desc">晚间回顾</div></div>
-<span class="arrow">›</span>
-</a>
-
-<a class="ed-card" href="蓝宝书Max_20260621_全球版.html">
-<div class="icon gv">🌍</div>
-<div class="info"><div class="name">全球版 · 2026年6月21日</div><div class="desc">全球市场评分总览</div></div>
-<span class="arrow">›</span>
-</a>
-
-<a class="ed-card" href="蓝宝书Max_20260620_晚间版.html">
-<div class="icon ev">🌙</div>
-<div class="info"><div class="name">晚间版 · 2026年6月20日（周六）</div><div class="desc">晚间回顾</div></div>
-<span class="arrow">›</span>
-</a>
-
+<div class="status-bar">
+    <span><span class="dot dot-live"></span> 数据来源: Alpha派 + 东方财富</span>
+    <span><span class="dot dot-auto"></span> 自动更新: 每交易日 07:00 / 12:00 / 20:00</span>
+    <span id="last-update">加载中...</span>
 </div>
+
+<div class="container">
+    <!-- 概览 -->
+    <div class="summary-cards" id="summary"></div>
+
+    <!-- 晨会版报告 -->
+    <div class="section-title">🌅 晨会版 (AM)</div>
+    <div class="report-grid" id="reports-am"></div>
+
+    <!-- 午间版报告 -->
+    <div class="section-title">☀️ 午间版 (MD)</div>
+    <div class="report-grid" id="reports-md"></div>
+
+    <!-- 晚间版报告 -->
+    <div class="section-title">🌙 晚间版 (PM)</div>
+    <div class="report-grid" id="reports-pm"></div>
+
+    <!-- 架构说明 -->
+    <div class="arch-diagram">
+        <h3>⚙️ 自动化流水线</h3>
+        <div class="arch-flow">
+            <span class="arch-node">GitHub Actions 定时触发</span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-node">Playwright 浏览器自动化</span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-node">Alpha派 蓝宝书抓取</span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-node">东财行情 API</span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-node">HTML 报告生成</span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-node">GitHub Pages 部署</span>
+        </div>
+    </div>
+</div>
+
 <div class="footer">
-蓝宝书Max · 数据来源 <a href="https://alphapai-web.rabyte.cn" target="_blank">Alpha派</a> · 行情 东方财富<br>
-Powered by <a href="https://allyhub.ai" target="_blank">AllyHub</a>
+    蓝宝书Max · 自动化报告系统 · 
+    <a href="https://github.com/jrzdgys/bluebook-max" target="_blank">GitHub</a> · 
+    数据来源: <a href="https://www.alphapai.com" target="_blank">Alpha派</a> & 
+    <a href="https://www.eastmoney.com" target="_blank">东方财富</a>
 </div>
-</div>
+
 <script>
-const d = new Date();
-document.getElementById('today').textContent = '更新于 ' + d.toLocaleString('zh-CN');
+// 从 manifest.json 读取报告列表
+(async function() {
+    try {
+        const resp = await fetch('manifest.json?' + Date.now());
+        const manifest = await resp.json();
+        
+        // 更新最近更新时间
+        if (manifest.last_updated) {
+            document.getElementById('last-update').textContent = '最近更新: ' + manifest.last_updated;
+        }
+
+        // 渲染摘要
+        const summary = document.getElementById('summary');
+        const totalReports = manifest.reports ? manifest.reports.length : 0;
+        const editions = { am: 0, md: 0, pm: 0 };
+        (manifest.reports || []).forEach(r => { editions[r.edition] = (editions[r.edition] || 0) + 1; });
+        summary.innerHTML = `
+            <div class="summary-card"><div class="num">${totalReports}</div><div class="label">报告总数</div></div>
+            <div class="summary-card"><div class="num">${editions.am || 0}</div><div class="label">晨会版</div></div>
+            <div class="summary-card"><div class="num">${editions.md || 0}</div><div class="label">午间版</div></div>
+            <div class="summary-card"><div class="num">${editions.pm || 0}</div><div class="label">晚间版</div></div>
+        `;
+
+        // 渲染各版报告
+        if (!manifest.reports || manifest.reports.length === 0) {
+            ['am', 'md', 'pm'].forEach(ed => {
+                const container = document.getElementById('reports-' + ed);
+                container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>暂无报告，等待首次抓取...</p></div>';
+            });
+            return;
+        }
+
+        const editionNames = { am: '晨会', md: '午间', pm: '晚间' };
+        const editionBadges = { am: 'badge-am', md: 'badge-md', pm: 'badge-pm' };
+
+        manifest.reports.sort((a, b) => b.date.localeCompare(a.date));
+
+        ['am', 'md', 'pm'].forEach(ed => {
+            const container = document.getElementById('reports-' + ed);
+            const reports = manifest.reports.filter(r => r.edition === ed).slice(0, 20);
+            if (reports.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>暂无' + editionNames[ed] + '版报告</p></div>';
+                return;
+            }
+            container.innerHTML = reports.map(r => {
+                const dateParts = r.date.match(/(\d{4})(\d{2})(\d{2})/);
+                const displayDate = dateParts ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日' : r.date;
+                return `
+                <a href="${r.file}" class="report-card">
+                    <div class="edition-badge ${editionBadges[ed]}">${editionNames[ed]}版</div>
+                    <div class="date">${displayDate}</div>
+                    <div class="meta">${r.stock_count || 0} 只股票 · 自动生成</div>
+                    <div class="arrow">→</div>
+                </a>`;
+            }).join('');
+        });
+    } catch (e) {
+        console.error('加载报告列表失败:', e);
+        document.getElementById('last-update').textContent = '加载失败';
+        ['am', 'md', 'pm'].forEach(ed => {
+            document.getElementById('reports-' + ed).innerHTML = 
+                '<div class="empty-state"><div class="icon">⚠️</div><p>加载报告列表失败，请稍后重试</p></div>';
+        });
+    }
+})();
 </script>
+
 </body>
 </html>
