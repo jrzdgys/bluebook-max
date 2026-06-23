@@ -296,8 +296,8 @@ def topic_to_v3(topic: dict, rank: int, secids: dict, live_quotes: dict = None,
         "heat": topic["heat"],
         "heat_breakdown": {
             "机构关注度": topic.get("org_attention", 0),
-            "市场确认度": topic.get("market_confirm", 0),
-            "催化质量": topic.get("catalyst_quality", 0),
+            "市场信号": topic.get("market_confirm", 0),
+            "催化强度": topic.get("catalyst_quality", 0),
         },
         "ai_summary": ai_summary,
         "bluebook_quote": bluebook_quote,
@@ -418,8 +418,8 @@ def build_opp_previews(am_opp: list, secids: dict) -> list:
             "heat": scores["heat_total"],
             "heat_breakdown": {
                 "机构关注度": scores["org_attention"],
-                "市场确认度": scores["market_confirm"],
-                "催化质量": scores["catalyst_quality"],
+                "市场信号": scores["market_signal"],
+                "催化强度": scores["catalyst"],
             },
             "ai_summary": ai_summary,
             "bluebook_quote": bluebook_quote,
@@ -429,15 +429,18 @@ def build_opp_previews(am_opp: list, secids: dict) -> list:
     return previews
 
 
-def format_raw_topics(raw_topics: list, secids: dict) -> list:
+def format_raw_topics(raw_topics: list, secids: dict, live_quotes: dict = None) -> list:
     """将 raw topic 列表格式化为 pipeline format，并评分排序"""
+    live_quotes = live_quotes or {}
     formatted = []
     for i, t in enumerate(raw_topics):
         try:
-            ft = format_topic_for_pipeline(t, i + 1, secids)
+            ft = format_topic_for_pipeline(t, i + 1, secids, live_quotes)
             formatted.append(ft)
         except Exception as e:
             print(f"  ⚠️ 格式化主题失败 [{t.get('topic', '?')}]: {e}")
+            import traceback
+            traceback.print_exc()
     formatted.sort(key=lambda x: x["heat"], reverse=True)
     return formatted
 
@@ -466,7 +469,7 @@ def generate_edition(edition: str, date_str: str, date_display: str,
     secids = build_secid_map(all_stock_names)
 
     # 2. 格式化 & 评分
-    formatted = format_raw_topics(raw_topics, secids)
+    formatted = format_raw_topics(raw_topics, secids, live_quotes)
 
     # 3. 转换为 v3 format
     v3_topics = []

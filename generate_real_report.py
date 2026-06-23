@@ -20,56 +20,65 @@ from industry_chain import match_chain
 REPORT_JSON = Path("data/reports_2026-06-23.json")
 CST = __import__('datetime', fromlist=['timezone','timedelta']).timezone(__import__('datetime', fromlist=['timedelta']).timedelta(hours=8))
 
-# ===== 评分引擎 =====
+# ===== 评分引擎 v2 =====
 
-def score_topic(topic_data, alpha_index):
-    """新评分算法：主题热度 = 机构关注(0-40) + 市场确认(0-35) + 催化质量(0-25)"""
-    heat_raw = topic_data["heat"]  # Alpha派 1-10 原始热度
+def score_topic(topic_data, alpha_index, live_quotes=None):
+    """
+    三层独立评分:
+      机构关注度(0-60): Alpha派 index → index/10 × 60
+      市场信号(0-25):   标的平均涨跌幅绝对值
+      催化强度(0-15):   摘要关键词推断
+    总分 = 机构 + 市场 + 催化 (0-100)
+    """
+    heat_raw = topic_data["heat"]  # Alpha派 index (1-10)
 
-    # 机构关注度(0-40)：从原始热度+摘要长度推断
-    summary_len = len(topic_data.get("summary_clean", ""))
-    if heat_raw >= 9:
-        org_attention = 34 + min(heat_raw - 9, 1) * 6  # 34-40
-    elif heat_raw >= 7:
-        org_attention = 24 + (heat_raw - 7) * 5  # 24-34
-    elif heat_raw >= 5:
-        org_attention = 14 + (heat_raw - 5) * 5  # 14-29
+    # === 第一层: 机构关注度 (0-60) ===
+    org_attention = int(heat_raw / 10 * 60)
+
+    # === 第二层: 市场信号 (0-25) ===
+    market_signal = 5  # 默认: 无行情数据
+    if live_quotes:
+        stocks_data = topic_data.get("stocks_data", [])
+        if not stocks_data:
+            # 从 stocks_with_reasons 获取标的列表
+            stocks_data = [sr["name"] for sr in topic_data.get("stocks_with_reasons", [])]
+        if stocks_data:
+            pcts = []
+            for name in stocks_data:
+                if name in live_quotes:
+                    pct = live_quotes[name].get("change_pct", 0)
+                    if isinstance(pct, (int, float)):
+                        pcts.append(abs(pct))
+            if pcts:
+                avg_pct = sum(pcts) / len(pcts)
+                if avg_pct >= 5:
+                    market_signal = 25
+                elif avg_pct >= 3:
+                    market_signal = 18
+                elif avg_pct >= 1:
+                    market_signal = 10
+                else:
+                    market_signal = 5
+
+    # === 第三层: 催化强度 (0-15) ===
+    summary = topic_data.get("summary_clean", topic_data.get("summary_raw", ""))
+    # 一级关键词: 确定性催化剂 (15分)
+    if any(kw in summary for kw in ["官宣", "确认", "正式发布", "Q2业绩", "获批", "敲定"]):
+        catalyst = 15
+    # 二级: 高置信度预期 (10分)
+    elif any(kw in summary for kw in ["或将", "预计", "接近", "计划量产", "涨价函", "上调"]):
+        catalyst = 10
+    # 三级: 传闻/跟踪 (5分)
+    elif any(kw in summary for kw in ["传 ", "传\"", "据称", "关注", "跟踪"]):
+        catalyst = 5
     else:
-        org_attention = heat_raw * 3  # 0-15
-
-    # 市场确认度(0-35)：摘要越长说明讨论越深入
-    if summary_len > 400:
-        market_confirm = 28 + min((summary_len - 400) / 200, 1) * 7
-    elif summary_len > 200:
-        market_confirm = 18 + (summary_len - 200) / 200 * 10
-    else:
-        market_confirm = max(5, summary_len / 200 * 13)
-
-    market_confirm = int(min(market_confirm, 35))
-
-    # 催化质量(0-25)：从摘要关键词判断事件可持续性
-    summary = topic_data.get("summary_clean", "")
-    catalyst_keywords = {
-        "禁令": 22, "涨价": 20, "断供": 22, "制裁": 20, "管制": 18,
-        "量产": 18, "业绩": 15, "订单": 17, "突破": 16, "政策": 16,
-        "报告": 12, "预期": 13, "上调": 15, "超预期": 19,
-    }
-    catalyst_score = 8
-    for kw, s in catalyst_keywords.items():
-        if kw in summary:
-            catalyst_score = max(catalyst_score, s)
-
-    # 趋势判断
-    if "持续" in summary or "强化" in summary:
-        catalyst_score = min(catalyst_score + 2, 25)
-    if "反转" in summary or "拐点" in summary:
-        catalyst_score = min(catalyst_score + 3, 25)
+        catalyst = 5
 
     return {
         "org_attention": org_attention,
-        "market_confirm": market_confirm,
-        "catalyst_quality": int(catalyst_score),
-        "heat_total": org_attention + market_confirm + int(catalyst_score),
+        "market_signal": market_signal,
+        "catalyst": catalyst,
+        "heat_total": org_attention + market_signal + catalyst,
     }
 
 
@@ -250,69 +259,109 @@ def parse_reports():
     return output
 
 
-def format_topic_for_pipeline(topic, rank, all_secids):
-    """格式化主题 + 新评分算法"""
-    scores = score_topic(topic, rank)
+def format_topic_for_pipeline(topic, rank, all_secids, live_quotes=None):
+    """格式化主题 + 三层独立评分 + 决策树分类"""
+    scores = score_topic(topic, rank, live_quotes)
 
     heat = scores["heat_total"]
-    if heat >= 85:
+    if heat >= 75:
         state = "主升"
-    elif heat >= 65:
+    elif heat >= 55:
         state = "强化"
-    elif heat >= 45:
+    elif heat >= 35:
         state = "持续"
     else:
         state = "孵化"
 
-    # 标的分层
-    stocks_data = []
+    # ===== 决策树分类: 龙头/弹性/相关 =====
     stocks = topic.get("stocks", [])
-    # 从 Alpha派原始数据获取推荐理由映射
     reason_map = {}
-    for sr in topic.get("stocks_with_reasons", []):
+    # 按 Alpha派原文 "关注：" 段落的自然分组
+    stocks_with_reasons = topic.get("stocks_with_reasons", [])
+    # 构建分组: 同一 reason 的标的 → 一组，顺序保持原文出现顺序
+    groups = []  # [(reason, [stock_name, ...])]
+    seen_groups = {}
+    for sr in stocks_with_reasons:
         name = sr.get("name", "")
-        reason = sr.get("reason", "")
+        reason = sr.get("reason", "").strip()
+        if not reason:
+            reason = "_default"
         if name and name not in reason_map:
             reason_map[name] = reason
+        if reason not in seen_groups:
+            seen_groups[reason] = len(groups)
+            groups.append((reason, []))
+        groups[seen_groups[reason]][1].append(name)
 
-    if stocks:
-        leader_items, flex_items, rest_items = [], [], []
-        for i, sname in enumerate(stocks):
-            stock_alpha = score_stock(sname, None, i)
-            sid = all_secids.get(sname, "")
-            reason = reason_map.get(sname, "")
-            if not reason:
-                reason = "核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的")
-            item = {
-                "name": sname, "code": sid,
-                "reason": reason,
-                "alpha": stock_alpha["alpha_total"],
-                "change_pct": 0,
-            }
-            if i < 2:
-                leader_items.append(item)
-            elif i < 4:
-                flex_items.append(item)
+    # 决策树判定每组标的
+    group_tiers = {}  # name → "龙头首选"|"弹性机会"|"相关标的"
+    for gi, (reason, group_stocks) in enumerate(groups):
+        first_of_group = group_stocks[0] if group_stocks else ""
+        if gi == 0:
+            # 第一组: 首位=龙头，其余=弹性
+            group_tiers[first_of_group] = "龙头首选"
+            for s in group_stocks[1:]:
+                group_tiers[s] = "弹性机会"
+        elif gi == 1:
+            # 第二组: 角色含"核心"→弹性，否则→相关
+            tier = "弹性机会" if "核心" in reason else "相关标的"
+            for s in group_stocks:
+                group_tiers[s] = tier
+        else:
+            # 第三组及以后: 全部相关
+            for s in group_stocks:
+                group_tiers[s] = "相关标的"
+
+    # 不在任何分组的标的（只有名字没有角色描述）→ 按出现位置 fallback
+    for i, sname in enumerate(stocks):
+        if sname not in group_tiers:
+            if i == 0:
+                group_tiers[sname] = "龙头首选"
+            elif i < 3:
+                group_tiers[sname] = "弹性机会"
             else:
-                rest_items.append(item)
+                group_tiers[sname] = "相关标的"
 
-        if leader_items:
-            stocks_data.append({"tier": "龙头首选", "label": "龙头首选", "items": leader_items})
-        if flex_items:
-            stocks_data.append({"tier": "弹性机会", "label": "弹性机会", "items": flex_items})
-        if rest_items:
-            stocks_data.append({"tier": "相关标的", "label": "相关标的", "items": rest_items})
+    # 构建三层分组数据
+    leader_items, flex_items, rest_items = [], [], []
+    for i, sname in enumerate(stocks):
+        stock_alpha = score_stock(sname, None, i)
+        sid = all_secids.get(sname, "")
+        reason = reason_map.get(sname, "")
+        if not reason:
+            reason = "核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的")
+        tier = group_tiers.get(sname, "相关标的")
+        item = {
+            "name": sname, "code": sid,
+            "reason": reason,
+            "alpha": stock_alpha["alpha_total"],
+            "change_pct": 0,
+        }
+        if tier == "龙头首选":
+            leader_items.append(item)
+        elif tier == "弹性机会":
+            flex_items.append(item)
+        else:
+            rest_items.append(item)
+
+    stocks_data = []
+    if leader_items:
+        stocks_data.append({"tier": "龙头首选", "label": "龙头首选", "items": leader_items})
+    if flex_items:
+        stocks_data.append({"tier": "弹性机会", "label": "弹性机会", "items": flex_items})
+    if rest_items:
+        stocks_data.append({"tier": "相关标的", "label": "相关标的", "items": rest_items})
 
     return {
         "title": topic["topic"],
         "summary": topic["summary_clean"][:120],
         "bluebook_quote": topic["summary_clean"][:200],
-        "summary_raw": topic.get("summary_raw", topic.get("summary_clean", "")),  # 原始摘要
+        "summary_raw": topic.get("summary_raw", topic.get("summary_clean", "")),
         "heat": heat,
         "state": state,
         "org_attention": scores["org_attention"],
-        "market_confirm": scores["market_confirm"],
-        "catalyst_quality": scores["catalyst_quality"],
+        "market_confirm": scores["market_signal"],
+        "catalyst_quality": scores["catalyst"],
         "stocks": stocks_data,
     }
 

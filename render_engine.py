@@ -325,8 +325,8 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
 
     hb = topic.get("heat_breakdown", {})
     org = hb.get("机构关注度", 0)
-    mkt = hb.get("市场确认度", 0)
-    cat = hb.get("催化质量", 0)
+    mkt = hb.get("市场信号", hb.get("市场确认度", 0))
+    cat = hb.get("催化强度", hb.get("催化质量", 0))
 
     ai_summary = topic.get("ai_summary", "")
     bluebook_quote = topic.get("bluebook_quote", "")
@@ -342,7 +342,7 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
 <span class="hib" data-popup="{popup_id}" onclick="event.stopPropagation();var p=document.getElementById('{popup_id}');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
 <div class="hp" id="{popup_id}">
 <div class="pt">{title} · 热度指数构成</div>
-<div class="pb">机构关注度 {org} | 市场确认度 {mkt} | 催化质量 {cat}</div>
+<div class="pb">机构关注度 {org} | 市场信号 {mkt} | 催化强度 {cat}</div>
 </div>
 </span>
 </div>"""]
@@ -394,8 +394,8 @@ def render_opportunity_preview(opp: Dict, popup_id: str) -> str:
 
     hb = opp.get("heat_breakdown", {})
     org = hb.get("机构关注度", 0)
-    mkt = hb.get("市场确认度", 0)
-    cat = hb.get("催化质量", 0)
+    mkt = hb.get("市场信号", hb.get("市场确认度", 0))
+    cat = hb.get("催化强度", hb.get("催化质量", 0))
 
     ai_summary = opp.get("ai_summary", "")
     bluebook_quote = opp.get("bluebook_quote", "")
@@ -410,7 +410,7 @@ def render_opportunity_preview(opp: Dict, popup_id: str) -> str:
 <span class="hib" data-popup="{popup_id}" onclick="event.stopPropagation();var p=document.getElementById('{popup_id}');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
 <div class="hp" id="{popup_id}">
 <div class="pt">{title} · 热度指数构成</div>
-<div class="pb">机构关注度 {org} | 市场确认度 {mkt} | 催化质量 {cat}</div>
+<div class="pb">机构关注度 {org} | 市场信号 {mkt} | 催化强度 {cat}</div>
 </div>
 </span>
 </div>"""]
@@ -451,8 +451,8 @@ def render_footer(meta: Dict) -> str:
     date_display = meta.get("date_display", "")
     return f"""<div class="fo">
 <div>⚡ 蓝宝书Max · {date_display} {edition_label} · 数据来源：Alpha派蓝宝书 · 行情：东方财富</div>
-<div class="fl">📊 热度指数=机构关注度+市场确认度+催化质量 · 📌 阶段判定：🔥📈➡️🌱<br>
-🟢 实时行情每3秒自动刷新 · ★ Alpha=催化质量+主题热度+产业地位+市场确认 · ⚠️ 仅供参考</div>
+<div class="fl">📊 热度指数=机构关注度+市场信号+催化强度 · 📌 阶段判定：🔥📈➡️🌱<br>
+🟢 实时行情每3秒自动刷新 · ★ Alpha=催化强度+主题热度+产业地位+市场信号 · ⚠️ 仅供参考</div>
 </div>"""
 
 
@@ -512,7 +512,7 @@ def generate_report(report_data: Dict) -> str:
         html_parts.append(
             '<div class="s2" style="margin-top:20px">★ 今日Top5 Alpha'
             '<span style="font-size:10px;font-weight:400;color:#999;background:#F5F4F2;'
-            'padding:3px 8px;border-radius:4px;margin-left:6px">综合催化质量·主题热度·产业地位·市场确认</span></div>'
+            'padding:3px 8px;border-radius:4px;margin-left:6px">综合催化强度·主题热度·产业地位·市场信号</span></div>'
         )
         html_parts.append('<div class="alpha-list">')
         for s in top5:
@@ -566,7 +566,7 @@ if __name__ == "__main__":
         "topics": [
             {
                 "rank": 1, "title": "测试主题A", "stage": "主升", "heat": 85,
-                "heat_breakdown": {"机构关注度": 50, "市场确认度": 20, "催化质量": 15},
+                "heat_breakdown": {"机构关注度": 50, "市场信号": 20, "催化强度": 15},
                 "ai_summary": "测试AI总结，简明扼要描述核心事件与边际变化",
                 "bluebook_quote": "核心投资逻辑：市场正交易从替代到量价齐升的转变",
                 "stock_groups": [
@@ -583,7 +583,7 @@ if __name__ == "__main__":
         "opportunity_previews": [
             {
                 "title": "测试前瞻", "stage": "孵化", "heat": 32,
-                "heat_breakdown": {"机构关注度": 12, "市场确认度": 10, "催化质量": 10},
+                "heat_breakdown": {"机构关注度": 12, "市场信号": 10, "催化强度": 10},
                 "ai_summary": "测试前瞻摘要",
                 "bluebook_quote": "测试前瞻引用",
                 "stocks": [{"name": "测试股C", "code": "000003", "pct": 1.5, "reason": "核心前瞻标的"}]
