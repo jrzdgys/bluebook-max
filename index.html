@@ -68,7 +68,7 @@ body{
 .features h2{text-align:center;font-size:clamp(22px,4vw,26px);font-weight:700;margin-bottom:32px}
 .features-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
-  max-width:900px;margin:0 auto;padding:0 16px;
+  max-width:960px;margin:0 auto;padding:0 16px;
 }
 .feature-card{
   background:#fff;border-radius:14px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04);
@@ -85,7 +85,7 @@ body{
   font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;
 }
 .reports-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;
   margin-bottom:24px;
 }
 .report-card{
@@ -144,7 +144,7 @@ body{
 .toast.show{opacity:1}
 
 /* ===== Container ===== */
-.container{max-width:900px;margin:0 auto;padding:0 16px}
+.container{max-width:960px;margin:0 auto;padding:0 16px}
 
 /* ===== Auth badge ===== */
 .auth-badge{
@@ -388,7 +388,7 @@ function showLoginPaywall() {
       const ed = r.edition || 'am';
       const badge = editionBadges[ed] || 'badge-am';
       const label = editionLabels[ed] || '';
-      const dateParts = (r.date || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
+      const dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
       const displayDate = dateParts
         ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
         : (r.date || '');
