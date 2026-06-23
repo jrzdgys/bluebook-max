@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝宝书Max · 访问码管理</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F5F5F7;color:#1D1D1F;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;
+}
+.card{
+  background:#fff;border-radius:20px;padding:40px;max-width:520px;width:100%;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+h1{font-size:24px;font-weight:700;margin-bottom:4px}
+.subtitle{font-size:14px;color:#86868B;margin-bottom:32px}
+.step{
+  background:#F5F5F7;border-radius:12px;padding:16px;margin-bottom:16px;
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;background:#0071E3;color:#fff;border-radius:50%;
+  font-size:12px;font-weight:700;margin-right:8px;
+}
+.step h3{font-size:15px;font-weight:600;display:flex;align-items:center;margin-bottom:10px}
+.input-row{display:flex;gap:8px}
+.input-row input{
+  flex:1;padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;
+  font-size:14px;font-family:inherit;outline:none;transition:border-color .15s;
+}
+.input-row input:focus{border-color:#0071E3}
+.input-row button{
+  padding:10px 20px;background:#0071E3;color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;
+}
+.input-row button:hover{background:#0077ED}
+.result{
+  margin-top:12px;background:#EEFFF2;border:1px solid #B7EBC8;border-radius:10px;
+  padding:14px;display:none;
+}
+.result .hash{
+  font-family:'SF Mono',Menlo,monospace;font-size:13px;color:#1D1D1F;
+  word-break:break-all;line-height:1.6;margin-bottom:0;
+}
+.result .copy-btn{
+  margin-top:10px;padding:6px 16px;background:#34C759;color:#fff;
+  border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;
+}
+.result .line{
+  margin-top:12px;padding:8px 12px;background:#1D1D1F;border-radius:8px;
+  font-family:'SF Mono',Menlo,monospace;font-size:12px;color:#34C759;
+  word-break:break-all;
+}
+.note{
+  font-size:12px;color:#AEAEB2;margin-top:24px;line-height:1.6;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🔐 蓝宝书Max · 访问码管理</h1>
+  <p class="subtitle">添加新访问码 → 复制哈希值 → 更新 codes.js → 部署</p>
+
+  <div class="step">
+    <h3><span class="step-num">1</span>输入新访问码</h3>
+    <div class="input-row">
+      <input type="text" id="codeInput" placeholder="例如：BLUEBOOK-2026-Q3" maxlength="64">
+      <button onclick="generateHash()">生成哈希</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">2</span>复制下面这行，粘贴到 codes.js</h3>
+    <div class="result" id="result">
+      <div class="hash" id="hashDisplay"></div>
+      <div class="line" id="lineDisplay"></div>
+      <button class="copy-btn" onclick="copyLine()">📋 复制到剪贴板</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">3</span>部署到 GitHub</h3>
+    <p style="font-size:13px;color:#64748B;line-height:1.6">
+      在知识星球群发布新码 → 运行 <code style="background:#F5F5F7;padding:2px 6px;border-radius:4px">python3 push_to_github.py</code> 完成部署。<br>
+      旧码保留 7 天过渡，之后删除即可。
+    </p>
+  </div>
+
+  <p class="note">
+    ⚠️ 此页面纯本地运行，不会上传任何数据。SHA-256 哈希在浏览器中计算。
+  </p>
+</div>
+
+<script>
+async function generateHash() {
+  const code = document.getElementById('codeInput').value.trim();
+  if (!code) return alert('请输入访问码');
+
+  const encoder = new TextEncoder();
+  const data = encoder.encode(code);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+
+  document.getElementById('hashDisplay').textContent = 'SHA-256: ' + hash;
+  document.getElementById('lineDisplay').textContent = '"' + hash + '", // ' + code;
+  document.getElementById('result').style.display = 'block';
+}
+
+async function copyLine() {
+  const line = document.getElementById('lineDisplay').textContent;
+  await navigator.clipboard.writeText(line);
+  const btn = event.target;
+  btn.textContent = '✓ 已复制';
+  setTimeout(() => btn.textContent = '📋 复制到剪贴板', 2000);
+}
+</script>
+</body>
+</html>

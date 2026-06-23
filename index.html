@@ -1,235 +1,174 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-paywall="true">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="蓝宝书Max - 机构级A股投研情报，Alpha派蓝宝书全链路自动化，产业链精准映射，每日最强标的。知识星球付费订阅。">
+<meta name="description" content="蓝宝书Max - 机构级A股投研情报，Alpha派蓝宝书全链路自动化，产业链精准映射，每日最强标的。知识星球付费订阅 ¥888/年。">
 <title>蓝宝书Max · 机构级投研情报</title>
 <style>
-/* ===== 付费墙样式 ===== */
-.pw-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,.55); backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 10000; display: flex; align-items: center; justify-content: center;
-  animation: pwFadeIn .3s ease;
-}
-@keyframes pwFadeIn { from { opacity: 0; } to { opacity: 1; } }
-.pw-card {
-  background: #fff; border-radius: 24px; padding: 48px 40px;
-  max-width: 420px; width: 92%; text-align: center;
-  box-shadow: 0 24px 80px rgba(0,0,0,.18);
-  animation: pwSlideUp .4s cubic-bezier(.16,1,.3,1);
-}
-@keyframes pwSlideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-.pw-icon { font-size: 52px; margin-bottom: 16px; }
-.pw-title { font-size: 22px; font-weight: 700; color: #1D1D1F; margin-bottom: 12px; }
-.pw-desc { font-size: 14px; color: #86868B; line-height: 1.7; margin-bottom: 28px; }
-.pw-input-group { display: flex; gap: 8px; margin-bottom: 12px; }
-.pw-input {
-  flex: 1; padding: 12px 16px; border: 1.5px solid #E5E5EA; border-radius: 12px;
-  font-size: 15px; font-family: -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
-  text-align: center; letter-spacing: 2px; outline: none;
-  transition: border-color .15s;
-}
-.pw-input:focus { border-color: #0071E3; }
-.pw-btn {
-  padding: 12px 24px; background: #0071E3; color: #fff; border: none;
-  border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer;
-  transition: all .15s; white-space: nowrap; font-family: inherit;
-}
-.pw-btn:hover { background: #0077ED; }
-.pw-btn:disabled { opacity: .6; cursor: not-allowed; }
-.pw-error {
-  color: #FF3B30; font-size: 13px; margin-top: 8px; display: none;
-}
-.pw-footer { margin-top: 28px; padding-top: 20px; border-top: 1px solid #F2F2F7; }
-.pw-footer p { font-size: 13px; color: #AEAEB2; margin-bottom: 10px; }
-.pw-zsxq-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 24px; background: linear-gradient(135deg,#1AAD19,#0F8F0F);
-  color: #fff; border-radius: 12px; text-decoration: none;
-  font-size: 14px; font-weight: 600; transition: all .15s;
-}
-.pw-zsxq-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,173,25,.3); }
-.pw-lock { font-size: 14px; margin-left: 6px; opacity: .6; }
-.pw-unlocked {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 10px; background: #EEFFF2; color: #34C759;
-  border-radius: 100px; font-size: 11px; font-weight: 600;
-}
-
-/* ===== 基础 ===== */
+/* ===== Reset & Base ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   background:#F5F5F7;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-.container{max-width:960px;margin:0 auto;padding:0 24px}
-.container-narrow{max-width:720px;margin:0 auto;padding:0 24px}
 
 /* ===== Hero ===== */
 .hero{
-  text-align:center;padding:80px 24px 64px;
-  background:linear-gradient(180deg,#fff 0%,#F5F5F7 100%);
+  text-align:center;padding:60px 20px 48px;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F5F5F7 100%);
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
-  padding:6px 16px;background:#FFF5E7;color:#FF9500;
-  border-radius:100px;font-size:13px;font-weight:600;margin-bottom:24px;
+  padding:5px 14px;background:#FFF5E7;color:#FF9500;
+  border-radius:100px;font-size:12px;font-weight:600;margin-bottom:20px;
 }
-.hero h1{
-  font-size:48px;font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.15;
-}
-.hero h1 .accent{color:#0071E3;}
+.hero h1{font-size:clamp(32px,8vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.hero h1 .accent{color:#0071E3}
 .hero .subtitle{
-  font-size:18px;color:#86868B;max-width:520px;margin:0 auto 32px;line-height:1.6;
+  font-size:clamp(14px,3vw,17px);color:#86868B;max-width:480px;margin:0 auto 28px;line-height:1.6;
+  padding:0 8px;
 }
 .hero-stats{
-  display:flex;justify-content:center;gap:48px;margin-bottom:40px;flex-wrap:wrap;
+  display:flex;justify-content:center;gap:32px;margin-bottom:32px;flex-wrap:wrap;
 }
-.hero-stat{text-align:center}
-.hero-stat .num{font-size:36px;font-weight:800;color:#1D1D1F;letter-spacing:-.5px}
-.hero-stat .label{font-size:13px;color:#86868B;margin-top:4px}
+.hero-stat{text-align:center;min-width:80px}
+.hero-stat .num{font-size:32px;font-weight:800;color:#1D1D1F}
+.hero-stat .label{font-size:12px;color:#86868B;margin-top:2px}
 .hero-cta{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
 }
 .btn{
   display:inline-flex;align-items:center;gap:6px;
-  padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;
+  padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;
   cursor:pointer;text-decoration:none;transition:all .15s;border:none;font-family:inherit;
+  white-space:nowrap;
 }
-.btn-primary{
-  background:#0071E3;color:#fff;
-}
+.btn-primary{background:#0071E3;color:#fff}
 .btn-primary:hover{background:#0077ED;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,113,227,.25)}
-.btn-zsxq{
-  background:linear-gradient(135deg,#1AAD19,#0F8F0F);color:#fff;
-}
+.btn-zsxq{background:linear-gradient(135deg,#1AAD19,#0F8F0F);color:#fff}
 .btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,173,25,.3)}
-.btn-outline{
-  background:transparent;color:#1D1D1F;border:1.5px solid #E5E5EA;
-}
+.btn-outline{background:transparent;color:#1D1D1F;border:1.5px solid #D1D1D6}
 .btn-outline:hover{background:#F5F5F7}
 
-/* ===== 功能亮点 ===== */
-.features{
-  padding:64px 0;
-}
-.features h2{
-  text-align:center;font-size:28px;font-weight:700;margin-bottom:48px;letter-spacing:-.3px;
-}
+/* ===== Features ===== */
+.features{padding:40px 0}
+.features h2{text-align:center;font-size:clamp(22px,4vw,26px);font-weight:700;margin-bottom:32px}
 .features-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
+  max-width:900px;margin:0 auto;padding:0 16px;
 }
 .feature-card{
-  background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(0,0,0,.04);
-  transition:all .25s;
+  background:#fff;border-radius:14px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04);
+  transition:all .2s;
 }
-.feature-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.feature-icon{font-size:32px;margin-bottom:16px}
-.feature-card h3{font-size:17px;font-weight:700;margin-bottom:8px}
-.feature-card p{font-size:14px;color:#86868B;line-height:1.6}
+.feature-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.feature-icon{font-size:28px;margin-bottom:12px}
+.feature-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.feature-card p{font-size:13px;color:#86868B;line-height:1.5}
 
-/* ===== 最新报告预览 ===== */
-.latest-section{
-  padding:48px 0 32px;
-  border-top:1px solid #E5E5EA;
+/* ===== Reports ===== */
+.reports-section{padding:32px 0;border-top:1px solid #E5E5EA}
+.reports-section h2{
+  font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;
 }
-.latest-section h2{
-  font-size:22px;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:8px;
-}
-.latest-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px;
+.reports-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;
+  margin-bottom:24px;
 }
 .report-card{
-  background:#fff;border-radius:14px;padding:20px;border:1px solid #F2F2F7;
-  transition:all .2s;text-decoration:none;color:inherit;display:block;position:relative;
+  background:#fff;border-radius:12px;padding:18px;border:1px solid #F2F2F7;
+  transition:all .15s;text-decoration:none;color:inherit;display:block;position:relative;
+  cursor:pointer;
 }
-.report-card:hover{
-  border-color:#0071E3;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-.report-card.locked{cursor:default;opacity:.6}
-.report-card.locked:hover{border-color:#F2F2F7;transform:none;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.report-card .edition-tag{
+.report-card:hover{border-color:#0071E3;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.report-card .r-badge{
   display:inline-block;padding:3px 10px;border-radius:100px;
-  font-size:11px;font-weight:600;margin-bottom:10px;
+  font-size:11px;font-weight:600;margin-bottom:8px;
 }
-.tag-am{background:#FFF5E7;color:#FF9500}
-.tag-pm{background:#EEF0FF;color:#5E5CE6}
-.tag-global{background:#E8F2FD;color:#0071E3}
-.report-card .r-date{font-size:20px;font-weight:700;margin-bottom:4px}
-.report-card .r-title{font-size:13px;color:#86868B;line-height:1.5;margin-bottom:8px}
-.report-card .r-meta{font-size:12px;color:#AEAEB2;display:flex;gap:12px}
-.report-card .lock-overlay{
-  position:absolute;top:12px;right:16px;font-size:18px;opacity:.5;
+.badge-am{background:#FFF5E7;color:#FF9500}
+.badge-md{background:#FFF0E0;color:#E8870A}
+.badge-pm{background:#EEF0FF;color:#5E5CE6}
+.report-card .r-date{font-size:18px;font-weight:700;margin-bottom:2px}
+.report-card .r-title{font-size:12px;color:#86868B;margin-bottom:6px;line-height:1.4}
+.report-card .r-meta{font-size:11px;color:#AEAEB2;display:flex;gap:10px;align-items:center}
+.report-card .r-free{
+  display:inline-block;padding:2px 8px;background:#EEFFF2;color:#34C759;
+  border-radius:100px;font-size:10px;font-weight:600;
 }
+.report-card .r-lock{color:#AEAEB2;font-size:11px}
 
-/* ===== 定价区 ===== */
+/* ===== Pricing ===== */
 .pricing{
-  padding:64px 0;text-align:center;background:#fff;border-radius:24px;margin:48px 0;
+  padding:48px 0;text-align:center;background:#fff;border-radius:20px;margin:32px 0;
+  max-width:600px;margin-left:auto;margin-right:auto;
 }
-.pricing h2{font-size:28px;font-weight:700;margin-bottom:16px}
-.pricing .price{
-  font-size:56px;font-weight:800;color:#0071E3;letter-spacing:-1px;margin-bottom:8px;
-}
-.pricing .price span{font-size:20px;font-weight:500;color:#86868B}
-.pricing .price-desc{color:#86868B;font-size:15px;margin-bottom:32px}
+.pricing h2{font-size:24px;font-weight:700;margin-bottom:12px}
+.pricing .price{font-size:52px;font-weight:800;color:#0071E3;letter-spacing:-1px;margin-bottom:4px}
+.pricing .price small{font-size:18px;font-weight:500;color:#86868B}
+.pricing .price-desc{color:#86868B;font-size:14px;margin-bottom:24px}
 .pricing-features{
-  display:inline-block;text-align:left;margin-bottom:32px;
+  display:inline-block;text-align:left;margin-bottom:28px;
 }
 .pricing-features li{
-  list-style:none;padding:6px 0;font-size:15px;color:#1D1D1F;
+  list-style:none;padding:5px 0;font-size:14px;color:#1D1D1F;
   display:flex;align-items:center;gap:8px;
 }
 .pricing-features li::before{content:'✓';color:#34C759;font-weight:700;font-size:16px}
 
 /* ===== Footer ===== */
-.footer{
-  text-align:center;padding:48px 24px;border-top:1px solid #E5E5EA;margin-top:64px;
-}
-.footer .disclaimer{
-  font-size:12px;color:#AEAEB2;line-height:1.8;max-width:600px;margin:0 auto 16px;
-}
-.footer .brand{font-size:13px;color:#86868B;}
+.footer{text-align:center;padding:40px 20px;border-top:1px solid #E5E5EA;margin-top:40px}
+.footer .disclaimer{font-size:11px;color:#AEAEB2;line-height:1.7;max-width:540px;margin:0 auto 12px}
+.footer .brand{font-size:12px;color:#86868B}
 .footer .brand a{color:#0071E3;text-decoration:none}
 
-/* ===== 认证状态条 ===== */
-.auth-bar{
-  background:#fff;border-bottom:1px solid #F2F2F7;padding:8px 0;text-align:center;
-  font-size:12px;color:#86868B;display:none;
+/* ===== Toast ===== */
+.toast{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;
+  background:#1D1D1F;color:#fff;padding:10px 20px;border-radius:12px;
+  font-size:13px;font-weight:500;opacity:0;transition:opacity .2s;
+  pointer-events:none;
 }
-.auth-bar.active{display:block}
-.auth-bar .dot{width:7px;height:7px;background:#34C759;border-radius:50%;display:inline-block;margin-right:6px}
+.toast.show{opacity:1}
 
-/* 响应式 */
+/* ===== Container ===== */
+.container{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* ===== Auth banner ===== */
+.auth-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 10px;background:#EEFFF2;color:#34C759;
+  border-radius:100px;font-size:11px;font-weight:600;
+  vertical-align:middle;margin-left:6px;
+}
+
+/* ===== Responsive ===== */
 @media(max-width:640px){
-  .hero h1{font-size:32px}
-  .hero-stats{gap:24px}
-  .hero-stat .num{font-size:28px}
+  .hero{padding:40px 16px 32px}
+  .hero-stats{gap:20px}
+  .hero-stat .num{font-size:26px}
+  .hero-cta{flex-direction:column;align-items:center}
+  .hero-cta .btn{width:100%;max-width:280px;justify-content:center}
   .features-grid{grid-template-columns:1fr}
-  .latest-grid{grid-template-columns:1fr}
+  .reports-grid{grid-template-columns:1fr}
   .pricing .price{font-size:40px}
+  .pricing{margin:24px 8px;padding:32px 16px}
 }
 </style>
 </head>
 <body>
 
-<!-- 付费墙容器（未认证时显示） -->
-<div id="paywall-container"></div>
+<!-- Toast 提示 -->
+<div class="toast" id="toast"></div>
 
-<!-- 认证状态条（已认证时显示） -->
-<div class="auth-bar" id="auth-bar">
-  已通过知识星球「蓝宝书Max投研圈」验证 · 订阅有效
-</div>
-
-<!-- ===== Hero ===== -->
+<!-- ===== Hero（完全开放，不弹付费墙） ===== -->
 <header class="hero">
-  <div class="hero-badge">🪐 知识星球付费订阅</div>
+  <div class="hero-badge">🪐 知识星球付费订阅 · ¥888/年</div>
   <h1>蓝宝书<span class="accent">Max</span></h1>
   <p class="subtitle">
-    机构级A股投研情报，Alpha派蓝宝书全链路自动化<br>
-    产业链精准映射 · 每日最强标的 · 交易日前三版
+    机构级A股投研情报 · Alpha派蓝宝书全链路自动化<br>
+    产业链精准映射 · 每日最强标的 · 交易日三版更新
   </p>
 
   <div class="hero-stats">
@@ -248,11 +187,11 @@ body{
   </div>
 
   <div class="hero-cta">
-    <a href="#" class="btn btn-zsxq" onclick="scrollToPricing();return false">
-      🪐 加入知识星球 · 年费订阅
+    <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
+      🪐 加入蓝宝书Max · ¥888/年
     </a>
-    <button class="btn btn-outline" id="btn-enter-code" onclick="showPaywall()">
-      🔑 已有访问码，直接登录
+    <button class="btn btn-outline" id="btn-login" onclick="showLoginPaywall()">
+      🔑 已有访问码，登录
     </button>
   </div>
 </header>
@@ -265,7 +204,7 @@ body{
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
         <h3>最强标的直出</h3>
-        <p>龙头首选→弹性机会→相关标的，三层分级，直接告诉你买什么、为什么买</p>
+        <p>龙头首选 → 弹性机会 → 相关标的，三层分级，直接告诉你买什么</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔗</div>
@@ -275,56 +214,62 @@ body{
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
         <h3>交易日三版更新</h3>
-        <p>晨会版7:00 · 午间版12:00 · 晚间版20:00，开盘前到收盘全覆盖</p>
+        <p>晨会版7:00 · 午间版12:00 · 晚间版20:00，全时段覆盖</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
         <h3>实时行情叠加</h3>
-        <p>报告内嵌东方财富实时API，涨跌幅每分钟刷新，打开即用</p>
+        <p>报告内嵌东方财富实时API，涨跌幅每分钟刷新</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔥</div>
         <h3>热度量化评分</h3>
-        <p>机构关注度+市场确认度+催化质量，三维量化每个主题的投资价值</p>
+        <p>机构关注度+市场确认度+催化质量，三维量化投资价值</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">★</div>
         <h3>Alpha精选池</h3>
-        <p>综合涨幅、确定性、筹码结构筛选的TOP5短线情绪标的</p>
+        <p>综合涨幅、确定性、筹码结构的TOP5短线情绪标的</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 最新报告 ===== -->
-<section class="latest-section">
+<!-- ===== 最新报告（免费试看1份） ===== -->
+<section class="reports-section">
   <div class="container">
-    <h2>📋 最新报告 <span style="font-size:14px;font-weight:400;color:#AEAEB2" id="report-count"></span></h2>
-    <div class="latest-grid" id="latest-reports">
+    <h2>📋 最新报告 <span style="font-size:13px;font-weight:400;color:#AEAEB2" id="report-count"></span>
+      <span id="auth-badge"></span>
+    </h2>
+    <div class="reports-grid" id="latest-reports">
       <div style="text-align:center;padding:40px;color:#AEAEB2;grid-column:1/-1">加载中...</div>
     </div>
+    <p style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:8px">
+      🎁 新用户可免费试看 1 份完整报告
+    </p>
   </div>
 </section>
 
 <!-- ===== 定价 ===== -->
-<section class="pricing container" id="pricing-section">
-  <h2>加入蓝宝书Max投研圈</h2>
-  <div class="price"><span>¥</span>365<span>/年</span></div>
-  <p class="price-desc">每天仅需 1 元，获取机构级投研情报</p>
+<section class="pricing" id="pricing-section">
+  <h2>加入蓝宝书Max</h2>
+  <div class="price"><small>¥</small>888<small>/年</small></div>
+  <p class="price-desc">每天不到 2.5 元，获取机构级投研情报</p>
 
   <ul class="pricing-features">
     <li>每日晨会版 + 午间版 + 晚间版</li>
-    <li>最强标的三层分级，直接告诉你买什么</li>
+    <li>最强标的三层分级，直出买卖逻辑</li>
     <li>产业链上下游精准映射</li>
-    <li>实时行情叠加，打开即刷新</li>
+    <li>实时行情叠加，每分钟刷新</li>
     <li>Alpha精选短线情绪池</li>
     <li>机会前瞻：提前布局下一个风口</li>
-    <li>知识星球专属社群交流</li>
+    <li>知识星球专属付费社群</li>
     <li>访问码一键登录，无限次查看</li>
   </ul>
 
-  <a href="#" class="btn btn-zsxq" style="font-size:16px;padding:16px 40px">
-    🪐 立即加入知识星球
+  <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener"
+     class="btn btn-zsxq" style="font-size:16px;padding:14px 36px">
+    🪐 立即加入蓝宝书Max · ¥888/年
   </a>
 </section>
 
@@ -332,112 +277,123 @@ body{
 <footer class="footer">
   <div class="container">
     <p class="disclaimer">
-      ⚠️ 蓝宝书Max为机构投研信息聚合工具，所有内容仅供参考，不构成投资建议。<br>
+      ⚠️ 蓝宝书Max 为机构投研信息聚合工具，所有内容仅供参考，不构成投资建议。<br>
       股市有风险，投资需谨慎。过往表现不预示未来收益。
     </p>
     <p class="brand">
-      蓝宝书Max · 数据来源：<a href="https://www.alphapai.com" target="_blank" rel="noopener">Alpha派</a> & 
-      <a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a> · 
-      自动更新
+      蓝宝书Max · 数据来源：<a href="https://www.alphapai.com" target="_blank" rel="noopener">Alpha派</a> &
+      <a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a> · 自动更新
     </p>
   </div>
 </footer>
 
-<!-- ===== Scripts ===== -->
+<script src="codes.js"></script>
 <script src="paywall.js"></script>
 <script>
-// ===== 页面逻辑 =====
-
-function scrollToPricing() {
-  const el = document.getElementById('pricing-section');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+// ===== 鉴权加载 =====
+function showLoginPaywall() {
+  Paywall.renderPaywall('paywall-container-dynamic', document.title);
 }
 
-function showPaywall() {
-  Paywall.renderPaywall('paywall-container');
-}
+// 页面底部动态容器
+(function addPaywallContainer() {
+  const div = document.createElement('div');
+  div.id = 'paywall-container-dynamic';
+  document.body.appendChild(div);
+})();
 
-// 加载报告数据
+// ===== 加载报告 =====
 (async function loadReports() {
   try {
     const resp = await fetch('manifest.json?' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const manifest = await resp.json();
 
-    // 更新统计
+    // 统计
     document.getElementById('stat-reports').textContent = manifest.total_reports || 0;
-
-    // 计算总覆盖标的
     let totalStocks = 0;
     (manifest.reports || []).forEach(r => { totalStocks += (r.stock_count || 0); });
     document.getElementById('stat-stocks').textContent = totalStocks || '—';
 
-    // 显示认证状态
+    // 认证状态
     if (Paywall.isAuthenticated()) {
-      document.getElementById('auth-bar').classList.add('active');
+      document.getElementById('auth-badge').innerHTML =
+        '<span class="auth-badge">✓ 已订阅</span>';
     }
 
-    // 渲染报告
-    const reports = (manifest.reports || []).sort((a, b) => b.date.localeCompare(a.date));
-    document.getElementById('report-count').textContent = `共 ${reports.length} 份`;
+    // 渲染报告列表
+    const reports = (manifest.reports || []).sort((a, b) =>
+      (b.date || '').localeCompare(a.date || ''));
+    document.getElementById('report-count').textContent =
+      '共 ' + reports.length + ' 份';
 
-    const isAuth = Paywall.isAuthenticated();
     const grid = document.getElementById('latest-reports');
-
     if (reports.length === 0) {
       grid.innerHTML = '<div style="text-align:center;padding:40px;color:#AEAEB2;grid-column:1/-1">暂无报告，等待首次抓取...</div>';
       return;
     }
 
     const editionLabels = { am: '晨会版', md: '午间版', pm: '晚间版' };
-    const editionTags = { am: 'tag-am', md: 'tag-pm', pm: 'tag-pm', global: 'tag-global' };
+    const editionBadges = { am: 'badge-am', md: 'badge-md', pm: 'badge-pm' };
 
-    // 未认证用户：显示前3份作为预览，其余上锁
-    const displayReports = isAuth ? reports : reports.slice(0, 3);
+    const isAuth = Paywall.isAuthenticated();
+    const hasFree = !isAuth && Paywall.hasFreeView();
 
-    grid.innerHTML = displayReports.map((r, i) => {
-      const dateParts = r.date ? r.date.match(/(\d{4})(\d{2})(\d{2})/) : null;
+    grid.innerHTML = reports.map((r, i) => {
+      const ed = r.edition || 'am';
+      const badge = editionBadges[ed] || 'badge-am';
+      const label = editionLabels[ed] || '';
+      const dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
       const displayDate = dateParts
         ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
         : (r.date || '');
-      const ed = r.edition || 'am';
-      const tag = editionTags[ed] || 'tag-am';
-      const label = editionLabels[ed] || r.label || '';
-      const href = isAuth ? (r.file || '#') : '#';
-      const onclick = isAuth ? '' : `onclick="showPaywall();return false"`;
-      const locked = !isAuth;
-      const lockHTML = locked ? '<span class="lock-overlay">🔒</span>' : '';
+
+      // 未认证用户：第一份报告免费，其余带锁
+      const isFree = hasFree && i === 0;
+      const canView = isAuth || isFree;
+      const href = r.file || '#';
+      const onclick = canView
+        ? (isFree ? `onclick="handleFreeView(event,'${href}')"` : '')
+        : `onclick="showLoginPaywall();return false"`;
+
+      const freeBadge = isFree ? '<span class="r-free">🎁 免费试看</span>' : '';
+      const lockInfo = !isAuth && !isFree ? '<span class="r-lock">🔒 付费专享</span>' : '';
 
       return `
-        <a href="${href}" class="report-card ${locked ? 'locked' : ''}" ${onclick}>
-          ${lockHTML}
-          <div class="edition-tag ${tag}">${label}</div>
+        <a href="${canView ? href : '#'}" class="report-card"
+           ${onclick} style="${!canView ? 'cursor:default;opacity:.7' : ''}">
+          <div class="r-badge ${badge}">${label}</div>
           <div class="r-date">${displayDate}</div>
-          <div class="r-title">${r.title || ''}</div>
+          <div class="r-title">${r.title || '蓝宝书Max报告'}</div>
           <div class="r-meta">
             <span>📊 ${r.stock_count || 0} 只标的</span>
-            ${locked ? '<span>🔒 付费专享</span>' : ''}
+            ${freeBadge}
+            ${lockInfo}
           </div>
         </a>`;
     }).join('');
 
-    // 未认证用户：显示加锁占位
-    if (!isAuth && reports.length > 3) {
-      const lockedCount = reports.length - 3;
-      grid.innerHTML += `
-        <div class="report-card locked" onclick="showPaywall()" style="display:flex;align-items:center;justify-content:center;min-height:100px">
-          <div style="text-align:center;color:#AEAEB2">
-            <div style="font-size:24px;margin-bottom:8px">🔒</div>
-            <div style="font-size:14px">还有 ${lockedCount} 份报告 · 加入知识星球解锁</div>
-          </div>
-        </div>`;
-    }
   } catch (e) {
     console.error('加载报告失败:', e);
     document.getElementById('latest-reports').innerHTML =
-      '<div style="text-align:center;padding:40px;color:#FF3B30;grid-column:1/-1">加载失败，请刷新重试</div>';
+      '<div style="text-align:center;padding:40px;color:#FF3B30;grid-column:1/-1">加载失败，请检查网络后刷新</div>';
   }
 })();
-</script>
 
+// 免费试看：标记已用，跳转
+function handleFreeView(e, href) {
+  e.preventDefault();
+  Paywall.useFreeView();
+  window.location.href = href;
+}
+
+// Toast
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
 </body>
 </html>

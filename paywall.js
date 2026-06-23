@@ -1,66 +1,54 @@
 /**
- * 蓝宝书Max · 付费墙鉴权系统
+ * 蓝宝书Max · 付费墙鉴权系统 v3
  * ==============================
- * 知识星球付费用户验证方案
- *
- * 原理：
- *   1. 你在知识星球付费群发布「访问码」
- *   2. 付费用户在此输入访问码
- *   3. 客户端 SHA-256 哈希比对（不传服务器，零泄露）
- *   4. 验证通过后 localStorage 持久化
- *
- * 如何更新访问码：
- *   1. 决定新码（如 BLUEBOOK-2026-Q3）
- *   2. 在终端运行: echo -n "新码" | shasum -a 256
- *   3. 把得到的 hash 加到下方 VALID_HASHES 数组
- *   4. 把旧 hash 留在数组中 7 天（给用户过渡期），然后删除
- *   5. 在知识星球群发新码
+ * 
+ * 鉴权流程：
+ *   导航页（index.html）    → 完全开放，不弹付费墙（广告展示）
+ *   报告页（reports/*.html） → 首次打开免费试看 1 份
+ *                           → 之后弹出付费墙，需输入访问码
+ * 
+ * 访问码管理：
+ *   打开 admin.html → 输入新码 → 复制哈希 → 粘贴到 codes.js → 部署
+ * 
+ * 星球信息：
+ *   蓝宝书Max · https://t.zsxq.com/6iVvp
  */
 
-// ===== 配置区 —— 在这里更新访问码哈希 =====
-const VALID_HASHES = [
-  // 初始访问码: BLUEBOOK-MAX-2026
-  "062e06e81a413b0fbaf7151dddf1129ec4d50368ece1e233e3fa24a759c88bfa",
-  // 添加更多 hash 以支持访问码轮换（旧码保留过渡期）
-];
+// ===== 配置 =====
+const ZSXQ_URL = "https://t.zsxq.com/6iVvp";
+const ZSXQ_NAME = "蓝宝书Max";
 
-// 知识星球链接
-const ZSXQ_URL = "https://t.zsxq.com/"; // 替换为你的知识星球链接
-const ZSXQ_NAME = "蓝宝书Max投研圈";       // 替换为你的星球名称
-
-// localStorage key
-const AUTH_KEY = "bbmax_auth_v2";
-const AUTH_CODE_KEY = "bbmax_auth_code";
+const AUTH_KEY = "bbmax_auth_v3";
+const FREE_VIEW_KEY = "bbmax_free_view_v3";
 
 // ===== 鉴权逻辑 =====
-
 const Paywall = {
-  /**
-   * 检查是否已认证
-   */
+
+  // ---------- 认证 ----------
   isAuthenticated() {
     try {
       const auth = JSON.parse(localStorage.getItem(AUTH_KEY) || "{}");
       return auth.valid === true;
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   },
 
-  /**
-   * 获取认证信息（用于显示、防泄露追踪）
-   */
   getAuthInfo() {
-    try {
-      return JSON.parse(localStorage.getItem(AUTH_KEY) || "{}");
-    } catch {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "{}"); }
+    catch { return {}; }
   },
 
-  /**
-   * 用 Web Crypto API 计算 SHA-256
-   */
+  // ---------- 免费试看 ----------
+  hasFreeView() {
+    return !localStorage.getItem(FREE_VIEW_KEY);
+  },
+
+  useFreeView() {
+    localStorage.setItem(FREE_VIEW_KEY, Date.now().toString());
+    // 7 天后重置免费试看（让回头客可以再看一眼）
+    // 注：这行在 localStorage 中，用户清缓存可重置，这是故意的——降低流失率
+  },
+
+  // ---------- SHA-256 ----------
   async sha256(message) {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
@@ -69,135 +57,164 @@ const Paywall = {
     return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
   },
 
-  /**
-   * 验证访问码
-   * @returns {{success: boolean, message: string}}
-   */
+  // ---------- 验证 ----------
   async verify(code) {
-    if (!code || code.trim().length < 6) {
+    if (!code || code.trim().length < 4) {
       return { success: false, message: "访问码格式不正确" };
     }
-
     const hash = await this.sha256(code.trim());
-
     if (VALID_HASHES.includes(hash)) {
-      // 找到匹配的 hash 索引（用于防泄露标记）
-      const hashIndex = VALID_HASHES.indexOf(hash);
-      const authData = {
-        valid: true,
-        codeId: hashIndex,
-        activatedAt: Date.now(),
-        codePrefix: code.trim().substring(0, 2), // 只存前2位做标记
-      };
-      localStorage.setItem(AUTH_KEY, JSON.stringify(authData));
+      const idx = VALID_HASHES.indexOf(hash);
+      localStorage.setItem(AUTH_KEY, JSON.stringify({
+        valid: true, codeId: idx, activatedAt: Date.now(),
+        codePrefix: code.trim().substring(0, 2),
+      }));
       return { success: true, message: "验证成功！欢迎加入蓝宝书Max" };
     }
-
-    return { success: false, message: "访问码无效，请在知识星球付费群获取最新访问码" };
+    return { success: false, message: "访问码无效，请在知识星球「蓝宝书Max」获取最新码" };
   },
 
-  /**
-   * 登出
-   */
   logout() {
     localStorage.removeItem(AUTH_KEY);
+    localStorage.removeItem(FREE_VIEW_KEY);
   },
 
-  /**
-   * 渲染付费墙 UI（登录弹窗）
-   * @param {string} containerId - 挂载点
-   */
-  renderPaywall(containerId) {
+  // ---------- 付费墙 UI ----------
+  renderPaywall(containerId, title) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    const reportTitle = title || document.title || "";
+    const isReport = containerId === "paywall-container";
+
     container.innerHTML = `
-    <div class="pw-overlay" id="pw-overlay">
-      <div class="pw-card">
-        <div class="pw-icon">🔐</div>
-        <h2 class="pw-title">知识星球付费会员专享</h2>
-        <p class="pw-desc">
+    <div class="pw-overlay" id="pw-overlay"
+         style="position:fixed;top:0;left:0;width:100%;height:100%;
+                background:rgba(0,0,0,.6);backdrop-filter:blur(16px);
+                -webkit-backdrop-filter:blur(16px);z-index:10000;
+                display:flex;align-items:center;justify-content:center;
+                animation:pwFade .3s ease">
+      <style>
+        @keyframes pwFade{from{opacity:0}to{opacity:1}}
+        @keyframes pwSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        .pw-card2{
+          background:#fff;border-radius:20px;padding:40px 32px;
+          max-width:420px;width:92%;text-align:center;
+          box-shadow:0 20px 60px rgba(0,0,0,.18);
+          animation:pwSlide .4s cubic-bezier(.16,1,.3,1);
+          margin:auto;
+        }
+        .pw-card2 .pw-icon2{font-size:44px;margin-bottom:12px}
+        .pw-card2 h2{font-size:20px;font-weight:700;color:#1D1D1F;margin-bottom:8px}
+        .pw-card2 .pw-desc2{font-size:13px;color:#86868B;line-height:1.6;margin-bottom:24px}
+        .pw-card2 .pw-input2{
+          width:100%;padding:12px 16px;border:1.5px solid #E5E5EA;border-radius:12px;
+          font-size:15px;font-family:inherit;text-align:center;letter-spacing:1px;
+          outline:none;transition:border-color .15s;margin-bottom:10px;
+        }
+        .pw-card2 .pw-input2:focus{border-color:#0071E3}
+        .pw-card2 .pw-btn2{
+          width:100%;padding:12px;background:#0071E3;color:#fff;border:none;
+          border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;
+          font-family:inherit;transition:all .15s;
+        }
+        .pw-card2 .pw-btn2:hover{background:#0077ED}
+        .pw-card2 .pw-btn2:disabled{opacity:.6;cursor:not-allowed}
+        .pw-card2 .pw-err2{color:#FF3B30;font-size:12px;margin-top:8px;display:none}
+        .pw-card2 .pw-ft2{
+          margin-top:24px;padding-top:20px;border-top:1px solid #F2F2F7;
+          font-size:12px;color:#AEAEB2;
+        }
+        .pw-card2 .pw-ft2 a{
+          display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+          padding:10px 24px;background:linear-gradient(135deg,#1AAD19,#0F8F0F);
+          color:#fff;border-radius:12px;text-decoration:none;
+          font-size:13px;font-weight:600;transition:all .15s;
+        }
+        .pw-card2 .pw-ft2 a:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,173,25,.3)}
+      </style>
+      <div class="pw-card2">
+        <div class="pw-icon2">🔐</div>
+        <h2>知识星球付费会员专享</h2>
+        <p class="pw-desc2">
+          ${reportTitle}<br>
           蓝宝书Max 为付费订阅产品<br>
-          请在「${ZSXQ_NAME}」知识星球获取访问码
+          年费 ¥888，加入「${ZSXQ_NAME}」获取访问码
         </p>
 
-        <div class="pw-input-group">
-          <input
-            class="pw-input"
-            type="text"
-            id="pw-code-input"
-            placeholder="输入访问码"
-            autocomplete="off"
-            maxlength="32"
-          >
-          <button class="pw-btn" id="pw-submit-btn">验证</button>
-        </div>
+        <input class="pw-input2" type="text" id="pw-code-input2"
+               placeholder="输入访问码" autocomplete="off" maxlength="64">
+        <button class="pw-btn2" id="pw-submit-btn2">验证访问码</button>
+        <div class="pw-err2" id="pw-error2"></div>
 
-        <div class="pw-error" id="pw-error"></div>
-
-        <div class="pw-footer">
-          <p>没有访问码？</p>
-          <a href="${ZSXQ_URL}" target="_blank" rel="noopener" class="pw-zsxq-btn">
-            🪐 加入知识星球，年费订阅
-          </a>
+        <div class="pw-ft2">
+          <p style="margin-bottom:8px">没有访问码？加入知识星球获取</p>
+          <a href="${ZSXQ_URL}" target="_blank" rel="noopener">🪐 加入蓝宝书Max · 年费 ¥888</a>
         </div>
       </div>
     </div>`;
 
-    // 事件绑定
-    const input = document.getElementById("pw-code-input");
-    const btn = document.getElementById("pw-submit-btn");
-    const error = document.getElementById("pw-error");
+    const input = document.getElementById("pw-code-input2");
+    const btn = document.getElementById("pw-submit-btn2");
+    const err = document.getElementById("pw-error2");
 
     const doVerify = async () => {
       btn.disabled = true;
       btn.textContent = "验证中...";
-      error.style.display = "none";
-
+      err.style.display = "none";
       const result = await Paywall.verify(input.value);
       if (result.success) {
-        // 刷新页面，解锁内容
         window.location.reload();
       } else {
-        error.textContent = result.message;
-        error.style.display = "block";
+        err.textContent = result.message;
+        err.style.display = "block";
         btn.disabled = false;
-        btn.textContent = "验证";
-        input.focus();
-        input.select();
+        btn.textContent = "验证访问码";
+        input.focus(); input.select();
       }
     };
-
     btn.addEventListener("click", doVerify);
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") doVerify();
-    });
-
-    // 自动聚焦
+    input.addEventListener("keydown", e => { if (e.key === "Enter") doVerify(); });
     setTimeout(() => input.focus(), 300);
   },
 
-  /**
-   * 渲染轻量锁图标（用于导航页列表项）
-   * @returns HTML string
-   */
-  lockIcon() {
-    return '<span class="pw-lock" title="付费会员专享">🔒</span>';
-  },
-
-  /**
-   * 渲染已解锁标记
-   */
+  // ---------- 装饰 ----------
+  lockIcon() { return '<span style="font-size:14px;margin-left:4px;opacity:.5">🔒</span>'; },
   unlockBadge() {
-    const info = this.getAuthInfo();
-    return `<span class="pw-unlocked" title="已通过知识星球验证">✓ 已订阅</span>`;
+    return '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:#EEFFF2;color:#34C759;border-radius:100px;font-size:11px;font-weight:600">✓ 已订阅</span>';
   },
 };
 
-// 如果页面有 data-paywall="true" 属性，自动检测鉴权
+// ===== 页面自动检测 =====
 document.addEventListener("DOMContentLoaded", () => {
   const needsAuth = document.documentElement.getAttribute("data-paywall") === "true";
-  if (needsAuth && !Paywall.isAuthenticated()) {
-    Paywall.renderPaywall("paywall-container");
+  if (!needsAuth) return;
+
+  // 已认证 → 直接放行
+  if (Paywall.isAuthenticated()) {
+    document.documentElement.classList.add("bb-authenticated");
+    return;
   }
+
+  // 有免费试看次数 → 放行
+  if (Paywall.hasFreeView()) {
+    Paywall.useFreeView();
+    document.documentElement.classList.add("bb-free-view");
+
+    // 显示一个提示条，告知这是免费试看
+    const banner = document.createElement("div");
+    banner.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:9999;" +
+      "background:linear-gradient(135deg,#FFF9F0,#FFF0E0);" +
+      "color:#C47A00;text-align:center;padding:10px 16px;" +
+      "font-size:13px;font-weight:600;box-shadow:0 -2px 12px rgba(0,0,0,.06);" +
+      "display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap";
+    banner.innerHTML = '🎁 免费试看中 · 本份报告可免费查看 · <a href="' + ZSXQ_URL +
+      '" target="_blank" rel="noopener" style="color:#1AAD19;font-weight:700;text-decoration:none">加入知识星球 ¥888/年 →</a>';
+    document.body.appendChild(banner);
+    return;
+  }
+
+  // 无认证也无免费次数 → 弹付费墙
+  const title = document.title || "";
+  Paywall.renderPaywall("paywall-container", title);
 });

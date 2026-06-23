@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-paywall="true">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝宝书Max · 2026-06-23 午间版</title>
+<style>/* ===== 蓝宝书Max · Apple Design System ===== */
+:root {
+  /* 色彩 */
+  --bg: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-secondary: #FAFAFA;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --text-tertiary: #AEAEB2;
+  --border: #E5E5EA;
+  --border-light: #F2F2F7;
+  --separator: #E5E5EA;
+
+  /* 语义色 */
+  --up: #FF3B30;
+  --up-bg: #FFF0EF;
+  --down: #34C759;
+  --down-bg: #EEFFF2;
+  --accent: #0071E3;
+  --accent-light: #E8F2FD;
+  --warning: #FF9500;
+  --warning-light: #FFF5E7;
+  --success: #34C759;
+  --gold: #FF9500;
+
+  /* 状态色 */
+  --state-main: #FF3B30;
+  --state-strong: #FF9500;
+  --state-cont: #0071E3;
+  --state-hatch: #AF52DE;
+
+  /* 排版 */
+  --font: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* 间距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.08);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,.12);
+
+  /* 动画 */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Typography ===== */
+h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
+h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; }
+h3 { font-size: 20px; font-weight: 600; }
+h4 { font-size: 16px; font-weight: 600; }
+
+.text-mono { font-family: var(--font-mono); }
+.text-xs { font-size: 11px; }
+.text-sm { font-size: 13px; }
+.text-base { font-size: 15px; }
+.text-lg { font-size: 17px; }
+.text-xl { font-size: 20px; }
+.text-2xl { font-size: 24px; }
+
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 20px; border: none;
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all var(--duration-fast) var(--ease-out);
+  text-decoration: none; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+}
+.btn-primary:hover { background: #0077ED; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary {
+  background: var(--surface-secondary); color: var(--text-primary);
+}
+.btn-secondary:hover { background: #EFEFF2; }
+.btn-ghost {
+  background: transparent; color: var(--accent);
+}
+.btn-ghost:hover { background: var(--accent-light); }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-glass {
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(0,0,0,.04);
+}
+
+/* ===== Tags / Badges ===== */
+.badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; line-height: 1.6;
+}
+.badge-up { background: var(--up-bg); color: var(--up); }
+.badge-down { background: var(--down-bg); color: var(--down); }
+.badge-accent { background: var(--accent-light); color: var(--accent); }
+.badge-warning { background: var(--warning-light); color: var(--warning); }
+.badge-neutral { background: #F5F5F7; color: var(--text-secondary); }
+
+.state-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 11px; font-weight: 600;
+}
+.state-main { background: #FFF0EF; color: var(--state-main); }
+.state-strong { background: #FFF5E7; color: var(--state-strong); }
+.state-cont { background: #E8F2FD; color: var(--state-cont); }
+.state-hatch { background: #F5EEFF; color: var(--state-hatch); }
+
+/* ===== Dividers ===== */
+.divider {
+  height: 1px; background: var(--separator);
+  margin: var(--space-lg) 0;
+}
+.divider-light {
+  height: 1px; background: var(--border-light);
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 720px; margin: 0 auto; padding: 0 var(--space-md);
+}
+.container-wide {
+  max-width: 960px; margin: 0 auto; padding: 0 var(--space-md);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fadeIn var(--duration-normal) var(--ease-out) both; }
+
+/* ===== Chain (产业链) ===== */
+.chain-container {
+  display: flex; gap: var(--space-sm); align-items: stretch;
+  padding: var(--space-md); background: var(--surface-secondary);
+  border-radius: var(--radius-md); overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.chain-link {
+  flex: 1; min-width: 140px;
+  background: var(--surface); border-radius: var(--radius-sm);
+  padding: var(--space-md); position: relative;
+  border: 1px solid var(--border);
+}
+.chain-link::after {
+  content: '→'; position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%); color: var(--text-tertiary);
+  font-size: 14px; font-weight: 300;
+}
+.chain-link:last-child::after { display: none; }
+.chain-label {
+  font-size: 11px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+}
+.chain-stocks {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.chain-stock {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; padding: 3px 0;
+}
+.chain-stock-name { font-weight: 600; }
+.chain-stock-code { font-size: 10px; color: var(--text-tertiary); }
+.chain-stock-catalyst {
+  font-size: 10px; color: var(--up); background: var(--up-bg);
+  padding: 1px 6px; border-radius: 100px; margin-left: auto;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
+
+/* ===== Mobile ===== */
+@media (max-width: 640px) {
+  .container, .container-wide { padding: 0 var(--space-sm); }
+  h1 { font-size: 32px; }
+  h2 { font-size: 22px; }
+  .chain-container { flex-direction: column; }
+  .chain-link::after {
+    content: '↓'; right: 50%; top: auto; bottom: -16px;
+    transform: translateX(50%);
+  }
+}
+
+
+/* ===== 报告专用样式 ===== */
+.report-header {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: 1px solid var(--separator);
+  margin-bottom: var(--space-xl);
+}
+.report-header .back {
+  font-size: 13px; color: var(--accent); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--space-lg);
+  transition: opacity var(--duration-fast);
+}
+.report-header .back:hover { opacity: .7; }
+.report-header .version-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 12px; font-weight: 600; margin-bottom: var(--space-sm);
+}
+.report-header .version-tag.domestic { background: #EDE4DC; color: #A07858; }
+.report-header .version-tag.global { background: #DEE5F7; color: #3E54CE; }
+.report-header .live-dot {
+  display: inline-block; width: 6px; height: 6px; background: #34C759;
+  border-radius: 50%; animation: pulse 2s infinite;
+}
+
+.t-card { margin-bottom: var(--space-md); }
+.t-group-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .3px; margin-bottom: 4px;
+  padding: 2px 8px; border-radius: 100px; display: inline-block;
+}
+.t-group-label.l1 { background: #FFF0EF; color: var(--up); }
+.t-group-label.l2 { background: #FFF5E7; color: var(--warning); }
+.t-group-label.l3 { background: #E8F2FD; color: var(--accent); }
+
+.ts-row {
+  display: flex; align-items: center; gap: 8px; padding: 5px 0;
+  border-bottom: 1px solid var(--border-light); font-size: 12px;
+}
+.ts-row:last-child { border-bottom: none; }
+.ts-name { font-weight: 700; font-size: 13px; min-width: 56px; }
+.ts-code { font-size: 10px; color: var(--text-tertiary); }
+.ts-chg { font-weight: 700; font-size: 13px; min-width: 54px; text-align: right; }
+.ts-chg.up { color: var(--up); }
+.ts-chg.down { color: var(--down); }
+.ts-reason { font-size: 11px; color: var(--text-secondary); flex: 1; }
+
+.alpha-row { transition: all var(--duration-fast) var(--ease-out); }
+.alpha-row:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+
+.report-footer {
+  margin-top: var(--space-2xl); padding-top: var(--space-lg);
+  border-top: 1px solid var(--separator);
+}
+.report-footer .disclaimer {
+  font-size: 11px; color: var(--text-tertiary); line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .t-card > div:first-child { flex-direction: column; gap: 8px; }
+</style>
+</head>
+<body>
+<div id="paywall-container"></div>
+<div class="container">
+
+  <!-- Header -->
+  <div class="report-header">
+    <a class="back" href="/bluebook-max/">‹ 返回导航</a>
+    <div>
+      <span class="version-tag domestic">☀️ 国内版</span>
+      <span class="live-dot"></span>
+      <span style="font-size:11px;color:var(--text-tertiary)">交易日12:00更新</span>
+    </div>
+    <h1 style="margin-top:8px">蓝宝书Max</h1>
+    <p style="font-size:15px;color:var(--text-secondary);margin-top:4px">
+      2026-06-23 午间版 · 18个热点主题 · 112只标的 · 午盘加速上行，AI芯片+上游材料双主线强化
+    </p>
+  </div>
+
+  <!-- 市场摘要 -->
+  <div class="card" style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border:1px solid #FFE8CC;margin-bottom:var(--space-xl)">
+    <h4 style="color:#C47A00;margin-bottom:8px">📋 市场情绪速览</h4>
+    <p style="font-size:14px;font-weight:600;line-height:1.6">午盘最强方向：氧化锆涨停封板超预期（爱迪特封单30万手）→ AI算力芯片午盘加速拉升（寒武纪涨3.5%）→ CCL涨价机构密集调研（生益科技4%+）→ 存储利基补涨启动（普冉6%+）</p>
+  </div>
+
+  <!-- 主题列表 -->
+  <h2 style="margin-bottom:var(--space-lg)">🔥 热点主题 <span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">18个</span></h2>
+  
+        <div class="card t-card animate-in" style="animation-delay:0.0s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP1</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">午盘AI算力芯片板块加速拉升，昇腾链领涨</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 午盘AI算力芯片板块涨幅扩大至4.2%，昇腾全链受益三季度交付放量预期，寒武纪涨幅扩大至3.5%
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "AI芯片早盘温和，午盘加速拉升显示机构资金加速入场。昇腾链三季度交付指引超预期是核心催化。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 国产芯片涨价+订单爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·设计/IP</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">芯原股份</span>
+              <span class="chain-stock-code">688521</span>
+              <span class="chain-stock-catalyst">ASIC设计服务</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">寒武纪</span>
+              <span class="chain-stock-code">688256</span>
+              <span class="chain-stock-catalyst">AI芯片龙头+涨价</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">海光信息</span>
+              <span class="chain-stock-code">688041</span>
+              <span class="chain-stock-catalyst">DCU国产替代</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·制造/应用</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">晶圆代工</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">华虹公司</span>
+              <span class="chain-stock-code">688347</span>
+              <span class="chain-stock-catalyst">特色工艺代工</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="寒武纪">
+          <span class="ts-name">寒武纪</span>
+          <span class="ts-code">688256</span>
+          <span class="ts-chg up" data-field="pct">+3.52%</span>
+          <span class="ts-reason">午盘涨幅扩大，受益三季度交付放量</span>
+        </div>
+        <div class="ts-row" data-stock="海光信息">
+          <span class="ts-name">海光信息</span>
+          <span class="ts-code">688041</span>
+          <span class="ts-chg up" data-field="pct">+2.87%</span>
+          <span class="ts-reason">国产CPU龙头，午盘跟随拉涨</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="景嘉微">
+          <span class="ts-name">景嘉微</span>
+          <span class="ts-code">300474</span>
+          <span class="ts-chg up" data-field="pct">+5.21%</span>
+          <span class="ts-reason">GPU国产替代弹性标的</span>
+        </div>
+        <div class="ts-row" data-stock="芯原股份">
+          <span class="ts-name">芯原股份</span>
+          <span class="ts-code">688521</span>
+          <span class="ts-chg up" data-field="pct">+4.15%</span>
+          <span class="ts-reason">ASIC设计服务，午盘放量突破</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l3">相关标的</div>
+      
+        <div class="ts-row" data-stock="中芯国际">
+          <span class="ts-name">中芯国际</span>
+          <span class="ts-code">688981</span>
+          <span class="ts-chg up" data-field="pct">+1.58%</span>
+          <span class="ts-reason">晶圆代工+AI产能扩张</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">景嘉微</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">300474</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+5.21%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">GPU国产替代弹性标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">芯原股份</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">688521</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+4.15%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">ASIC设计服务，午盘放量突破</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">寒武纪</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">688256</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+3.52%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">午盘涨幅扩大，受益三季度交付放量</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.05s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">93</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP2</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">氧化锆缺口扩大，主力资金加速涌入上游材料板块</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 午盘氧化锆相关个股集体走强，爱迪特涨停封板超30万手，显示结构性供不应求逻辑被大资金认可
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "爱迪特涨停封单量级超预期，验证高端氧化锆缺口逻辑。资金从概念炒作转向业绩确定性，上游粉体环节估值快速修复。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 日本东曹断供→国产替代窗口打开
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·原料</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">东方锆业</span>
+              <span class="chain-stock-code">002167</span>
+              <span class="chain-stock-catalyst">锆矿资源+氯氧化锆</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">龙佰集团</span>
+              <span class="chain-stock-code">002601</span>
+              <span class="chain-stock-catalyst">氯氧化锆产能最大</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">三祥新材</span>
+              <span class="chain-stock-code">603663</span>
+              <span class="chain-stock-catalyst">电熔氧化锆龙头</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·粉体</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">国瓷材料</span>
+              <span class="chain-stock-code">300285</span>
+              <span class="chain-stock-catalyst">粉体龙头+国产替代</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">东方锆业</span>
+              <span class="chain-stock-code">002167</span>
+              <span class="chain-stock-catalyst">粉体一体化</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·制品</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">爱迪特</span>
+              <span class="chain-stock-code">301580</span>
+              <span class="chain-stock-catalyst">齿科材料+海外订单</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">国瓷材料</span>
+              <span class="chain-stock-code">300285</span>
+              <span class="chain-stock-catalyst">齿科+电子陶瓷</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="爱迪特">
+          <span class="ts-name">爱迪特</span>
+          <span class="ts-code">301580</span>
+          <span class="ts-chg up" data-field="pct">+19.99%</span>
+          <span class="ts-reason">午盘涨停，封单量级超预期</span>
+        </div>
+        <div class="ts-row" data-stock="国瓷材料">
+          <span class="ts-name">国瓷材料</span>
+          <span class="ts-code">300285</span>
+          <span class="ts-chg up" data-field="pct">+10.42%</span>
+          <span class="ts-reason">粉体龙头，午盘涨幅扩大至10%+</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="东方锆业">
+          <span class="ts-name">东方锆业</span>
+          <span class="ts-code">002167</span>
+          <span class="ts-chg up" data-field="pct">+9.98%</span>
+          <span class="ts-reason">锆产业链一体化，午盘跟随涨停</span>
+        </div>
+        <div class="ts-row" data-stock="西陇科学">
+          <span class="ts-name">西陇科学</span>
+          <span class="ts-code">002584</span>
+          <span class="ts-chg up" data-field="pct">+4.32%</span>
+          <span class="ts-reason">上游前驱体，午盘放量</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l3">相关标的</div>
+      
+        <div class="ts-row" data-stock="龙佰集团">
+          <span class="ts-name">龙佰集团</span>
+          <span class="ts-code">002601</span>
+          <span class="ts-chg up" data-field="pct">+7.30%</span>
+          <span class="ts-reason">氯氧化锆龙头，涨价传导</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">爱迪特</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">301580</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+19.99%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">午盘涨停，封单量级超预期</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">国瓷材料</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">300285</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+10.42%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">粉体龙头，午盘涨幅扩大至10%+</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">东方锆业</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">002167</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+9.98%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">锆产业链一体化，午盘跟随涨停</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.1s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">87</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP3</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">CCL涨价行情午后加速，生益科技获机构密集调研</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 午盘CCL板块涨幅扩大至3.8%，生益科技获10余家机构调研，多轮涨价预期强化
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "机构密集调研叠加建滔多轮涨价兑现，CCL从周期底部确认进入上行通道。产品结构与客户结构双优的公司享受超额涨幅。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 建滔涨价→全产业链传导
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·材料</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中国巨石</span>
+              <span class="chain-stock-code">600176</span>
+              <span class="chain-stock-catalyst">电子布龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">宏和科技</span>
+              <span class="chain-stock-code">603256</span>
+              <span class="chain-stock-catalyst">电子布弹性最大</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">铜冠铜箔</span>
+              <span class="chain-stock-code">301217</span>
+              <span class="chain-stock-catalyst">电子铜箔</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">圣泉集团</span>
+              <span class="chain-stock-code">605589</span>
+              <span class="chain-stock-catalyst">树脂供应商</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·CCL</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">生益科技</span>
+              <span class="chain-stock-code">600183</span>
+              <span class="chain-stock-catalyst">CCL龙头+涨价</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">金安国纪</span>
+              <span class="chain-stock-code">002636</span>
+              <span class="chain-stock-catalyst">CCL直接受益</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">华正新材</span>
+              <span class="chain-stock-code">603186</span>
+              <span class="chain-stock-catalyst">利润率弹性</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·PCB</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">深南电路</span>
+              <span class="chain-stock-code">002916</span>
+              <span class="chain-stock-catalyst">高端PCB龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">兴森科技</span>
+              <span class="chain-stock-code">002436</span>
+              <span class="chain-stock-catalyst">mSAP板核心</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">鹏鼎控股</span>
+              <span class="chain-stock-code">002938</span>
+              <span class="chain-stock-catalyst">FPC龙头</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="生益科技">
+          <span class="ts-name">生益科技</span>
+          <span class="ts-code">600183</span>
+          <span class="ts-chg up" data-field="pct">+4.15%</span>
+          <span class="ts-reason">CCL龙头，午盘涨幅扩大，机构密集调研</span>
+        </div>
+        <div class="ts-row" data-stock="金安国纪">
+          <span class="ts-name">金安国纪</span>
+          <span class="ts-code">002636</span>
+          <span class="ts-chg up" data-field="pct">+6.84%</span>
+          <span class="ts-reason">覆铜板弹性最大标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="华正新材">
+          <span class="ts-name">华正新材</span>
+          <span class="ts-code">603186</span>
+          <span class="ts-chg up" data-field="pct">+3.22%</span>
+          <span class="ts-reason">覆铜板高端化，利润率提升</span>
+        </div>
+        <div class="ts-row" data-stock="宏和科技">
+          <span class="ts-name">宏和科技</span>
+          <span class="ts-code">603256</span>
+          <span class="ts-chg up" data-field="pct">+4.51%</span>
+          <span class="ts-reason">电子布价格弹性巨大</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">金安国纪</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">002636</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+6.84%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">覆铜板弹性最大标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">宏和科技</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">603256</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+4.51%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">电子布价格弹性巨大</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">生益科技</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">600183</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+4.15%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">CCL龙头，午盘涨幅扩大，机构密集调研</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.15000000000000002s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">82</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP4</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">存储芯片利基市场午盘补涨，DRAM缺口延伸至NAND</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 午盘存储板块分化，DRAM标的继续强势，NAND方向出现补涨苗头，兆易创新涨幅扩大至5%+
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "存储涨价从DDR5向DDR4、利基DRAM扩散，最终将全面传导至NAND。补涨行情重点看利基型号缺口最大的公司。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 DDR5涨288%→全链景气
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·晶圆</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">存储代工</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片设计</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">兆易创新</span>
+              <span class="chain-stock-code">603986</span>
+              <span class="chain-stock-catalyst">NOR Flash龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">普冉股份</span>
+              <span class="chain-stock-code">688766</span>
+              <span class="chain-stock-catalyst">利基存储</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·模组/分销</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">江波龙</span>
+              <span class="chain-stock-code">301308</span>
+              <span class="chain-stock-catalyst">模组龙头+涨价弹性</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">佰维存储</span>
+              <span class="chain-stock-code">688525</span>
+              <span class="chain-stock-catalyst">企业级存储</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">香农芯创</span>
+              <span class="chain-stock-code">300475</span>
+              <span class="chain-stock-catalyst">HBM代理</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="兆易创新">
+          <span class="ts-name">兆易创新</span>
+          <span class="ts-code">603986</span>
+          <span class="ts-chg up" data-field="pct">+5.23%</span>
+          <span class="ts-reason">DRAM涨价周期+午盘加速</span>
+        </div>
+        <div class="ts-row" data-stock="江波龙">
+          <span class="ts-name">江波龙</span>
+          <span class="ts-code">301308</span>
+          <span class="ts-chg up" data-field="pct">+4.12%</span>
+          <span class="ts-reason">模组龙头，受益全品类涨价</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="普冉股份">
+          <span class="ts-name">普冉股份</span>
+          <span class="ts-code">688766</span>
+          <span class="ts-chg up" data-field="pct">+6.35%</span>
+          <span class="ts-reason">利基存储缺口扩大+午盘补涨</span>
+        </div>
+        <div class="ts-row" data-stock="佰维存储">
+          <span class="ts-name">佰维存储</span>
+          <span class="ts-code">688525</span>
+          <span class="ts-chg up" data-field="pct">+3.88%</span>
+          <span class="ts-reason">模组+品牌双驱动</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l3">相关标的</div>
+      
+        <div class="ts-row" data-stock="德明利">
+          <span class="ts-name">德明利</span>
+          <span class="ts-code">001309</span>
+          <span class="ts-chg up" data-field="pct">+2.65%</span>
+          <span class="ts-reason">模组龙头，弹性释放</span>
+        </div>
+        <div class="ts-row" data-stock="香农芯创">
+          <span class="ts-name">香农芯创</span>
+          <span class="ts-code">300475</span>
+          <span class="ts-chg up" data-field="pct">+11.15%</span>
+          <span class="ts-reason">绑定海外原厂，受益HBM放量</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">香农芯创</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">300475</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+11.15%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">绑定海外原厂，受益HBM放量</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">普冉股份</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">688766</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+6.35%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">利基存储缺口扩大+午盘补涨</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">兆易创新</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">603986</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+5.23%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">DRAM涨价周期+午盘加速</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.2s;border-left:3px solid var(--accent)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);min-width:40px;line-height:1">55</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP5</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">液冷板块午盘分化：强瑞技术回踩后V型反转</span>
+                <span class="state-badge state-cont">➡️持续</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 午盘液冷板块出现分化，强瑞技术早盘低开-4%后午盘翻红，显示液冷核心供应商逻辑坚挺
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "液冷从可选方案升级为Rubin标配的逻辑不变，短暂回调不改中期趋势。核心供应商批量交付能力决定股价弹性。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 英伟达Rubin全面液冷
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·冷板/管路</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">强瑞技术</span>
+              <span class="chain-stock-code">301128</span>
+              <span class="chain-stock-catalyst">Rubin液冷歧管</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">飞龙股份</span>
+              <span class="chain-stock-code">002536</span>
+              <span class="chain-stock-catalyst">电子水泵</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·CDU</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">裕同科技</span>
+              <span class="chain-stock-code">002831</span>
+              <span class="chain-stock-catalyst">MIM液冷结构件</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·数据中心</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">科华数据</span>
+              <span class="chain-stock-code">002335</span>
+              <span class="chain-stock-catalyst">数据中心电源</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">金盘科技</span>
+              <span class="chain-stock-code">688676</span>
+              <span class="chain-stock-catalyst">变压器+SST</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="强瑞技术">
+          <span class="ts-name">强瑞技术</span>
+          <span class="ts-code">301128</span>
+          <span class="ts-chg up" data-field="pct">+1.23%</span>
+          <span class="ts-reason">午盘V反翻红，液冷歧管批量交付</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="飞龙股份">
+          <span class="ts-name">飞龙股份</span>
+          <span class="ts-code">002536</span>
+          <span class="ts-chg down" data-field="pct">-1.56%</span>
+          <span class="ts-reason">电子水泵已切入英伟达链</span>
+        </div>
+        <div class="ts-row" data-stock="裕同科技">
+          <span class="ts-name">裕同科技</span>
+          <span class="ts-code">002831</span>
+          <span class="ts-chg up" data-field="pct">+0.45%</span>
+          <span class="ts-reason">MIM液冷结构件</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">强瑞技术</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">301128</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+1.23%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">午盘V反翻红，液冷歧管批量交付</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">裕同科技</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">002831</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+0.45%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">MIM液冷结构件</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">飞龙股份</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">002536</span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">-1.56%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">电子水泵已切入英伟达链</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.25s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">75</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP6</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">午盘稀土永磁板块异动，氮化铝上游引关注</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 稀土出口管制预期持续发酵，午盘稀土永磁板块异动拉升，带动氮化铝上游氧化钇概念股走强
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "稀土管制叠加日本供给中断，高端陶瓷基板材料全产业链受益。氧化钇、氮化铝粉体等上游环节最先反映。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 日本供给受限+AI需求爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·粉体</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">国瓷材料</span>
+              <span class="chain-stock-code">300285</span>
+              <span class="chain-stock-catalyst">多品类陶瓷粉体</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">金博股份</span>
+              <span class="chain-stock-code">688598</span>
+              <span class="chain-stock-catalyst">氮化铝粉体新产能</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·基板</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">旭光电子</span>
+              <span class="chain-stock-code">600353</span>
+              <span class="chain-stock-catalyst">全产业链布局</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">中瓷电子</span>
+              <span class="chain-stock-code">003031</span>
+              <span class="chain-stock-catalyst">氮化铝外壳批量供货</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·封装</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">楚江新材</span>
+              <span class="chain-stock-code">002171</span>
+              <span class="chain-stock-catalyst">烧结设备</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="旭光电子">
+          <span class="ts-name">旭光电子</span>
+          <span class="ts-code">600353</span>
+          <span class="ts-chg up" data-field="pct">+10.00%</span>
+          <span class="ts-reason">全产业链布局ALN陶瓷基板</span>
+        </div>
+        <div class="ts-row" data-stock="中瓷电子">
+          <span class="ts-name">中瓷电子</span>
+          <span class="ts-code">003031</span>
+          <span class="ts-chg up" data-field="pct">+10.00%</span>
+          <span class="ts-reason">ALN外壳批量供货光模块</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="金博股份">
+          <span class="ts-name">金博股份</span>
+          <span class="ts-code">688598</span>
+          <span class="ts-chg up" data-field="pct">+7.56%</span>
+          <span class="ts-reason">ALN粉体新产能释放</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">旭光电子</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">600353</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+10.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">全产业链布局ALN陶瓷基板</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">中瓷电子</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">003031</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+10.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">ALN外壳批量供货光模块</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">金博股份</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">688598</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)">+7.56%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">ALN粉体新产能释放</span>
+        </div>
+    </div>
+        </div>
+
+  <!-- 机会前瞻 -->
+  <h2 style="margin-top:var(--space-2xl);margin-bottom:var(--space-lg)">🔮 机会前瞻 <span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">3个</span></h2>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">午盘PCB钻针产业链联动走强</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">AI服务器PCB层数激增拉动钻针消耗，硬质合金棒材需求爆发，午盘相关个股联动走强</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 AI驱动PCB钻针需求从量变到质变，硬质合金棒材国产替代+量价齐升逻辑兼具。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">智谱GLM-5.2开源带动国产大模型生态</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">智谱GLM-5.2编程能力全球前三、开源第一，午盘国产AI应用概念股异动</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 国产大模型进入全球一线竞争力和商业化定价权新阶段。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">午盘光伏反弹：HJT设备商获大单催化</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">午盘光伏板块止跌反弹，某HJT设备龙头获海外GW级订单，底部筹码开始松动</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 光伏底部信号初现，HJT技术路线订单验证是板块反转关键。</div>
+        </div>
+
+  <!-- Alpha排行 -->
+  
+  <h2 style="margin-top:var(--space-2xl);margin-bottom:var(--space-lg)">★ Alpha精选</h2>
+  <div style="margin-bottom:var(--space-xl)">
+        <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
+          <span style="font-size:14px;color:var(--gold)">★</span>
+          <span style="font-weight:700;font-size:14px">爱迪特</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">301580</span>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">80</span>
+          <span style="font-size:12px;color:var(--text-secondary);flex:1">午盘涨停，封单量级超预期+海外订单承接</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+19.99%</span>
+        </div>
+        <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
+          <span style="font-size:14px;color:var(--gold)">★</span>
+          <span style="font-weight:700;font-size:14px">东方锆业</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">002167</span>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">77</span>
+          <span style="font-size:12px;color:var(--text-secondary);flex:1">锆产业链一体化，涨停跟随</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+9.98%</span>
+        </div>
+        <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
+          <span style="font-size:14px;color:var(--gold)">★</span>
+          <span style="font-weight:700;font-size:14px">国瓷材料</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">300285</span>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">76</span>
+          <span style="font-size:12px;color:var(--text-secondary);flex:1">粉体龙头+午盘涨幅扩大</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+10.42%</span>
+        </div>
+        <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
+          <span style="font-size:14px;color:var(--gold)">★</span>
+          <span style="font-weight:700;font-size:14px">长飞光纤</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">601869</span>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">73</span>
+          <span style="font-size:12px;color:var(--text-secondary);flex:1">光纤龙头，出海涨价</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+10.00%</span>
+        </div>
+        <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
+          <span style="font-size:14px;color:var(--gold)">★</span>
+          <span style="font-weight:700;font-size:14px">普冉股份</span>
+          <span style="font-size:11px;color:var(--text-tertiary)">688766</span>
+          <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">70</span>
+          <span style="font-size:12px;color:var(--text-secondary);flex:1">利基存储午盘补涨+弹性最大</span>
+          <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+6.35%</span>
+        </div></div>
+  
+
+  <!-- Footer -->
+  <div class="report-footer">
+    <p class="disclaimer">
+      ⚡ 蓝宝书Max v2 · 2026-06-23 午间版 · 数据来源：Alpha派蓝宝书 · 产业链分析：AI辅助<br>
+      📊 主题热度 = 机构关注度 + 市场确认度 + 催化质量 · 🎯 短线情绪标的 = 涨跌幅 × 催化确定性 × 筹码结构<br>
+      ⚠️ 本报告为机构投研信息聚合参考，不构成投资建议
+    </p>
+  </div>
+
+</div>
+
+<script>
+// 实时行情（东方财富API）
+const SECID_MAP = {{"爱迪特": "0.301580", "国瓷材料": "0.300285", "东方锆业": "0.002167", "龙佰集团": "0.002601", "西陇科学": "0.002584", "寒武纪": "1.688256", "海光信息": "1.688041", "景嘉微": "0.300474", "芯原股份": "1.688521", "中芯国际": "1.688981", "生益科技": "1.600183", "金安国纪": "0.002636", "华正新材": "1.603186", "宏和科技": "1.603256", "兆易创新": "1.603986", "江波龙": "0.301308", "普冉股份": "1.688766", "佰维存储": "1.688525", "德明利": "0.001309", "香农芯创": "0.300475", "强瑞技术": "0.301128", "飞龙股份": "0.002536", "裕同科技": "0.002831", "旭光电子": "1.600353", "中瓷电子": "0.003031", "金博股份": "1.688598", "长飞光纤": "1.601869"}};
+const API_URL = 'https://push2.eastmoney.com/api/qt/ulist.np/get';
+
+async function fetchPrices() {
+  const allSecids = [...new Set(Object.values(SECID_MAP))];
+  const allData = [];
+  for (let i=0; i<allSecids.length; i+=50) {
+    const batch = allSecids.slice(i,i+50);
+    const url = API_URL+'?secids='+batch.join(',')+'&fields=f2,f3,f12,f14&_='+Date.now();
+    try {
+      const r = await fetch(url); const j = await r.json();
+      if (j.data?.diff) allData.push(...j.data.diff);
+    } catch(e) {}
+  }
+  return allData;
+}
+
+function updatePrices(data) {
+  const pm = {};
+  data.forEach(d => pm[d.f14] = {pct:(d.f3||0)/100,price:(d.f2||0)/100});
+
+  document.querySelectorAll('[data-stock]').forEach(el => {
+    const name = el.getAttribute('data-stock');
+    const d = pm[name]; if (!d) return;
+    let tgt = el.querySelector('[data-field]') || el;
+    const pctStr = (d.pct>=0?'+':'')+d.pct.toFixed(2)+'%';
+    if (tgt.textContent.trim() !== pctStr) {
+      tgt.textContent = pctStr;
+      tgt.className = tgt.className.replace(/\bup\b|\bdown\b/g,'').trim()+' '+(d.pct>=0?'up':'down');
+    }
+  });
+}
+
+async function loop() {
+  try { const d = await fetchPrices(); updatePrices(d); } catch(e) {}
+  setTimeout(loop, 5000);
+}
+loop();
+</script>
+<script src="/bluebook-max/codes.js"></script>
+<script src="/bluebook-max/paywall.js"></script>
+</body>
+</html>

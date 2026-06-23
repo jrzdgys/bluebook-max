@@ -13,7 +13,8 @@ from datetime import datetime
 from pathlib import Path
 
 
-OUTPUT_DIR = Path.cwd()
+OUTPUT_DIR = Path(__file__).parent
+REPORTS_DIR = OUTPUT_DIR / "output" / "reports"
 MANIFEST_FILE = OUTPUT_DIR / "manifest.json"
 
 
@@ -21,17 +22,31 @@ def update_manifest():
     """扫描 HTML 报告和 JSON 数据，更新 manifest.json"""
     reports = []
 
-    for f in sorted(OUTPUT_DIR.glob("*-*.html"), reverse=True):
-        name = f.stem  # e.g., "am-20260623"
-        parts = name.split("-")
-        if len(parts) >= 2:
+    # 扫描 output/reports/ 和根目录
+    search_dirs = [REPORTS_DIR, OUTPUT_DIR]
+    seen = set()
+
+    for search_dir in search_dirs:
+        if not search_dir.exists():
+            continue
+        for f in sorted(search_dir.glob("*-*.html"), reverse=True):
+            name = f.stem  # e.g., "am-20260623"
+            parts = name.split("-")
+            if len(parts) < 2:
+                continue
             edition = parts[0]
             date_str = parts[1]
 
-            if edition not in ("am", "md", "pm"):
+            if edition not in ("am", "md", "pm", "noon"):
                 continue
 
-            edition_labels = {"am": "晨会版", "md": "午间版", "pm": "晚间版"}
+            # 去重
+            key = f"{edition}-{date_str}"
+            if key in seen:
+                continue
+            seen.add(key)
+
+            edition_labels = {"am": "晨会版", "md": "午间版", "noon": "午间版", "pm": "晚间版"}
             label = edition_labels.get(edition, edition.upper())
 
             try:
@@ -50,8 +65,14 @@ def update_manifest():
                 except:
                     pass
 
+            # 确定 file 路径
+            if REPORTS_DIR in f.parents:
+                rel_file = f"reports/{f.name}"
+            else:
+                rel_file = f.name
+
             reports.append({
-                "file": f.name,
+                "file": rel_file,
                 "edition": edition,
                 "label": f"{label}",
                 "date": date_str,
