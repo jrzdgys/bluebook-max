@@ -280,9 +280,12 @@ def format_topic_for_pipeline(topic, rank, all_secids):
         for i, sname in enumerate(stocks):
             stock_alpha = score_stock(sname, None, i)
             sid = all_secids.get(sname, "")
+            reason = reason_map.get(sname, "")
+            if not reason:
+                reason = "核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的")
             item = {
                 "name": sname, "code": sid,
-                "reason": reason_map.get(sname, "") or "",  # 无原文理由时留空（不用"核心标的"等通用词）
+                "reason": reason,
                 "alpha": stock_alpha["alpha_total"],
                 "change_pct": 0,
             }
@@ -304,6 +307,7 @@ def format_topic_for_pipeline(topic, rank, all_secids):
         "title": topic["topic"],
         "summary": topic["summary_clean"][:120],
         "bluebook_quote": topic["summary_clean"][:200],
+        "summary_raw": topic.get("summary_raw", topic.get("summary_clean", "")),  # 原始摘要
         "heat": heat,
         "state": state,
         "org_attention": scores["org_attention"],

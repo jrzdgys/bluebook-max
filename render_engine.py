@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """
 蓝宝书Max v3 渲染引擎
-从结构化数据生成 deliverable-style 报告 HTML
-完全数据驱动，零硬编码
+从结构化数据生成报告 HTML，完全数据驱动
 """
 import json
 from typing import Dict, List, Optional, Any
 
 
 # ============================================================
-# CSS 模板 —— 与 deliverables_am-20260622-live.html 完全一致
+# CSS 模板
 # ============================================================
 REPORT_CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
@@ -55,11 +54,13 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 .tsl{display:flex;flex-direction:column;gap:6px}
 .t-sg{margin-bottom:4px}
 .t-gl{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:3px}
-.chain-up{background:#4CAF5012;color:#4CAF50}
-.chain-mid{background:#FF980012;color:#FF9800}
-.chain-down{background:#2196F312;color:#2196F3}
+.t-gl.l1{background:#C4433A12;color:#C4433A}
+.t-gl.l2{background:#E87A2012;color:#E87A20}
+.t-gl.l3{background:#3E54CE12;color:#3E54CE}
 .tsr{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #F5F4F2;font-size:12px;flex-wrap:wrap;transition:background .3s}
 .tsr:last-child{border-bottom:none}
+.tsr.flash-up{background:#C4433A08}
+.tsr.flash-dn{background:#3D482608}
 .tsn{font-weight:700;font-size:13px;color:#151515;min-width:56px}
 .tsc{font-weight:700;font-size:13px;min-width:54px;text-align:right;transition:color .3s}
 .tsr2{font-size:11px;color:#999;margin-left:6px;flex:1;min-width:80px}
@@ -120,7 +121,7 @@ def render_live_js(secid_map: Dict[str, str]) -> str:
     function updatePrices(data) {{
         const priceMap = {{}};
         for (const item of data) {{
-            priceMap[item.f14] = {{ price: item.f2 / 100, pct: item.f3 / 100 }};
+            priceMap[item.f14] = {{ price: item.f2, pct: item.f3 }};
         }}
 
         let changes = 0;
@@ -209,16 +210,15 @@ STAGE_STYLE = {
 }
 
 HEAT_COLOR = {
-    "high": "#C4433A",    # >= 80
-    "mid": "#E87A20",     # >= 60
-    "low": "#3E54CE",     # < 60
+    "high": "#C4433A",
+    "mid": "#E87A20",
+    "low": "#3E54CE",
 }
 
-# 产业链位置样式
-CHAIN_LABEL_STYLE = {
-    "上游": ("上游", "#4CAF50"),
-    "中游": ("中游", "#FF9800"),
-    "下游": ("下游", "#2196F3"),
+TIER_STYLE = {
+    1: ("龙头首选", "l1"),
+    2: ("弹性机会", "l2"),
+    3: ("相关标的", "l3"),
 }
 
 EDITION_META = {
@@ -241,8 +241,32 @@ def _heat_color(score: int) -> str:
     return HEAT_COLOR["low"]
 
 
+def _fmt_pct(pct: float) -> tuple:
+    """格式化涨跌幅"""
+    if pct == 0:
+        return ("-0.00%", "")
+    pct_str = f"+{pct:.2f}%" if pct > 0 else f"{pct:.2f}%"
+    dir_class = "up" if pct > 0 else "dn"
+    return (pct_str, dir_class)
+
+
+def _render_stock_row(s: dict) -> str:
+    """单只标的行"""
+    name = s.get("name", "")
+    code = s.get("code", "")
+    pct = s.get("pct", 0)
+    reason = s.get("reason", "")
+    pct_str, dir_class = _fmt_pct(pct)
+    tsc_cls = f"tsc {dir_class}".rstrip()
+    return (f'<div class="tsr" data-stock="{name}">'
+            f'<span class="tsn">{name}</span>'
+            f'<span class="tcd">{code}</span>'
+            f'<span class="{tsc_cls}" data-field="pct">{pct_str}</span>'
+            f'<span class="tsr2">{reason}</span>'
+            f'</div>')
+
+
 def render_header(meta: Dict) -> str:
-    """报告头部：渐变背景 + 版本标签 + 实时脉搏"""
     edition = EDITION_META.get(meta.get("edition", "am"), EDITION_META["am"])
     return f"""<div class="sh">
 <div class="sd">⚡ 蓝宝书Max · 每日机构投研精华</div>
@@ -258,7 +282,6 @@ def render_header(meta: Dict) -> str:
 
 
 def render_market_summary(summary: Dict) -> str:
-    """市场情绪速览卡片"""
     if not summary:
         return ""
 
@@ -271,13 +294,11 @@ def render_market_summary(summary: Dict) -> str:
     total_opp = summary.get("total_opp", 0)
     total_stocks = summary.get("total_stocks", 0)
 
-    # 最强方向
     top_parts = []
-    for i, (name, heat) in enumerate(top_dirs[:3]):
+    for name, heat in top_dirs[:3]:
         top_parts.append(f"【{name}】热度{heat}")
     top_str = " · ".join(top_parts)
 
-    # 涨跌标签
     tags_html = ""
     for tag in rising_tags:
         tags_html += f'<span class="tag-s">↑ {tag}</span>'
@@ -294,7 +315,7 @@ def render_market_summary(summary: Dict) -> str:
 
 
 def render_topic_card(topic: Dict, popup_id: str) -> str:
-    """单个主题卡片 - 产业链上中下游驱动"""
+    """单个主题卡片 - 三层分级"""
     rank = topic.get("rank", 0)
     title = topic.get("title", "")
     stage = topic.get("stage", "持续")
@@ -307,13 +328,9 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
     mkt = hb.get("市场确认度", 0)
     cat = hb.get("催化质量", 0)
 
-    # 📌 AI总结（精简）
     ai_summary = topic.get("ai_summary", "")
-    # 📘 蓝宝书重点
     bluebook_quote = topic.get("bluebook_quote", "")
-
-    # 产业链分组 (替代旧 tier 分组)
-    chain_groups = topic.get("chain_groups", [])
+    stock_groups = topic.get("stock_groups", [])
 
     parts = [f"""<div class="tc">
 <div class="th">
@@ -330,54 +347,37 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
 </span>
 </div>"""]
 
-    # AI 摘要（精简）
+    # AI 摘要 (每个主题都有)
     if ai_summary:
         parts.append(f'<div class="tr2">📌 {ai_summary}</div>')
+    else:
+        parts.append(f'<div class="tr2">📌 {title}，热度{heat}，{stage}阶段</div>')
 
     # 蓝宝书重点
     if bluebook_quote:
         parts.append(f'<div class="tbb">📘 {bluebook_quote}</div>')
 
-    # 产业链驱动 k-v
+    # 产业链驱动简述（轻量，不替代三层标签）
     chain = topic.get("industry_chain")
     if chain and chain.get("key_driver"):
         parts.append(
-            f'<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">'
+            f'<div style="font-size:11px;color:#7C4FC4;margin:4px 0 6px;font-weight:500">'
             f'⚡ {chain["key_driver"]}</div>'
         )
 
-    # 产业链分组渲染
-    if chain_groups:
+    # 三层分组渲染
+    if stock_groups:
         parts.append('<div class="tsl">')
-        for cg in chain_groups:
-            level = cg.get("level", "")
-            role = cg.get("role", "")
-            stocks = cg.get("stocks", [])
+        for group in stock_groups:
+            tier = group.get("tier", 1)
+            tier_label, tier_class = TIER_STYLE.get(tier, ("层级", "l3"))
+            stocks = group.get("stocks", [])
             if not stocks:
                 continue
 
-            # 产业链标签颜色
-            label, color = CHAIN_LABEL_STYLE.get(level, (level, "#999"))
-
-            parts.append(
-                f'<div class="t-sg"><div class="t-gl" style="background:{color}12;color:{color};font-size:10px">'
-                f'{label} {role}</div>'
-            )
-
+            parts.append(f'<div class="t-sg"><div class="t-gl {tier_class}">{tier_label}</div>')
             for s in stocks:
-                name = s.get("name", "")
-                code = s.get("code", "")
-                pct = s.get("pct", 0)
-                reason = s.get("reason", "")
-                pct_str, dir_class = _fmt_pct(pct)
-                tsc_cls = f"tsc {dir_class}".rstrip()
-
-                parts.append(f'<div class="tsr" data-stock="{name}">'
-                           f'<span class="tsn">{name}</span>'
-                           f'<span class="tcd">{code}</span>'
-                           f'<span class="{tsc_cls}" data-field="pct">{pct_str}</span>'
-                           f'<span class="tsr2">{reason}</span>'
-                           f'</div>')
+                parts.append(_render_stock_row(s))
             parts.append('</div>')
         parts.append('</div>')
 
@@ -386,12 +386,11 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
 
 
 def render_opportunity_preview(opp: Dict, popup_id: str) -> str:
-    """机会前瞻卡片（特殊紫色左边框样式）"""
+    """机会前瞻卡片"""
     title = opp.get("title", "")
     stage = opp.get("stage", "孵化")
     _, stage_color, stage_icon = STAGE_STYLE.get(stage, STAGE_STYLE["孵化"])
     heat = opp.get("heat", 0)
-    hc = _heat_color(heat)
 
     hb = opp.get("heat_breakdown", {})
     org = hb.get("机构关注度", 0)
@@ -418,53 +417,28 @@ def render_opportunity_preview(opp: Dict, popup_id: str) -> str:
 
     if ai_summary:
         parts.append(f'<div class="tr2">📌 {ai_summary}</div>')
-
     if bluebook_quote:
-        parts.append(f'<div class="tbb" style="border-left-color:#9B59B6">📘 "{bluebook_quote}"</div>')
+        parts.append(f'<div class="tbb" style="border-left-color:#9B59B6">📘 {bluebook_quote}</div>')
 
     if stocks:
         parts.append('<div class="tsl">')
         for s in stocks:
-            name = s.get("name", "")
-            code = s.get("code", "")
-            pct = s.get("pct", 0)
-            reason = s.get("reason", "")
-            pct_str, dir_class = _fmt_pct(pct)
-            tsc_cls = f"tsc {dir_class}".rstrip()
-
-            parts.append(f'<div class="tsr" data-stock="{name}">'
-                       f'<span class="tsn">{name}</span>'
-                       f'<span class="tcd">{code}</span>'
-                       f'<span class="{tsc_cls}" data-field="pct">{pct_str}</span>'
-                       f'<span class="tsr2">{reason}</span>'
-                       f'</div>')
+            parts.append(_render_stock_row(s))
         parts.append('</div>')
 
     parts.append('</div>')
     return "\n".join(parts)
 
 
-def _fmt_pct(pct: float) -> tuple:
-    """格式化涨跌幅，返回 (显示字符串, dir_class)"""
-    if pct == 0:
-        return ("-0.00%", "")
-    pct_str = f"+{pct:.2f}%" if pct > 0 else f"{pct:.2f}%"
-    dir_class = "up" if pct > 0 else "dn"
-    return (pct_str, dir_class)
-
-
 def render_alpha_row(stock: Dict, is_leader: bool = False) -> str:
-    """Alpha 精选行"""
     name = stock.get("name", "")
     alpha = stock.get("alpha", 0)
     reason = stock.get("reason", "")
     pct = stock.get("pct", 0)
-
     pct_str, dir_class = _fmt_pct(pct)
     star = "★" if is_leader else "·"
-    star_cls = f"ar ldr" if is_leader else "ar"
+    star_cls = "ar ldr" if is_leader else "ar"
     ap_cls = f"ap {dir_class}".rstrip()
-
     return f'''<div class="asc">
 <span class="{star_cls}">{star}</span>
 <div class="ai"><span class="an">{name}</span><span class="ab">{alpha}</span><span class="ar2">{reason}</span></div>
@@ -473,7 +447,6 @@ def render_alpha_row(stock: Dict, is_leader: bool = False) -> str:
 
 
 def render_footer(meta: Dict) -> str:
-    """页脚"""
     edition_label = EDITION_META.get(meta.get("edition", "am"), {}).get("label", "")
     date_display = meta.get("date_display", "")
     return f"""<div class="fo">
@@ -488,53 +461,9 @@ def render_footer(meta: Dict) -> str:
 # ============================================================
 
 def generate_report(report_data: Dict) -> str:
-    """
-    从结构化数据生成完整 HTML 报告
-
-    report_data 结构:
-    {
-        "meta": {
-            "edition": "am",          # am|md|pm|global
-            "date": "2026-06-23",
-            "date_display": "2026年6月23日",
-            "topic_count": 20,
-            "opp_count": 2,
-            "stock_count": 137,
-            "title": "蓝宝书Max · 2026年6月23日 晨会版"
-        },
-        "market_summary": {
-            "top_directions": [("氧化锆断供", 92), ...],
-            "rising_tags": ["氧化锆断供", ...],
-            "one_liner": "...",
-            "up_count": 81, "down_count": 54,
-            "total_topics": 20, "total_opp": 2, "total_stocks": 137
-        },
-        "topics": [
-            {
-                "rank": 1,
-                "title": "...",
-                "stage": "主升",       # 主升|强化|持续|孵化
-                "heat": 92,
-                "heat_breakdown": {"机构关注度": 60, "市场确认度": 18, "催化质量": 14},
-                "ai_summary": "...",
-                "bluebook_quote": "...",
-                "stock_groups": [
-                    {"tier": 1, "stocks": [{"name": "...", "code": "...", "pct": 19.99, "reason": "..."}]},
-                    ...
-                ]
-            },
-            ...
-        ],
-        "opportunity_previews": [...],   # 结构同 topics 但用 stocks 列表
-        "top5_alpha": [...],            # [{"name":..., "alpha":..., "reason":..., "pct":...}]
-        "all_alpha": [...],
-        "secid_map": {"股票名": "0.300xxx", ...}
-    }
-    """
     meta = report_data.get("meta", {})
     title = meta.get("title", "蓝宝书Max")
 
-    # 构建 HTML
     html_parts = [f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -543,31 +472,28 @@ def generate_report(report_data: Dict) -> str:
 <body>
 <div class="w">"""]
 
-    # 1. 头部
     html_parts.append(render_header(meta))
-
-    # 2. 正文区域
     html_parts.append('<div class="ct">')
 
-    # 2a. 市场摘要
+    # 市场摘要
     market_summary = report_data.get("market_summary")
     if market_summary:
         html_parts.append(render_market_summary(market_summary))
 
-    # 2b. 全部主题
+    # 全部主题
     topics = report_data.get("topics", [])
     if topics:
         html_parts.append(
-            '<div class="s2"><span>🔥 全部主题（{}个）</span>'
+            f'<div class="s2"><span>🔥 全部主题（{len(topics)}个）</span>'
             '<span style="font-size:10px;font-weight:400;color:#999;background:#F5F4F2;padding:3px 8px;border-radius:4px">'
-            '点击ⓘ查看三维度评分</span></div>'.format(len(topics))
+            '点击ⓘ查看三维度评分</span></div>'
         )
         html_parts.append('<div class="grid">')
         for i, topic in enumerate(topics):
             html_parts.append(render_topic_card(topic, f"popup-{i}"))
         html_parts.append('</div>')
 
-    # 2c. 机会前瞻
+    # 机会前瞻
     opps = report_data.get("opportunity_previews", [])
     if opps:
         html_parts.append(
@@ -580,7 +506,7 @@ def generate_report(report_data: Dict) -> str:
             html_parts.append(render_opportunity_preview(opp, f"hp_opp_{i}"))
         html_parts.append('</div>')
 
-    # 2d. Top5 Alpha
+    # Top5 Alpha
     top5 = report_data.get("top5_alpha", [])
     if top5:
         html_parts.append(
@@ -593,12 +519,12 @@ def generate_report(report_data: Dict) -> str:
             html_parts.append(render_alpha_row(s, is_leader=True))
         html_parts.append('</div>')
 
-    # 2e. 全部 Alpha (精简)
+    # 全部 Alpha (全量，不砍)
     all_alpha = report_data.get("all_alpha", [])
     if all_alpha:
         html_parts.append(
             f'<div class="s2" style="margin-top:14px;font-size:14px">'
-            f'📋 Alpha精选池（{len(all_alpha)}只 · 按综合评分排序）</div>'
+            f'📋 全部Alpha（{len(all_alpha)}只 · 不含Top5 · 按综合评分排序）</div>'
         )
         html_parts.append('<div class="alpha-list">')
         for s in all_alpha:
@@ -606,57 +532,52 @@ def generate_report(report_data: Dict) -> str:
         html_parts.append('</div>')
 
     html_parts.append('</div>')  # close .ct
-
-    # 3. 页脚
     html_parts.append(render_footer(meta))
-
     html_parts.append('</div>')  # close .w
 
-    # 4. 实时行情 JS
+    # 实时行情 JS
     secid_map = report_data.get("secid_map", {})
     html_parts.append(render_live_js(secid_map))
 
     html_parts.append('</body></html>')
-
     return "\n".join(html_parts)
 
 
 # ============================================================
-# CLI 入口（用于测试）
+# CLI 入口
 # ============================================================
 if __name__ == "__main__":
-    import sys
     from pathlib import Path
 
-    # 测试：从 sample data 生成
     sample = {
         "meta": {
             "edition": "am", "date": "2026-06-23",
             "date_display": "2026年6月23日 晨会版",
-            "topic_count": 3, "opp_count": 1, "stock_count": 15,
+            "topic_count": 2, "opp_count": 1, "stock_count": 10,
             "title": "蓝宝书Max · 2026年6月23日 晨会版"
         },
         "market_summary": {
-            "top_directions": [("测试主题A", 85), ("测试主题B", 72), ("测试主题C", 68)],
-            "rising_tags": ["测试主题A", "测试主题B"],
+            "top_directions": [("测试主题A", 85), ("测试主题B", 72)],
+            "rising_tags": ["测试主题A"],
             "one_liner": "测试一句话总结",
-            "up_count": 10, "down_count": 5,
-            "total_topics": 3, "total_opp": 1, "total_stocks": 15
+            "up_count": 6, "down_count": 4,
+            "total_topics": 2, "total_opp": 1, "total_stocks": 10
         },
         "topics": [
             {
                 "rank": 1, "title": "测试主题A", "stage": "主升", "heat": 85,
                 "heat_breakdown": {"机构关注度": 50, "市场确认度": 20, "催化质量": 15},
-                "ai_summary": "测试AI总结内容",
-                "bluebook_quote": "测试蓝宝书原文引用",
+                "ai_summary": "测试AI总结，简明扼要描述核心事件与边际变化",
+                "bluebook_quote": "核心投资逻辑：市场正交易从替代到量价齐升的转变",
                 "stock_groups": [
                     {"tier": 1, "stocks": [
-                        {"name": "测试股A", "code": "000001", "pct": 5.23, "reason": "测试推荐理由"}
+                        {"name": "测试龙头A", "code": "000001", "pct": 5.23, "reason": "头部厂商，受益涨价"}
                     ]},
                     {"tier": 2, "stocks": [
-                        {"name": "测试股B", "code": "000002", "pct": -2.15, "reason": "测试弹性推荐"}
+                        {"name": "测试弹性B", "code": "000002", "pct": -2.15, "reason": "弹性标的"}
                     ]}
-                ]
+                ],
+                "industry_chain": {"key_driver": "日本东曹断供→国产替代窗口打开"}
             }
         ],
         "opportunity_previews": [
@@ -665,22 +586,20 @@ if __name__ == "__main__":
                 "heat_breakdown": {"机构关注度": 12, "市场确认度": 10, "催化质量": 10},
                 "ai_summary": "测试前瞻摘要",
                 "bluebook_quote": "测试前瞻引用",
-                "stocks": [
-                    {"name": "测试股C", "code": "000003", "pct": 1.50, "reason": "测试前瞻推荐"}
-                ]
+                "stocks": [{"name": "测试股C", "code": "000003", "pct": 1.5, "reason": "核心前瞻标的"}]
             }
         ],
         "top5_alpha": [
-            {"name": "测试股A", "alpha": 82, "reason": "测试推荐", "pct": 5.23}
+            {"name": "测试龙头A", "alpha": 82, "reason": "头部厂商", "pct": 5.23}
         ],
         "all_alpha": [
-            {"name": "测试股B", "alpha": 65, "reason": "测试", "pct": -2.15}
+            {"name": "测试弹性B", "alpha": 65, "reason": "弹性标的", "pct": -2.15},
+            {"name": "测试股C", "alpha": 55, "reason": "前瞻标的", "pct": 1.5}
         ],
-        "secid_map": {"测试股A": "0.000001", "测试股B": "0.000002", "测试股C": "0.000003"}
+        "secid_map": {"测试龙头A": "0.000001", "测试弹性B": "0.000002", "测试股C": "0.000003"}
     }
 
     html = generate_report(sample)
-
     out_dir = Path("output/reports")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "am-test-v3.html"
