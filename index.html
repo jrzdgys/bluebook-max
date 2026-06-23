@@ -492,7 +492,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     }
 
     var editionLabels = { am: '晨会版', mc: '晨会版', md: '午间版', pm: '午间版', ev: '晚间版', global: '全球版', gv: '全球版' };
-    var today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    var n=new Date();var today=n.getFullYear()+String(n.getMonth()+1).padStart(2,'0')+String(n.getDate()).padStart(2,'0');
 
     var todayReports = [];
     var historyMap = {};
