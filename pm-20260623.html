@@ -51,13 +51,15 @@
     .gl.l1{background:#FFF0E6;color:#E8870A}
     .gl.l2{background:#EEF0FF;color:#5E5CE6}
     .gl.l3{background:#F2F2F7;color:#86868B}
-    .sr{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;font-size:13px;transition:background .1s}
+    /* Stock row */
+    .sr{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;font-size:13px;transition:background .1s}
     .sr:hover{background:#F5F5F7}
-    .sr .sn{font-weight:600;min-width:64px}
-    .sr .sc{font-size:10px;color:#AEAEB2;min-width:44px}
-    .sr .sp{font-size:15px;font-weight:700;min-width:72px;text-align:right;font-variant-numeric:tabular-nums}
-    .sr .sp.up{color:#C4433A}
-    .sr .sp.dn{color:#34C759}
+    .sr .sn{font-weight:600;min-width:58px;font-size:13px}
+    .sr .sc{font-size:10px;color:#AEAEB2;min-width:40px}
+    .sr .sp{font-size:12px;font-weight:600;min-width:50px;text-align:right;font-variant-numeric:tabular-nums;color:#1D1D1F}
+    .sr .spp{font-size:12px;font-weight:600;min-width:52px;text-align:right;font-variant-numeric:tabular-nums}
+    .sr .spp.up{color:#C4433A}
+    .sr .spp.dn{color:#34C759}
     .sr .sr2{font-size:10px;color:#AEAEB2;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .fo{text-align:center;padding:20px;font-size:11px;color:#C7C7CC}
     .fo a{color:#86868B;text-decoration:none}
@@ -71,10 +73,11 @@
       .stats-row{gap:8px}
       .stats-row .st{min-width:60px;padding:8px 10px}
       .stats-row .st strong{font-size:20px}
-      .sr{flex-wrap:wrap;gap:2px 6px;padding:6px 4px}
-      .sr .sn{min-width:auto;font-size:12px;font-weight:600}
-      .sr .sc{font-size:9px;min-width:auto;color:#AEAEB2}
-      .sr .sp{font-size:13px;min-width:auto;font-weight:700}
+      .sr{flex-wrap:wrap;gap:2px 4px;padding:6px 4px}
+      .sr .sn{min-width:auto;font-size:12px}
+      .sr .sc{font-size:9px;min-width:auto}
+      .sr .sp{font-size:11px;min-width:auto}
+      .sr .spp{font-size:11px;min-width:auto}
       .sr .sr2{font-size:11px;flex-basis:100%;text-align:left;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;color:#86868B;line-height:1.5;padding-top:2px;border-top:1px dotted #E5E5EA;margin-top:2px}
       .tc-header{gap:4px}
       .tc-name{font-size:13px;flex:1 1 100%}
@@ -135,7 +138,7 @@
     function stageBg(h){if(h>=85)return'#C4433A15';if(h>=70)return'#E67E2215';if(h>=55)return'#2E86C115';return'#7D8B8F15'}
     ED.topics.forEach(function(t,i){var rank=i+1;var color=heatColor(t.heat);var bg=stageBg(t.heat);var labelClasses={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};var sc=t.scores||{};var inst=sc.inst||Math.round(t.heat*0.55);var market=sc.market||Math.round(t.heat*0.25);var catalyst=sc.catalyst||Math.round(t.heat*0.20);
     var groupsHtml='';
-    t.groups.forEach(function(g){if(!g.items||g.items.length===0)return;var lc=labelClasses[g.label]||'l3';var rows=g.items.map(function(s){var code=ED.secidMap[s.name]||'';var codeNum=code.replace(/^[01]\./,'');var priceDisplay=(s.price!=null)?s.price.toFixed(2):'--';var pctHtml=(s.pct!=null)?' <span style="font-size:9px;color:'+(s.pct>=0?'#C4433A':'#34C759')+'">'+(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%</span>':'';return'<div class="sr" data-stock="'+s.name+'" data-secid="'+code+'"><span class="sn">'+s.name+'</span><span class="sc">'+codeNum+'</span><span class="sp'+(s.pct?(s.pct>=0?' up':' dn'):'')+'">'+priceDisplay+'</span><span class="sr2" title="'+(s.reason||g.label)+'">'+(s.reason||g.label)+pctHtml+'</span></div>'}).join('');groupsHtml+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
+    t.groups.forEach(function(g){if(!g.items||g.items.length===0)return;var lc=labelClasses[g.label]||'l3';var rows=g.items.map(function(s){var code=ED.secidMap[s.name]||'';var codeNum=code.replace(/^[01]\./,'');var priceDisplay=(s.price!=null)?s.price.toFixed(2):'--';var pctDisplay=(s.pct!=null)?((s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'):'';var pctCls=(s.pct!=null)?(s.pct>=0?' up':' dn'):'';return'<div class="sr" data-stock="'+s.name+'" data-secid="'+code+'"><span class="sn">'+s.name+'</span><span class="sc">'+codeNum+'</span><span class="sp">'+priceDisplay+'</span><span class="spp'+pctCls+'">'+pctDisplay+'</span><span class="sr2" title="'+(s.reason||g.label)+'">'+(s.reason||g.label)+'</span></div>'}).join('');groupsHtml+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
     var card=document.createElement('div');card.className='tc';card.innerHTML='<div class="tc-header"><span class="tc-rank">TOP'+rank+'</span><span class="tc-name">'+t.topic+'</span><span class="tc-stage" style="background:'+bg+';color:'+color+'">'+t.stage+'</span><div class="tc-heat-wrap"><span class="tc-heat" style="color:'+color+'" data-idx="'+i+'">'+t.heat+'</span><span class="tc-info" data-idx="'+i+'">ⓘ</span></div></div><div class="tc-desc">'+t.summary+'</div>'+(t.quote?'<div class="tc-quote">📘 '+t.quote+'</div>':'')+groupsHtml;container.appendChild(card)});
     var popupEl=document.createElement('div');popupEl.className='hp';popupEl.id='shared-popup';document.body.appendChild(popupEl);
     function showPopup(idx,anchorEl){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{};var inst=sc.inst||Math.round(t.heat*0.55);var market=sc.market||Math.round(t.heat*0.25);var catalyst=sc.catalyst||Math.round(t.heat*0.20);popupEl.innerHTML='<div class="hp-title">'+t.topic+' · 热度构成</div><div class="hp-scores"><div class="hp-line"><span class="hl">机构关注度</span><span class="hv">'+inst+'/60</span></div><div class="hp-line"><span class="hl">市场确认度</span><span class="hv">'+market+'/25</span></div><div class="hp-line"><span class="hl">催化强度</span><span class="hv">'+catalyst+'/15</span></div><div class="hp-line" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.15)"><span class="hl">综合热度</span><span class="hv" style="color:'+heatColor(t.heat)+'">'+t.heat+'/100</span></div></div>';var rect=anchorEl.getBoundingClientRect();var popupW=280;var x=rect.right+10;var y=rect.top-20;if(x+popupW>window.innerWidth-10){x=rect.left-popupW-10;popupEl.classList.add('right')}else{popupEl.classList.remove('right')}if(y<10)y=10;if(y+120>window.innerHeight)y=window.innerHeight-130;popupEl.style.left=x+'px';popupEl.style.top=y+'px';popupEl.style.display='block';openPopup=idx}
@@ -146,7 +149,7 @@
     window.addEventListener('resize',function(){if(openPopup!=null)hidePopup()},{passive:true});
     var TRADING=isTradingHours();var REFRESH_MS=TRADING?15000:60000;var API_URL='https://push2.eastmoney.com/api/qt/ulist.np/get';
     function updateLiveIndicator(){var dot=document.getElementById('live-dot');var txt=document.getElementById('live-text');if(isTradingHours()){dot.className='live-dot live';txt.textContent='实时行情 · '+timeStr()}else{dot.className='live-dot closed';txt.textContent='收盘价 · '+timeStr()}}
-    async function fetchQuotes(){var allSecids=[];var seen={};Object.values(ED.secidMap).forEach(function(s){if(!seen[s]){seen[s]=1;allSecids.push(s)}});if(allSecids.length===0)return;try{var url=API_URL+'?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+allSecids.join(',')+'&_='+Date.now();var resp=await fetch(url);var json=await resp.json();if(!json.data||!json.data.diff)return;var priceMap={};json.data.diff.forEach(function(d){priceMap[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var secid=row.dataset.secid;var d=priceMap[secid];var spEl=row.querySelector('.sp');if(d&&spEl){if(!isTradingHours()&&d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}}});updateLiveIndicator();document.getElementById('footer-time').textContent=timeStr()}catch(e){}}
+    async function fetchQuotes(){var allSecids=[];var seen={};Object.values(ED.secidMap).forEach(function(s){if(!seen[s]){seen[s]=1;allSecids.push(s)}});if(allSecids.length===0)return;try{var url=API_URL+'?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+allSecids.join(',')+'&_='+Date.now();var resp=await fetch(url);var json=await resp.json();if(!json.data||!json.data.diff)return;var priceMap={};json.data.diff.forEach(function(d){priceMap[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var secid=row.dataset.secid;var d=priceMap[secid];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d&&spEl){if(!isTradingHours()&&d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null&&sppEl){var v=parseFloat(d.pct);sppEl.className='spp'+(v>=0?' up':' dn');sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});updateLiveIndicator();document.getElementById('footer-time').textContent=timeStr()}catch(e){}}
     updateLiveIndicator();fetchQuotes();setInterval(fetchQuotes,REFRESH_MS);setInterval(function(){updateLiveIndicator()},60000);
     
 </script>
