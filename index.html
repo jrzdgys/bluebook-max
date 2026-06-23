@@ -3,175 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="蓝宝书Max - 机构级A股投研情报，Alpha派蓝宝书全链路自动化，产业链精准映射，每日最强标的。知识星球付费订阅 ¥888/年。">
+<meta name="description" content="蓝宝书Max - 机构级A股投研情报，Alpha派蓝宝书全链路自动化，每日最强标的。知识星球付费订阅 ¥888/年。">
 <title>蓝宝书Max · 机构级投研情报</title>
 <style>
 /* ===== Reset & Base ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
-  background:#F5F5F7;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F2F2F7;color:#1D1D1F;line-height:1.5;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;min-height:100vh;
 }
+
+/* ===== Glass Navbar ===== */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(242,242,247,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08);padding:12px 0;
+}
+.nav-inner{
+  max-width:960px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:18px;font-weight:700;letter-spacing:-.3px;color:#1D1D1F}
+.nav-brand span{color:#0071E3}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.nav-status{
+  font-size:12px;font-weight:500;color:#34C759;display:flex;align-items:center;gap:4px;
+}
+.nav-status .dot{width:6px;height:6px;background:#34C759;border-radius:50%}
+.nav-time{font-size:12px;color:#86868B;font-variant-numeric:tabular-nums;font-family:'SF Mono',Menlo,monospace}
+.nav-login{
+  background:rgba(0,113,227,.08);color:#0071E3;border:none;
+  padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.nav-login:hover{background:rgba(0,113,227,.15)}
 
 /* ===== Hero ===== */
 .hero{
-  text-align:center;padding:60px 20px 48px;
-  background:linear-gradient(180deg,#FFFFFF 0%,#F5F5F7 100%);
+  text-align:center;padding:56px 20px 40px;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F2F2F7 100%);
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
-  padding:5px 14px;background:#FFF5E7;color:#FF9500;
+  padding:5px 14px;background:rgba(255,149,0,.1);color:#FF9500;
   border-radius:100px;font-size:12px;font-weight:600;margin-bottom:20px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
 }
-.hero h1{font-size:clamp(32px,8vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.hero h1{
+  font-size:clamp(36px,8vw,56px);font-weight:800;letter-spacing:-1.5px;margin-bottom:8px;
+  line-height:1.1;
+}
 .hero h1 .accent{color:#0071E3}
 .hero .subtitle{
-  font-size:clamp(14px,3vw,17px);color:#86868B;max-width:480px;margin:0 auto 28px;line-height:1.6;
-  padding:0 8px;
+  font-size:clamp(15px,3vw,18px);color:#86868B;max-width:500px;margin:0 auto 24px;line-height:1.5;
 }
 .hero-stats{
-  display:flex;justify-content:center;gap:32px;margin-bottom:32px;flex-wrap:wrap;
+  display:flex;justify-content:center;gap:40px;margin-bottom:28px;flex-wrap:wrap;
 }
-.hero-stat{text-align:center;min-width:80px}
-.hero-stat .num{font-size:32px;font-weight:800;color:#1D1D1F}
-.hero-stat .label{font-size:12px;color:#86868B;margin-top:2px}
-.live-clock{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:6px 14px;background:#F5F5F7;border-radius:100px;
-  font-size:12px;font-weight:600;color:#86868B;margin-bottom:28px;
-  font-variant-numeric:tabular-nums;font-family:"SF Mono","Menlo","Monaco",monospace;
-}
-.live-clock .dot{
-  width:7px;height:7px;background:#34C759;border-radius:50%;
-  animation:pulse2 2s infinite;
-}
-@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-stat{text-align:center;min-width:90px}
+.hero-stat .num{font-size:36px;font-weight:800;color:#1D1D1F;letter-spacing:-1px}
+.hero-stat .label{font-size:12px;color:#86868B;margin-top:2px;font-weight:500}
 .hero-cta{
-  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
 }
+
+/* ===== Buttons ===== */
 .btn{
   display:inline-flex;align-items:center;gap:6px;
-  padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;
-  cursor:pointer;text-decoration:none;transition:all .15s;border:none;font-family:inherit;
-  white-space:nowrap;
+  padding:13px 26px;border-radius:14px;font-size:15px;font-weight:600;
+  cursor:pointer;text-decoration:none;transition:all .2s;border:none;font-family:inherit;
 }
 .btn-primary{background:#0071E3;color:#fff}
-.btn-primary:hover{background:#0077ED;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,113,227,.25)}
-.btn-zsxq{background:linear-gradient(135deg,#1AAD19,#0F8F0F);color:#fff}
-.btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,173,25,.3)}
-.btn-outline{background:transparent;color:#1D1D1F;border:1.5px solid #D1D1D6}
-.btn-outline:hover{background:#F5F5F7}
+.btn-primary:hover{background:#0077ED;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,113,227,.25)}
+.btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F}
+.btn-outline:hover{background:rgba(0,0,0,.08)}
+.btn-zsxq{
+  background:linear-gradient(135deg,#07C160,#06AD56);color:#fff;font-size:15px;
+}
+.btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(7,193,96,.3)}
+
+/* ===== Container ===== */
+.container{max-width:960px;margin:0 auto;padding:0 20px}
+.section{padding:36px 0}
+.section-title{
+  font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title .count{font-size:13px;font-weight:400;color:#AEAEB2}
+
+/* ===== Date Group ===== */
+.date-group{margin-bottom:28px}
+.date-label{
+  font-size:14px;font-weight:600;color:#1D1D1F;margin-bottom:10px;padding-left:4px;
+  display:flex;align-items:center;gap:8px;
+}
+.date-label .dot{width:8px;height:8px;background:#0071E3;border-radius:50%}
+.date-label .today-dot{background:#34C759;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== Report Cards ===== */
+.reports-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.report-card{
+  background:rgba(255,255,255,.8);border-radius:14px;padding:18px 20px;
+  border:1px solid rgba(0,0,0,.06);transition:all .25s;
+  text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;
+  position:relative;overflow:hidden;
+}
+.report-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent);opacity:0;transition:opacity .25s;
+}
+.report-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(0,0,0,.08);
+  border-color:rgba(0,0,0,.1);
+}
+.report-card:hover::before{opacity:1}
+.report-card.am{--accent:#FF9500}
+.report-card.md{--accent:#E8870A}
+.report-card.pm{--accent:#5E5CE6}
+.report-card.global{--accent:#0071E3}
+.report-card-header{display:flex;align-items:center;gap:8px}
+.r-badge{
+  padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.3px;
+}
+.r-badge.am{background:rgba(255,149,0,.1);color:#FF9500}
+.r-badge.md{background:rgba(232,135,10,.1);color:#E8870A}
+.r-badge.pm{background:rgba(94,92,230,.1);color:#5E5CE6}
+.r-badge.global{background:rgba(0,113,227,.1);color:#0071E3}
+.r-date{font-size:18px;font-weight:700;letter-spacing:-.2px}
+.r-title{
+  font-size:12px;color:#86868B;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.r-meta{font-size:11px;color:#AEAEB2;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.r-free{background:rgba(52,199,89,.1);color:#34C759;padding:2px 8px;border-radius:100px;font-size:10px;font-weight:600}
+.r-lock{color:#AEAEB2;font-size:10px}
+.r-auth{font-size:10px;color:#34C759}
+
+/* ===== History Accordion ===== */
+.history-section{margin-top:16px}
+.history-toggle{
+  background:none;border:none;width:100%;padding:14px 18px;
+  font-size:14px;font-weight:600;color:#0071E3;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:14px;background:rgba(0,113,227,.04);transition:all .2s;
+}
+.history-toggle:hover{background:rgba(0,113,227,.08)}
+.history-toggle .arrow{transition:transform .3s;font-size:12px}
+.history-toggle.open .arrow{transform:rotate(180deg)}
+.history-content{overflow:hidden;max-height:0;transition:max-height .4s ease}
+.history-content.show{max-height:4000px}
+.history-content .date-group{margin-top:20px}
 
 /* ===== Features ===== */
-.features{padding:40px 0}
-.features h2{text-align:center;font-size:clamp(22px,4vw,26px);font-weight:700;margin-bottom:32px}
 .features-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
-  max-width:960px;margin:0 auto;padding:0 16px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;
 }
 .feature-card{
-  background:#fff;border-radius:14px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04);
-  transition:all .2s;
+  background:rgba(255,255,255,.6);border-radius:14px;padding:20px 18px;
+  border:1px solid rgba(0,0,0,.04);transition:all .2s;
 }
-.feature-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
-.feature-icon{font-size:28px;margin-bottom:12px}
-.feature-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
-.feature-card p{font-size:13px;color:#86868B;line-height:1.5}
-
-/* ===== Reports ===== */
-.reports-section{padding:32px 0 0;border-top:1px solid #E5E5EA}
-.reports-section h2{
-  font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;
-}
-.reports-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;
-  margin-bottom:24px;
-}
-.report-card{
-  background:#fff;border-radius:12px;padding:18px;border:1px solid #F2F2F7;
-  transition:all .15s;text-decoration:none;color:inherit;display:block;position:relative;
-  cursor:pointer;
-}
-.report-card:hover{border-color:#0071E3;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.report-card .r-badge{
-  display:inline-block;padding:3px 10px;border-radius:100px;
-  font-size:11px;font-weight:600;margin-bottom:8px;
-}
-.badge-am{background:#FFF5E7;color:#FF9500}
-.badge-md{background:#FFF0E0;color:#E8870A}
-.badge-pm{background:#EEF0FF;color:#5E5CE6}
-.report-card .r-date{font-size:18px;font-weight:700;margin-bottom:2px}
-.report-card .r-title{font-size:12px;color:#86868B;margin-bottom:6px;line-height:1.4}
-.report-card .r-meta{font-size:11px;color:#AEAEB2;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.report-card .r-free{
-  display:inline-block;padding:2px 8px;background:#EEFFF2;color:#34C759;
-  border-radius:100px;font-size:10px;font-weight:600;
-}
-.report-card .r-lock{color:#AEAEB2;font-size:11px}
+.feature-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.06)}
+.feature-icon{font-size:24px;margin-bottom:10px}
+.feature-card h3{font-size:14px;font-weight:700;margin-bottom:4px}
+.feature-card p{font-size:12px;color:#86868B;line-height:1.5}
 
 /* ===== Pricing ===== */
 .pricing{
-  padding:48px 0;text-align:center;background:#fff;border-radius:20px;margin:32px 0;
-  max-width:600px;margin-left:auto;margin-right:auto;
+  text-align:center;background:rgba(255,255,255,.7);border-radius:20px;padding:44px 20px;
+  max-width:560px;margin:0 auto;border:1px solid rgba(0,0,0,.06);
 }
-.pricing h2{font-size:24px;font-weight:700;margin-bottom:12px}
-.pricing .price{font-size:52px;font-weight:800;color:#0071E3;letter-spacing:-1px;margin-bottom:4px}
-.pricing .price small{font-size:18px;font-weight:500;color:#86868B}
-.pricing .price-desc{color:#86868B;font-size:14px;margin-bottom:24px}
-.pricing-features{
-  display:inline-block;text-align:left;margin-bottom:28px;
-}
+.pricing h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.pricing .price{font-size:56px;font-weight:800;color:#0071E3;letter-spacing:-2px;margin-bottom:4px}
+.pricing .price small{font-size:20px;font-weight:500;color:#86868B}
+.pricing .price-desc{color:#86868B;font-size:14px;margin-bottom:20px}
+.pricing-features{display:inline-block;text-align:left;margin-bottom:24px}
 .pricing-features li{
-  list-style:none;padding:5px 0;font-size:14px;color:#1D1D1F;
+  list-style:none;padding:5px 0;font-size:13px;color:#1D1D1F;
   display:flex;align-items:center;gap:8px;
 }
-.pricing-features li::before{content:'✓';color:#34C759;font-weight:700;font-size:16px}
-
-/* ===== Footer ===== */
-.footer{text-align:center;padding:40px 20px;border-top:1px solid #E5E5EA;margin-top:40px}
-.footer .disclaimer{font-size:11px;color:#AEAEB2;line-height:1.7;max-width:540px;margin:0 auto 12px}
-.footer .brand{font-size:12px;color:#86868B}
-.footer .brand a{color:#0071E3;text-decoration:none}
+.pricing-features li::before{content:'✓';color:#34C759;font-weight:700;font-size:14px}
 
 /* ===== Toast ===== */
 .toast{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;
-  background:#1D1D1F;color:#fff;padding:10px 20px;border-radius:12px;
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;
+  background:rgba(29,29,31,.9);color:#fff;padding:10px 20px;border-radius:12px;
   font-size:13px;font-weight:500;opacity:0;transition:opacity .2s;
-  pointer-events:none;
+  pointer-events:none;backdrop-filter:blur(10px);
 }
 .toast.show{opacity:1}
 
-/* ===== Container ===== */
-.container{max-width:960px;margin:0 auto;padding:0 16px}
-
-/* ===== Auth badge ===== */
-.auth-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  padding:2px 10px;background:#EEFFF2;color:#34C759;
-  border-radius:100px;font-size:11px;font-weight:600;
-  vertical-align:middle;margin-left:6px;
+/* ===== Footer ===== */
+.footer{
+  text-align:center;padding:32px 20px;border-top:1px solid rgba(0,0,0,.06);margin-top:40px;
 }
+.footer .disclaimer{font-size:11px;color:#AEAEB2;line-height:1.7;max-width:500px;margin:0 auto 10px}
+.footer .brand{font-size:12px;color:#86868B}
+.footer .brand a{color:#0071E3;text-decoration:none}
 
-/* ===== Free hint ===== */
-.free-hint{
-  text-align:center;font-size:12px;color:#AEAEB2;margin-top:8px;
-  padding:8px 16px;background:#FFF9F0;border-radius:10px;
-}
+/* ===== Empty state ===== */
+.empty-state{text-align:center;padding:48px 20px;color:#AEAEB2;grid-column:1/-1}
+.empty-state .icon{font-size:40px;margin-bottom:12px}
 
 /* ===== Responsive ===== */
-@media(max-width:640px){
-  .hero{padding:36px 14px 28px}
-  .hero-stats{gap:18px}
-  .hero-stat .num{font-size:26px}
+@media(max-width:768px){
+  .hero{padding:40px 16px 32px}
+  .hero h1{font-size:36px}
+  .hero-stats{gap:24px}
+  .hero-stat .num{font-size:28px}
   .hero-cta{flex-direction:column;align-items:center}
-  .hero-cta .btn{width:100%;max-width:280px;justify-content:center}
-  .features-grid{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%;max-width:300px;justify-content:center}
+  .section{padding:24px 0}
+  .section-title{font-size:20px}
   .reports-grid{grid-template-columns:1fr}
-  .pricing .price{font-size:40px}
-  .pricing{margin:20px 6px;padding:28px 14px}
-  .report-card .r-date{font-size:16px}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing .price{font-size:44px}
+  .pricing{margin:12px 8px;padding:32px 16px}
+  .nav-inner{padding:0 14px}
+  .nav-brand{font-size:16px}
+}
+@media(max-width:480px){
+  .features-grid{grid-template-columns:1fr}
+  .report-card{padding:14px 16px}
+  .r-date{font-size:16px}
+  .nav-status .text{display:none}
 }
 </style>
 </head>
@@ -180,21 +237,28 @@ body{
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
+<!-- ===== Glass Navbar ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">蓝宝书<span>Max</span></div>
+    <div class="nav-actions">
+      <span class="nav-status" id="nav-status" style="display:none">
+        <span class="dot"></span><span class="text">已订阅</span>
+      </span>
+      <span class="nav-time" id="nav-time">--</span>
+      <button class="nav-login" id="btn-nav-login" onclick="showLoginPaywall()">登录</button>
+    </div>
+  </div>
+</nav>
+
 <!-- ===== Hero ===== -->
 <header class="hero">
   <div class="hero-badge">🪐 知识星球付费订阅 · ¥888/年</div>
   <h1>蓝宝书<span class="accent">Max</span></h1>
   <p class="subtitle">
-    机构级A股投研情报 · Alpha派蓝宝书全链路自动化<br>
-    产业链精准映射 · 每日最强标的 · 交易日三版更新
+    机构级A股投研情报 · 交易日三版更新<br>
+    产业链精准映射 · 每日最强标的
   </p>
-
-  <!-- 实时时钟 -->
-  <div class="live-clock">
-    <span class="dot"></span>
-    <span id="live-time">--</span>
-    <span style="font-weight:400;font-size:11px;color:#AEAEB2">实时</span>
-  </div>
 
   <div class="hero-stats">
     <div class="hero-stat">
@@ -202,12 +266,12 @@ body{
       <div class="label">累计报告</div>
     </div>
     <div class="hero-stat">
-      <div class="num" id="stat-hotspots">—</div>
-      <div class="label">覆盖热点主题</div>
-    </div>
-    <div class="hero-stat">
       <div class="num">3</div>
       <div class="label">每日版次</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num" id="stat-stocks">—</div>
+      <div class="label">覆盖标的</div>
     </div>
   </div>
 
@@ -215,87 +279,104 @@ body{
     <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
       🪐 加入蓝宝书Max · ¥888/年
     </a>
-    <button class="btn btn-outline" id="btn-login" onclick="showLoginPaywall()">
-      🔑 已有访问码，登录
+    <button class="btn btn-outline" onclick="showLoginPaywall()">
+      🔑 已有访问码
     </button>
   </div>
 </header>
 
 <!-- ===== 功能亮点 ===== -->
-<section class="features">
+<section class="section" style="padding-top:8px">
   <div class="container">
-    <h2>为什么选择蓝宝书Max</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
         <h3>最强标的直出</h3>
-        <p>龙头首选 → 弹性机会 → 相关标的，三层分级，直接告诉你买什么</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3>产业链精准映射</h3>
-        <p>每个热点自动映射上下游产业链，上游→中游→下游一览无余</p>
+        <p>龙头首选 → 弹性机会 → 相关标的</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <h3>交易日三版更新</h3>
-        <p>晨会版7:00 · 午间版12:00 · 晚间版20:00，全时段覆盖</p>
+        <h3>三版更新</h3>
+        <p>晨会7:00 · 午间12:00 · 晚间20:00</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
-        <h3>实时行情叠加</h3>
-        <p>报告内嵌东方财富实时API，涨跌幅每分钟刷新</p>
+        <h3>实时行情</h3>
+        <p>东方财富API · 每3秒刷新</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔥</div>
-        <h3>热度量化评分</h3>
-        <p>机构关注度+市场确认度+催化质量，三维量化投资价值</p>
+        <h3>热度评分</h3>
+        <p>机构关注度+市场确认度+催化质量</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">★</div>
-        <h3>Alpha精选池</h3>
-        <p>综合涨幅、确定性、筹码结构的TOP5短线情绪标的</p>
+        <h3>Alpha 精选</h3>
+        <p>综合评分的短线情绪标的池</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>产业链映射</h3>
+        <p>上游→中游→下游 一览无余</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 最新报告 ===== -->
-<section class="reports-section">
+<!-- ===== 今日报告 ===== -->
+<section class="section" style="border-top:1px solid rgba(0,0,0,.06)">
   <div class="container">
-    <h2>📋 最新报告 <span style="font-size:13px;font-weight:400;color:#AEAEB2" id="report-count"></span>
+    <div class="section-title">
+      📋 最新报告 <span class="count" id="report-count"></span>
       <span id="auth-badge"></span>
-    </h2>
-    <div class="reports-grid" id="latest-reports">
-      <div style="text-align:center;padding:40px;color:#AEAEB2;grid-column:1/-1">加载中...</div>
     </div>
-    <div class="free-hint" id="free-hint">
-      🎁 新用户可免费试看 1 份完整报告，不按日期重置，总共仅此1次
+    <div id="today-reports">
+      <div class="empty-state"><div class="icon">📡</div>加载中...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 历史报告 ===== -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="history-section">
+      <button class="history-toggle" id="history-btn" onclick="toggleHistory()">
+        查看历史报告 <span class="arrow">▾</span>
+      </button>
+      <div class="history-content" id="history-content">
+        <div id="history-reports">
+          <div class="empty-state"><div class="icon">📂</div>暂无历史报告</div>
+        </div>
+      </div>
+    </div>
+    <div id="free-hint" style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:12px;padding:10px 16px;background:rgba(255,149,0,.06);border-radius:12px">
+      🎁 新用户可免费试看 1 份完整报告
     </div>
   </div>
 </section>
 
 <!-- ===== 定价 ===== -->
-<section class="pricing" id="pricing-section">
-  <h2>加入蓝宝书Max</h2>
-  <div class="price"><small>¥</small>888<small>/年</small></div>
-  <p class="price-desc">每天不到 2.5 元，获取机构级投研情报</p>
+<section class="section">
+  <div class="container">
+    <div class="pricing">
+      <h2>加入蓝宝书Max</h2>
+      <div class="price"><small>¥</small>888<small>/年</small></div>
+      <p class="price-desc">每天不到 2.5 元，获取机构级投研情报</p>
 
-  <ul class="pricing-features">
-    <li>每日晨会版 + 午间版 + 晚间版</li>
-    <li>最强标的三层分级，直出买卖逻辑</li>
-    <li>产业链上下游精准映射</li>
-    <li>实时行情叠加，每分钟刷新</li>
-    <li>Alpha精选短线情绪池</li>
-    <li>机会前瞻：提前布局下一个风口</li>
-    <li>知识星球专属付费社群</li>
-    <li>访问码一键登录，永久有效</li>
-  </ul>
+      <ul class="pricing-features">
+        <li>每日晨会版 + 午间版 + 晚间版</li>
+        <li>最强标的三层分级，直出买卖逻辑</li>
+        <li>产业链上下游精准映射</li>
+        <li>实时行情叠加，每3秒刷新</li>
+        <li>Alpha精选短线情绪池</li>
+        <li>访问码一键登录，永久有效</li>
+      </ul>
 
-  <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener"
-     class="btn btn-zsxq" style="font-size:16px;padding:14px 36px">
-    🪐 立即加入蓝宝书Max · ¥888/年
-  </a>
+      <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
+        🪐 立即加入 · ¥888/年
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- ===== Footer ===== -->
@@ -307,7 +388,7 @@ body{
     </p>
     <p class="brand">
       蓝宝书Max · 数据来源：<a href="https://www.alphapai.com" target="_blank" rel="noopener">Alpha派</a> &
-      <a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a> · 自动更新
+      <a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>
     </p>
   </div>
 </footer>
@@ -319,19 +400,16 @@ body{
 function updateClock() {
   const now = new Date();
   const days = ['周日','周一','周二','周三','周四','周五','周六'];
-  const str = now.getFullYear() + '年' +
-    String(now.getMonth()+1).padStart(2,'0') + '月' +
-    String(now.getDate()).padStart(2,'0') + '日 ' +
-    days[now.getDay()] + ' ' +
-    String(now.getHours()).padStart(2,'0') + ':' +
-    String(now.getMinutes()).padStart(2,'0') + ':' +
-    String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('live-time').textContent = str;
+  const str = String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ' · ' +
+    now.getFullYear() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' +
+    String(now.getDate()).padStart(2,'0') + ' ' + days[now.getDay()];
+  document.getElementById('nav-time').textContent = str;
 }
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock, 30000);
 
-// ===== 付费墙容器（导航页不弹，放这里给"已有访问码"按钮用） =====
+// ===== 付费墙容器 =====
 (function addPaywallContainer() {
   const div = document.createElement('div');
   div.id = 'paywall-container-dynamic';
@@ -342,86 +420,123 @@ function showLoginPaywall() {
   Paywall.renderPaywall('paywall-container-dynamic', '蓝宝书Max');
 }
 
+// ===== 渲染单张报告卡 =====
+function renderCard(r, isFirst, isAuth, editionLabels, editionBadges) {
+  const ed = r.edition || 'am';
+  const label = editionLabels[ed] || '';
+  const dateParts = (r.date || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
+  const displayDate = dateParts
+    ? dateParts[2] + '/' + dateParts[3]
+    : (r.date || '');
+
+  const canView = isAuth || isFirst;
+  const onclick = canView ? '' : 'onclick="showLoginPaywall();return false"';
+  const freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费</span>' : '';
+  const lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费</span>' : '';
+  const authTag = isAuth ? '<span class="r-auth">✓ 已解锁</span>' : '';
+
+  return `
+    <a href="${canView ? (r.file || '#') : '#'}" class="report-card ${ed}"
+       ${onclick} style="${!canView ? 'cursor:default;opacity:.65' : ''}">
+      <div class="report-card-header">
+        <span class="r-badge ${ed}">${label}</span>
+        <span class="r-date">${displayDate}</span>
+        ${freeBadge}${lockInfo}${authTag}
+      </div>
+      <div class="r-title">${r.title || '蓝宝书Max报告'}</div>
+    </a>`;
+}
+
 // ===== 加载报告 =====
 (async function loadReports() {
   try {
     const resp = await fetch('manifest.json?' + Date.now());
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const manifest = await resp.json();
+    const reports = (manifest.reports || [])
+      .filter(r => r.date !== 'test')
+      .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-    const reports = (manifest.reports || []).sort((a, b) =>
-      (b.date || '').localeCompare(a.date || ''));
-
-    // 统计：报告数量
-    document.getElementById('stat-reports').textContent = manifest.total_reports || reports.length || '—';
-
-    // 覆盖热点主题：从报告标题估算（每个报告通常包含5-8个主题）
-    // 如果 manifest 有 stock_count 且 > 0，使用它；否则用报告数量×6 估算
+    // 统计
+    document.getElementById('stat-reports').textContent = reports.length || '—';
     let totalStocks = 0;
-    reports.forEach(r => { totalStocks += (r.stock_count || 0); });
-    // 估算：如果没有准确数据，用报告数×6（每个报告约6个热点）
-    const estimatedHotspots = totalStocks > 0 ? totalStocks : reports.length * 6;
-    document.getElementById('stat-hotspots').textContent = estimatedHotspots || '—';
+    reports.forEach(r => { totalStocks += (r.stock_count || 10); });
+    document.getElementById('stat-stocks').textContent = totalStocks > 0 ? totalStocks : '—';
 
-    // 认证状态
-    if (Paywall.isAuthenticated()) {
+    const isAuth = Paywall.isAuthenticated();
+    if (isAuth) {
       document.getElementById('auth-badge').innerHTML =
-        '<span class="auth-badge">✓ 已订阅</span>';
+        '<span style="font-size:10px;color:#34C759;background:rgba(52,199,89,.1);padding:2px 8px;border-radius:100px">✓ 已订阅</span>';
+      document.getElementById('nav-status').style.display = 'flex';
+      document.getElementById('btn-nav-login').textContent = '已登录';
+      document.getElementById('btn-nav-login').style.color = '#34C759';
+      document.getElementById('btn-nav-login').style.background = 'rgba(52,199,89,.08)';
     }
 
-    // 渲染报告列表
-    document.getElementById('report-count').textContent =
-      '共 ' + reports.length + ' 份';
-
-    const grid = document.getElementById('latest-reports');
     if (reports.length === 0) {
-      grid.innerHTML = '<div style="text-align:center;padding:40px;color:#AEAEB2;grid-column:1/-1">暂无报告，等待首次抓取...</div>';
+      document.getElementById('today-reports').innerHTML =
+        '<div class="empty-state"><div class="icon">📡</div>暂无报告</div>';
       return;
     }
 
-    const editionLabels = { am: '晨会版', md: '午间版', pm: '晚间版' };
-    const editionBadges = { am: 'badge-am', md: 'badge-md', pm: 'badge-pm' };
+    const editionLabels = { am: '晨会版', md: '午间版', pm: '晚间版', global: '全球版' };
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
-    const isAuth = Paywall.isAuthenticated();
+    // 分组：今日 vs 历史，历史按日期分组
+    const todayReports = [];
+    const historyMap = {};
 
-    grid.innerHTML = reports.map((r, i) => {
-      const ed = r.edition || 'am';
-      const badge = editionBadges[ed] || 'badge-am';
-      const label = editionLabels[ed] || '';
-      const dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
-      const displayDate = dateParts
-        ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
-        : (r.date || '');
+    reports.forEach((r, i) => {
+      if (r.date === today) {
+        todayReports.push({ r, originalIndex: i });
+      } else {
+        const key = r.date || 'unknown';
+        if (!historyMap[key]) historyMap[key] = [];
+        historyMap[key].push({ r, originalIndex: i });
+      }
+    });
 
-      // 免费试看：只有第1份报告（按列表顺序）且未认证用户可以点
-      // ⭐ 不在这里消耗免费次数，由报告页的 paywall.js 自行判断
-      const isFirst = i === 0;
-      const href = r.file || '#';
+    // 渲染今日报告
+    const todayGrid = document.getElementById('today-reports');
+    if (todayReports.length > 0) {
+      todayGrid.innerHTML = '<div class="date-group">' +
+        '<div class="date-label"><span class="dot today-dot"></span>今天</div>' +
+        '<div class="reports-grid">' +
+        todayReports.map(({r, originalIndex}) => renderCard(r, originalIndex === 0, isAuth, editionLabels)).join('') +
+        '</div></div>';
+    } else {
+      // 没有今天报告时，显示最新日期
+      const latest = reports[0];
+      todayGrid.innerHTML = '<div class="date-group">' +
+        '<div class="date-label"><span class="dot"></span>最新</div>' +
+        '<div class="reports-grid">' +
+        renderCard(latest, true, isAuth, editionLabels) +
+        '</div></div>';
+    }
 
-      // 未认证 + 非首份 → 不能直接打开
-      const canView = isAuth || isFirst;
-      const onclick = canView
-        ? '' // 直接导航到报告页，让报告页判断免费/付费
-        : 'onclick="showLoginPaywall();return false"';
+    document.getElementById('report-count').textContent = '共 ' + reports.length + ' 份';
 
-      const freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费试看</span>' : '';
-      const lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费专享</span>' : '';
-      const authTag = isAuth ? '<span style="font-size:10px;color:#34C759">✓ 已解锁</span>' : '';
-
-      return `
-        <a href="${canView ? href : '#'}" class="report-card"
-           ${onclick} style="${!canView ? 'cursor:default;opacity:.7' : ''}">
-          <div class="r-badge ${badge}">${label}</div>
-          <div class="r-date">${displayDate}</div>
-          <div class="r-title">${r.title || '蓝宝书Max报告'}</div>
-          <div class="r-meta">
-            <span>📊 ${r.stock_count || '若干'} 只标的</span>
-            ${freeBadge}
-            ${lockInfo}
-            ${authTag}
-          </div>
-        </a>`;
-    }).join('');
+    // 渲染历史报告（按日期倒序分组）
+    const historyDates = Object.keys(historyMap).sort().reverse();
+    if (historyDates.length > 0) {
+      let historyHTML = '';
+      historyDates.forEach(dateKey => {
+        const items = historyMap[dateKey];
+        const dateParts = (dateKey || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
+        const displayDate = dateParts
+          ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
+          : dateKey;
+        historyHTML += '<div class="date-group">' +
+          '<div class="date-label"><span class="dot" style="background:#AEAEB2"></span>' + displayDate + '</div>' +
+          '<div class="reports-grid">' +
+          items.map(({r}) => renderCard(r, false, isAuth, editionLabels)).join('') +
+          '</div></div>';
+      });
+      document.getElementById('history-reports').innerHTML = historyHTML;
+    } else {
+      document.getElementById('history-reports').innerHTML =
+        '<div class="empty-state"><div class="icon">📂</div>更多历史报告将陆续归档</div>';
+    }
 
     // 更新免费提示
     if (isAuth) {
@@ -431,17 +546,34 @@ function showLoginPaywall() {
 
   } catch (e) {
     console.error('加载报告失败:', e);
-    document.getElementById('latest-reports').innerHTML =
-      '<div style="text-align:center;padding:40px;color:#FF3B30;grid-column:1/-1">加载失败，请检查网络后刷新</div>';
+    document.getElementById('today-reports').innerHTML =
+      '<div class="empty-state"><div class="icon">⚠️</div>加载失败，请刷新</div>';
   }
 })();
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+// ===== 历史报告折叠 =====
+function toggleHistory() {
+  const content = document.getElementById('history-content');
+  const btn = document.getElementById('history-btn');
+  content.classList.toggle('show');
+  btn.classList.toggle('open');
+  const hasHistory = document.getElementById('history-reports').textContent.trim().length > 0;
+  if (content.classList.contains('show')) {
+    btn.innerHTML = '收起历史报告 <span class="arrow">▾</span>';
+  } else {
+    btn.innerHTML = '查看历史报告 <span class="arrow">▾</span>';
+  }
 }
+
+// 默认展开历史（如果有内容）
+setTimeout(() => {
+  const hist = document.getElementById('history-reports');
+  if (hist && hist.querySelector('.date-group')) {
+    document.getElementById('history-content').classList.add('show');
+    document.getElementById('history-btn').classList.add('open');
+    document.getElementById('history-btn').innerHTML = '收起历史报告 <span class="arrow">▾</span>';
+  }
+}, 500);
 </script>
 </body>
 </html>
