@@ -134,42 +134,37 @@ def score_stock(stock_name, chain_context, position_in_summary):
 
 
 def fetch_realtime_quotes(secid_map):
-    """从东方财富API拉取所有标的的实时行情（服务端调用，午间版用）"""
+    """从东方财富API拉取所有标的的实时行情（优先用curl，requests常被代理拦截）"""
     if not secid_map:
         return {}
 
+    import subprocess
     secids = list(set(secid_map.values()))
     quotes = {}
-    sess = _requests.Session()
-    sess.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-        "Referer": "https://quote.eastmoney.com/",
-    })
 
     for i in range(0, len(secids), 50):
         batch = secids[i:i + 50]
+        secid_str = ",".join(batch)
+        url = f"https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&fields=f2,f3,f4,f12,f14&secids={secid_str}"
+
         try:
-            params = {
-                "fltt": "2",
-                "fields": "f2,f3,f4,f12,f14",
-                "secids": ",".join(batch),
-                "_": str(int(_time.time() * 1000)),
-            }
-            resp = sess.get(
-                "https://push2.eastmoney.com/api/qt/ulist.np/get",
-                params=params, timeout=10
+            result = subprocess.run(
+                ["curl", "-s", "--connect-timeout", "10", "--max-time", "15", url],
+                capture_output=True, text=True, timeout=20
             )
-            data = resp.json()
-            if data.get("data") and data["data"].get("diff"):
-                for item in data["data"]["diff"]:
-                    name = item.get("f14", "")
-                    quotes[name] = {
-                        "price": item.get("f2"),
-                        "change_pct": item.get("f3") or 0,
-                        "code": item.get("f12", ""),
-                    }
+            if result.returncode == 0 and result.stdout:
+                data = json.loads(result.stdout)
+                if data.get("data") and data["data"].get("diff"):
+                    for item in data["data"]["diff"]:
+                        name = item.get("f14", "")
+                        quotes[name] = {
+                            "price": item.get("f2"),
+                            "change_pct": item.get("f3") or 0,
+                            "code": item.get("f12", ""),
+                        }
+            _time.sleep(0.3)
         except Exception as e:
-            print(f"  ⚠️ 实时行情批量拉取异常: {e}")
+            print(f"  ⚠️ 实时行情拉取异常: {e}")
 
     print(f"  📊 实时行情: 拉取 {len(secids)} 个标的，成功 {len(quotes)} 个")
     return quotes
@@ -186,6 +181,35 @@ def build_secid_map(stock_names):
 
 
 # ===== 数据解析 =====
+
+def _parse_stock_reasons(summary: str) -> list:
+    """
+    从 Alpha派摘要中提取股票和推荐理由
+    模式: **name1**/**name2**（理由），**name3**（理由）
+    """
+    stocks = []
+    if "关注：" in summary:
+        stock_section = summary.split("关注：", 1)[1]
+    elif "关注:" in summary:
+        stock_section = summary.split("关注:", 1)[1]
+    else:
+        return stocks
+
+    groups = re.split(r'[，,；;]', stock_section)
+    for group in groups:
+        group = group.strip()
+        if not group:
+            continue
+        reason_match = re.search(r'[（(](.+?)[）)]', group)
+        reason = reason_match.group(1).strip() if reason_match else ""
+        names = re.findall(r'\*\*(.+?)\*\*', group)
+        for name in names:
+            name = name.strip()
+            if len(name) > 12 or '/' in name:
+                continue
+            stocks.append({"name": name, "reason": reason})
+    return stocks
+
 
 def parse_reports():
     with open(REPORT_JSON) as f:
@@ -210,6 +234,9 @@ def parse_reports():
                 clean = re.sub(r'<[^>]+>', '', t["summary"])
                 clean = re.sub(r'\*\*', '', clean)
 
+                # 从摘要中解析股票推荐理由
+                stocks_with_reasons = _parse_stock_reasons(t.get("summary", ""))
+
                 output[key].append({
                     "section": s["title"],
                     "topic": t["topicName"],
@@ -217,6 +244,7 @@ def parse_reports():
                     "summary_raw": t.get("summary", ""),
                     "summary_clean": clean,
                     "stocks": stocks,
+                    "stocks_with_reasons": stocks_with_reasons,  # 新增
                     "id": t.get("id", 0),
                 })
     return output
@@ -239,6 +267,14 @@ def format_topic_for_pipeline(topic, rank, all_secids):
     # 标的分层
     stocks_data = []
     stocks = topic.get("stocks", [])
+    # 从 Alpha派原始数据获取推荐理由映射
+    reason_map = {}
+    for sr in topic.get("stocks_with_reasons", []):
+        name = sr.get("name", "")
+        reason = sr.get("reason", "")
+        if name and name not in reason_map:
+            reason_map[name] = reason
+
     if stocks:
         leader_items, flex_items, rest_items = [], [], []
         for i, sname in enumerate(stocks):
@@ -246,7 +282,7 @@ def format_topic_for_pipeline(topic, rank, all_secids):
             sid = all_secids.get(sname, "")
             item = {
                 "name": sname, "code": sid,
-                "reason": "核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的"),
+                "reason": reason_map.get(sname, "") or ("核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的")),
                 "alpha": stock_alpha["alpha_total"],
                 "change_pct": 0,
             }

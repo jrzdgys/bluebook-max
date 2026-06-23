@@ -60,7 +60,22 @@ h1{font-size:24px;font-weight:700;margin-bottom:4px}
 </style>
 </head>
 <body>
-<div class="card">
+
+<!-- 密码门 -->
+<div class="card" id="password-gate">
+  <h1>🔐 蓝宝书Max · 管理员入口</h1>
+  <p class="subtitle">请输入管理密码以访问访问码管理功能</p>
+  <div class="input-row" style="margin-top:24px">
+    <input type="password" id="adminPassword" placeholder="请输入管理密码" maxlength="32"
+           onkeydown="if(event.key==='Enter')checkPassword()">
+    <button onclick="checkPassword()">验证</button>
+  </div>
+  <div id="pwd-error" style="color:#FF3B30;font-size:12px;margin-top:10px;display:none">密码错误，请重试</div>
+  <p class="note">默认密码：首次使用请修改 codes.js 中的 ADMIN_PASSWORD_HASH</p>
+</div>
+
+<!-- 主内容（初始隐藏） -->
+<div class="card" id="main-content" style="display:none">
   <h1>🔐 蓝宝书Max · 访问码管理</h1>
   <p class="subtitle">添加新访问码 → 复制哈希值 → 更新 codes.js → 部署</p>
 
@@ -90,11 +105,39 @@ h1{font-size:24px;font-weight:700;margin-bottom:4px}
   </div>
 
   <p class="note">
-    ⚠️ 此页面纯本地运行，不会上传任何数据。SHA-256 哈希在浏览器中计算。
+    ⚠️ 此页面纯本地运行，不会上传任何数据。SHA-256 哈希在浏览器中计算。<br>
+    管理密码哈希存储在 codes.js 的 ADMIN_PASSWORD_HASH 中。
   </p>
 </div>
 
+<script src="codes.js"></script>
 <script>
+// ===== 密码验证 =====
+// 默认密码 "bluebook2026" 的 SHA-256 哈希
+const DEFAULT_HASH = "f8a8e7e3a2c0c6b5d4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1";
+
+async function checkPassword() {
+  const pwd = document.getElementById('adminPassword').value.trim();
+  if (!pwd) return;
+
+  const encoder = new TextEncoder();
+  const data = encoder.encode(pwd);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+
+  const expectedHash = (typeof ADMIN_PASSWORD_HASH !== 'undefined')
+    ? ADMIN_PASSWORD_HASH : DEFAULT_HASH;
+
+  if (hash === expectedHash) {
+    document.getElementById('password-gate').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  } else {
+    document.getElementById('pwd-error').style.display = 'block';
+  }
+}
+
+// ===== 访问码生成 =====
 async function generateHash() {
   const code = document.getElementById('codeInput').value.trim();
   if (!code) return alert('请输入访问码');

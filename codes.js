@@ -18,3 +18,10 @@ const VALID_HASHES = [
   // 初始访问码: BLUEBOOK-MAX-2026
   "062e06e81a413b0fbaf7151dddf1129ec4d50368ece1e233e3fa24a759c88bfa",
 ];
+
+/**
+ * 管理后台密码哈希 (默认密码: bluebook2026)
+ * 🔧 修改密码：运行 echo -n "新密码" | shasum -a 256
+ *    然后把哈希值替换到下面
+ */
+const ADMIN_PASSWORD_HASH = "84365e0a7aff7e062747a08c7a5f1a9bce92eb52a74f51e164757bb26a695bed";

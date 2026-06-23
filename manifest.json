@@ -1,9 +1,9 @@
 {
   "name": "蓝宝书Max",
   "description": "Alpha派蓝宝书热点自动抓取与分析报告",
-  "last_updated": "2026-06-23 14:17:42",
-  "updated": "2026-06-23T14:17:42.313424",
-  "total_reports": 3,
+  "last_updated": "2026-06-23 14:57:34",
+  "updated": "2026-06-23T14:57:34.522894",
+  "total_reports": 4,
   "reports": [
     {
       "file": "reports/md-20260623.html",
@@ -21,6 +21,15 @@
       "date": "20260623",
       "date_display": "2026年06月23日",
       "title": "蓝宝书Max 全球版 - 2026年06月23日",
+      "stock_count": 0
+    },
+    {
+      "file": "reports/am-test-v3.html",
+      "edition": "am",
+      "label": "晨会版",
+      "date": "test",
+      "date_display": "test",
+      "title": "蓝宝书Max 晨会版 - test",
       "stock_count": 0
     },
     {

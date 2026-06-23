@@ -1,1635 +1,722 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-paywall="true">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>蓝宝书Max · 2026-06-23 晨会版</title>
-<style>/* ===== 蓝宝书Max · Apple Design System ===== */
-:root {
-  /* 色彩 */
-  --bg: #F5F5F7;
-  --surface: #FFFFFF;
-  --surface-secondary: #FAFAFA;
-  --text-primary: #1D1D1F;
-  --text-secondary: #86868B;
-  --text-tertiary: #AEAEB2;
-  --border: #E5E5EA;
-  --border-light: #F2F2F7;
-  --separator: #E5E5EA;
-
-  /* 语义色 */
-  --up: #FF3B30;
-  --up-bg: #FFF0EF;
-  --down: #34C759;
-  --down-bg: #EEFFF2;
-  --accent: #0071E3;
-  --accent-light: #E8F2FD;
-  --warning: #FF9500;
-  --warning-light: #FFF5E7;
-  --success: #34C759;
-  --gold: #FF9500;
-
-  /* 状态色 */
-  --state-main: #FF3B30;
-  --state-strong: #FF9500;
-  --state-cont: #0071E3;
-  --state-hatch: #AF52DE;
-
-  /* 排版 */
-  --font: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
-
-  /* 间距 */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-
-  /* 圆角 */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
-
-  /* 阴影 */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,.08);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,.12);
-
-  /* 动画 */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
-  --duration-fast: 0.15s;
-  --duration-normal: 0.3s;
-  --duration-slow: 0.5s;
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝宝书Max · 2026年6月23日 午间版</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color:#151515;padding:24px}
+.w{max-width:1200px;margin:0 auto;background:#FDFCF9;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.sh{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);color:#fff;padding:28px 36px}
+.sd{font-size:11px;font-weight:500;color:rgba(255,255,255,.5)}
+.sh1{font-size:28px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.vb{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.vb.dom{background:#EDE4DC;color:#A07858}
+.live-dot{display:inline-block;width:8px;height:8px;background:#00E676;border-radius:50%;margin-left:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.live-text{font-size:10px;color:rgba(255,255,255,.6);margin-left:6px}
+.sm{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap}
+.smi{font-size:12px;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);padding:8px 14px;border-radius:8px;text-align:center;min-width:100px}
+.smi strong{color:#fff;font-size:20px;display:block;margin-bottom:2px}
+.ct{padding:20px 36px 28px}
+.sc{background:#FFF8F0;border:1px solid #FFE8CC;border-radius:10px;padding:14px 18px;margin-bottom:16px}
+.st{font-size:14px;line-height:1.5;font-weight:600}
+.sm2{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap}
+.smi2{font-size:11px;color:#666}
+.smi2 strong{color:#151515}
+.chg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag-s{font-size:10px;padding:2px 7px;border-radius:3px;font-weight:600;background:#FFE8E8;color:#C4433A}
+.tag-n{font-size:10px;padding:2px 7px;border-radius:3px;font-weight:600;background:#E8EEFF;color:#3E54CE}
+.s2{font-size:16px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px}
+.tc{background:#fff;border:1px solid #E8E6E2;border-radius:10px;padding:14px 18px;position:relative}
+.th{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.tr{font-size:10px;font-weight:700;color:#fff;background:#151515;border-radius:3px;padding:2px 6px}
+.tn{font-size:20px;font-weight:700;letter-spacing:-0.3px}
+.tcd{font-size:10px;color:#aaa;margin:0 4px;font-weight:400}
+.ts{margin-left:auto;display:flex;align-items:center;gap:2px;position:relative}
+.tsv{font-size:26px;font-weight:700;line-height:1}
+.hib{font-size:12px;cursor:pointer;color:#999;display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;background:#F0F0F0;font-style:normal}
+.hib:hover{background:#E0E0E0;color:#666}
+.hp{display:none;position:absolute;top:calc(100% + 4px);right:0;z-index:1000;background:#fff;border:1px solid #E0DDD8;border-radius:8px;padding:12px 16px;min-width:220px;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.pt{font-size:12px;font-weight:700;color:#151515;margin-bottom:4px}
+.pb{font-size:11px;color:#888}
+.sb{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px}
+.tr2{font-size:13px;color:#151515;font-weight:500;margin-bottom:6px;line-height:1.5}
+.tbb{font-size:12px;color:#888;background:#F8F6F3;padding:8px 12px;border-radius:6px;line-height:1.5;border-left:3px solid #D4C8BC;margin-bottom:10px}
+.tsl{display:flex;flex-direction:column;gap:6px}
+.t-sg{margin-bottom:4px}
+.t-gl{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:3px}
+.t-gl.l1{background:#C4433A12;color:#C4433A}
+.t-gl.l2{background:#E87A2012;color:#E87A20}
+.t-gl.l3{background:#3E54CE12;color:#3E54CE}
+.tsr{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #F5F4F2;font-size:12px;flex-wrap:wrap;transition:background .3s}
+.tsr:last-child{border-bottom:none}
+.tsn{font-weight:700;font-size:13px;color:#151515;min-width:56px}
+.tsc{font-weight:700;font-size:13px;min-width:54px;text-align:right;transition:color .3s}
+.tsr2{font-size:11px;color:#999;margin-left:6px;flex:1;min-width:80px}
+.up{color:#C4433A}.dn{color:#3D4826}
+.asc{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border:1px solid #E8E6E2;border-radius:8px;margin-bottom:5px;min-height:48px}
+.ar{font-size:11px;font-weight:700;color:#C0C0C0;min-width:16px;text-align:center}
+.ar.ldr{color:#E8A500;font-size:14px}
+.ai{flex:1;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.an{font-size:14px;font-weight:700}
+.ab{font-size:10px;font-weight:700;color:#fff;background:#151515;border-radius:3px;padding:1px 5px;text-align:center;line-height:1.4}
+.ar2{font-size:11px;color:#A07858;flex:1;min-width:60px}
+.ap{font-size:12px;font-weight:600;min-width:55px;text-align:right;white-space:nowrap;transition:color .3s}
+.alpha-list{}
+.fo{padding:14px 36px;font-size:11px;color:#999;border-top:1px solid #E8E6E2;line-height:1.6}
+.fl{margin-top:6px;padding-top:6px;border-top:1px solid #F0EFEC;font-size:10px;color:#B0B0B0}
+@media(max-width:600px){
+    body{padding:0}.w{border-radius:0}.sh{padding:20px}.ct{padding:16px}.fo{padding:12px 16px}
+    .tn{font-size:17px}.tsv{font-size:22px}.th{gap:6px 8px}
+    .ts{margin-left:0;width:100%;justify-content:flex-end;margin-top:4px}
+    .tr{font-size:9px;padding:2px 5px}.sb{font-size:9px;padding:2px 5px}
 }
-
-/* ===== Reset ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ===== Typography ===== */
-h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
-h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; }
-h3 { font-size: 20px; font-weight: 600; }
-h4 { font-size: 16px; font-weight: 600; }
-
-.text-mono { font-family: var(--font-mono); }
-.text-xs { font-size: 11px; }
-.text-sm { font-size: 13px; }
-.text-base { font-size: 15px; }
-.text-lg { font-size: 17px; }
-.text-xl { font-size: 20px; }
-.text-2xl { font-size: 24px; }
-
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-
-/* ===== Buttons ===== */
-.btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 16px; border-radius: 20px; border: none;
-  font-family: var(--font); font-size: 14px; font-weight: 500;
-  cursor: pointer; transition: all var(--duration-fast) var(--ease-out);
-  text-decoration: none; white-space: nowrap;
-}
-.btn-primary {
-  background: var(--accent); color: #fff;
-}
-.btn-primary:hover { background: #0077ED; transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-secondary {
-  background: var(--surface-secondary); color: var(--text-primary);
-}
-.btn-secondary:hover { background: #EFEFF2; }
-.btn-ghost {
-  background: transparent; color: var(--accent);
-}
-.btn-ghost:hover { background: var(--accent-light); }
-
-/* ===== Cards ===== */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--duration-normal) var(--ease-out);
-}
-.card:hover { box-shadow: var(--shadow-md); }
-.card-glass {
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(0,0,0,.04);
-}
-
-/* ===== Tags / Badges ===== */
-.badge {
-  display: inline-flex; align-items: center; gap: 3px;
-  padding: 2px 8px; border-radius: 100px;
-  font-size: 11px; font-weight: 600; line-height: 1.6;
-}
-.badge-up { background: var(--up-bg); color: var(--up); }
-.badge-down { background: var(--down-bg); color: var(--down); }
-.badge-accent { background: var(--accent-light); color: var(--accent); }
-.badge-warning { background: var(--warning-light); color: var(--warning); }
-.badge-neutral { background: #F5F5F7; color: var(--text-secondary); }
-
-.state-badge {
-  display: inline-flex; align-items: center; gap: 3px;
-  padding: 3px 10px; border-radius: 100px;
-  font-size: 11px; font-weight: 600;
-}
-.state-main { background: #FFF0EF; color: var(--state-main); }
-.state-strong { background: #FFF5E7; color: var(--state-strong); }
-.state-cont { background: #E8F2FD; color: var(--state-cont); }
-.state-hatch { background: #F5EEFF; color: var(--state-hatch); }
-
-/* ===== Dividers ===== */
-.divider {
-  height: 1px; background: var(--separator);
-  margin: var(--space-lg) 0;
-}
-.divider-light {
-  height: 1px; background: var(--border-light);
-}
-
-/* ===== Layout ===== */
-.container {
-  max-width: 720px; margin: 0 auto; padding: 0 var(--space-md);
-}
-.container-wide {
-  max-width: 960px; margin: 0 auto; padding: 0 var(--space-md);
-}
-
-/* ===== Animations ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
-}
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-in { animation: fadeIn var(--duration-normal) var(--ease-out) both; }
-
-/* ===== Chain (产业链) ===== */
-.chain-container {
-  display: flex; gap: var(--space-sm); align-items: stretch;
-  padding: var(--space-md); background: var(--surface-secondary);
-  border-radius: var(--radius-md); overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.chain-link {
-  flex: 1; min-width: 140px;
-  background: var(--surface); border-radius: var(--radius-sm);
-  padding: var(--space-md); position: relative;
-  border: 1px solid var(--border);
-}
-.chain-link::after {
-  content: '→'; position: absolute; right: -14px; top: 50%;
-  transform: translateY(-50%); color: var(--text-tertiary);
-  font-size: 14px; font-weight: 300;
-}
-.chain-link:last-child::after { display: none; }
-.chain-label {
-  font-size: 11px; font-weight: 600; color: var(--text-secondary);
-  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
-}
-.chain-stocks {
-  display: flex; flex-direction: column; gap: 4px;
-}
-.chain-stock {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12px; padding: 3px 0;
-}
-.chain-stock-name { font-weight: 600; }
-.chain-stock-code { font-size: 10px; color: var(--text-tertiary); }
-.chain-stock-catalyst {
-  font-size: 10px; color: var(--up); background: var(--up-bg);
-  padding: 1px 6px; border-radius: 100px; margin-left: auto;
-}
-
-/* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
-
-/* ===== Mobile ===== */
-@media (max-width: 640px) {
-  .container, .container-wide { padding: 0 var(--space-sm); }
-  h1 { font-size: 32px; }
-  h2 { font-size: 22px; }
-  .chain-container { flex-direction: column; }
-  .chain-link::after {
-    content: '↓'; right: 50%; top: auto; bottom: -16px;
-    transform: translateX(50%);
-  }
-}
-
-
-/* ===== 报告页专用 ===== */
-body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#F5F5F7;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.rp-wrapper{max-width:800px;margin:0 auto;padding:0 16px 60px}
-
-/* 报告头 */
-.rp-hero{background:#fff;padding:32px 24px 24px;text-align:center;border-bottom:1px solid #E5E5EA;margin-bottom:20px}
-.rp-hero .back{display:inline-block;margin-bottom:12px;font-size:12px;color:#0071E3;text-decoration:none}
-.rp-hero .back:hover{opacity:.7}
-.rp-hero .edition{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:700;margin-bottom:12px}
-.rp-hero .edition.am{background:#FFF5E7;color:#FF9500}
-.rp-hero .edition.noon,.rp-hero .edition.md{background:#FFF0E0;color:#E8870A}
-.rp-hero .edition.pm{background:#EEF0FF;color:#5E5CE6}
-.rp-hero .edition.global{background:#E8F2FD;color:#0071E3}
-.rp-hero .date{font-size:clamp(22px,5vw,30px);font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
-.rp-hero .schedule{font-size:12px;color:#86868B}
-.rp-hero .stats{display:flex;justify-content:center;gap:20px;margin-top:14px;flex-wrap:wrap}
-.rp-hero .stat{text-align:center}
-.rp-hero .stat .n{font-size:18px;font-weight:700}
-.rp-hero .stat .l{font-size:11px;color:#86868B}
-
-/* 情绪摘要 */
-.sentiment{background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border:1px solid #FFE8CC;border-radius:14px;padding:18px 20px;margin-bottom:20px}
-.sentiment h3{color:#C47A00;font-size:14px;margin-bottom:6px}
-.sentiment .oneliner{font-size:15px;font-weight:700;line-height:1.6}
-.sentiment .signal{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:100px;font-size:11px;font-weight:600}
-.signal-bullish{background:#FFF0EF;color:#E74C3C}
-.signal-neutral{background:#E8F2FD;color:#0071E3}
-
-/* 板块标题 */
-.section-title{font-size:18px;font-weight:700;margin:28px 0 14px;display:flex;align-items:center;gap:8px}
-.section-title .cnt{font-size:13px;font-weight:400;color:#86868B}
-
-/* 主题卡片 */
-.topic-card{background:#fff;border-radius:14px;padding:20px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid #F2F2F7;border-left:3px solid #0071E3;transition:box-shadow .15s}
-.topic-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.topic-card .tc-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
-.topic-card .tc-score{font-size:24px;font-weight:800;min-width:38px;line-height:1;text-align:center}
-.topic-card .tc-score-sm{font-size:9px;color:#86868B;text-align:center;display:block}
-.topic-card .tc-rank{font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;padding:2px 6px;border-radius:3px;flex-shrink:0}
-.topic-card .tc-title{font-size:17px;font-weight:700;letter-spacing:-.3px;line-height:1.4}
-.topic-card .tc-state{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;flex-shrink:0}
-.tc-state-main{background:#FFF0EF;color:#E74C3C}
-.tc-state-strong{background:#FFF5E7;color:#E8870A}
-.tc-state-cont{background:#E8F2FD;color:#0071E3}
-.tc-state-hatch{background:#F5EEFF;color:#AF52DE}
-.topic-card .tc-summary{font-size:13px;color:#86868B;line-height:1.5;margin-bottom:6px}
-.topic-card .tc-quote{font-size:12px;color:#6E6E73;background:#F8F6F3;padding:10px 14px;border-radius:8px;line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:10px}
-
-/* 产业链 */
-.chain-bar{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
-.chain-node{flex:1;min-width:130px;background:#F9F9FB;border-radius:10px;padding:10px 12px;border:1px solid #EEEEF2}
-.chain-node .cn-label{font-size:10px;font-weight:600;color:#86868B;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.cn-stock{display:flex;align-items:center;gap:5px;padding:2px 0;font-size:12px}
-.cn-stock .cns-name{font-weight:600}
-.cn-stock .cns-code{font-size:10px;color:#AEAEB2}
-.cn-stock .cns-why{font-size:10px;color:#0071E3;margin-left:auto}
-.chain-driver{font-size:11px;font-weight:600;color:#86868B;margin-top:4px;text-align:center}
-
-/* 标的分层 */
-.ts-tier{margin-top:10px}
-.ts-tier-label{font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:4px}
-.ts-tier-label.l1{background:#FFF0EF;color:#E74C3C}
-.ts-tier-label.l2{background:#FFF5E7;color:#E8870A}
-.ts-tier-label.l3{background:#E8F2FD;color:#0071E3}
-.ts-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #F5F5F7;font-size:13px}
-.ts-row:last-child{border-bottom:none}
-.ts-name{font-weight:700;min-width:54px}
-.ts-code{font-size:11px;color:#86868B}
-.ts-chg{font-weight:700;min-width:54px;text-align:right}
-.ts-chg.up{color:#E74C3C}
-.ts-chg.down{color:#34C759}
-.ts-reason{font-size:11px;color:#86868B;flex:1;text-align:right}
-
-/* 情绪标的 */
-.emopick{background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:12px;padding:12px 14px;margin-top:10px}
-.emopick .ep-header{font-size:12px;font-weight:700;color:#C47A00;margin-bottom:6px}
-.emopick .ep-row{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:13px}
-.emopick .ep-name{font-weight:700}
-.emopick .ep-chg{font-weight:600}
-.emopick .ep-reason{font-size:11px;color:#86868B;margin-left:auto}
-
-/* 机会前瞻 */
-.opp-card{background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;border:1px solid #F2F2F7;border-left:3px solid #AF52DE}
-.opp-card .opp-tag{font-size:11px;font-weight:600;color:#AF52DE;background:#F5EEFF;padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:6px}
-.opp-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
-.opp-card p{font-size:13px;color:#86868B;line-height:1.5}
-
-/* Alpha精选 */
-.a-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#fff;border-radius:10px;margin-bottom:4px;border:1px solid #F2F2F7;transition:border-color .15s}
-.a-row:hover{border-color:#0071E3;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.a-row .ar-star{color:#FFB800;font-size:14px}
-.a-row .ar-name{font-weight:700;font-size:14px}
-.a-row .ar-code{font-size:11px;color:#86868B}
-.a-row .ar-score{font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;padding:1px 5px;border-radius:3px}
-.a-row .ar-reason{font-size:12px;color:#86868B;flex:1}
-.a-row .ar-chg{font-weight:600;font-size:13px}
-.a-row .ar-chg.up{color:#E74C3C}
-.a-row .ar-chg.down{color:#34C759}
-
-/* Footer */
-.rp-footer{text-align:center;padding:28px 0;margin-top:28px;border-top:1px solid #E5E5EA;color:#86868B;font-size:11px;line-height:1.8}
-
-/* 响应式 */
-@media(max-width:640px){
-  .rp-hero{padding:24px 14px 18px}
-  .rp-hero .date{font-size:20px}
-  .rp-hero .stats{gap:14px}
-  .topic-card{padding:16px 14px}
-  .topic-card .tc-head{flex-direction:column;align-items:flex-start;gap:6px}
-  .topic-card .tc-score{font-size:20px;min-width:auto;display:flex;align-items:center;gap:4px}
-  .topic-card .tc-score-sm{display:inline}
-  .chain-bar{flex-direction:column}
-  .ts-row{flex-wrap:wrap;font-size:12px}
-  .ts-reason{flex:auto;width:100%;text-align:left;padding-left:60px}
-  .a-row{flex-wrap:wrap;gap:6px}
-  .a-row .ar-reason{flex:auto;width:100%}
-  .sentiment{padding:14px}
-  .sentiment .oneliner{font-size:14px}
-}
-</style>
-</head>
+</style></head>
 <body>
-<div id="paywall-container"></div>
-<div class="rp-wrapper">
-
-  <!-- 报告头 -->
-  <div class="rp-hero">
-    <a class="back" href="/bluebook-max/">‹ 返回导航页</a>
-    <div class="edition md">🌅 晨会版</div>
-    <div class="date">2026-06-23</div>
-    <div class="schedule">交易日7:00更新</div>
-    <div class="stats">
-      <div class="stat"><div class="n">10</div><div class="l">热点主题</div></div>
-      <div class="stat"><div class="n">63</div><div class="l">相关标的</div></div>
-      <div class="stat"><div class="n">2</div><div class="l">机会前瞻</div></div>
-    </div>
-  </div>
-
-  <!-- 市场情绪 -->
-  <div class="sentiment">
-    <h3>📋 市场情绪速览</h3>
-    <div class="oneliner">午盘分化，关注领涨方向，13只上涨/13只下跌，平均+0.14%</div>
-    <span class="signal signal-neutral">中性偏多</span>
-  </div>
-
-  <!-- 热点主题 -->
-  <div class="section-title">🔥 热点主题 <span class="cnt">10个</span></div>
-  
-        <div class="topic-card animate-in" style="animation-delay:0.0s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">10</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP1</span>
-                <span class="tc-title">英伟达Rubin平台采用全面液冷方案</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 在过去24小时内，随着英伟达于美国时间6月21日正式发文详解Rubin平台，市场对AI散热的认知已从“风液混合”的过渡方案彻底转向“全面液冷”的终局标配。这一事件的边际变化在于，液冷不再是可选项，而是...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 英伟达Rubin全面液冷</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·冷板/管路</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">强瑞技术</span>
-              <span class="cns-code">301128</span>
-              <span class="cns-why">Rubin液冷歧管</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">飞龙股份</span>
-              <span class="cns-code">002536</span>
-              <span class="cns-why">电子水泵</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·CDU</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">裕同科技</span>
-              <span class="cns-code">002831</span>
-              <span class="cns-why">MIM液冷结构件</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·数据中心</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">科华数据</span>
-              <span class="cns-code">002335</span>
-              <span class="cns-why">数据中心电源</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">金盘科技</span>
-              <span class="cns-code">688676</span>
-              <span class="cns-why">变压器+SST</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="高澜股份">
-          <span class="ts-name">高澜股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+6.45%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="飞龙股份">
-          <span class="ts-name">飞龙股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.65%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="英维克">
-          <span class="ts-name">英维克</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.53%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="金富科技">
-          <span class="ts-name">金富科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+2.69%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="申菱环境">
-          <span class="ts-name">申菱环境</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+0.05%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="大元泵业">
-          <span class="ts-name">大元泵业</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="鼎通科技">
-          <span class="ts-name">鼎通科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="裕同科技">
-          <span class="ts-name">裕同科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="海科新源">
-          <span class="ts-name">海科新源</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="石大胜华">
-          <span class="ts-name">石大胜华</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="工业富联">
-          <span class="ts-name">工业富联</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">高澜股份</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+6.45%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">飞龙股份</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.65%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">英维克</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.53%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.05s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">9</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP2</span>
-                <span class="tc-title">国产AI芯片迎订单与新品发布共振</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 过去24小时内，国产AI芯片领域迎来新品发布与订单预期的共振，继飞腾A1000智算芯片亮相后，市场对华为、天数智芯等下半年新品及头部厂商Q2业绩的乐观预期显著增强。投资逻辑已从“国产替代”叙事升级为“...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 国产芯片涨价+订单爆发</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·设计/IP</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">芯原股份</span>
-              <span class="cns-code">688521</span>
-              <span class="cns-why">ASIC设计服务</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·芯片</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">寒武纪</span>
-              <span class="cns-code">688256</span>
-              <span class="cns-why">AI芯片龙头+涨价</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">海光信息</span>
-              <span class="cns-code">688041</span>
-              <span class="cns-why">DCU国产替代</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·制造/应用</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">中芯国际</span>
-              <span class="cns-code">688981</span>
-              <span class="cns-why">晶圆代工</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">华虹公司</span>
-              <span class="cns-code">688347</span>
-              <span class="cns-why">特色工艺代工</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="海光信息">
-          <span class="ts-name">海光信息</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="天数智芯">
-          <span class="ts-name">天数智芯</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="华虹宏力">
-          <span class="ts-name">华虹宏力</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="沐曦股份">
-          <span class="ts-name">沐曦股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="壁仞科技">
-          <span class="ts-name">壁仞科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中芯国际">
-          <span class="ts-name">中芯国际</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-2.65%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="寒武纪">
-          <span class="ts-name">寒武纪</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-3.40%</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">海光信息</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">天数智芯</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">华虹宏力</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.1s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">9</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP3</span>
-                <span class="tc-title">传26年Q3存储芯片价格或环比上涨50%</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 6月22日，行业专家将Q3存储价格预期猛然上调至环比增长40-50%，远超此前15-20%的市场共识，这一边际变化的核心在于AI对HBM及企业级SSD的产能挤占已传导至全品类，并得到韩国最新出口数据和...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 DDR5涨288%→全链景气</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·晶圆</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">中芯国际</span>
-              <span class="cns-code">688981</span>
-              <span class="cns-why">存储代工</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·芯片设计</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">兆易创新</span>
-              <span class="cns-code">603986</span>
-              <span class="cns-why">NOR Flash龙头</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">普冉股份</span>
-              <span class="cns-code">688766</span>
-              <span class="cns-why">利基存储</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·模组/分销</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">江波龙</span>
-              <span class="cns-code">301308</span>
-              <span class="cns-why">模组龙头+涨价弹性</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">佰维存储</span>
-              <span class="cns-code">688525</span>
-              <span class="cns-why">企业级存储</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">香农芯创</span>
-              <span class="cns-code">300475</span>
-              <span class="cns-why">HBM代理</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="德明利">
-          <span class="ts-name">德明利</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+2.43%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="北方华创">
-          <span class="ts-name">北方华创</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中微公司">
-          <span class="ts-name">中微公司</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="普冉股份">
-          <span class="ts-name">普冉股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-0.76%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="江波龙">
-          <span class="ts-name">江波龙</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-2.35%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="佰维存储">
-          <span class="ts-name">佰维存储</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-3.72%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="兆易创新">
-          <span class="ts-name">兆易创新</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-7.16%</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">德明利</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+2.43%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">北方华创</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">中微公司</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.15000000000000002s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">8</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP4</span>
-                <span class="tc-title">半导体设备国产化迎历史性机遇</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 日本于6月22日正式敲定对先进封装设备的出口管制，将后道设备的国产化从长期选项变为短期内的强制任务，彻底引爆了后道设备及零部件的紧急替代需求。这一外部强制性催化，叠加6月23日长川科技超预期的Q2业绩...
-              </div>
-              
-            </div>
-          </div>
-          
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="金海通">
-          <span class="ts-name">金海通</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.57%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="长川科技">
-          <span class="ts-name">长川科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+2.86%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="华峰测控">
-          <span class="ts-name">华峰测控</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+1.02%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="深科达">
-          <span class="ts-name">深科达</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="新益昌">
-          <span class="ts-name">新益昌</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="北方华创">
-          <span class="ts-name">北方华创</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中微公司">
-          <span class="ts-name">中微公司</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="华海清科">
-          <span class="ts-name">华海清科</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="富创精密">
-          <span class="ts-name">富创精密</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="新莱应材">
-          <span class="ts-name">新莱应材</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="机器人">
-          <span class="ts-name">机器人</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">金海通</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.57%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">长川科技</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+2.86%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">华峰测控</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+1.02%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.2s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">7</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP5</span>
-                <span class="tc-title">中芯国际与华虹宏力稼动率接近满载</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 今日市场交易的核心逻辑，是台积电确认削减28nm产能以支援先进封装，此举在供给端为国内晶圆代工创造了明确的订单外溢和涨价窗口。这一变化验证了国产晶圆代工正从周期性复苏转向由AI需求外溢和供给格局优化驱...
-              </div>
-              
-            </div>
-          </div>
-          
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="华虹宏力">
-          <span class="ts-name">华虹宏力</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="海光信息">
-          <span class="ts-name">海光信息</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="柏诚股份">
-          <span class="ts-name">柏诚股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="北方华创">
-          <span class="ts-name">北方华创</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中微公司">
-          <span class="ts-name">中微公司</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="芯原股份">
-          <span class="ts-name">芯原股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-1.68%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中芯国际">
-          <span class="ts-name">中芯国际</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-2.65%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="寒武纪">
-          <span class="ts-name">寒武纪</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-3.40%</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">华虹宏力</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">海光信息</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">柏诚股份</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.25s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">7</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP6</span>
-                <span class="tc-title">光通信板块景气度持续提升</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 6月22日，受日本光纤巨头藤仓因北美AI数据中心需求旺盛、供给紧张而推进提价的消息催化，A股光纤板块应声大涨。这标志着AI算力竞赛正从算力层向底层物理传输介质蔓延，市场确认光纤环节已进入供需失衡驱动的...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 国产芯片涨价+订单爆发</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·设计/IP</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">芯原股份</span>
-              <span class="cns-code">688521</span>
-              <span class="cns-why">ASIC设计服务</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·芯片</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">寒武纪</span>
-              <span class="cns-code">688256</span>
-              <span class="cns-why">AI芯片龙头+涨价</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">海光信息</span>
-              <span class="cns-code">688041</span>
-              <span class="cns-why">DCU国产替代</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·制造/应用</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">中芯国际</span>
-              <span class="cns-code">688981</span>
-              <span class="cns-why">晶圆代工</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">华虹公司</span>
-              <span class="cns-code">688347</span>
-              <span class="cns-why">特色工艺代工</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="长飞光纤">
-          <span class="ts-name">长飞光纤</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+7.59%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中天科技">
-          <span class="ts-name">中天科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.40%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="云南锗业">
-          <span class="ts-name">云南锗业</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+0.11%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="天孚通信">
-          <span class="ts-name">天孚通信</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="光库科技">
-          <span class="ts-name">光库科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="福晶科技">
-          <span class="ts-name">福晶科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="亨通光电">
-          <span class="ts-name">亨通光电</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-2.61%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="源杰科技">
-          <span class="ts-name">源杰科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-3.12%</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">长飞光纤</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+7.59%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">中天科技</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.40%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">云南锗业</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+0.11%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.30000000000000004s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">6</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP7</span>
-                <span class="tc-title">扬杰科技发布全系产品涨价函</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 6月23日，扬杰科技发布全系产品涨价10%-15%的通知，标志着功率半导体行业第二轮涨价趋势正式确立。此轮涨价由AI电源、新能源等下游需求旺盛及上游8寸产能紧缺共同驱动，不仅直接提升了IDM厂商的盈利...
-              </div>
-              
-            </div>
-          </div>
-          
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="扬杰科技">
-          <span class="ts-name">扬杰科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="新洁能">
-          <span class="ts-name">新洁能</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="士兰微">
-          <span class="ts-name">士兰微</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="芯联集成">
-          <span class="ts-name">芯联集成</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="东微半导">
-          <span class="ts-name">东微半导</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">扬杰科技</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">新洁能</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">士兰微</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.35000000000000003s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">6</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP8</span>
-                <span class="tc-title">金富科技成英伟达液冷波纹管核心供应商</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 昨夜今晨（6月22日晚-23日），随着英伟达官宣其Rubin平台将全面采用“无软管”的全液冷架构，市场迅速将焦点转向刚性波纹管的供应链；最新的边际变化在于，市场确认金富科技不仅是Tier-1奇宏的核心...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 英伟达Rubin全面液冷</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·冷板/管路</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">强瑞技术</span>
-              <span class="cns-code">301128</span>
-              <span class="cns-why">Rubin液冷歧管</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">飞龙股份</span>
-              <span class="cns-code">002536</span>
-              <span class="cns-why">电子水泵</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·CDU</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">裕同科技</span>
-              <span class="cns-code">002831</span>
-              <span class="cns-why">MIM液冷结构件</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·数据中心</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">科华数据</span>
-              <span class="cns-code">002335</span>
-              <span class="cns-why">数据中心电源</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">金盘科技</span>
-              <span class="cns-code">688676</span>
-              <span class="cns-why">变压器+SST</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="飞龙股份">
-          <span class="ts-name">飞龙股份</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.65%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="英维克">
-          <span class="ts-name">英维克</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+3.53%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="金富科技">
-          <span class="ts-name">金富科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+2.69%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="申菱环境">
-          <span class="ts-name">申菱环境</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+0.05%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="五洋自控">
-          <span class="ts-name">五洋自控</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="大元泵业">
-          <span class="ts-name">大元泵业</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">飞龙股份</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.65%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">英维克</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+3.53%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">金富科技</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+2.69%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.4s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">6</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP9</span>
-                <span class="tc-title">券商板块被指为科技行情卖铲人</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 在过去24小时内，券商板块在放量大涨后，市场逻辑已从单纯的低估值修复转向确认其作为科技行情的“卖铲人”角色。核心边际变化在于，市场不再将其视为与科技股争夺流动性的对手，而是通过科创板跟投等机制直接分享...
-              </div>
-              
-            </div>
-          </div>
-          
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="招商证券">
-          <span class="ts-name">招商证券</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg up" data-field="pct">+1.98%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中信建投">
-          <span class="ts-name">中信建投</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="财通证券">
-          <span class="ts-name">财通证券</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中金公司">
-          <span class="ts-name">中金公司</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-0.40%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="华泰证券">
-          <span class="ts-name">华泰证券</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-0.47%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="中信证券">
-          <span class="ts-name">中信证券</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-1.12%</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="国泰海通">
-          <span class="ts-name">国泰海通</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg down" data-field="pct">-1.21%</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">招商证券</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--up)">+1.98%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">中信建投</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">财通证券</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-        <div class="topic-card animate-in" style="animation-delay:0.45s;border-left-color:var(--state-hatch)">
-          <div class="tc-head">
-            <div><div class="tc-score" style="color:var(--state-hatch)">5</div><span class="tc-score-sm">热度</span></div>
-            <div style="flex:1;min-width:0">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
-                <span class="tc-rank">TOP10</span>
-                <span class="tc-title">传深圳渠道商有千台级服务器入关</span>
-                <span class="tc-state tc-state-strong">📈强化</span>
-              </div>
-              <div class="tc-summary">
-                📌 本周深圳渠道商千台级服务器确认入关，标志着AI算力硬件的交付瓶颈正在被打破，产业渠道开始实质性回暖。这一进展直接打通了算力租赁公司从订单到收入的“最后一公里”，市场预期将从关注订单规模转向聚焦Q2及下...
-              </div>
-              
-            </div>
-          </div>
-          
-    <div style="margin-top:12px;margin-bottom:12px">
-      <div class="chain-driver">🔗 国产芯片涨价+订单爆发</div>
-      <div class="chain-bar">
-        <div class="chain-node">
-          <div class="cn-label">上游·设计/IP</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">芯原股份</span>
-              <span class="cns-code">688521</span>
-              <span class="cns-why">ASIC设计服务</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">中游·芯片</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">寒武纪</span>
-              <span class="cns-code">688256</span>
-              <span class="cns-why">AI芯片龙头+涨价</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">海光信息</span>
-              <span class="cns-code">688041</span>
-              <span class="cns-why">DCU国产替代</span>
-            </div></div>
-        </div>
-        <div class="chain-node">
-          <div class="cn-label">下游·制造/应用</div>
-          <div class="chain-stocks">
-            <div class="cn-stock">
-              <span class="cns-name">中芯国际</span>
-              <span class="cns-code">688981</span>
-              <span class="cns-why">晶圆代工</span>
-            </div>
-            <div class="cn-stock">
-              <span class="cns-name">华虹公司</span>
-              <span class="cns-code">688347</span>
-              <span class="cns-why">特色工艺代工</span>
-            </div></div>
-        </div></div>
-    </div>
-          
-    <div class="ts-tier">
-      <div class="ts-tier-label l3">相关标的</div>
-      
-        <div class="ts-row" data-stock="利通电子">
-          <span class="ts-name">利通电子</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="盛视科技">
-          <span class="ts-name">盛视科技</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="智微智能">
-          <span class="ts-name">智微智能</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="协创数据">
-          <span class="ts-name">协创数据</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="赛意信息">
-          <span class="ts-name">赛意信息</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-        <div class="ts-row" data-stock="恒铭达">
-          <span class="ts-name">恒铭达</span>
-          <span class="ts-code"></span>
-          <span class="ts-chg " data-field="pct">—</span>
-          <span class="ts-reason"></span>
-        </div>
-    </div>
-          
-    <div class="emopick">
-      <div class="ep-header">🎯 短线情绪精准标的</div>
-      
-        <div class="ep-row">
-          <span class="ep-name">利通电子</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">盛视科技</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-        <div class="ep-row">
-          <span class="ep-name">智微智能</span>
-          <span style="font-size:11px;color:var(--text-tertiary)"></span>
-          <span class="ep-chg" style="color:var(--down)">0.00%</span>
-          <span class="ep-reason"></span>
-        </div>
-    </div>
-        </div>
-
-  <!-- 机会前瞻 -->
-  
-
-  <!-- Alpha精选 -->
-  <div class="section-title">★ Alpha精选</div>
-        <div class="a-row">
-          <span class="ar-star">★</span>
-          <span class="ar-name">英维克</span>
-          <span class="ar-code"></span>
-          <span class="ar-score">10</span>
-          <span class="ar-reason">英伟达Rubin平台采用全面液冷方案</span>
-          <span class="ar-chg up">+3.53%</span>
-        </div>
-        <div class="a-row">
-          <span class="ar-star">★</span>
-          <span class="ar-name">寒武纪</span>
-          <span class="ar-code"></span>
-          <span class="ar-score">9</span>
-          <span class="ar-reason">国产AI芯片迎订单与新品发布共振</span>
-          <span class="ar-chg down">-3.40%</span>
-        </div>
-        <div class="a-row">
-          <span class="ar-star">★</span>
-          <span class="ar-name">江波龙</span>
-          <span class="ar-code"></span>
-          <span class="ar-score">9</span>
-          <span class="ar-reason">传26年Q3存储芯片价格或环比上涨50%</span>
-          <span class="ar-chg down">-2.35%</span>
-        </div>
-        <div class="a-row">
-          <span class="ar-star">★</span>
-          <span class="ar-name">长川科技</span>
-          <span class="ar-code"></span>
-          <span class="ar-score">8</span>
-          <span class="ar-reason">半导体设备国产化迎历史性机遇</span>
-          <span class="ar-chg up">+2.86%</span>
-        </div>
-        <div class="a-row">
-          <span class="ar-star">★</span>
-          <span class="ar-name">中芯国际</span>
-          <span class="ar-code"></span>
-          <span class="ar-score">7</span>
-          <span class="ar-reason">中芯国际与华虹宏力稼动率接近满载</span>
-          <span class="ar-chg down">-2.65%</span>
-        </div>
-
-  <!-- Footer -->
-  <div class="rp-footer">
-    蓝宝书Max · 2026-06-23 晨会版<br>
-    数据来源：Alpha派蓝宝书 · 产业链分析：AI辅助<br>
-    📊 热度算法 = 机构关注度 + 市场确认度 + 催化质量<br>
-    ⚠️ 本报告为机构投研信息聚合参考，不构成投资建议
-  </div>
-
+<div class="w">
+<div class="sh">
+<div class="sd">⚡ 蓝宝书Max · 每日机构投研精华</div>
+<div class="sh1">机构观点快照<span class="vb dom">国内版 🧡</span>
+<span class="live-dot" id="live-dot"></span><span class="live-text" id="live-text">实时行情</span></div>
+<div style="font-size:13px;color:rgba(255,255,255,.85);margin-top:4px;font-weight:500">
+📋 2026年6月23日 午间版 · 10主题 · 覆盖沪深A股 · 实时刷新</div>
+<div class="sm">
+<div class="smi"><strong>10</strong> 全部主题</div>
+<div class="smi"><strong>2</strong> 机会前瞻</div>
+<div class="smi"><strong>86</strong> 推荐标的</div>
+</div></div>
+<div class="ct">
+<div class="sc">
+<div style="font-size:12px;font-weight:700;color:#C47A00;margin-bottom:4px">📋 今日市场摘要</div>
+<div class="st">最强方向：【国产AI芯片迎订单与新品发布共振】热度75 · 【半导体设备国产化迎历史性机遇】热度75 · 【传26年Q3存储芯片价格或环比上涨50%】热度73</div>
+<div class="sm2">
+<div class="smi2"><strong>10</strong> 全部主题 · <strong>2</strong> 机会前瞻 · <strong>76</strong> 推荐标的 · <span id="up-down">19涨13跌</span></div>
 </div>
-
+<div class="chg"><span class="tag-s">↑ 传26年Q3存储芯片价格或环比上涨50%</span><span class="tag-s">↑ 英伟达Rubin平台采用全面液冷方案</span><span class="tag-s">↑ 光通信板块景气度持续提升</span></div>
+<div style="font-size:12px;color:#666;margin-top:6px;line-height:1.5;font-weight:500">📌 一句话总结：国产AI芯片迎订单与新品发布共振、半导体设备国产化迎历史性机遇引领今日热点，机构积极布局，结构性机会突出</div>
+</div>
+<div class="s2"><span>🔥 全部主题（10个）</span><span style="font-size:10px;font-weight:400;color:#999;background:#F5F4F2;padding:3px 8px;border-radius:4px">点击ⓘ查看三维度评分</span></div>
+<div class="grid">
+<div class="tc">
+<div class="th">
+<span class="tr">TOP1</span>
+<span class="tn">国产AI芯片迎订单与新品发布共振</span>
+<span class="sb" style="background:#E87A2015;color:#E87A20">📈强化</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">75</span>
+<span class="hib" data-popup="popup-0" onclick="event.stopPropagation();var p=document.getElementById('popup-0');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-0">
+<div class="pt">国产AI芯片迎订单与新品发布共振 · 热度指数构成</div>
+<div class="pb">机构关注度 34 | 市场确认度 21 | 催化质量 20</div>
+</div>
+</span>
+</div>
+<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·芯片 AI训练/推理芯片</div>
+<div class="tsr" data-stock="寒武纪" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">寒武纪</span><span class="tcd">688256</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">AI芯片龙头+涨价</span></div>
+<div class="tsr" data-stock="海光信息" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">海光信息</span><span class="tcd">688041</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">DCU国产替代</span></div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·制造/应用 晶圆制造+封装测试</div>
+<div class="tsr" data-stock="中芯国际" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">中芯国际</span><span class="tcd">688981</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">晶圆代工</span></div>
+</div></div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="寒武纪"><span class="tsn">寒武纪</span><span class="tcd">1.688256</span><span class="tsc dn" data-field="pct">-3.09%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="海光信息"><span class="tsn">海光信息</span><span class="tcd">1.688041</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="天数智芯"><span class="tsn">天数智芯</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="中芯国际"><span class="tsn">中芯国际</span><span class="tcd">1.688981</span><span class="tsc dn" data-field="pct">-2.62%</span><span class="tsr2">AI芯片订单外溢及代工涨价</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="华虹宏力"><span class="tsn">华虹宏力</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">AI芯片订单外溢及代工涨价</span></div>
+<div class="tsr" data-stock="沐曦股份"><span class="tsn">沐曦股份</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="壁仞科技"><span class="tsn">壁仞科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP2</span>
+<span class="tn">半导体设备国产化迎历史性机遇</span>
+<span class="sb" style="background:#E87A2015;color:#E87A20">📈强化</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">75</span>
+<span class="hib" data-popup="popup-1" onclick="event.stopPropagation();var p=document.getElementById('popup-1');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-1">
+<div class="pt">半导体设备国产化迎历史性机遇 · 热度指数构成</div>
+<div class="pb">机构关注度 29 | 市场确认度 24 | 催化质量 22</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="深科达"><span class="tsn">深科达</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="新益昌"><span class="tsn">新益昌</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="金海通"><span class="tsn">金海通</span><span class="tcd">1.603061</span><span class="tsc up" data-field="pct">+3.59%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="长川科技"><span class="tsn">长川科技</span><span class="tcd">0.300604</span><span class="tsc up" data-field="pct">+4.09%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="华峰测控"><span class="tsn">华峰测控</span><span class="tcd">1.688200</span><span class="tsc up" data-field="pct">+4.31%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="北方华创"><span class="tsn">北方华创</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="中微公司"><span class="tsn">中微公司</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="华海清科"><span class="tsn">华海清科</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="富创精密"><span class="tsn">富创精密</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="新莱应材"><span class="tsn">新莱应材</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="机器人"><span class="tsn">机器人</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP3</span>
+<span class="tn">传26年Q3存储芯片价格或环比上涨50%</span>
+<span class="sb" style="background:#E87A2015;color:#E87A20">📈强化</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">73</span>
+<span class="hib" data-popup="popup-2" onclick="event.stopPropagation();var p=document.getElementById('popup-2');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-2">
+<div class="pt">传26年Q3存储芯片价格或环比上涨50% · 热度指数构成</div>
+<div class="pb">机构关注度 34 | 市场确认度 22 | 催化质量 17</div>
+</div>
+</span>
+</div>
+<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·芯片设计 存储芯片设计</div>
+<div class="tsr" data-stock="兆易创新" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">兆易创新</span><span class="tcd">603986</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">NOR Flash龙头</span></div>
+<div class="tsr" data-stock="普冉股份" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">普冉股份</span><span class="tcd">688766</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">利基存储</span></div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·模组/分销 存储模组+分销</div>
+<div class="tsr" data-stock="江波龙" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">江波龙</span><span class="tcd">301308</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">模组龙头+涨价弹性</span></div>
+<div class="tsr" data-stock="佰维存储" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">佰维存储</span><span class="tcd">688525</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">企业级存储</span></div>
+</div></div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="江波龙"><span class="tsn">江波龙</span><span class="tcd">0.301308</span><span class="tsc dn" data-field="pct">-3.29%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="佰维存储"><span class="tsn">佰维存储</span><span class="tcd">1.688525</span><span class="tsc dn" data-field="pct">-4.14%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="德明利"><span class="tsn">德明利</span><span class="tcd">0.001309</span><span class="tsc up" data-field="pct">+2.44%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="兆易创新"><span class="tsn">兆易创新</span><span class="tcd">1.603986</span><span class="tsc dn" data-field="pct">-7.06%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="普冉股份"><span class="tsn">普冉股份</span><span class="tcd">1.688766</span><span class="tsc up" data-field="pct">+5.77%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="北方华创"><span class="tsn">北方华创</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">晶圆厂扩产拉动上游设备需求</span></div>
+<div class="tsr" data-stock="中微公司"><span class="tsn">中微公司</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">晶圆厂扩产拉动上游设备需求</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP4</span>
+<span class="tn">英伟达Rubin平台采用全面液冷方案</span>
+<span class="sb" style="background:#E87A2015;color:#E87A20">📈强化</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">71</span>
+<span class="hib" data-popup="popup-3" onclick="event.stopPropagation();var p=document.getElementById('popup-3');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-3">
+<div class="pt">英伟达Rubin平台采用全面液冷方案 · 热度指数构成</div>
+<div class="pb">机构关注度 40 | 市场确认度 23 | 催化质量 8</div>
+</div>
+</span>
+</div>
+<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·冷板/管路 冷板+管路+水泵</div>
+<div class="tsr" data-stock="飞龙股份" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">飞龙股份</span><span class="tcd">002536</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电子水泵</span></div>
+<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·CDU CDU+Manifold</div>
+<div class="tsr" data-stock="裕同科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">裕同科技</span><span class="tcd">002831</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">MIM液冷结构件</span></div>
+</div></div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="英维克"><span class="tsn">英维克</span><span class="tcd">0.002837</span><span class="tsc up" data-field="pct">+5.34%</span><span class="tsr2">CDU及系统方案商</span></div>
+<div class="tsr" data-stock="申菱环境"><span class="tsn">申菱环境</span><span class="tcd">0.301018</span><span class="tsc up" data-field="pct">+0.61%</span><span class="tsr2">CDU及系统方案商</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="高澜股份"><span class="tsn">高澜股份</span><span class="tcd">0.300499</span><span class="tsc up" data-field="pct">+5.81%</span><span class="tsr2">CDU及系统方案商</span></div>
+<div class="tsr" data-stock="飞龙股份"><span class="tsn">飞龙股份</span><span class="tcd">0.002536</span><span class="tsc up" data-field="pct">+4.46%</span><span class="tsr2">核心部件水泵</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="大元泵业"><span class="tsn">大元泵业</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心部件水泵</span></div>
+<div class="tsr" data-stock="金富科技"><span class="tsn">金富科技</span><span class="tcd">0.003018</span><span class="tsc up" data-field="pct">+2.57%</span><span class="tsr2">冷板及快接头等精密组件</span></div>
+<div class="tsr" data-stock="鼎通科技"><span class="tsn">鼎通科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">冷板及快接头等精密组件</span></div>
+<div class="tsr" data-stock="裕同科技"><span class="tsn">裕同科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">冷板及快接头等精密组件</span></div>
+<div class="tsr" data-stock="海科新源"><span class="tsn">海科新源</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">冷却液核心原料丙二醇</span></div>
+<div class="tsr" data-stock="石大胜华"><span class="tsn">石大胜华</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">冷却液核心原料丙二醇</span></div>
+<div class="tsr" data-stock="工业富联"><span class="tsn">工业富联</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">整机柜集成</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP5</span>
+<span class="tn">光通信板块景气度持续提升</span>
+<span class="sb" style="background:#E87A2015;color:#E87A20">📈强化</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">70</span>
+<span class="hib" data-popup="popup-4" onclick="event.stopPropagation();var p=document.getElementById('popup-4');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-4">
+<div class="pt">光通信板块景气度持续提升 · 热度指数构成</div>
+<div class="pb">机构关注度 24 | 市场确认度 24 | 催化质量 22</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="长飞光纤"><span class="tsn">长飞光纤</span><span class="tcd">1.601869</span><span class="tsc up" data-field="pct">+10.00%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="亨通光电"><span class="tsn">亨通光电</span><span class="tcd">1.600487</span><span class="tsc dn" data-field="pct">-2.28%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="中天科技"><span class="tsn">中天科技</span><span class="tcd">1.600522</span><span class="tsc up" data-field="pct">+3.52%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="天孚通信"><span class="tsn">天孚通信</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="光库科技"><span class="tsn">光库科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升</span></div>
+<div class="tsr" data-stock="源杰科技"><span class="tsn">源杰科技</span><span class="tcd">1.688498</span><span class="tsc dn" data-field="pct">-2.54%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="云南锗业"><span class="tsn">云南锗业</span><span class="tcd">0.002428</span><span class="tsc up" data-field="pct">+1.29%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="福晶科技"><span class="tsn">福晶科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP6</span>
+<span class="tn">中芯国际与华虹宏力稼动率接近满载</span>
+<span class="sb" style="background:#3E54CE15;color:#3E54CE">➡️持续</span>
+<span class="ts">
+<span class="tsv" style="color:#E87A20">63</span>
+<span class="hib" data-popup="popup-5" onclick="event.stopPropagation();var p=document.getElementById('popup-5');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-5">
+<div class="pt">中芯国际与华虹宏力稼动率接近满载 · 热度指数构成</div>
+<div class="pb">机构关注度 24 | 市场确认度 19 | 催化质量 20</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="中芯国际"><span class="tsn">中芯国际</span><span class="tcd">1.688981</span><span class="tsc dn" data-field="pct">-2.62%</span><span class="tsr2">直接受益于产能紧张、订单外溢及价格上涨</span></div>
+<div class="tsr" data-stock="华虹宏力"><span class="tsn">华虹宏力</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">直接受益于产能紧张、订单外溢及价格上涨</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="寒武纪"><span class="tsn">寒武纪</span><span class="tcd">1.688256</span><span class="tsc dn" data-field="pct">-3.09%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="海光信息"><span class="tsn">海光信息</span><span class="tcd">1.688041</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="芯原股份"><span class="tsn">芯原股份</span><span class="tcd">1.688521</span><span class="tsc up" data-field="pct">+0.61%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="柏诚股份"><span class="tsn">柏诚股份</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">晶圆厂资本开支扩产的核心受益标的</span></div>
+<div class="tsr" data-stock="北方华创"><span class="tsn">北方华创</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">晶圆厂资本开支扩产的核心受益标的</span></div>
+<div class="tsr" data-stock="中微公司"><span class="tsn">中微公司</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">晶圆厂资本开支扩产的核心受益标的</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP7</span>
+<span class="tn">扬杰科技发布全系产品涨价函</span>
+<span class="sb" style="background:#3E54CE15;color:#3E54CE">➡️持续</span>
+<span class="ts">
+<span class="tsv" style="color:#3E54CE">59</span>
+<span class="hib" data-popup="popup-6" onclick="event.stopPropagation();var p=document.getElementById('popup-6');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-6">
+<div class="pt">扬杰科技发布全系产品涨价函 · 热度指数构成</div>
+<div class="pb">机构关注度 19 | 市场确认度 18 | 催化质量 22</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="扬杰科技"><span class="tsn">扬杰科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="新洁能"><span class="tsn">新洁能</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="士兰微"><span class="tsn">士兰微</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="芯联集成"><span class="tsn">芯联集成</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="东微半导"><span class="tsn">东微半导</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">AI业务敞口高</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP8</span>
+<span class="tn">金富科技成英伟达液冷波纹管核心供应商</span>
+<span class="sb" style="background:#3E54CE15;color:#3E54CE">➡️持续</span>
+<span class="ts">
+<span class="tsv" style="color:#3E54CE">56</span>
+<span class="hib" data-popup="popup-7" onclick="event.stopPropagation();var p=document.getElementById('popup-7');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-7">
+<div class="pt">金富科技成英伟达液冷波纹管核心供应商 · 热度指数构成</div>
+<div class="pb">机构关注度 19 | 市场确认度 22 | 催化质量 15</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="金富科技"><span class="tsn">金富科技</span><span class="tcd">0.003018</span><span class="tsc up" data-field="pct">+2.57%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="五洋自控"><span class="tsn">五洋自控</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="英维克"><span class="tsn">英维克</span><span class="tcd">0.002837</span><span class="tsc up" data-field="pct">+5.34%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="申菱环境"><span class="tsn">申菱环境</span><span class="tcd">0.301018</span><span class="tsc up" data-field="pct">+0.61%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="飞龙股份"><span class="tsn">飞龙股份</span><span class="tcd">0.002536</span><span class="tsc up" data-field="pct">+4.46%</span><span class="tsr2">液冷泵等核心零部件供应商</span></div>
+<div class="tsr" data-stock="大元泵业"><span class="tsn">大元泵业</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">液冷泵等核心零部件供应商</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP9</span>
+<span class="tn">券商板块被指为科技行情卖铲人</span>
+<span class="sb" style="background:#3E54CE15;color:#3E54CE">➡️持续</span>
+<span class="ts">
+<span class="tsv" style="color:#3E54CE">53</span>
+<span class="hib" data-popup="popup-8" onclick="event.stopPropagation();var p=document.getElementById('popup-8');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-8">
+<div class="pt">券商板块被指为科技行情卖铲人 · 热度指数构成</div>
+<div class="pb">机构关注度 19 | 市场确认度 19 | 催化质量 15</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="中信证券"><span class="tsn">中信证券</span><span class="tcd">1.600030</span><span class="tsc dn" data-field="pct">-1.15%</span><span class="tsr2">受益于行业集中度提升和业务综合优势的头部券商</span></div>
+<div class="tsr" data-stock="国泰海通"><span class="tsn">国泰海通</span><span class="tcd">1.601211</span><span class="tsc dn" data-field="pct">-0.99%</span><span class="tsr2">受益于行业集中度提升和业务综合优势的头部券商</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="华泰证券"><span class="tsn">华泰证券</span><span class="tcd">1.601688</span><span class="tsc dn" data-field="pct">-0.23%</span><span class="tsr2">受益于行业集中度提升和业务综合优势的头部券商</span></div>
+<div class="tsr" data-stock="中金公司"><span class="tsn">中金公司</span><span class="tcd">1.601995</span><span class="tsc dn" data-field="pct">-0.06%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="中信建投"><span class="tsn">中信建投</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="招商证券"><span class="tsn">招商证券</span><span class="tcd">1.600999</span><span class="tsc up" data-field="pct">+2.44%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="财通证券"><span class="tsn">财通证券</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">具备转股及并购重组预期</span></div>
+</div>
+</div>
+</div>
+<div class="tc">
+<div class="th">
+<span class="tr">TOP10</span>
+<span class="tn">传深圳渠道商有千台级服务器入关</span>
+<span class="sb" style="background:#3E54CE15;color:#3E54CE">➡️持续</span>
+<span class="ts">
+<span class="tsv" style="color:#3E54CE">49</span>
+<span class="hib" data-popup="popup-9" onclick="event.stopPropagation();var p=document.getElementById('popup-9');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="popup-9">
+<div class="pt">传深圳渠道商有千台级服务器入关 · 热度指数构成</div>
+<div class="pb">机构关注度 14 | 市场确认度 18 | 催化质量 17</div>
+</div>
+</span>
+</div>
+<div class="tsl">
+<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="tsr" data-stock="利通电子"><span class="tsn">利通电子</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="tsr" data-stock="盛视科技"><span class="tsn">盛视科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l2">弹性机会</div>
+<div class="tsr" data-stock="智微智能"><span class="tsn">智微智能</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="tsr" data-stock="协创数据"><span class="tsn">协创数据</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="tsr" data-stock="赛意信息"><span class="tsn">赛意信息</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="tsr" data-stock="恒铭达"><span class="tsn">恒铭达</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="s2" style="margin-top:4px">🔮 机会前瞻 <span style="font-size:11px;font-weight:400;color:#999;margin-left:6px">机构新增关注、逐渐发酵的新话题</span></div>
+<div class="grid" style="margin-bottom:20px">
+<div class="tc" style="border-left:3px solid #9B59B6">
+<div class="th">
+<span class="tn" style="font-size:16px">智谱发布GLM-5.2模型追赶海外</span>
+<span class="sb" style="background:#8B5CF615;color:#8B5CF6">🌱孵化</span>
+<span class="ts">
+<span class="tsv" style="color:#8B5CF6">51</span>
+<span class="hib" data-popup="hp_opp_0" onclick="event.stopPropagation();var p=document.getElementById('hp_opp_0');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="hp_opp_0">
+<div class="pt">智谱发布GLM-5.2模型追赶海外 · 热度指数构成</div>
+<div class="pb">机构关注度 19 | 市场确认度 24 | 催化质量 8</div>
+</div>
+</span>
+</div>
+<div class="tr2">📌 在过去一周，智谱于6月17日前后发布并开源GLM-5.2，其在代码生成和长程任务上的能力已进入全球第一梯队，在部分权威评测中与Claude Opus 4.8处于可比区间，尤其在海外顶尖模型Fable 5受限后，其“Opus平替”的口碑迅速确立。</div>
+<div class="tbb" style="border-left-color:#9B59B6">📘 "这不仅是技术追赶的里程碑，更标志着国产头部模型正从低价竞争转向凭借顶尖能力获得定价权的新阶段，其年内连续提价和API调用量不降反升验证了高质量Token的商业价值，同时，该模型发布首日即全面适配国产算力平台，解决了AI自主可控的核心叙事。"</div>
+<div class="tsl">
+<div class="tsr" data-stock="智谱"><span class="tsn">智谱</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心前瞻标的</span></div>
+<div class="tsr" data-stock="寒武纪"><span class="tsn">寒武纪</span><span class="tcd">1.688256</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="摩尔线程"><span class="tsn">摩尔线程</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="海光信息"><span class="tsn">海光信息</span><span class="tcd">1.688041</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="昆仑芯"><span class="tsn">昆仑芯</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+</div>
+</div>
+<div class="tc" style="border-left:3px solid #9B59B6">
+<div class="th">
+<span class="tn" style="font-size:16px">剑桥科技备料CPO外置光源ELSFP</span>
+<span class="sb" style="background:#8B5CF615;color:#8B5CF6">🌱孵化</span>
+<span class="ts">
+<span class="tsv" style="color:#8B5CF6">63</span>
+<span class="hib" data-popup="hp_opp_1" onclick="event.stopPropagation();var p=document.getElementById('hp_opp_1');p.style.display=p.style.display==='block'?'none':'block';">ⓘ</span>
+<div class="hp" id="hp_opp_1">
+<div class="pt">剑桥科技备料CPO外置光源ELSFP · 热度指数构成</div>
+<div class="pb">机构关注度 19 | 市场确认度 23 | 催化质量 21</div>
+</div>
+</span>
+</div>
+<div class="tr2">📌 昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链从巨头垂直整合的封闭模式，正式转向开放的社会化分工。</div>
+<div class="tbb" style="border-left-color:#9B59B6">📘 "昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链从巨头垂直整合的封闭模式，正式转向开放的社会化分工。"</div>
+<div class="tsl">
+<div class="tsr" data-stock="剑桥科技"><span class="tsn">剑桥科技</span><span class="tcd">1.603083</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心前瞻标的</span></div>
+<div class="tsr" data-stock="源杰科技"><span class="tsn">源杰科技</span><span class="tcd">1.688498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="仕佳光子"><span class="tsn">仕佳光子</span><span class="tcd">1.688313</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="中际旭创"><span class="tsn">中际旭创</span><span class="tcd">0.300308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+<div class="tsr" data-stock="新易盛"><span class="tsn">新易盛</span><span class="tcd">0.300502</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
+</div>
+</div>
+</div>
+<div class="s2" style="margin-top:20px">★ 今日Top5 Alpha<span style="font-size:10px;font-weight:400;color:#999;background:#F5F4F2;padding:3px 8px;border-radius:4px;margin-left:6px">综合催化质量·主题热度·产业地位·市场确认</span></div>
+<div class="alpha-list">
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">寒武纪</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ap dn" data-stock="寒武纪" data-field="pct">-3.09%</div>
+</div>
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">海光信息</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="海光信息" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">深科达</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="深科达" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">新益昌</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="新益昌" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">江波龙</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
+<div class="ap dn" data-stock="江波龙" data-field="pct">-3.29%</div>
+</div>
+</div>
+<div class="s2" style="margin-top:14px;font-size:14px">📋 Alpha精选池（20只 · 按综合评分排序）</div>
+<div class="alpha-list">
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">佰维存储</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
+<div class="ap dn" data-stock="佰维存储" data-field="pct">-4.14%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">英维克</span><span class="ab">72</span><span class="ar2">CDU及系统方案商</span></div>
+<div class="ap up" data-stock="英维克" data-field="pct">+5.34%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">申菱环境</span><span class="ab">72</span><span class="ar2">CDU及系统方案商</span></div>
+<div class="ap up" data-stock="申菱环境" data-field="pct">+0.61%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">长飞光纤</span><span class="ab">72</span><span class="ar2">核心标的</span></div>
+<div class="ap up" data-stock="长飞光纤" data-field="pct">+10.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">亨通光电</span><span class="ab">72</span><span class="ar2">核心标的</span></div>
+<div class="ap dn" data-stock="亨通光电" data-field="pct">-2.28%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">天数智芯</span><span class="ab">65</span><span class="ar2">弹性标的</span></div>
+<div class="ap" data-stock="天数智芯" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">中芯国际</span><span class="ab">65</span><span class="ar2">AI芯片订单外溢及代工涨价</span></div>
+<div class="ap dn" data-stock="中芯国际" data-field="pct">-2.62%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">金海通</span><span class="ab">65</span><span class="ar2">弹性标的</span></div>
+<div class="ap up" data-stock="金海通" data-field="pct">+3.59%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">长川科技</span><span class="ab">65</span><span class="ar2">弹性标的</span></div>
+<div class="ap up" data-stock="长川科技" data-field="pct">+4.09%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">扬杰科技</span><span class="ab">65</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="扬杰科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">新洁能</span><span class="ab">65</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="新洁能" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">德明利</span><span class="ab">63</span><span class="ar2">弹性标的</span></div>
+<div class="ap up" data-stock="德明利" data-field="pct">+2.44%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">兆易创新</span><span class="ab">63</span><span class="ar2">弹性标的</span></div>
+<div class="ap dn" data-stock="兆易创新" data-field="pct">-7.06%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">五洋自控</span><span class="ab">63</span><span class="ar2">核心标的</span></div>
+<div class="ap" data-stock="五洋自控" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">高澜股份</span><span class="ab">62</span><span class="ar2">CDU及系统方案商</span></div>
+<div class="ap up" data-stock="高澜股份" data-field="pct">+5.81%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">飞龙股份</span><span class="ab">62</span><span class="ar2">核心部件水泵</span></div>
+<div class="ap up" data-stock="飞龙股份" data-field="pct">+4.46%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">中天科技</span><span class="ab">62</span><span class="ar2">弹性标的</span></div>
+<div class="ap up" data-stock="中天科技" data-field="pct">+3.52%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">天孚通信</span><span class="ab">62</span><span class="ar2">高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升</span></div>
+<div class="ap" data-stock="天孚通信" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">中信证券</span><span class="ab">61</span><span class="ar2">受益于行业集中度提升和业务综合优势的头部券商</span></div>
+<div class="ap dn" data-stock="中信证券" data-field="pct">-1.15%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">国泰海通</span><span class="ab">61</span><span class="ar2">受益于行业集中度提升和业务综合优势的头部券商</span></div>
+<div class="ap dn" data-stock="国泰海通" data-field="pct">-0.99%</div>
+</div>
+</div>
+</div>
+<div class="fo">
+<div>⚡ 蓝宝书Max · 2026年6月23日 午间版 · 数据来源：Alpha派蓝宝书 · 行情：东方财富</div>
+<div class="fl">📊 热度指数=机构关注度+市场确认度+催化质量 · 📌 阶段判定：🔥📈➡️🌱<br>
+🟢 实时行情每3秒自动刷新 · ★ Alpha=催化质量+主题热度+产业地位+市场确认 · ⚠️ 仅供参考</div>
+</div>
+</div>
 <script>
-var SECID_MAP={{"云南锗业": "0.002428", "长飞光纤": "1.601869", "英维克": "0.002837", "德明利": "0.001309", "中芯国际": "1.688981", "海光信息": "1.688041", "高澜股份": "0.300499", "中信证券": "1.600030", "长川科技": "0.300604", "佰维存储": "1.688525", "兆易创新": "1.603986", "华峰测控": "1.688200", "江波龙": "0.301308", "申菱环境": "0.301018", "芯原股份": "1.688521", "金富科技": "0.003018", "国泰海通": "1.601211", "普冉股份": "1.688766", "华泰证券": "1.601688", "寒武纪": "1.688256", "中金公司": "1.601995", "招商证券": "1.600999", "金海通": "1.603061", "亨通光电": "1.600487", "飞龙股份": "0.002536", "中天科技": "1.600522", "源杰科技": "1.688498"}};
-var API_URL='https://push2.eastmoney.com/api/qt/ulist.np/get';
-(function(){
-  function F(){
-    var s=[...new Set(Object.values(SECID_MAP))],d=[];
-    for(var i=0;i<s.length;i+=50){
-      var u=API_URL+'?secids='+s.slice(i,i+50).join(',')+'&fields=f2,f3,f12,f14&_='+Date.now();
-      fetch(u).then(function(r){return r.json()}).then(function(j){
-        if(j.data&&j.data.diff)j.data.diff.forEach(function(x){
-          var v={p:(x.f3||0)/100};
-          document.querySelectorAll('[data-stock="'+x.f14+'"]').forEach(function(e){
-            var t=e.querySelector('[data-field]')||e;
-            var s=(v.p>=0?'+':'')+v.p.toFixed(2)+'%';
-            if(t.textContent.trim()!==s){t.textContent=s;t.className=(t.className.replace(/\bup\b|\bdown\b/g,'').trim()+' '+(v.p>=0?'up':'down'))}
-          });
-        });
-      }).catch(function(){})
+    // === REAL-TIME STOCK PRICE UPDATER ===
+    const SECID_MAP = {"英维克": "0.002837", "申菱环境": "0.301018", "高澜股份": "0.300499", "飞龙股份": "0.002536", "金富科技": "0.003018", "寒武纪": "1.688256", "海光信息": "1.688041", "中芯国际": "1.688981", "江波龙": "0.301308", "佰维存储": "1.688525", "德明利": "0.001309", "兆易创新": "1.603986", "普冉股份": "1.688766", "金海通": "1.603061", "长川科技": "0.300604", "华峰测控": "1.688200", "芯原股份": "1.688521", "长飞光纤": "1.601869", "亨通光电": "1.600487", "中天科技": "1.600522", "源杰科技": "1.688498", "云南锗业": "0.002428", "中信证券": "1.600030", "国泰海通": "1.601211", "华泰证券": "1.601688", "中金公司": "1.601995", "招商证券": "1.600999", "剑桥科技": "1.603083", "仕佳光子": "1.688313", "中际旭创": "0.300308", "新易盛": "0.300502"};
+    const API_URL = 'https://push2.eastmoney.com/api/qt/ulist.np/get';
+    const REFRESH_INTERVAL = 3000;
+
+    let lastPrices = {};
+    let updateCount = 0;
+
+    const allSecids = [...new Set(Object.values(SECID_MAP))];
+    console.log('[Live] Tracking ' + allSecids.length + ' stocks');
+
+    async function fetchPrices() {
+        const batchSize = 50;
+        const allData = [];
+        for (let i = 0; i < allSecids.length; i += batchSize) {
+            const batch = allSecids.slice(i, i + batchSize);
+            const url = API_URL + '?secids=' + batch.join(',') + '&fields=f2,f3,f12,f14&_=' + Date.now();
+            try {
+                const resp = await fetch(url);
+                const json = await resp.json();
+                if (json.data && json.data.diff) allData.push(...json.data.diff);
+            } catch(e) { console.warn('[Live] Batch fetch error:', e.message); }
+        }
+        return allData;
     }
-  }
-  setInterval(F,5000);F();
-})();
-</script>
-<script src="/bluebook-max/codes.js"></script>
-<script src="/bluebook-max/paywall.js"></script>
-</body>
-</html>
+
+    function updatePrices(data) {
+        const priceMap = {};
+        for (const item of data) {
+            priceMap[item.f14] = { price: item.f2 / 100, pct: item.f3 / 100 };
+        }
+
+        let changes = 0;
+        document.querySelectorAll('[data-stock]').forEach(el => {
+            const name = el.getAttribute('data-stock');
+            let field = el.getAttribute('data-field');
+            const d = priceMap[name];
+            if (!d) return;
+
+            let target = el;
+            if (!field) {
+                const child = el.querySelector('[data-field]');
+                if (child) { target = child; field = child.getAttribute('data-field'); }
+                else return;
+            }
+
+            const newPct = d.pct;
+            const oldPct = lastPrices[name];
+
+            if (field === 'pct') {
+                const pctStr = (newPct >= 0 ? '+' : '') + newPct.toFixed(2) + '%';
+                if (target.textContent.trim() !== pctStr) {
+                    target.textContent = pctStr;
+                    target.className = target.className.replace(/\bup\b|\bdn\b/g, '').trim()
+                        + ' ' + (newPct >= 0 ? 'up' : 'dn');
+
+                    if (oldPct !== undefined && oldPct !== newPct) {
+                        const row = target.closest('.tsr, .asc');
+                        if (row) {
+                            row.style.transition = 'background 0.15s';
+                            row.style.background = newPct > oldPct ? '#C4433A18' : '#3D482618';
+                            setTimeout(() => { row.style.background = ''; }, 900);
+                        }
+                        changes++;
+                    }
+                }
+            }
+            lastPrices[name] = newPct;
+        });
+
+        if (changes > 0) {
+            let up = 0, down = 0;
+            for (const [, pct] of Object.entries(lastPrices)) {
+                if (pct > 0) up++;
+                else if (pct < 0) down++;
+            }
+            const udEl = document.getElementById('up-down');
+            if (udEl) udEl.textContent = up + '涨' + down + '跌';
+        }
+
+        updateCount++;
+        const liveText = document.getElementById('live-text');
+        if (liveText) {
+            liveText.textContent = '实时 · ' + new Date().toLocaleTimeString('zh-CN',
+                {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+        }
+        return changes;
+    }
+
+    async function refreshLoop() {
+        try {
+            const data = await fetchPrices();
+            updatePrices(data);
+        } catch(e) { console.warn('[Live] Refresh error:', e.message); }
+        setTimeout(refreshLoop, REFRESH_INTERVAL);
+    }
+
+    refreshLoop();
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('hib')) {
+            document.querySelectorAll('.hp').forEach(function(p) { p.style.display = 'none'; });
+        }
+    });
+    </script>
+</body></html>
