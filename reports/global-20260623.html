@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-paywall="true">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝宝书Max · 2026年06月23日 全球版</title>
+<style>/* ===== 蓝宝书Max · Apple Design System ===== */
+:root {
+  /* 色彩 */
+  --bg: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-secondary: #FAFAFA;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --text-tertiary: #AEAEB2;
+  --border: #E5E5EA;
+  --border-light: #F2F2F7;
+  --separator: #E5E5EA;
+
+  /* 语义色 */
+  --up: #FF3B30;
+  --up-bg: #FFF0EF;
+  --down: #34C759;
+  --down-bg: #EEFFF2;
+  --accent: #0071E3;
+  --accent-light: #E8F2FD;
+  --warning: #FF9500;
+  --warning-light: #FFF5E7;
+  --success: #34C759;
+  --gold: #FF9500;
+
+  /* 状态色 */
+  --state-main: #FF3B30;
+  --state-strong: #FF9500;
+  --state-cont: #0071E3;
+  --state-hatch: #AF52DE;
+
+  /* 排版 */
+  --font: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* 间距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.08);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,.12);
+
+  /* 动画 */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Typography ===== */
+h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
+h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; }
+h3 { font-size: 20px; font-weight: 600; }
+h4 { font-size: 16px; font-weight: 600; }
+
+.text-mono { font-family: var(--font-mono); }
+.text-xs { font-size: 11px; }
+.text-sm { font-size: 13px; }
+.text-base { font-size: 15px; }
+.text-lg { font-size: 17px; }
+.text-xl { font-size: 20px; }
+.text-2xl { font-size: 24px; }
+
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 20px; border: none;
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all var(--duration-fast) var(--ease-out);
+  text-decoration: none; white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+}
+.btn-primary:hover { background: #0077ED; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary {
+  background: var(--surface-secondary); color: var(--text-primary);
+}
+.btn-secondary:hover { background: #EFEFF2; }
+.btn-ghost {
+  background: transparent; color: var(--accent);
+}
+.btn-ghost:hover { background: var(--accent-light); }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-glass {
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(0,0,0,.04);
+}
+
+/* ===== Tags / Badges ===== */
+.badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; line-height: 1.6;
+}
+.badge-up { background: var(--up-bg); color: var(--up); }
+.badge-down { background: var(--down-bg); color: var(--down); }
+.badge-accent { background: var(--accent-light); color: var(--accent); }
+.badge-warning { background: var(--warning-light); color: var(--warning); }
+.badge-neutral { background: #F5F5F7; color: var(--text-secondary); }
+
+.state-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 11px; font-weight: 600;
+}
+.state-main { background: #FFF0EF; color: var(--state-main); }
+.state-strong { background: #FFF5E7; color: var(--state-strong); }
+.state-cont { background: #E8F2FD; color: var(--state-cont); }
+.state-hatch { background: #F5EEFF; color: var(--state-hatch); }
+
+/* ===== Dividers ===== */
+.divider {
+  height: 1px; background: var(--separator);
+  margin: var(--space-lg) 0;
+}
+.divider-light {
+  height: 1px; background: var(--border-light);
+}
+
+/* ===== Layout ===== */
+.container {
+  max-width: 720px; margin: 0 auto; padding: 0 var(--space-md);
+}
+.container-wide {
+  max-width: 960px; margin: 0 auto; padding: 0 var(--space-md);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fadeIn var(--duration-normal) var(--ease-out) both; }
+
+/* ===== Chain (产业链) ===== */
+.chain-container {
+  display: flex; gap: var(--space-sm); align-items: stretch;
+  padding: var(--space-md); background: var(--surface-secondary);
+  border-radius: var(--radius-md); overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.chain-link {
+  flex: 1; min-width: 140px;
+  background: var(--surface); border-radius: var(--radius-sm);
+  padding: var(--space-md); position: relative;
+  border: 1px solid var(--border);
+}
+.chain-link::after {
+  content: '→'; position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%); color: var(--text-tertiary);
+  font-size: 14px; font-weight: 300;
+}
+.chain-link:last-child::after { display: none; }
+.chain-label {
+  font-size: 11px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+}
+.chain-stocks {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.chain-stock {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; padding: 3px 0;
+}
+.chain-stock-name { font-weight: 600; }
+.chain-stock-code { font-size: 10px; color: var(--text-tertiary); }
+.chain-stock-catalyst {
+  font-size: 10px; color: var(--up); background: var(--up-bg);
+  padding: 1px 6px; border-radius: 100px; margin-left: auto;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
+
+/* ===== Mobile ===== */
+@media (max-width: 640px) {
+  .container, .container-wide { padding: 0 var(--space-sm); }
+  h1 { font-size: 32px; }
+  h2 { font-size: 22px; }
+  .chain-container { flex-direction: column; }
+  .chain-link::after {
+    content: '↓'; right: 50%; top: auto; bottom: -16px;
+    transform: translateX(50%);
+  }
+}
+
+
+/* ===== 报告专用样式 v4 ===== */
+:root{
+  --rp-bg:#F5F5F7;--rp-card:#FFFFFF;--rp-text:#1D1D1F;--rp-sub:#86868B;
+  --rp-accent:#0071E3;--rp-up:#E74C3C;--rp-down:#27AE60;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--rp-bg);color:var(--rp-text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* ---- 报告头（Hero风格） ---- */
+.rp-hero{
+  background:#fff;padding:36px 24px 28px;text-align:center;
+  border-bottom:1px solid #E5E5EA;margin-bottom:20px;
+}
+.rp-hero .rp-edition{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:100px;font-size:12px;font-weight:700;margin-bottom:14px;
+}
+.rp-hero .rp-edition.am{background:#FFF5E7;color:#FF9500}
+.rp-hero .rp-edition.md{background:#FFF0E0;color:#E8870A}
+.rp-hero .rp-edition.pm{background:#EEF0FF;color:#5E5CE6}
+.rp-hero .rp-date{
+  font-size:clamp(24px,5vw,32px);font-weight:800;letter-spacing:-.5px;margin-bottom:4px;
+}
+.rp-hero .rp-subtitle{
+  font-size:13px;color:var(--rp-sub);
+}
+.rp-hero .rp-stats{
+  display:flex;justify-content:center;gap:24px;margin-top:16px;flex-wrap:wrap;
+}
+.rp-hero .rp-stat{text-align:center}
+.rp-hero .rp-stat .n{font-size:20px;font-weight:700}
+.rp-hero .rp-stat .l{font-size:11px;color:var(--rp-sub)}
+.rp-hero .rp-back{
+  display:inline-block;margin-bottom:12px;font-size:12px;color:var(--rp-accent);
+  text-decoration:none;transition:opacity .15s;
+}
+.rp-hero .rp-back:hover{opacity:.7}
+
+/* ---- 容器 ---- */
+.rp-container{max-width:900px;margin:0 auto;padding:0 16px 60px}
+
+/* ---- 情绪摘要 ---- */
+.rp-sentiment{
+  background:linear-gradient(135deg,#FFF9F0,#FFF0E0);
+  border:1px solid #FFE8CC;border-radius:14px;padding:20px 22px;margin-bottom:20px;
+}
+.rp-sentiment h3{color:#C47A00;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.rp-sentiment .one-liner{font-size:15px;font-weight:700;color:#1D1D1F;line-height:1.6}
+.rp-sentiment .signal-tag{
+  display:inline-block;margin-top:8px;padding:3px 10px;border-radius:100px;
+  font-size:11px;font-weight:600;
+}
+.signal-bullish{background:#FFF0F0;color:#E74C3C}
+.signal-bearish{background:#F0FFF0;color:#27AE60}
+.signal-neutral{background:#F0F0FF;color:#5E5CE6}
+
+/* ---- 主题卡片 ---- */
+.t-card{
+  background:#fff;border-radius:14px;padding:22px 20px;margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);transition:all .15s;
+  border:1px solid #F2F2F7;
+}
+.t-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.t-card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.t-card .heat-score{
+  font-size:26px;font-weight:800;min-width:40px;line-height:1;text-align:center;
+}
+.t-card .heat-label{font-size:9px;color:var(--rp-sub);text-align:center;margin-top:2px}
+.t-card .t-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.t-card .t-rank{
+  font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;padding:2px 6px;border-radius:4px;
+}
+.t-card .t-title{font-size:17px;font-weight:700;letter-spacing:-.3px;flex:1}
+.t-card .t-state{
+  font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;
+}
+.state-main{background:#FFF0EF;color:#E74C3C}
+.state-strong{background:#FFF5E7;color:#E8870A}
+.state-cont{background:#E8F2FD;color:#0071E3}
+.state-hatch{background:#F5EEFF;color:#AF52DE}
+.t-card .t-summary{font-size:13px;color:var(--rp-sub);line-height:1.5;margin-bottom:0}
+.t-card .t-quote{
+  font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:8px;
+  line-height:1.6;border-left:3px solid #D4C8BC;margin-top:10px;
+}
+
+/* ---- 产业链 ---- */
+.chain-bar{
+  display:flex;gap:6px;align-items:stretch;margin:14px 0;flex-wrap:wrap;
+}
+.chain-node{
+  flex:1;min-width:140px;background:#F9F9FB;border-radius:10px;
+  padding:12px 14px;border:1px solid #EEEEF2;
+}
+.chain-node .cn-label{font-size:11px;font-weight:600;color:#86868B;margin-bottom:6px}
+.chain-stock{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px}
+.chain-stock .cs-name{font-weight:600}
+.chain-stock .cs-code{font-size:10px;color:#AEAEB2}
+.chain-stock .cs-catalyst{font-size:10px;color:var(--rp-accent);margin-left:auto}
+.chain-driver{
+  font-size:11px;font-weight:600;color:var(--rp-sub);margin-top:6px;text-align:center;
+}
+
+/* ---- 标的分层 ---- */
+.t-tier{margin-top:12px}
+.t-tier-label{
+  font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;
+  display:inline-block;margin-bottom:4px;
+}
+.t-tier-label.l1{background:#FFF0EF;color:#E74C3C}
+.t-tier-label.l2{background:#FFF5E7;color:#E8870A}
+.t-tier-label.l3{background:#E8F2FD;color:#0071E3}
+.ts-row{
+  display:flex;align-items:center;gap:8px;padding:4px 0;
+  border-bottom:1px solid #F5F5F7;font-size:13px;
+}
+.ts-row:last-child{border-bottom:none}
+.ts-name{font-weight:700;min-width:56px}
+.ts-code{font-size:11px;color:var(--rp-sub)}
+.ts-chg{font-weight:700;min-width:56px;text-align:right}
+.ts-chg.up{color:var(--rp-up)}
+.ts-chg.down{color:var(--rp-down)}
+.ts-reason{font-size:11px;color:var(--rp-sub);flex:1;text-align:right}
+
+/* ---- 情绪标的 ---- */
+.rp-sentiment-pick{
+  background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:12px;
+  padding:14px 16px;margin-top:12px;
+}
+.rp-sentiment-pick .sp-header{font-size:12px;font-weight:700;color:#C47A00;margin-bottom:8px}
+.rp-sentiment-pick .sp-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px}
+.rp-sentiment-pick .sp-name{font-weight:700}
+.rp-sentiment-pick .sp-chg{font-weight:600}
+.rp-sentiment-pick .sp-reason{font-size:11px;color:var(--rp-sub);margin-left:auto}
+
+/* ---- 板块标题 ---- */
+.rp-section-title{
+  font-size:18px;font-weight:700;margin:28px 0 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.rp-section-title .count{font-size:13px;font-weight:400;color:var(--rp-sub)}
+
+/* ---- 机会前瞻 ---- */
+.opp-card{
+  background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;
+  border:1px solid #F2F2F7;border-left:3px solid #AF52DE;
+}
+.opp-card .opp-tag{
+  font-size:11px;font-weight:600;color:#AF52DE;background:#F5EEFF;
+  padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:6px;
+}
+.opp-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.opp-card p{font-size:13px;color:var(--rp-sub);line-height:1.5}
+
+/* ---- Alpha精选 ---- */
+.alpha-row{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:#fff;border-radius:10px;margin-bottom:4px;
+  border:1px solid #F2F2F7;transition:all .15s;
+}
+.alpha-row:hover{border-color:var(--rp-accent);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.alpha-row .ar-star{font-size:14px;color:#FFB800}
+.alpha-row .ar-name{font-weight:700;font-size:14px}
+.alpha-row .ar-code{font-size:11px;color:var(--rp-sub)}
+.alpha-row .ar-score{
+  font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;
+  padding:2px 6px;border-radius:3px;line-height:1;
+}
+.alpha-row .ar-reason{font-size:12px;color:var(--rp-sub);flex:1}
+.alpha-row .ar-chg{font-weight:600;font-size:13px}
+.alpha-row .ar-chg.up{color:var(--rp-up)}
+.alpha-row .ar-chg.down{color:var(--rp-down)}
+
+/* ---- Footer ---- */
+.rp-footer{
+  text-align:center;padding:32px 0;margin-top:32px;
+  border-top:1px solid #E5E5EA;color:var(--rp-sub);font-size:11px;line-height:1.8;
+}
+
+/* ---- 响应式 ---- */
+@media(max-width:640px){
+  .rp-hero{padding:24px 14px 20px}
+  .rp-hero .rp-date{font-size:22px}
+  .rp-hero .rp-stats{gap:14px}
+  .t-card-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .t-card .heat-score{font-size:22px;min-width:auto;display:flex;align-items:center;gap:6px}
+  .t-card .heat-label{margin-top:0;display:inline}
+  .chain-bar{flex-direction:column}
+  .ts-row{flex-wrap:wrap;font-size:12px}
+  .ts-reason{flex:auto;width:100%;text-align:left;padding-left:64px}
+  .alpha-row{flex-wrap:wrap;gap:6px}
+  .alpha-row .ar-reason{flex:auto;width:100%}
+  .rp-sentiment{padding:16px}
+  .rp-sentiment .one-liner{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div id="paywall-container"></div>
+<div class="rp-container">
+
+  <!-- ===== 报告头（Hero） ===== -->
+  <div class="rp-hero">
+    <a class="rp-back" href="/bluebook-max/">‹ 返回导航页</a>
+    <div class="rp-edition global">🌍 全球版</div>
+    <div class="rp-date">2026年06月23日</div>
+    <div class="rp-subtitle">每日8:00更新</div>
+    <div class="rp-stats">
+      <div class="rp-stat"><div class="n">24</div><div class="l">热点主题</div></div>
+      <div class="rp-stat"><div class="n">0</div><div class="l">相关标的</div></div>
+      <div class="rp-stat"><div class="n">12</div><div class="l">机会前瞻</div></div>
+    </div>
+  </div>
+
+  <!-- ===== 市场情绪速览 ===== -->
+  <div class="rp-sentiment">
+    <h3>📋 市场情绪速览</h3>
+    <div class="one-liner">全球市场：市场整体、美国授权伊朗临时出口原油、SpaceX(SPCX)领涨，AI算力与存储板块持续走强</div>
+    <span class="signal-tag signal-neutral">积极看多</span>
+  </div>
+
+  <!-- ===== 热点主题 ===== -->
+  <div class="rp-section-title">🔥 热点主题 <span class="count">24个</span></div>
+  
+        <div class="card t-card animate-in" style="animation-delay:0.0s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">100</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP1</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">市场整体</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 隔夜市场整体表现分化，纳斯达克100指数(QQQ)收跌25个基点，而半导体板块在存储和设备股的带动下逆市大涨2%。市场的主要压力来自于大型科技股的普遍回调，其中Google(GOOGL)和Amazon(AMZN)跌幅达5%，Microsof
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "隔夜市场整体表现分化，纳斯达克100指数(QQQ)收跌25个基点，而半导体板块在存储和设备股的带动下逆市大涨2%。市场的主要压力来自于大型科技股的普遍回调，其中Google(GOOGL)和Amazon(AMZN)跌幅达5%，Microsoft(MSFT)下跌3%，Meta(META)下跌超2%。大型科技股的疲软主要归因于投资者对自由现金流(FCF)、投资回报率(ROI)及潜在股权融资的担忧，同时市"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 DDR5涨288%→全链景气
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·晶圆</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">存储代工</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片设计</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">兆易创新</span>
+              <span class="chain-stock-code">603986</span>
+              <span class="chain-stock-catalyst">NOR Flash龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">普冉股份</span>
+              <span class="chain-stock-code">688766</span>
+              <span class="chain-stock-catalyst">利基存储</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·模组/分销</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">江波龙</span>
+              <span class="chain-stock-code">301308</span>
+              <span class="chain-stock-catalyst">模组龙头+涨价弹性</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">佰维存储</span>
+              <span class="chain-stock-code">688525</span>
+              <span class="chain-stock-catalyst">企业级存储</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">香农芯创</span>
+              <span class="chain-stock-code">300475</span>
+              <span class="chain-stock-catalyst">HBM代理</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="大型科技股的普遍回调">
+          <span class="ts-name">大型科技股的普遍回调</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="5%">
+          <span class="ts-name">5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="3%">
+          <span class="ts-name">3%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+        <div class="ts-row" data-stock="2%">
+          <span class="ts-name">2%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">大型科技股的普遍回调</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">3%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.05s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP2</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">SpaceX(SPCX)重挫16%，轨道计算可行性遭质疑</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 SpaceX(SPCX)股价大跌16%，Keybanc以中性评级覆盖该股。同时，有研究报告对轨道计算的商业化可行性提出质疑，指出其在热管理、电力输送和资产寿命经济性方面面临重大工程瓶颈，导致市场情绪降温。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "SpaceX(SPCX)股价大跌16%，Keybanc以中性评级覆盖该股。同时，有研究报告对轨道计算的商业化可行性提出质疑，指出其在热管理、电力输送和资产寿命经济性方面面临重大工程瓶颈，导致市场情绪降温。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="16%">
+          <span class="ts-name">16%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">16%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.1s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP3</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">存储芯片走强，美光(MU)在财报前上涨7%</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 在财报发布前，存储芯片股表现强劲，美光(MU)上涨7%，SanDisk(SNDK)上涨4%。Jefferies的最新渠道调查显示，DRAM价格在Q3和Q4的涨幅预期（分别为30%和40%）高于市场共识。此外，美光宣布与Anthropic达成
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "在财报发布前，存储芯片股表现强劲，美光(MU)上涨7%，SanDisk(SNDK)上涨4%。Jefferies的最新渠道调查显示，DRAM价格在Q3和Q4的涨幅预期（分别为30%和40%）高于市场共识。此外，美光宣布与Anthropic达成战略协议，涵盖AI架构设计、供需联动及对Anthropic的战略投资。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 DDR5涨288%→全链景气
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·晶圆</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">存储代工</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片设计</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">兆易创新</span>
+              <span class="chain-stock-code">603986</span>
+              <span class="chain-stock-catalyst">NOR Flash龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">普冉股份</span>
+              <span class="chain-stock-code">688766</span>
+              <span class="chain-stock-catalyst">利基存储</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·模组/分销</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">江波龙</span>
+              <span class="chain-stock-code">301308</span>
+              <span class="chain-stock-catalyst">模组龙头+涨价弹性</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">佰维存储</span>
+              <span class="chain-stock-code">688525</span>
+              <span class="chain-stock-catalyst">企业级存储</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">香农芯创</span>
+              <span class="chain-stock-code">300475</span>
+              <span class="chain-stock-catalyst">HBM代理</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="7%">
+          <span class="ts-name">7%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="4%">
+          <span class="ts-name">4%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">7%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">4%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.15000000000000002s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP4</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">英特尔(INTC)上涨5%，EMIB-T技术获市场关注</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 英特尔(INTC)股价上涨5%，主要驱动因素包括Mizuho看好其EMIB-T技术作为CoWoS-L替代方案的潜力，以及Jeff Pu指出公司通过14A制程和EMIB-T封装技术获得了未来SpaceX数据中心ASIC的订单。公司高管在访谈中
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "英特尔(INTC)股价上涨5%，主要驱动因素包括Mizuho看好其EMIB-T技术作为CoWoS-L替代方案的潜力，以及Jeff Pu指出公司通过14A制程和EMIB-T封装技术获得了未来SpaceX数据中心ASIC的订单。公司高管在访谈中表达了对2030-2032年基本面改善的信心，并强调了CPU在AI Agent和推理场景中的需求回升。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="5%">
+          <span class="ts-name">5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.2s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP5</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">Getty Images(GETY)暴涨90%，与OpenAI达成内容授权协议</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 Getty Images(GETY)宣布与OpenAI达成内容授权协议，其图片库将接入ChatGPT的搜索功能。受此消息提振，公司股价一度飙升145%，最终收涨90%。市场认为，此举标志着公司从抵制AI转向与AI平台合作，缓解了其商业模式被
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "Getty Images(GETY)宣布与OpenAI达成内容授权协议，其图片库将接入ChatGPT的搜索功能。受此消息提振，公司股价一度飙升145%，最终收涨90%。市场认为，此举标志着公司从抵制AI转向与AI平台合作，缓解了其商业模式被替代的担忧。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="90%">
+          <span class="ts-name">90%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">90%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.25s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP6</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">光学板块集体走强，Coherent(COHR)领涨</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 在多份积极的卖方报告和管理层会议纪要提振下，光学板块集体上涨，Coherent(COHR)上涨9%，Lumentum(LITE)上涨5%，Ciena(CIEN)和Corning(GLW)均上涨7.5%。JPM认为Coherent的毛利率、收
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "在多份积极的卖方报告和管理层会议纪要提振下，光学板块集体上涨，Coherent(COHR)上涨9%，Lumentum(LITE)上涨5%，Ciena(CIEN)和Corning(GLW)均上涨7.5%。JPM认为Coherent的毛利率、收发器需求和定价环境健康；Cowen则指出Lumentum的CPO和NPO需求正在加速。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="9%">
+          <span class="ts-name">9%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="5%">
+          <span class="ts-name">5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="7.5%">
+          <span class="ts-name">7.5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">9%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">7.5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.30000000000000004s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP7</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">半导体设备股再创新高，LRCX(+5%)、AMAT(+4%)走强</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 半导体设备龙头延续强势，Lam Research(LRCX)上涨5%，Applied Materials(AMAT)上涨4%，股价双双创下历史新高，反映了市场对半导体资本支出周期的乐观预期。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "半导体设备龙头延续强势，Lam Research(LRCX)上涨5%，Applied Materials(AMAT)上涨4%，股价双双创下历史新高，反映了市场对半导体资本支出周期的乐观预期。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="5%">
+          <span class="ts-name">5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="4%">
+          <span class="ts-name">4%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">4%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.35000000000000003s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP8</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">奈飞(NFLX)下跌6%，机构数据预警用户增长放缓</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 奈飞(NFLX)股价下跌6%，触及52周新低。M Science发布报告称，跟踪数据显示本季度的全球净增用户数可能为2022年以来最弱，主要由于美国市场用户流失率回升和观看时长受压，其模型预测数据比市场共识低近300万。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "奈飞(NFLX)股价下跌6%，触及52周新低。M Science发布报告称，跟踪数据显示本季度的全球净增用户数可能为2022年以来最弱，主要由于美国市场用户流失率回升和观看时长受压，其模型预测数据比市场共识低近300万。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="6%">
+          <span class="ts-name">6%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">6%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.4s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">70</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP9</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">模拟芯片普遍走强，安森美(ON)大涨8%</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 模拟芯片板块整体表现强劲，安森美半导体(ON)大涨8%，德州仪器(TXN)、ADI、意法半导体(STM)、恩智浦(NXPI)等也录得2-4%​的涨幅。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "模拟芯片板块整体表现强劲，安森美半导体(ON)大涨8%，德州仪器(TXN)、ADI、意法半导体(STM)、恩智浦(NXPI)等也录得2-4%​的涨幅。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 AI服务器功耗提升→模拟芯片爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·晶圆</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">华虹公司</span>
+              <span class="chain-stock-code">688347</span>
+              <span class="chain-stock-catalyst">模拟芯片代工</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片设计</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">圣邦股份</span>
+              <span class="chain-stock-code">300661</span>
+              <span class="chain-stock-catalyst">平台型模拟龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">思瑞浦</span>
+              <span class="chain-stock-code">688536</span>
+              <span class="chain-stock-catalyst">信号链龙头</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">纳芯微</span>
+              <span class="chain-stock-code">688052</span>
+              <span class="chain-stock-catalyst">隔离+驱动芯片</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·专用芯片</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">杰华特</span>
+              <span class="chain-stock-code">688141</span>
+              <span class="chain-stock-catalyst">DrMOS国产替代</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">南芯科技</span>
+              <span class="chain-stock-code">688484</span>
+              <span class="chain-stock-catalyst">电荷泵快充</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="8%">
+          <span class="ts-name">8%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="2-4%​">
+          <span class="ts-name">2-4%​</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">8%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">2-4%​</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.45s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">70</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP10</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">维谛技术(VRT)上涨8%，受益于轨道计算叙事降温</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 作为地面数据中心散热解决方案的领导者，维谛技术(VRT)被市场视为轨道计算叙事的主要受损方之一。随着市场对轨道计算可行性的担忧加剧，公司股价受益上涨8%。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "作为地面数据中心散热解决方案的领导者，维谛技术(VRT)被市场视为轨道计算叙事的主要受损方之一。随着市场对轨道计算可行性的担忧加剧，公司股价受益上涨8%。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 英伟达Rubin全面液冷
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·冷板/管路</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">强瑞技术</span>
+              <span class="chain-stock-code">301128</span>
+              <span class="chain-stock-catalyst">Rubin液冷歧管</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">飞龙股份</span>
+              <span class="chain-stock-code">002536</span>
+              <span class="chain-stock-catalyst">电子水泵</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·CDU</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">裕同科技</span>
+              <span class="chain-stock-code">002831</span>
+              <span class="chain-stock-catalyst">MIM液冷结构件</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·数据中心</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">科华数据</span>
+              <span class="chain-stock-code">002335</span>
+              <span class="chain-stock-catalyst">数据中心电源</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">金盘科技</span>
+              <span class="chain-stock-code">688676</span>
+              <span class="chain-stock-catalyst">变压器+SST</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="8%">
+          <span class="ts-name">8%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">8%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.5s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">70</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP11</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">软件板块普遍疲软，Palantir(PLTR)领跌</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 软件板块整体表现疲软，Palantir(PLTR)下跌7%，MongoDB(MDB)下跌4%，Oracle(ORCL)下跌5%。包括SAP、Intuit(INTU)、Workday(WDAY)在内的多只应用软件股股价触及新低。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "软件板块整体表现疲软，Palantir(PLTR)下跌7%，MongoDB(MDB)下跌4%，Oracle(ORCL)下跌5%。包括SAP、Intuit(INTU)、Workday(WDAY)在内的多只应用软件股股价触及新低。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="7%">
+          <span class="ts-name">7%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="4%">
+          <span class="ts-name">4%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="5%">
+          <span class="ts-name">5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">7%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">4%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.55s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">60</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP12</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">博通(AVGO)下跌4.5%，受谷歌TPU合作传闻影响</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 博通(AVGO)股价下跌4.5%，市场传闻称Google(GOOGL)正与联发科就TPU V9芯片进行更紧密的合作，引发了投资者对博通未来AI芯片业务的担忧。
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "博通(AVGO)股价下跌4.5%，市场传闻称Google(GOOGL)正与联发科就TPU V9芯片进行更紧密的合作，引发了投资者对博通未来AI芯片业务的担忧。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 国产芯片涨价+订单爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·设计/IP</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">芯原股份</span>
+              <span class="chain-stock-code">688521</span>
+              <span class="chain-stock-catalyst">ASIC设计服务</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">寒武纪</span>
+              <span class="chain-stock-code">688256</span>
+              <span class="chain-stock-catalyst">AI芯片龙头+涨价</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">海光信息</span>
+              <span class="chain-stock-code">688041</span>
+              <span class="chain-stock-catalyst">DCU国产替代</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·制造/应用</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">晶圆代工</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">华虹公司</span>
+              <span class="chain-stock-code">688347</span>
+              <span class="chain-stock-catalyst">特色工艺代工</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="4.5%">
+          <span class="ts-name">4.5%</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">4.5%</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.6000000000000001s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">100</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP13</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">美国授权伊朗临时出口原油，作为和平协议一部分</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 美国政府发布了一项为期60天的通用许可证，授权伊朗在全球市场（包括美国）销售原油和石油产品，以推动与伊朗的和平谈判。此举被视为美方重大政策转向，旨在通过提供经济利益换取伊朗在核问题及地区安全上的合作，市场预期此举将缓解全球原油供应紧张局面，
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "美国政府发布了一项为期60天的通用许可证，授权伊朗在全球市场（包括美国）销售原油和石油产品，以推动与伊朗的和平谈判。此举被视为美方重大政策转向，旨在通过提供经济利益换取伊朗在核问题及地区安全上的合作，市场预期此举将缓解全球原油供应紧张局面，导致油价应声下跌。美股关注：美国航空(AAL)、联合航空(UAL) (航油成本下降直接利好航空公司利润)，雪佛龙(CVX)、埃克森美孚(XOM) (油价波动直接"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="美国航空(AAL)">
+          <span class="ts-name">美国航空(AAL)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="联合航空(UAL)">
+          <span class="ts-name">联合航空(UAL)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="雪佛龙(CVX)">
+          <span class="ts-name">雪佛龙(CVX)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+        <div class="ts-row" data-stock="埃克森美孚(XOM)">
+          <span class="ts-name">埃克森美孚(XOM)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">美国航空(AAL)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">联合航空(UAL)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">雪佛龙(CVX)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.65s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP14</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">SpaceX启动200亿美元债券发行，为AI扩张提供资金</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 SpaceX首次进入投资级债券市场，计划发行至少200亿美元的债券，为其在人工智能领域的扩张提供资金。此次发债在公司创纪录的IPO后进行，旨在利用其充裕的现金储备和获得的BBB级信用评级，通过债务市场而非股权为长期扩张提供支持，凸显了AI基
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "SpaceX首次进入投资级债券市场，计划发行至少200亿美元的债券，为其在人工智能领域的扩张提供资金。此次发债在公司创纪录的IPO后进行，旨在利用其充裕的现金储备和获得的BBB级信用评级，通过债务市场而非股权为长期扩张提供支持，凸显了AI基础设施投入的巨大资本需求。美股关注：Nvidia(NVDA) (作为算力硬件核心供应商将受益于其扩容)，Vertiv(VRT)、Eaton(ETN) (数据中心"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="Nvidia(NVDA)">
+          <span class="ts-name">Nvidia(NVDA)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="Vertiv(VRT)">
+          <span class="ts-name">Vertiv(VRT)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="Eaton(ETN)">
+          <span class="ts-name">Eaton(ETN)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Nvidia(NVDA)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Vertiv(VRT)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Eaton(ETN)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.7000000000000001s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">90</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP15</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">英国首相斯塔默宣布辞职，伯纳姆有望接任首相</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 因民调支持率持续低迷及党内压力，英国首相基尔·斯塔默宣布辞职，大曼彻斯特市长安迪·伯纳姆成为最热门的继任者。由于主要竞争对手公开支持，市场普遍预期此次权力交接将平稳进行，英镑和英国国债在该消息后均出现上涨，反映出市场对政治不确定性暂时消除的
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "因民调支持率持续低迷及党内压力，英国首相基尔·斯塔默宣布辞职，大曼彻斯特市长安迪·伯纳姆成为最热门的继任者。由于主要竞争对手公开支持，市场普遍预期此次权力交接将平稳进行，英镑和英国国债在该消息后均出现上涨，反映出市场对政治不确定性暂时消除的积极反应。"</div>
+            </div>
+          </div>
+
+          
+          
+          
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.75s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP16</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">Meta向印度Cred投资9亿美元，其创始人将执掌WhatsApp</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 Meta Platforms宣布向印度金融科技初创公司Cred投资9亿美元，获得约20%的股份。作为交易的一部分，Cred创始人Kunal Shah将加入Meta，接任WhatsApp新负责人，此举旨在利用其在印度市场的成功经验，加速Wha
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "Meta Platforms宣布向印度金融科技初创公司Cred投资9亿美元，获得约20%的股份。作为交易的一部分，Cred创始人Kunal Shah将加入Meta，接任WhatsApp新负责人，此举旨在利用其在印度市场的成功经验，加速WhatsApp的商业化进程和AI功能整合。美股关注：Meta Platforms(META) (该战略投资和人事任命旨在解锁WhatsApp的巨大商业潜力)。"</div>
+            </div>
+          </div>
+
+          
+          
+          
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.8s;border-left:3px solid var(--up)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--up);min-width:40px;line-height:1">80</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP17</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">艾伯维(AbbVie)以109亿美元收购Apogee以加强免疫学管线</span>
+                <span class="state-badge state-main">🔥主升</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 艾伯维(AbbVie)宣布将以10.9亿美元的总价收购Apogee Therapeutics，这是其五年来最大规模的收购。此次交易旨在获取Apogee在研的针对特应性皮炎和哮喘等炎症性疾病的治疗方案，以加强艾伯维在免疫学领域的后期产品管线，
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "艾伯维(AbbVie)宣布将以10.9亿美元的总价收购Apogee Therapeutics，这是其五年来最大规模的收购。此次交易旨在获取Apogee在研的针对特应性皮炎和哮喘等炎症性疾病的治疗方案，以加强艾伯维在免疫学领域的后期产品管线，应对未来核心产品专利到期的挑战。美股关注：AbbVie(ABBV) (通过收购补充其后期产品线，增强长期增长潜力)。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="AbbVie(ABBV)">
+          <span class="ts-name">AbbVie(ABBV)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">AbbVie(ABBV)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.8500000000000001s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">70</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP18</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">高通(Qualcomm)或以40亿美元收购AI芯片初创公司Modular</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 高通(Qualcomm)正就以约40亿美元的价格收购AI芯片初创公司Modular Inc.进行深入谈判。此次收购若达成，将显著增强高通在AI芯片市场的产品组合和技术实力，以更好地与行业领导者英伟达(Nvidia)展开竞争，尤其是在快速增长
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "高通(Qualcomm)正就以约40亿美元的价格收购AI芯片初创公司Modular Inc.进行深入谈判。此次收购若达成，将显著增强高通在AI芯片市场的产品组合和技术实力，以更好地与行业领导者英伟达(Nvidia)展开竞争，尤其是在快速增长的AI推理芯片领域。美股关注：Qualcomm(QCOM) (收购将加速其在AI芯片市场的战略布局)。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 国产芯片涨价+订单爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·设计/IP</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">芯原股份</span>
+              <span class="chain-stock-code">688521</span>
+              <span class="chain-stock-catalyst">ASIC设计服务</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">寒武纪</span>
+              <span class="chain-stock-code">688256</span>
+              <span class="chain-stock-catalyst">AI芯片龙头+涨价</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">海光信息</span>
+              <span class="chain-stock-code">688041</span>
+              <span class="chain-stock-catalyst">DCU国产替代</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·制造/应用</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">晶圆代工</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">华虹公司</span>
+              <span class="chain-stock-code">688347</span>
+              <span class="chain-stock-catalyst">特色工艺代工</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="40亿美元">
+          <span class="ts-name">40亿美元</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">40亿美元</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.9s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">60</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP19</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">Robinhood拟发行20亿美元可转债，部分用于股票回购</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 金融科技公司Robinhood宣布计划通过发行20亿美元于2029年到期的可转换债券进行融资。公司计划将所得款项中的约3.2亿美元用于回购公司股票，其余资金主要用于支付对冲交易成本以限制未来股权稀释，此举旨在优化资本结构并向市场传递信心。美
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "金融科技公司Robinhood宣布计划通过发行20亿美元于2029年到期的可转换债券进行融资。公司计划将所得款项中的约3.2亿美元用于回购公司股票，其余资金主要用于支付对冲交易成本以限制未来股权稀释，此举旨在优化资本结构并向市场传递信心。美股关注：Robinhood(HOOD) (发债回购是常见的资本运作方式，可能对股价有短期提振)。"</div>
+            </div>
+          </div>
+
+          
+          
+          
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:0.9500000000000001s;border-left:3px solid var(--warning)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--warning);min-width:40px;line-height:1">60</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP20</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">前美联储主席艾伦·格林斯潘去世，享年100岁</span>
+                <span class="state-badge state-strong">📈强化</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 前美联储主席艾伦·格林斯潘于周一去世，享年100岁。他执掌美联储长达18年，其任期覆盖了美国经济的长期繁荣（“大缓和”时期），但其宽松的货币政策和放松监管的理念也被认为是2008年金融危机的诱因之一，其复杂的经济遗产引发了市场对当前货币政策
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "前美联储主席艾伦·格林斯潘于周一去世，享年100岁。他执掌美联储长达18年，其任期覆盖了美国经济的长期繁荣（“大缓和”时期），但其宽松的货币政策和放松监管的理念也被认为是2008年金融危机的诱因之一，其复杂的经济遗产引发了市场对当前货币政策的反思。"</div>
+            </div>
+          </div>
+
+          
+          
+          
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:1.0s;border-left:3px solid var(--accent)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);min-width:40px;line-height:1">50</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP21</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">CRH斥资85亿美元收购Arcosa，加码北美基建需求</span>
+                <span class="state-badge state-cont">➡️持续</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 爱尔兰建材巨头CRH宣布将以85亿美元现金收购美国基础设施产品公司Arcosa。此次收购旨在加强CRH在北美市场的业务布局，并扩大其在美国基础设施建设需求浪潮中的敞口，显示出对该领域长期增长前景的看好。美股关注：CRH(CRH) (收购增强
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "爱尔兰建材巨头CRH宣布将以85亿美元现金收购美国基础设施产品公司Arcosa。此次收购旨在加强CRH在北美市场的业务布局，并扩大其在美国基础设施建设需求浪潮中的敞口，显示出对该领域长期增长前景的看好。美股关注：CRH(CRH) (收购增强其北美市场地位)，Caterpillar(CAT)、Vulcan Materials(VMC) (同为受益于美国基建周期的核心标的)。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="CRH(CRH)">
+          <span class="ts-name">CRH(CRH)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">CRH(CRH)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:1.05s;border-left:3px solid var(--accent)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);min-width:40px;line-height:1">50</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP22</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">雪佛龙(Chevron)与微软(Microsoft)达成数据中心供电协议</span>
+                <span class="state-badge state-cont">➡️持续</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 雪佛龙(Chevron)与微软(Microsoft)签署协议，将合作开发一个天然气发电设施，为微软位于西得克萨斯州的数据中心直接供电。这一合作是能源公司与科技巨头为解决AI算力带来的巨大能源消耗而直接结盟的最新案例，凸显了数据中心电力供应已
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "雪佛龙(Chevron)与微软(Microsoft)签署协议，将合作开发一个天然气发电设施，为微软位于西得克萨斯州的数据中心直接供电。这一合作是能源公司与科技巨头为解决AI算力带来的巨大能源消耗而直接结盟的最新案例，凸显了数据中心电力供应已成为关键瓶颈。美股关注：Chevron(CVX)、Microsoft(MSFT) (直接合作方)，Vertiv(VRT)、Eaton(ETN) (数据中心电力基"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 北美数据中心缺电
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·核心部件</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">应流股份</span>
+              <span class="chain-stock-code">603308</span>
+              <span class="chain-stock-catalyst">高温合金叶片</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">万泽股份</span>
+              <span class="chain-stock-code">000534</span>
+              <span class="chain-stock-catalyst">高温合金</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·机组</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">杰瑞股份</span>
+              <span class="chain-stock-code">002353</span>
+              <span class="chain-stock-catalyst">燃气轮机成套</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">东方电气</span>
+              <span class="chain-stock-code">600875</span>
+              <span class="chain-stock-catalyst">重型燃机龙头</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·配电</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中国西电</span>
+              <span class="chain-stock-code">601179</span>
+              <span class="chain-stock-catalyst">变压器+SST</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">金盘科技</span>
+              <span class="chain-stock-code">688676</span>
+              <span class="chain-stock-catalyst">干式变压器</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">思源电气</span>
+              <span class="chain-stock-code">002028</span>
+              <span class="chain-stock-catalyst">SST+电能质量</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="Chevron(CVX)">
+          <span class="ts-name">Chevron(CVX)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="Vertiv(VRT)">
+          <span class="ts-name">Vertiv(VRT)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="Eaton(ETN)">
+          <span class="ts-name">Eaton(ETN)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Chevron(CVX)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Vertiv(VRT)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Eaton(ETN)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:1.1s;border-left:3px solid var(--accent)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);min-width:40px;line-height:1">40</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP23</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">AI初创公司Groq在业务转型后完成6.5亿美元融资</span>
+                <span class="state-badge state-cont">➡️持续</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 AI芯片初创公司Groq在将其大部分芯片资产出售给英伟达并转型为数据中心运营商后，宣布完成新一轮6.5亿美元的融资。该笔资金将用于扩张其数据中心网络，以满足日益增长的AI推理需求，这反映出资本正持续涌入AI基础设施服务领域。美股关注：Equ
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "AI芯片初创公司Groq在将其大部分芯片资产出售给英伟达并转型为数据中心运营商后，宣布完成新一轮6.5亿美元的融资。该笔资金将用于扩张其数据中心网络，以满足日益增长的AI推理需求，这反映出资本正持续涌入AI基础设施服务领域。美股关注：Equinix(EQIX)、Digital Realty(DLR) (作为数据中心REITs，受益于整体行业资本开支的增加)。"</div>
+            </div>
+          </div>
+
+          
+    <div style="margin-top:var(--space-md);margin-bottom:var(--space-md)">
+      <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.3px">
+        🔗 国产芯片涨价+订单爆发
+      </div>
+      <div class="chain-container">
+        <div class="chain-link">
+          <div class="chain-label">上游·设计/IP</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">芯原股份</span>
+              <span class="chain-stock-code">688521</span>
+              <span class="chain-stock-catalyst">ASIC设计服务</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">中游·芯片</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">寒武纪</span>
+              <span class="chain-stock-code">688256</span>
+              <span class="chain-stock-catalyst">AI芯片龙头+涨价</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">海光信息</span>
+              <span class="chain-stock-code">688041</span>
+              <span class="chain-stock-catalyst">DCU国产替代</span>
+            </div></div>
+        </div>
+        <div class="chain-link">
+          <div class="chain-label">下游·制造/应用</div>
+          <div class="chain-stocks">
+            <div class="chain-stock">
+              <span class="chain-stock-name">中芯国际</span>
+              <span class="chain-stock-code">688981</span>
+              <span class="chain-stock-catalyst">晶圆代工</span>
+            </div>
+            <div class="chain-stock">
+              <span class="chain-stock-name">华虹公司</span>
+              <span class="chain-stock-code">688347</span>
+              <span class="chain-stock-catalyst">特色工艺代工</span>
+            </div></div>
+        </div></div>
+    </div>
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="扩张其数据中心网络">
+          <span class="ts-name">扩张其数据中心网络</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">扩张其数据中心网络</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+    </div>
+        </div>
+        <div class="card t-card animate-in" style="animation-delay:1.1500000000000001s;border-left:3px solid var(--accent)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--accent);min-width:40px;line-height:1">40</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:2px 6px;border-radius:3px">TOP24</span>
+                <span style="font-size:18px;font-weight:700;letter-spacing:-.3px">电动汽车制造商Lucid宣布裁员18%并调整高管团队</span>
+                <span class="state-badge state-cont">➡️持续</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">
+                📌 电动汽车制造商Lucid Group宣布将裁减约18%的美国员工，同时其首席运营官离职。在电动车市场竞争加剧、需求放缓的背景下，此举是公司为削减成本、提升盈利能力而采取的最新举措，也反映了部分造车新势力面临的经营压力。美股关注：Tesla(
+              </div>
+              <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);line-height:1.6;border-left:3px solid #D4C8BC;margin-bottom:12px">📘 "电动汽车制造商Lucid Group宣布将裁减约18%的美国员工，同时其首席运营官离职。在电动车市场竞争加剧、需求放缓的背景下，此举是公司为削减成本、提升盈利能力而采取的最新举措，也反映了部分造车新势力面临的经营压力。美股关注：Tesla(TSLA)、Rivian(RIVN) (作为竞争对手，可能从Lucid的收缩中获得相对市场优势)。"</div>
+            </div>
+          </div>
+
+          
+          
+    <div class="t-stock-group">
+      <div class="t-group-label l1">龙头首选</div>
+      
+        <div class="ts-row" data-stock="裁减约18%的美国员工">
+          <span class="ts-name">裁减约18%的美国员工</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+        <div class="ts-row" data-stock="削减成本、提升盈利能力">
+          <span class="ts-name">削减成本、提升盈利能力</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">核心标的</span>
+        </div>
+    </div>
+    <div class="t-stock-group">
+      <div class="t-group-label l2">弹性机会</div>
+      
+        <div class="ts-row" data-stock="Tesla(TSLA)">
+          <span class="ts-name">Tesla(TSLA)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+        <div class="ts-row" data-stock="Rivian(RIVN)">
+          <span class="ts-name">Rivian(RIVN)</span>
+          <span class="ts-code"></span>
+          <span class="ts-chg " data-field="pct">—</span>
+          <span class="ts-reason">弹性标的</span>
+        </div>
+    </div>
+          
+    <div style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:var(--radius-md);padding:14px 16px;margin-top:var(--space-md)">
+      <div style="font-size:11px;font-weight:700;color:#C47A00;margin-bottom:8px;letter-spacing:.3px">🎯 短线情绪精准标的</div>
+      
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">裁减约18%的美国员工</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">削减成本、提升盈利能力</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">核心标的</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+          <span style="font-weight:700;font-size:14px;color:var(--text-primary)">Tesla(TSLA)</span>
+          <span style="font-size:11px;color:var(--text-tertiary)"></span>
+          <span style="font-weight:600;font-size:13px;color:var(--down)">0.00%</span>
+          <span style="font-size:11px;color:var(--text-secondary);margin-left:auto">弹性标的</span>
+        </div>
+    </div>
+        </div>
+
+  <!-- ===== 机会前瞻 ===== -->
+  <div class="rp-section-title">🔮 机会前瞻 <span class="count">12个</span></div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">美国授权伊朗临时出口原油，作为和平协议一部分</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">美国政府发布了一项为期60天的通用许可证，授权伊朗在全球市场（包括美国）销售原油和石油产品，以推动与伊朗的和平谈判。此举被视为美方重大政策转向，旨在通过提供经济利益换取伊朗在核问题及地区安全上的合作，</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 美国政府发布了一项为期60天的通用许可证，授权伊朗在全球市场（包括美国）销售原油和石油产品，以推动与伊朗的和平谈判。此举被视为美方重大政策转向，旨在通过提供经济利益换取伊朗在核问题及地区安全上的合作，市场预期此举将缓解全球原油供应紧张局面，导致油价应声下跌。美股关注：美国航空(AAL)、联合航空(UAL) (航油成本下降直接利好航空公司利润)，雪佛龙(CVX)、埃克森美孚(XOM) (油价波动直接</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">SpaceX启动200亿美元债券发行，为AI扩张提供资金</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">SpaceX首次进入投资级债券市场，计划发行至少200亿美元的债券，为其在人工智能领域的扩张提供资金。此次发债在公司创纪录的IPO后进行，旨在利用其充裕的现金储备和获得的BBB级信用评级，通过债务市场</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 SpaceX首次进入投资级债券市场，计划发行至少200亿美元的债券，为其在人工智能领域的扩张提供资金。此次发债在公司创纪录的IPO后进行，旨在利用其充裕的现金储备和获得的BBB级信用评级，通过债务市场而非股权为长期扩张提供支持，凸显了AI基础设施投入的巨大资本需求。美股关注：Nvidia(NVDA) (作为算力硬件核心供应商将受益于其扩容)，Vertiv(VRT)、Eaton(ETN) (数据中心</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">英国首相斯塔默宣布辞职，伯纳姆有望接任首相</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">因民调支持率持续低迷及党内压力，英国首相基尔·斯塔默宣布辞职，大曼彻斯特市长安迪·伯纳姆成为最热门的继任者。由于主要竞争对手公开支持，市场普遍预期此次权力交接将平稳进行，英镑和英国国债在该消息后均出现</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 因民调支持率持续低迷及党内压力，英国首相基尔·斯塔默宣布辞职，大曼彻斯特市长安迪·伯纳姆成为最热门的继任者。由于主要竞争对手公开支持，市场普遍预期此次权力交接将平稳进行，英镑和英国国债在该消息后均出现上涨，反映出市场对政治不确定性暂时消除的积极反应。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">Meta向印度Cred投资9亿美元，其创始人将执掌WhatsApp</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">Meta Platforms宣布向印度金融科技初创公司Cred投资9亿美元，获得约20%的股份。作为交易的一部分，Cred创始人Kunal Shah将加入Meta，接任WhatsApp新负责人，此举旨</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 Meta Platforms宣布向印度金融科技初创公司Cred投资9亿美元，获得约20%的股份。作为交易的一部分，Cred创始人Kunal Shah将加入Meta，接任WhatsApp新负责人，此举旨在利用其在印度市场的成功经验，加速WhatsApp的商业化进程和AI功能整合。美股关注：Meta Platforms(META) (该战略投资和人事任命旨在解锁WhatsApp的巨大商业潜力)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">艾伯维(AbbVie)以109亿美元收购Apogee以加强免疫学管线</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">艾伯维(AbbVie)宣布将以10.9亿美元的总价收购Apogee Therapeutics，这是其五年来最大规模的收购。此次交易旨在获取Apogee在研的针对特应性皮炎和哮喘等炎症性疾病的治疗方案，</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 艾伯维(AbbVie)宣布将以10.9亿美元的总价收购Apogee Therapeutics，这是其五年来最大规模的收购。此次交易旨在获取Apogee在研的针对特应性皮炎和哮喘等炎症性疾病的治疗方案，以加强艾伯维在免疫学领域的后期产品管线，应对未来核心产品专利到期的挑战。美股关注：AbbVie(ABBV) (通过收购补充其后期产品线，增强长期增长潜力)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">高通(Qualcomm)或以40亿美元收购AI芯片初创公司Modular</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">高通(Qualcomm)正就以约40亿美元的价格收购AI芯片初创公司Modular Inc.进行深入谈判。此次收购若达成，将显著增强高通在AI芯片市场的产品组合和技术实力，以更好地与行业领导者英伟达(</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 高通(Qualcomm)正就以约40亿美元的价格收购AI芯片初创公司Modular Inc.进行深入谈判。此次收购若达成，将显著增强高通在AI芯片市场的产品组合和技术实力，以更好地与行业领导者英伟达(Nvidia)展开竞争，尤其是在快速增长的AI推理芯片领域。美股关注：Qualcomm(QCOM) (收购将加速其在AI芯片市场的战略布局)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">Robinhood拟发行20亿美元可转债，部分用于股票回购</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">金融科技公司Robinhood宣布计划通过发行20亿美元于2029年到期的可转换债券进行融资。公司计划将所得款项中的约3.2亿美元用于回购公司股票，其余资金主要用于支付对冲交易成本以限制未来股权稀释，</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 金融科技公司Robinhood宣布计划通过发行20亿美元于2029年到期的可转换债券进行融资。公司计划将所得款项中的约3.2亿美元用于回购公司股票，其余资金主要用于支付对冲交易成本以限制未来股权稀释，此举旨在优化资本结构并向市场传递信心。美股关注：Robinhood(HOOD) (发债回购是常见的资本运作方式，可能对股价有短期提振)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">前美联储主席艾伦·格林斯潘去世，享年100岁</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">前美联储主席艾伦·格林斯潘于周一去世，享年100岁。他执掌美联储长达18年，其任期覆盖了美国经济的长期繁荣（“大缓和”时期），但其宽松的货币政策和放松监管的理念也被认为是2008年金融危机的诱因之一，</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 前美联储主席艾伦·格林斯潘于周一去世，享年100岁。他执掌美联储长达18年，其任期覆盖了美国经济的长期繁荣（“大缓和”时期），但其宽松的货币政策和放松监管的理念也被认为是2008年金融危机的诱因之一，其复杂的经济遗产引发了市场对当前货币政策的反思。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">CRH斥资85亿美元收购Arcosa，加码北美基建需求</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">爱尔兰建材巨头CRH宣布将以85亿美元现金收购美国基础设施产品公司Arcosa。此次收购旨在加强CRH在北美市场的业务布局，并扩大其在美国基础设施建设需求浪潮中的敞口，显示出对该领域长期增长前景的看好</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 爱尔兰建材巨头CRH宣布将以85亿美元现金收购美国基础设施产品公司Arcosa。此次收购旨在加强CRH在北美市场的业务布局，并扩大其在美国基础设施建设需求浪潮中的敞口，显示出对该领域长期增长前景的看好。美股关注：CRH(CRH) (收购增强其北美市场地位)，Caterpillar(CAT)、Vulcan Materials(VMC) (同为受益于美国基建周期的核心标的)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">雪佛龙(Chevron)与微软(Microsoft)达成数据中心供电协议</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">雪佛龙(Chevron)与微软(Microsoft)签署协议，将合作开发一个天然气发电设施，为微软位于西得克萨斯州的数据中心直接供电。这一合作是能源公司与科技巨头为解决AI算力带来的巨大能源消耗而直接</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 雪佛龙(Chevron)与微软(Microsoft)签署协议，将合作开发一个天然气发电设施，为微软位于西得克萨斯州的数据中心直接供电。这一合作是能源公司与科技巨头为解决AI算力带来的巨大能源消耗而直接结盟的最新案例，凸显了数据中心电力供应已成为关键瓶颈。美股关注：Chevron(CVX)、Microsoft(MSFT) (直接合作方)，Vertiv(VRT)、Eaton(ETN) (数据中心电力基</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">AI初创公司Groq在业务转型后完成6.5亿美元融资</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">AI芯片初创公司Groq在将其大部分芯片资产出售给英伟达并转型为数据中心运营商后，宣布完成新一轮6.5亿美元的融资。该笔资金将用于扩张其数据中心网络，以满足日益增长的AI推理需求，这反映出资本正持续涌</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 AI芯片初创公司Groq在将其大部分芯片资产出售给英伟达并转型为数据中心运营商后，宣布完成新一轮6.5亿美元的融资。该笔资金将用于扩张其数据中心网络，以满足日益增长的AI推理需求，这反映出资本正持续涌入AI基础设施服务领域。美股关注：Equinix(EQIX)、Digital Realty(DLR) (作为数据中心REITs，受益于整体行业资本开支的增加)。</div>
+        </div>
+        <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
+            <span style="font-size:16px;font-weight:700">电动汽车制造商Lucid宣布裁员18%并调整高管团队</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:8px">电动汽车制造商Lucid Group宣布将裁减约18%的美国员工，同时其首席运营官离职。在电动车市场竞争加剧、需求放缓的背景下，此举是公司为削减成本、提升盈利能力而采取的最新举措，也反映了部分造车新势</div>
+          <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 电动汽车制造商Lucid Group宣布将裁减约18%的美国员工，同时其首席运营官离职。在电动车市场竞争加剧、需求放缓的背景下，此举是公司为削减成本、提升盈利能力而采取的最新举措，也反映了部分造车新势力面临的经营压力。美股关注：Tesla(TSLA)、Rivian(RIVN) (作为竞争对手，可能从Lucid的收缩中获得相对市场优势)。</div>
+        </div>
+
+  <!-- ===== Alpha精选 ===== -->
+  
+
+  <!-- ===== Footer ===== -->
+  <div class="rp-footer">
+    蓝宝书Max · 2026年06月23日 全球版<br>
+    数据来源：Alpha派蓝宝书 · 产业链分析：AI辅助<br>
+    📊 热度 = 机构关注度×市场确认度×催化质量<br>
+    ⚠️ 本报告为机构投研信息聚合参考，不构成投资建议
+  </div>
+
+</div>
+
+<script>
+var SECID_MAP={{}};
+var API_URL='https://push2.eastmoney.com/api/qt/ulist.np/get';
+(async function P(){
+  async function F(){
+    var s=[...new Set(Object.values(SECID_MAP))],d=[];
+    for(var i=0;i<s.length;i+=50){
+      var u=API_URL+'?secids='+s.slice(i,i+50).join(',')+'&fields=f2,f3,f12,f14&_='+Date.now();
+      try{var r=await fetch(u),j=await r.json();if(j.data&&j.data.diff)d.push(...j.data.diff)}catch(e){}
+    }
+    var m={};d.forEach(function(x){m[x.f14]={p:(x.f3||0)/100,Q:(x.f2||0)/100}});
+    document.querySelectorAll('[data-stock]').forEach(function(e){
+      var n=e.getAttribute('data-stock'),v=m[n];if(!v)return;
+      var t=e.querySelector('[data-field]')||e,s=(v.p>=0?'+':'')+v.p.toFixed(2)+'%';
+      if(t.textContent.trim()!==s){t.textContent=s;t.className=t.className.replace(/\bup\b|\bdown\b/g,'').trim()+' '+(v.p>=0?'up':'down')}
+    });
+  }
+  setInterval(function(){try{F()}catch(e){}},5000);
+  try{F()}catch(e){}
+})();
+</script>
+<script src="/bluebook-max/codes.js"></script>
+<script src="/bluebook-max/paywall.js"></script>
+</body>
+</html>
