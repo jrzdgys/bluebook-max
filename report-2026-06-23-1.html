@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6月23日 晨会版 | 长川科技业绩加速、英伟达确认全面液冷、CCL覆铜板多轮提价</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0f1117; color: #e1e4e8; line-height: 1.8; min-height: 100vh;
+        }
+        .top-bar {
+            background: #161b22; border-bottom: 1px solid #30363d;
+            padding: 0 24px; height: 52px; display: flex; align-items: center;
+            justify-content: space-between; position: sticky; top: 0; z-index: 100;
+        }
+        .top-bar .brand { font-weight: 800; font-size: 16px; color: #58a6ff; text-decoration: none; }
+        .top-bar .brand span { color: #f0883e; }
+        .top-bar a { font-size: 13px; color: #8b949e; text-decoration: none; }
+        .top-bar a:hover { color: #58a6ff; }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
+
+        /* Header */
+        .report-hero {
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 50%, #1a2332 100%);
+            border: 1px solid #30363d; border-radius: 16px; padding: 40px 36px;
+            margin-bottom: 28px; position: relative; overflow: hidden;
+        }
+        .report-hero::before {
+            content: ""; position: absolute; top: -60px; right: -60px;
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .report-hero * { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-block; padding: 4px 14px; border-radius: 20px;
+            font-size: 12px; font-weight: 600; letter-spacing: 1px;
+            background: rgba(88,166,255,0.12); color: #58a6ff; margin-bottom: 12px;
+        }
+        .report-hero h1 { font-size: 28px; font-weight: 800; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .hero-meta { display: flex; gap: 20px; font-size: 13px; color: #8b949e; flex-wrap: wrap; }
+
+        /* Stats */
+        .stats-row {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+            padding: 20px 16px; text-align: center;
+        }
+        .stat-card .num { font-size: 30px; font-weight: 800; color: #58a6ff; line-height: 1.2; }
+        .stat-card .label { font-size: 12px; color: #8b949e; margin-top: 4px; }
+
+        /* Section */
+        .section {
+            background: #161b22; border: 1px solid #30363d; border-radius: 14px;
+            padding: 28px; margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+            padding-bottom: 14px; border-bottom: 1px solid #21262d;
+        }
+        .section-header h2 { font-size: 18px; font-weight: 700; }
+        .section-header .count { font-size: 12px; color: #8b949e; background: #21262d; padding: 2px 10px; border-radius: 12px; }
+
+        /* Topic items */
+        .topic-item {
+            border: 1px solid #21262d; border-radius: 12px; padding: 20px 22px;
+            margin-bottom: 12px; background: #0d1117; transition: all 0.2s;
+        }
+        .topic-item:hover { border-color: #30363d; background: #161b22; }
+        .topic-item .topic-num {
+            display: inline-block; width: 28px; height: 28px; border-radius: 50%;
+            background: #1f6feb; color: #fff; font-size: 12px; font-weight: 700;
+            text-align: center; line-height: 28px; margin-right: 10px; flex-shrink: 0;
+        }
+        .topic-item h3 {
+            font-size: 15px; font-weight: 600; color: #f0f6fc; margin-bottom: 8px;
+            display: flex; align-items: flex-start;
+        }
+        .topic-item p {
+            font-size: 13.5px; color: #8b949e; line-height: 1.75; margin-left: 38px;
+        }
+        .topic-item .tags {
+            margin-left: 38px; margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;
+        }
+        .tag {
+            font-size: 11px; padding: 2px 8px; border-radius: 4px;
+            background: #21262d; color: #58a6ff; font-family: "SF Mono", monospace;
+        }
+
+        /* Stock tags inline */
+        .stock-tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 600; margin: 0 2px;
+            background: #1f2228; color: #f0883e;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center; color: #484f58; font-size: 12px;
+            padding: 32px 20px; border-top: 1px solid #21262d; margin-top: 40px;
+        }
+        .footer a { color: #58a6ff; text-decoration: none; }
+
+        /* Keywords section */
+        .keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .keyword {
+            font-size: 12px; padding: 4px 12px; border-radius: 16px;
+            background: #1f2228; color: #8b949e; border: 1px solid #30363d;
+        }
+
+        @media (max-width: 640px) {
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .report-hero h1 { font-size: 20px; }
+            .report-hero { padding: 24px 20px; }
+            .section { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="top-bar">
+    <a href="index.html" class="brand">📘 蓝宝书<span>Max</span></a>
+    <a href="index.html">← 导航页</a>
+</nav>
+
+<div class="container">
+    <div class="report-hero">
+        <div class="hero-badge">📊 🌅 晨会版</div>
+        <h1>6月23日 晨会版 | 长川科技业绩加速、英伟达确认全面液冷、CCL覆铜板多轮提价</h1>
+        <div class="hero-meta">
+            <span>📅 2026-06-23</span>
+            <span>📝 2 个板块</span>
+            <span>📌 22 条分析</span>
+        </div>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="num">2</div>
+            <div class="label">分析板块</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">22</div>
+            <div class="label">热点条目</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">0</div>
+            <div class="label">提及标的</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">20</div>
+            <div class="label">关键词</div>
+        </div>
+    </div>
+
+    
+        <div class="section">
+            <div class="section-header">
+                <h2>📌 市场热点</h2>
+                <span class="count">20 条</span>
+            </div>
+            
+            <div class="topic-item">
+                <h3><span class="topic-num">1</span>美国当地时间6月21日，英伟达通过官方博客首次全面详解了Rubin平台的100%液冷架构，为即将到来的Q3量产节点明确了技术路线和生态系统方向。这一官方确认将液...</h3>
+                <p>美国当地时间6月21日，英伟达通过官方博客首次全面详解了Rubin平台的100%液冷架构，为即将到来的Q3量产节点明确了技术路线和生态系统方向。这一官方确认将液冷从一个效率优化项彻底转变为下一代AI基础设施的必需品，投资焦点已从趋势判断转向对**产业链价值通胀**的量化，单机柜液冷价值量相较前代产品提升2-3倍，**核心供应商的业绩兑现**成为下半年关键的跟踪变量。<br><br>关注：**强瑞技术**/**金富科技**（Rubin核心结构件与冷板供应商，订单放量确定性高），**飞龙股份**（大功率CDU趋势下电子水泵核心标的），**申菱环境**/**高澜股份**/**英维克**（液冷系统及CDU核心厂商），**和胜股份**（Rubin液冷Busbar独家供应商）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">2</span>6月22日晚间，长川科技发布了超预期的半年度业绩预告，其Q2利润环比大幅增长（+55%~+83%），这标志着公司在AI算力与存储芯片驱动的测试需求爆发周期中，已...</h3>
+                <p>6月22日晚间，长川科技发布了超预期的半年度业绩预告，其Q2利润环比大幅增长（+55%~+83%），这标志着公司在AI算力与存储芯片驱动的测试需求爆发周期中，已进入业绩加速兑现阶段。这一强劲业绩验证了**AI芯片复杂化带来的测试“通胀”逻辑**，同时海外龙头产能紧张为国产替代打开了窗口，市场开始重新评估公司在SoC与存储测试双轮驱动下的**长期业绩弹性和平台化估值**。<br><br>关注：**长川科技**（SoC与存储测试龙头，业绩加速兑现）、**华峰测控**（模拟测试龙头，拓展SoC测试）、**精智达**（深度绑定大客户的存储测试设备龙头）、**金海通**（测试时长增加带动分选机需求通胀）、**强一股份**（测试复杂度提升，探针卡量价齐升）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">3</span>截至6月22日，CCL覆铜板行业确认进入全产业链满产、订单排至2027年底的超级周期，其核心背景是AI需求爆发与上游电子布、铜箔、树脂等关键材料的结构性短缺。最...</h3>
+                <p>截至6月22日，CCL覆铜板行业确认进入全产业链满产、订单排至2027年底的超级周期，其核心背景是AI需求爆发与上游电子布、铜箔、树脂等关键材料的结构性短缺。最新的边际变化在于，市场已确认CCL产品涨价幅度（~50%）远超原材料成本涨幅（~30%），这意味着产业链利润正集中于CCL环节，投资逻辑从交易涨价预期转向**验证中报的利润兑现能力**。<br><br>关注：**建滔积层板**/**生益科技**/**华正新材**/**金安国纪**（CCL制造商，直接受益于产品涨价和利润率扩张），**中国巨石**/**中材科技**/**宏和科技**/**国际复材**（上游电子布核心供应商，**产能紧缺是本轮涨价的关键驱动力**），**德福科技**/**圣泉集团**/**东材科技**（分别受益于上游关键原材料铜箔和树脂的量价齐升）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">4</span>6月22日的最新行业专家交流明确，Q3存储价格预期已从原先的环比上涨15-20%大幅跳升至40-50%，这一预期差源于AI对HBM产能的挤占正向通用及利基型存储...</h3>
+                <p>6月22日的最新行业专家交流明确，Q3存储价格预期已从原先的环比上涨15-20%大幅跳升至40-50%，这一预期差源于AI对HBM产能的挤占正向通用及利基型存储传导，叠加云巨头Q3集中拉货窗口，导致全品类供给收缩的逻辑被极限强化。这意味着存储板块正从“涨价预期”兑现为“业绩爆表”，**核心投资逻辑已转变为捕捉因价格涨幅远超预期而带来的巨大盈利弹性与估值重估机会**。<br><br>关注：**兆易创新**/**北京君正**/**普冉股份**/**东芯股份**（利基存储设计公司，受益于供给收缩和价格弹性，业绩兑现期来临），**江波龙**/**佰维存储**/**德明利**/**大普微**（模组厂，直接受益于存储颗粒涨价和下游需求传导），**澜起科技**（受益于服务器内存接口升级需求）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">5</span>6月22日，券商板块在经历上周因资金再平衡导致的调整后迎来放量普涨，标志着此前的技术性抛压已基本出清。市场焦点正从资金面扰动转向基本面兑现，**头部机构中报业绩...</h3>
+                <p>6月22日，券商板块在经历上周因资金再平衡导致的调整后迎来放量普涨，标志着此前的技术性抛压已基本出清。市场焦点正从资金面扰动转向基本面兑现，**头部机构中报业绩超50%的高增长预期与历史低位的估值形成鲜明反差**，板块在7月业绩预告密集披露前正迎来价值重估的配置窗口。<br><br>关注：**中信证券**/**广发证券**/**国泰海通**/**华泰证券**/**招商证券**（受益于行业集中度提升且中报业绩高增长确定性强的头部券商），**东方财富**/**同花顺**（财富管理业务受益于市场高活跃度，业绩弹性大），**中金公司**（投行与国际业务优势突出，H股估值具备吸引力）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">6</span>在国务院第839号令于近期正式施行后，6月22日的市场分析迅速聚焦于磷矿石被列为国家战略性矿产的核心影响，即国家将对磷矿资源实施从勘探到销售的全链条统筹管控。这...</h3>
+                <p>在国务院第839号令于近期正式施行后，6月22日的市场分析迅速聚焦于磷矿石被列为国家战略性矿产的核心影响，即国家将对磷矿资源实施从勘探到销售的全链条统筹管控。这一政策转变被视为锁定了磷矿石长期供给的稀缺性和价格高位运行的确定性，正触发对**拥有上游磷矿资源的“矿化一体”龙头企业的根本性价值重估**，因为**资源自给率直接决定了企业在产业链中的定价权**与盈利能力。<br><br>关注：**云天化**/**兴发集团**/**川恒股份**（国内磷矿资源储量及规划产能龙头，在资源战略溢价提升中最为受益），**川发龙蟒**/**云图控股**/**新洋丰**/**芭田股份**（具备矿化一体化产业链优势，受益于行业集中度提升和磷矿价格中枢上行）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">7</span>台积电于近期（6月17日左右）正式发布“CoWoS玻璃基板开发计划”，联合ABF载板厂Ibiden与面板厂群创启动产业化验证，此举标志着行业龙头首次公开其玻璃基...</h3>
+                <p>台积电于近期（6月17日左右）正式发布“CoWoS玻璃基板开发计划”，联合ABF载板厂Ibiden与面板厂群创启动产业化验证，此举标志着行业龙头首次公开其玻璃基板路线图，正式从技术探索迈入产业共建阶段。这一变化的核心在于，**行业领导者的正式入局彻底打消了市场对玻璃基板技术路线的疑虑，并将原先预估在2030年后的量产时间表显著提前**，从而将整个产业链的投资逻辑从远期主题切换至中期高确定性成长赛道。<br><br>关注：**凯盛科技**/**旗滨集团**/**戈碧迦**（玻璃原片与TGV技术布局）、**帝尔激光**/**德龙激光**（TGV激光设备核心供应商）、**东威科技**/**芯碁微装**（电镀与光刻设备）、**京东方A**/**沃格光电**（玻璃基板加工与中试线领先者）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">8</span>在过去24小时内，市场对日本藤仓6月18日因AI订单激增而大幅上调47%的全年利润指引并提价的事件，已形成关键共识：全球光纤行业正式由需求驱动转向供给紧缺，产能...</h3>
+                <p>在过去24小时内，市场对日本藤仓6月18日因AI订单激增而大幅上调47%的全年利润指引并提价的事件，已形成关键共识：全球光纤行业正式由需求驱动转向供给紧缺，产能受限的海外龙头被迫提价，验证了行业进入卖方市场。这一变化的核心投资逻辑已从单纯的AI需求放量，转变为**产能缺口下的“量价齐升”双击**，为具备产能和出海能力的中国厂商打开了获取更高利润和市场份额的窗口期，**整个光纤光缆板块的价值正在被重估**。<br><br>关注：**长飞光纤**/**亨通光电**/**中天科技**/**烽火通信**（作为国内光纤光缆龙头，拥有产能优势，有望在海外龙头产能受限时，承接北美市场溢出订单并受益于全球价格上涨）/**太辰光**/**仕佳光子**（作为MPO等高密度光连接器核心供应商，直接受益于AI数据中心内部互联需求爆发及藤仓等布线方案商业绩增长）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">9</span>在过去24小时内，市场对北美AIDC缺电的认知已从宏观主题转向订单兑现，核心边际变化是中国动力累计燃机订单突破100台及应流股份与贝克休斯签订5年长协，这标志着...</h3>
+                <p>在过去24小时内，市场对北美AIDC缺电的认知已从宏观主题转向订单兑现，核心边际变化是中国动力累计燃机订单突破100台及应流股份与贝克休斯签订5年长协，这标志着海外燃机产能瓶颈的外溢效应已开始体现为国内产业链的确定性长单。投资逻辑已从博弈景气度转向**测算国产替代份额和业绩弹性**，因为海外主流厂商交付周期已排至2028-2030年，具备产能和技术优势的**国内企业正迎来一个抢占市场份额的确定性窗口期**。<br><br>关注：**中国动力**（国产燃机整机订单超预期，出海加速）/**应流股份**（燃机叶片龙头，锁定贝克休斯5年长协）/**杰瑞股份**（燃机成撬集成商，北美订单持续放量且涨价）/**潍柴动力**（大功率燃气发动机作为关键替代方案，受益需求外溢）/**联德股份**/**天润工业**（深度绑定卡特彼勒等海外发动机龙头供应链）/**三环集团**（SOFC作为快速部署方案，为BloomEnergy核心供应商）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">10</span>在过去24小时内，随着爱迪特于6月21日晚间正式确认收到日本东曹的氧化锆粉体断供通知，市场已迅速从事实验证转向对供给缺口的量化，并预计东曹及其他日本厂商的库存在...</h3>
+                <p>在过去24小时内，随着爱迪特于6月21日晚间正式确认收到日本东曹的氧化锆粉体断供通知，市场已迅速从事实验证转向对供给缺口的量化，并预计东曹及其他日本厂商的库存在未来1-2个月内将耗尽。核心投资逻辑已从单纯的国产替代，升级为**对标“六氟化钨”时刻的全球供应链重塑**：基于氧化钇原料百倍以上的海内外巨大价差，拥有“碾压级成本优势”的国内一体化厂商将迎来**份额抢占与价格重估的双重机遇**。<br><br>关注：**国瓷材料**（国内高端氧化锆粉体龙头，直接受益于涨价与份额替代）、**爱迪特**（下游义齿瓷块龙头，海外业务占比高，受益于行业定价中枢上移）、**东方锆业**（拥有上游锆矿资源，受益于全产业链价值提升）、**龙佰集团**（东方锆业控股股东，全球氧氯化锆龙头，产业链一体化优势显著）、**西陇科学**（量产上游核心前驱体正丙醇锆，卡位原料端）、**三祥新材**（具备电熔氧化锆及纳米氧化锆产能）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">11</span>截至6月22日，市场对先进封装的认知已从单纯关注产能景气转向对其作为AI核心资产的全面价值重估，直接表现为OSAT（外包半导体封测）板块估值体系的系统性提升。投...</h3>
+                <p>截至6月22日，市场对先进封装的认知已从单纯关注产能景气转向对其作为AI核心资产的全面价值重估，直接表现为OSAT（外包半导体封测）板块估值体系的系统性提升。投资逻辑已清晰地从周期性产能利用率转向**封装技术作为延续摩尔定律的关键路径**，拥有玻璃基板（TGV）、CoWoS-L等先进技术储备和客户绑定的公司，其高价值环节的属性正在被市场重新定价，盈利能力和估值中枢有望被根本性重塑。<br><br>关注：**长电科技**/**通富微电**/**华天科技**/**盛合晶微**（国内先进封装龙头，直接受益于AI订单外溢和估值重估），**京东方A**/**沃格光电**/**凯盛科技**（在玻璃基板/TGV核心环节卡位，具备0到1的产业化潜力），**大族激光**/**芯碁微装**（TGV激光钻孔、直写光刻等设备是玻璃基板封装产业化的关键），**联瑞新材**/**天承科技**/**圣泉集团**（先进封装驱动上游高性能树脂、硅微粉等核心材料需求升级）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">12</span>6月22日，科济药业的恺力美在中国获批，成为全球首款获批用于实体瘤的CAR-T疗法，用于治疗CLDN18.2阳性的晚期胃癌。这一里程碑事件**彻底验证了CLDN...</h3>
+                <p>6月22日，科济药业的恺力美在中国获批，成为全球首款获批用于实体瘤的CAR-T疗法，用于治疗CLDN18.2阳性的晚期胃癌。这一里程碑事件**彻底验证了CLDN18.2靶点的成药性与CAR-T技术在实体瘤领域的突破**，投资逻辑已从对研发管线的博弈，全面转向对产品商业化放量能力的兑现。<br><br>关注：**科济药业**（全球首款实体瘤CAR-T产品获批，进入商业化兑现期），**传奇生物**/**药明巨诺**（作为细胞治疗头部公司，同行在实体瘤领域的突破有望提升板块整体估值），**金斯瑞生物科技**（细胞治疗上游核心供应商，下游产品商业化加速带来订单预期）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">13</span>在过去24小时内，市场对金刚石散热的关注度因英特尔CEO陈立武在近期专访中明确看好其在芯片封装领域的应用潜力而急剧升温，这一来自产业巨头的背书，叠加官方媒体对该...</h3>
+                <p>在过去24小时内，市场对金刚石散热的关注度因英特尔CEO陈立武在近期专访中明确看好其在芯片封装领域的应用潜力而急剧升温，这一来自产业巨头的背书，叠加官方媒体对该技术攻克算力散热难题的报道，共同构成了强力催化。这一系列事件将金刚石散热的投资逻辑从远期概念迅速拉回现实，市场将其视为解决AI芯片功耗“热墙”问题的**终极物理方案**，并开始交易其从0到1的产业化元年逻辑，认为这是**一个确定性极强的千亿级赛道起点**。<br><br>关注：**国机精工**/**四方达**/**沃尔德**（具备金刚石复合材料或散热方案技术，且已进入头部客户验证或合作阶段），**力量钻石**/**惠丰钻石**/**中兵红箭**（加速布局上游MPCVD核心产能），**恒盛能源**（与核心客户合作且具备低成本能源优势），**共达电声**（转型切入金刚石激光加工环节）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">14</span>在过去24小时内，市场确认了**中国对日钨原料出口管制**已引发日本PCB钻针用钨棒材的实质性供应中断，三菱、住友等日本主要生产商因原料短缺已开始大幅提价（部分...</h3>
+                <p>在过去24小时内，市场确认了**中国对日钨原料出口管制**已引发日本PCB钻针用钨棒材的实质性供应中断，三菱、住友等日本主要生产商因原料短缺已开始大幅提价（部分超3倍）或削减产能。这一供给侧的突发真空，使投资逻辑从渐进的国产替代转向了紧急的供应缺口填补，具备高端超细晶棒材生产能力的国内厂商，其估值基础正从成本加成模式转变为**由稀缺性驱动的定价权和巨大的利润弹性空间**。<br><br>关注：**中钨高新**/**厦门钨业**（全产业链一体化龙头，直接承接日系高端市场份额）、**欧科亿**/**华锐精密**/**新锐股份**（具备技术和产能弹性，有望快速切入并放量）、**鼎泰高科**（下游钻针龙头，受益于国产棒材保供和成本优势）、**江钨装备**（资产注入后成为PCB钨棒及上游高纯钨粉核心供应商）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">15</span>过去24小时，特斯拉机器人量产进程的关键边际在于供应链流程已基本闭环，核心供应商收到项目书，且**明确了从6月周产百台到9月周产千台的产能爬坡路径**，同时得州...</h3>
+                <p>过去24小时，特斯拉机器人量产进程的关键边际在于供应链流程已基本闭环，核心供应商收到项目书，且**明确了从6月周产百台到9月周产千台的产能爬坡路径**，同时得州超级工厂主体结构已建成四层，为远期千万级年产能规划提供了实体支撑。这一系列具体进展，将投资逻辑从对量产可能性的博弈，**转向对产能爬坡速度和核心供应商份额确定性的验证**，市场开始基于明确的排产指引和工厂建设进度，对产业链公司的业绩兑现进行更为精确的量化评估。<br><br>关注：**拓普集团**/**三花智控**（总成环节核心供应商）、**科达利**/**斯菱智驱**（谐波减速器环节，有海外扩产等实质性进展）、**峰岹科技**/**恒帅股份**（电机环节稀缺标的）、**福赛科技**（PEEK轻量化部件，收到产能指引）、**贝斯特**/**恒立液压**/**浙江荣泰**（丝杠环节）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">16</span>6月22日，市场传出上汽、比亚迪等多家车企将2027年明确为全固态电池装车节点，这标志着固态电池已从远期概念转向产业验证阶段。投资焦点正从炒作概念转向挖掘实际订...</h3>
+                <p>6月22日，市场传出上汽、比亚迪等多家车企将2027年明确为全固态电池装车节点，这标志着固态电池已从远期概念转向产业验证阶段。投资焦点正从炒作概念转向挖掘实际订单，其中**全固态电池所需的新增干法电极、等静压等工艺将带来设备端需求重估**，因此**设备企业有望先于材料和电池厂兑现订单弹性，存在显著预期差**。<br><br>关注：**利元亨**/**先导智能**（全固态新增工艺带来设备端重估，订单有望先于材料和整车放量），**上海洗霸**/**三祥新材**（固态电解质及上游材料核心标的，直接受益于产业化验证加速），**国轩高科**/**亿纬锂能**/**宁德时代**（加速全固态电池验证和量产导入的头部电池厂）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">17</span>6月22日晚间，国家发改委与能源局发布可再生能源消纳新政，首次将绿氢、绿氨、绿醇等非电能源利用纳入省级强制性考核，并以物理热量而非绿证作为核算单位。这一转变将化...</h3>
+                <p>6月22日晚间，国家发改委与能源局发布可再生能源消纳新政，首次将绿氢、绿氨、绿醇等非电能源利用纳入省级强制性考核，并以物理热量而非绿证作为核算单位。这一转变将化工、钢铁等领域的绿色替代从弹性选择变为**刚性需求**，为率先投产且具备成本优势的绿氢氨醇生产商和上游电解槽设备商创造了**确定性的增量市场**。<br><br>关注：**嘉泽新能**/**中国天楹**/**电投绿能**（绿氢氨醇生产商，直接受益于需求刚性化），**华电科工**/**中集安瑞科**（上游电解槽及储运设备商，需求传导受益）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">18</span>昨晚（6月22日）宁德时代在储能新品发布会上官宣，其首批钠离子电池解决方案将于今年9月交付，年底实现GWh级出货。此举将钠电产业化**从预期阶段正式推向了落地验...</h3>
+                <p>昨晚（6月22日）宁德时代在储能新品发布会上官宣，其首批钠离子电池解决方案将于今年9月交付，年底实现GWh级出货。此举将钠电产业化**从预期阶段正式推向了落地验证**，核心在于确立了一条与锂电互补的低成本技术路线，为对冲上游锂价波动和切入对成本敏感的储能、两轮车等增量市场提供了明确的执行时间表。<br><br>关注：**宁德时代**（钠电商业化落地验证，开启第二成长曲线），**鼎胜新材**（钠电池正负极集流体均使用铝箔，需求有望放量），**欣旺达**/**鹏辉能源**（同为钠电布局者，受益于产业化提速）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">19</span>截至6月22日，国内618大促收官数据显示，宠物消费市场结构性分化显著，功能粮与处方粮品类在京东等平台实现超60%的爆发式增长，标志着行业竞争已从过去的原料堆砌...</h3>
+                <p>截至6月22日，国内618大促收官数据显示，宠物消费市场结构性分化显著，功能粮与处方粮品类在京东等平台实现超60%的爆发式增长，标志着行业竞争已从过去的原料堆砌转向功效验证。这一变化将重塑市场格局，竞争壁垒正向**具备扎实研发能力和专业化产品矩阵**的企业倾斜，拥有前瞻性功能粮和处方粮布局的公司将获得更高的品牌溢价和市场份额。<br><br>关注：**乖宝宠物**（旗下麦富迪、弗列加特品牌在多平台稳居前列，并推出处方粮品牌康弗，卡位功能化趋势）、**中宠股份**（旗下领先、顽皮品牌推出美毛、护肠等精准功能系列新品，契合市场需求）、**佩蒂股份**（国内宠物食品龙头之一，受益于行业高端化和功能化趋势）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">20</span>6月22日晚间最新海关数据显示，5月中国对欧洲热泵出口额同比大增46%，在德国、法国、意大利等核心国家均实现高速增长，再次印证了欧洲能源转型带来的需求韧性。这一...</h3>
+                <p>6月22日晚间最新海关数据显示，5月中国对欧洲热泵出口额同比大增46%，在德国、法国、意大利等核心国家均实现高速增长，再次印证了欧洲能源转型带来的需求韧性。这一数据不仅夯实了欧洲市场的基本盘，**更关键的边际增量来自北美市场同比79%的爆发**，表明龙头企业的出海逻辑已从单一区域景气升级为全球共振，其增长天花板被进一步打开。<br><br>关注：**日出东方**/**美的集团**/**万和电气**（作为空气源热泵主要生产商，深度受益于欧洲能源替代和北美市场需求爆发），**海尔智家**（全球化布局完善，有望在多区域市场共同发力）</p>
+                
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-header">
+                <h2>📌 机会前瞻</h2>
+                <span class="count">2 条</span>
+            </div>
+            
+            <div class="topic-item">
+                <h3><span class="topic-num">1</span>在过去一周，智谱于6月17日前后发布并开源GLM-5.2，其在代码生成和长程任务上的能力已进入全球第一梯队，在部分权威评测中与Claude Opus 4.8处于...</h3>
+                <p>在过去一周，智谱于6月17日前后发布并开源GLM-5.2，其在代码生成和长程任务上的能力已进入全球第一梯队，在部分权威评测中与Claude Opus 4.8处于可比区间，尤其在海外顶尖模型Fable 5受限后，其“Opus平替”的口碑迅速确立。这不仅是技术追赶的里程碑，更标志着**国产头部模型正从低价竞争转向凭借顶尖能力获得定价权的新阶段**，其年内连续提价和API调用量不降反升验证了高质量Token的商业价值，同时，该模型发布首日即**全面适配国产算力平台，解决了AI自主可控的核心叙事**。<br><br>关注：**智谱**（模型能力进入全球第一梯队，商业化与定价权得到验证）、**寒武纪**/**摩尔线程**/**海光信息**/**昆仑芯**（作为国产算力平台，受益于“国模配国芯”的自主可控生态加速落地）</p>
+                
+            </div>
+            <div class="topic-item">
+                <h3><span class="topic-num">2</span>昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链**从巨头垂直整...</h3>
+                <p>昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链**从巨头垂直整合的封闭模式，正式转向开放的社会化分工**。凭借其在**大规模流水线组装与供应链成本管控上的核心优势**，剑桥的入局将驱动ELSFP成本进入快速下行通道，从而打破CPO商业化的最后一道成本壁垒，公司自身也将从这一技术路线的放量中深度受益。<br><br>关注：**剑桥科技**（CPO外置光源ELSFP进入量产备料，产业链分工重构与成本下降的核心受益者），**源杰科技**/**仕佳光子**（作为剑桥上游国产CW光源供应商，有望受益于其放量），**中际旭创**/**新易盛**（CPO产业化拐点确认，利好所有具备CPO技术储备的头部光模块厂商）</p>
+                
+            </div>
+        </div>
+
+    
+        <div class="section">
+            <div class="section-header"><h2>🔑 关键词</h2></div>
+            <div class="keywords"><span class="keyword">AI芯片复杂化带来的测试“通胀”逻辑</span><span class="keyword">产业链价值通胀</span><span class="keyword">华峰测控</span><span class="keyword">华正新材</span><span class="keyword">和胜股份</span><span class="keyword">建滔积层板</span><span class="keyword">强一股份</span><span class="keyword">强瑞技术</span><span class="keyword">核心供应商的业绩兑现</span><span class="keyword">生益科技</span><span class="keyword">申菱环境</span><span class="keyword">精智达</span><span class="keyword">英维克</span><span class="keyword">金富科技</span><span class="keyword">金海通</span><span class="keyword">长川科技</span><span class="keyword">长期业绩弹性和平台化估值</span><span class="keyword">飞龙股份</span><span class="keyword">验证中报的利润兑现能力</span><span class="keyword">高澜股份</span></div>
+        </div>
+
+    <div class="footer">
+        蓝宝书Max · 自动化报告 · 数据来源: <a href="https://alphapai-web.rabyte.cn">Alpha派</a> · 
+        抓取时间: 2026-06-23 11:38:44
+    </div>
+</div>
+</body>
+</html>
