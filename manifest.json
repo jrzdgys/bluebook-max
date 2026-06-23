@@ -1,45 +1,72 @@
 {
   "name": "蓝宝书Max",
   "description": "Alpha派蓝宝书热点自动抓取与分析报告",
-  "last_updated": "2026-06-23 16:14:53",
-  "updated": "2026-06-23T16:14:53.597687",
-  "total_reports": 4,
+  "last_updated": "2026-06-23 16:20:00",
+  "updated": "2026-06-23T16:20:00",
+  "total_reports": 7,
   "reports": [
     {
-      "file": "reports/md-20260623.html",
+      "file": "pm-20260623.html",
       "edition": "md",
       "label": "午间版",
       "date": "20260623",
       "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 午间版 - 2026年06月23日",
-      "stock_count": 0
+      "title": "英伟达全面液冷、存储芯片涨价50%、设备国产替代",
+      "stock_count": 73
     },
     {
-      "file": "reports/global-20260623.html",
-      "edition": "global",
-      "label": "全球版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 全球版 - 2026年06月23日",
-      "stock_count": 0
-    },
-    {
-      "file": "reports/am-test-v3.html",
-      "edition": "am",
-      "label": "晨会版",
-      "date": "test",
-      "date_display": "test",
-      "title": "蓝宝书Max 晨会版 - test",
-      "stock_count": 0
-    },
-    {
-      "file": "reports/am-20260623.html",
+      "file": "am-20260623.html",
       "edition": "am",
       "label": "晨会版",
       "date": "20260623",
       "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月23日",
-      "stock_count": 0
+      "title": "英伟达Rubin确认全面液冷、长川科技业绩预增、CCL提价",
+      "stock_count": 145
+    },
+    {
+      "file": "ev-20260622.html",
+      "edition": "pm",
+      "label": "晚间版",
+      "date": "20260622",
+      "date_display": "2026年06月22日",
+      "title": "蓝宝书Max 晚间版",
+      "stock_count": 89
+    },
+    {
+      "file": "md-20260622.html",
+      "edition": "md",
+      "label": "午间版",
+      "date": "20260622",
+      "date_display": "2026年06月22日",
+      "title": "蓝宝书Max 午间版",
+      "stock_count": 62
+    },
+    {
+      "file": "am-20260622.html",
+      "edition": "am",
+      "label": "晨会版",
+      "date": "20260622",
+      "date_display": "2026年06月22日",
+      "title": "蓝宝书Max 晨会版",
+      "stock_count": 143
+    },
+    {
+      "file": "pm-20260621.html",
+      "edition": "pm",
+      "label": "晚间版",
+      "date": "20260621",
+      "date_display": "2026年06月21日",
+      "title": "蓝宝书Max 晚间版",
+      "stock_count": 122
+    },
+    {
+      "file": "蓝宝书Max_20260620_晚间版.html",
+      "edition": "pm",
+      "label": "晚间版",
+      "date": "20260620",
+      "date_display": "2026年06月20日",
+      "title": "蓝宝书Max 晚间版",
+      "stock_count": 60
     }
   ]
 }
