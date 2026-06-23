@@ -46,9 +46,9 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 .tsl{display:flex;flex-direction:column;gap:6px}
 .t-sg{margin-bottom:4px}
 .t-gl{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:3px}
-.t-gl.l1{background:#C4433A12;color:#C4433A}
-.t-gl.l2{background:#E87A2012;color:#E87A20}
-.t-gl.l3{background:#3E54CE12;color:#3E54CE}
+.chain-up{background:#4CAF5012;color:#4CAF50}
+.chain-mid{background:#FF980012;color:#FF9800}
+.chain-down{background:#2196F312;color:#2196F3}
 .tsr{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #F5F4F2;font-size:12px;flex-wrap:wrap;transition:background .3s}
 .tsr:last-child{border-bottom:none}
 .tsn{font-weight:700;font-size:13px;color:#151515;min-width:56px}
@@ -91,7 +91,7 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 <div style="font-size:12px;font-weight:700;color:#C47A00;margin-bottom:4px">📋 今日市场摘要</div>
 <div class="st">最强方向：【长川科技上半年净利预增超110%】热度75 · 【英伟达Rubin平台确认全面液冷】热度74 · 【机构预测Q3存储价格或环比上涨超40%】热度73</div>
 <div class="sm2">
-<div class="smi2"><strong>20</strong> 全部主题 · <strong>2</strong> 机会前瞻 · <strong>147</strong> 推荐标的 · <span id="up-down">0涨0跌</span></div>
+<div class="smi2"><strong>20</strong> 全部主题 · <strong>2</strong> 机会前瞻 · <strong>134</strong> 推荐标的 · <span id="up-down">0涨0跌</span></div>
 </div>
 <div class="chg"></div>
 <div style="font-size:12px;color:#666;margin-top:6px;line-height:1.5;font-weight:500">📌 一句话总结：长川科技上半年净利预增超110%、英伟达Rubin平台确认全面液冷引领今日热点，市场轮动加速，关注主线清晰的方向</div>
@@ -113,15 +113,13 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="长期业绩弹性和平台化估值"><span class="tsn">长期业绩弹性和平台化估值</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="长川科技"><span class="tsn">长川科技</span><span class="tcd">0.300604</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="长期业绩弹性和平台化估值"><span class="tsn">长期业绩弹性和平台化估值</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="长川科技"><span class="tsn">长川科技</span><span class="tcd">0.300604</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="华峰测控"><span class="tsn">华峰测控</span><span class="tcd">1.688200</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="华峰测控"><span class="tsn">华峰测控</span><span class="tcd">1.688200</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 深度绑定大客户的存储测试设备龙头</div>
 <div class="tsr" data-stock="精智达"><span class="tsn">精智达</span><span class="tcd">1.688627</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定大客户的存储测试设备龙头</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
 <div class="tsr" data-stock="金海通"><span class="tsn">金海通</span><span class="tcd">1.603061</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定大客户的存储测试设备龙头</span></div>
 <div class="tsr" data-stock="强一股份"><span class="tsn">强一股份</span><span class="tcd">1.688552</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定大客户的存储测试设备龙头</span></div>
 </div>
@@ -141,25 +139,23 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·冷板/管路 冷板+管路+水泵</div>
-<div class="tsr" data-stock="强瑞技术" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">强瑞技术</span><span class="tcd">301128</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">Rubin液冷歧管</span></div>
-<div class="tsr" data-stock="飞龙股份" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">飞龙股份</span><span class="tcd">002536</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电子水泵</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ 英伟达Rubin全面液冷</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="产业链价值通胀"><span class="tsn">产业链价值通胀</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="核心供应商的业绩兑现"><span class="tsn">核心供应商的业绩兑现</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="产业链价值通胀"><span class="tsn">产业链价值通胀</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="核心供应商的业绩兑现"><span class="tsn">核心供应商的业绩兑现</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="强瑞技术"><span class="tsn">强瑞技术</span><span class="tcd">0.301128</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="金富科技"><span class="tsn">金富科技</span><span class="tcd">0.003018</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="强瑞技术"><span class="tsn">强瑞技术</span><span class="tcd">0.301128</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="金富科技"><span class="tsn">金富科技</span><span class="tcd">0.003018</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 大功率CDU趋势下电子水泵核心标的</div>
 <div class="tsr" data-stock="飞龙股份"><span class="tsn">飞龙股份</span><span class="tcd">0.002536</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">大功率CDU趋势下电子水泵核心标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 液冷系统及CDU核心厂商</div>
 <div class="tsr" data-stock="申菱环境"><span class="tsn">申菱环境</span><span class="tcd">0.301018</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">液冷系统及CDU核心厂商</span></div>
 <div class="tsr" data-stock="高澜股份"><span class="tsn">高澜股份</span><span class="tcd">0.300499</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">液冷系统及CDU核心厂商</span></div>
 <div class="tsr" data-stock="英维克"><span class="tsn">英维克</span><span class="tcd">0.002837</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">液冷系统及CDU核心厂商</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 Rubin液冷Busbar独家供应商</div>
 <div class="tsr" data-stock="和胜股份"><span class="tsn">和胜股份</span><span class="tcd">0.002824</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">Rubin液冷Busbar独家供应商</span></div>
 </div>
 </div>
@@ -178,29 +174,15 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·芯片设计 存储芯片设计</div>
-<div class="tsr" data-stock="兆易创新" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">兆易创新</span><span class="tcd">603986</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">NOR Flash龙头</span></div>
-<div class="tsr" data-stock="普冉股份" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">普冉股份</span><span class="tcd">688766</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">利基存储</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·模组/分销 存储模组+分销</div>
-<div class="tsr" data-stock="江波龙" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">江波龙</span><span class="tcd">301308</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">模组龙头+涨价弹性</span></div>
-<div class="tsr" data-stock="佰维存储" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">佰维存储</span><span class="tcd">688525</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">企业级存储</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ DDR5涨288%→全链景气</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="兆易创新"><span class="tsn">兆易创新</span><span class="tcd">1.603986</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="北京君正"><span class="tsn">北京君正</span><span class="tcd">0.300223</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 存储芯片设计</div>
+<div class="tsr" data-stock="兆易创新"><span class="tsn">兆易创新</span><span class="tcd">1.603986</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">NOR Flash龙头</span></div>
+<div class="tsr" data-stock="普冉股份"><span class="tsn">普冉股份</span><span class="tcd">1.688766</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">利基存储</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="普冉股份"><span class="tsn">普冉股份</span><span class="tcd">1.688766</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="东芯股份"><span class="tsn">东芯股份</span><span class="tcd">1.688110</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="江波龙"><span class="tsn">江波龙</span><span class="tcd">0.301308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="佰维存储"><span class="tsn">佰维存储</span><span class="tcd">1.688525</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="德明利"><span class="tsn">德明利</span><span class="tcd">0.001309</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="大普微"><span class="tsn">大普微</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="澜起科技"><span class="tsn">澜起科技</span><span class="tcd">1.688008</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于服务器内存接口升级需求</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 存储模组+分销</div>
+<div class="tsr" data-stock="江波龙"><span class="tsn">江波龙</span><span class="tcd">0.301308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">模组龙头+涨价弹性</span></div>
+<div class="tsr" data-stock="佰维存储"><span class="tsn">佰维存储</span><span class="tcd">1.688525</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">企业级存储</span></div>
 </div>
 </div>
 </div>
@@ -218,34 +200,17 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·材料 电子布+铜箔+树脂</div>
-<div class="tsr" data-stock="中国巨石" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">中国巨石</span><span class="tcd">600176</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电子布龙头</span></div>
-<div class="tsr" data-stock="宏和科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">宏和科技</span><span class="tcd">603256</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电子布弹性最大</span></div>
-<div class="tsr" data-stock="圣泉集团" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">圣泉集团</span><span class="tcd">605589</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">树脂供应商</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·CCL 覆铜板制造</div>
-<div class="tsr" data-stock="生益科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">生益科技</span><span class="tcd">600183</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">CCL龙头+涨价</span></div>
-<div class="tsr" data-stock="金安国纪" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">金安国纪</span><span class="tcd">002636</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">CCL直接受益</span></div>
-<div class="tsr" data-stock="华正新材" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">华正新材</span><span class="tcd">603186</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">利润率弹性</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ 建滔涨价→全产业链传导</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="验证中报的利润兑现能力"><span class="tsn">验证中报的利润兑现能力</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="建滔积层板"><span class="tsn">建滔积层板</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 电子布+铜箔+树脂</div>
+<div class="tsr" data-stock="中国巨石"><span class="tsn">中国巨石</span><span class="tcd">1.600176</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电子布龙头</span></div>
+<div class="tsr" data-stock="宏和科技"><span class="tsn">宏和科技</span><span class="tcd">1.603256</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电子布弹性最大</span></div>
+<div class="tsr" data-stock="圣泉集团"><span class="tsn">圣泉集团</span><span class="tcd">1.605589</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">树脂供应商</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="生益科技"><span class="tsn">生益科技</span><span class="tcd">1.600183</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="华正新材"><span class="tsn">华正新材</span><span class="tcd">1.603186</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="金安国纪"><span class="tsn">金安国纪</span><span class="tcd">0.002636</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="中国巨石"><span class="tsn">中国巨石</span><span class="tcd">1.600176</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="中材科技"><span class="tsn">中材科技</span><span class="tcd">0.002080</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="宏和科技"><span class="tsn">宏和科技</span><span class="tcd">1.603256</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="国际复材"><span class="tsn">国际复材</span><span class="tcd">0.301526</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="德福科技"><span class="tsn">德福科技</span><span class="tcd">0.301511</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">分别受益于上游关键原材料铜箔和树脂的量价齐升</span></div>
-<div class="tsr" data-stock="圣泉集团"><span class="tsn">圣泉集团</span><span class="tcd">1.605589</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">分别受益于上游关键原材料铜箔和树脂的量价齐升</span></div>
-<div class="tsr" data-stock="东材科技"><span class="tsn">东材科技</span><span class="tcd">1.601208</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">分别受益于上游关键原材料铜箔和树脂的量价齐升</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 覆铜板制造</div>
+<div class="tsr" data-stock="生益科技"><span class="tsn">生益科技</span><span class="tcd">1.600183</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">CCL龙头+涨价</span></div>
+<div class="tsr" data-stock="金安国纪"><span class="tsn">金安国纪</span><span class="tcd">0.002636</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">CCL直接受益</span></div>
+<div class="tsr" data-stock="华正新材"><span class="tsn">华正新材</span><span class="tcd">1.603186</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">利润率弹性</span></div>
 </div>
 </div>
 </div>
@@ -264,15 +229,13 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="中国动力"><span class="tsn">中国动力</span><span class="tcd">1.600482</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="应流股份"><span class="tsn">应流股份</span><span class="tcd">1.603308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="中国动力"><span class="tsn">中国动力</span><span class="tcd">1.600482</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="应流股份"><span class="tsn">应流股份</span><span class="tcd">1.603308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="杰瑞股份"><span class="tsn">杰瑞股份</span><span class="tcd">0.002353</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="潍柴动力"><span class="tsn">潍柴动力</span><span class="tcd">0.000338</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="杰瑞股份"><span class="tsn">杰瑞股份</span><span class="tcd">0.002353</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="潍柴动力"><span class="tsn">潍柴动力</span><span class="tcd">0.000338</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 深度绑定卡特彼勒等海外发动机龙头供应链</div>
 <div class="tsr" data-stock="联德股份"><span class="tsn">联德股份</span><span class="tcd">1.605060</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定卡特彼勒等海外发动机龙头供应链</span></div>
 <div class="tsr" data-stock="天润工业"><span class="tsn">天润工业</span><span class="tcd">0.002283</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定卡特彼勒等海外发动机龙头供应链</span></div>
 <div class="tsr" data-stock="三环集团"><span class="tsn">三环集团</span><span class="tcd">0.300408</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">深度绑定卡特彼勒等海外发动机龙头供应链</span></div>
@@ -293,30 +256,20 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·原料 锆矿→氯氧化锆→氧化锆粉体</div>
-<div class="tsr" data-stock="东方锆业" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">东方锆业</span><span class="tcd">002167</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">锆矿资源+氯氧化锆</span></div>
-<div class="tsr" data-stock="龙佰集团" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">龙佰集团</span><span class="tcd">002601</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">氯氧化锆产能最大</span></div>
-<div class="tsr" data-stock="三祥新材" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">三祥新材</span><span class="tcd">603663</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电熔氧化锆龙头</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·粉体 氧化锆粉体→成型→烧结</div>
-<div class="tsr" data-stock="国瓷材料" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">国瓷材料</span><span class="tcd">300285</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">粉体龙头+国产替代</span></div>
-<div class="tsr" data-stock="东方锆业" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">东方锆业</span><span class="tcd">002167</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">粉体一体化</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·制品 齿科材料+电子陶瓷+结构件</div>
-<div class="tsr" data-stock="爱迪特" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">爱迪特</span><span class="tcd">301580</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">齿科材料+海外订单</span></div>
-<div class="tsr" data-stock="国瓷材料" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">国瓷材料</span><span class="tcd">300285</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">齿科+电子陶瓷</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ 日本东曹断供→国产替代窗口打开</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="国瓷材料"><span class="tsn">国瓷材料</span><span class="tcd">0.300285</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="爱迪特"><span class="tsn">爱迪特</span><span class="tcd">0.301580</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 锆矿→氯氧化锆→氧化锆粉体</div>
+<div class="tsr" data-stock="东方锆业"><span class="tsn">东方锆业</span><span class="tcd">0.002167</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">锆矿资源+氯氧化锆</span></div>
+<div class="tsr" data-stock="龙佰集团"><span class="tsn">龙佰集团</span><span class="tcd">0.002601</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">氯氧化锆产能最大</span></div>
+<div class="tsr" data-stock="三祥新材"><span class="tsn">三祥新材</span><span class="tcd">1.603663</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电熔氧化锆龙头</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="东方锆业"><span class="tsn">东方锆业</span><span class="tcd">0.002167</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="龙佰集团"><span class="tsn">龙佰集团</span><span class="tcd">0.002601</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 氧化锆粉体→成型→烧结</div>
+<div class="tsr" data-stock="国瓷材料"><span class="tsn">国瓷材料</span><span class="tcd">0.300285</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">粉体龙头+国产替代</span></div>
+<div class="tsr" data-stock="东方锆业"><span class="tsn">东方锆业</span><span class="tcd">0.002167</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">粉体一体化</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="西陇科学"><span class="tsn">西陇科学</span><span class="tcd">0.002584</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="三祥新材"><span class="tsn">三祥新材</span><span class="tcd">1.603663</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">具备电熔氧化锆及纳米氧化锆产能</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 齿科材料+电子陶瓷+结构件</div>
+<div class="tsr" data-stock="爱迪特"><span class="tsn">爱迪特</span><span class="tcd">0.301580</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">齿科材料+海外订单</span></div>
+<div class="tsr" data-stock="国瓷材料"><span class="tsn">国瓷材料</span><span class="tcd">0.300285</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">齿科+电子陶瓷</span></div>
 </div>
 </div>
 </div>
@@ -335,20 +288,20 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="长电科技"><span class="tsn">长电科技</span><span class="tcd">1.600584</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="通富微电"><span class="tsn">通富微电</span><span class="tcd">0.002156</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="长电科技"><span class="tsn">长电科技</span><span class="tcd">1.600584</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="通富微电"><span class="tsn">通富微电</span><span class="tcd">0.002156</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="华天科技"><span class="tsn">华天科技</span><span class="tcd">0.002185</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="盛合晶微"><span class="tsn">盛合晶微</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="京东方A"><span class="tsn">京东方A</span><span class="tcd">0.000725</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="沃格光电"><span class="tsn">沃格光电</span><span class="tcd">1.603773</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="凯盛科技"><span class="tsn">凯盛科技</span><span class="tcd">1.600552</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="华天科技"><span class="tsn">华天科技</span><span class="tcd">0.002185</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="盛合晶微"><span class="tsn">盛合晶微</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="京东方A"><span class="tsn">京东方A</span><span class="tcd">0.000725</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="沃格光电"><span class="tsn">沃格光电</span><span class="tcd">1.603773</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="凯盛科技"><span class="tsn">凯盛科技</span><span class="tcd">1.600552</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 TGV激光钻孔、直写光刻等设备是玻璃基板封装产业</div>
 <div class="tsr" data-stock="大族激光"><span class="tsn">大族激光</span><span class="tcd">0.002008</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">TGV激光钻孔、直写光刻等设备是玻璃基板封装产业化的关键</span></div>
 <div class="tsr" data-stock="芯碁微装"><span class="tsn">芯碁微装</span><span class="tcd">1.688630</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">TGV激光钻孔、直写光刻等设备是玻璃基板封装产业化的关键</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 先进封装驱动上游高性能树脂、硅微粉等核心材料需求</div>
 <div class="tsr" data-stock="联瑞新材"><span class="tsn">联瑞新材</span><span class="tcd">1.688300</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">先进封装驱动上游高性能树脂、硅微粉等核心材料需求升级</span></div>
 <div class="tsr" data-stock="天承科技"><span class="tsn">天承科技</span><span class="tcd">1.688601</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">先进封装驱动上游高性能树脂、硅微粉等核心材料需求升级</span></div>
 <div class="tsr" data-stock="圣泉集团"><span class="tsn">圣泉集团</span><span class="tcd">1.605589</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">先进封装驱动上游高性能树脂、硅微粉等核心材料需求升级</span></div>
@@ -370,18 +323,14 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="云天化"><span class="tsn">云天化</span><span class="tcd">1.600096</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="兴发集团"><span class="tsn">兴发集团</span><span class="tcd">1.600141</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="川恒股份"><span class="tsn">川恒股份</span><span class="tcd">0.002895</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="川发龙蟒"><span class="tsn">川发龙蟒</span><span class="tcd">0.002312</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="云图控股"><span class="tsn">云图控股</span><span class="tcd">0.002539</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="新洋丰"><span class="tsn">新洋丰</span><span class="tcd">0.000902</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="芭田股份"><span class="tsn">芭田股份</span><span class="tcd">0.002170</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="云天化"><span class="tsn">云天化</span><span class="tcd">1.600096</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="兴发集团"><span class="tsn">兴发集团</span><span class="tcd">1.600141</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="川恒股份"><span class="tsn">川恒股份</span><span class="tcd">0.002895</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="川发龙蟒"><span class="tsn">川发龙蟒</span><span class="tcd">0.002312</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="云图控股"><span class="tsn">云图控股</span><span class="tcd">0.002539</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="新洋丰"><span class="tsn">新洋丰</span><span class="tcd">0.000902</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="芭田股份"><span class="tsn">芭田股份</span><span class="tcd">0.002170</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -399,28 +348,18 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·预制棒 光纤预制棒+涂料</div>
-<div class="tsr" data-stock="长飞光纤" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">长飞光纤</span><span class="tcd">601869</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">光纤预制棒龙头</span></div>
-<div class="tsr" data-stock="中天科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">中天科技</span><span class="tcd">600522</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">棒纤缆一体化</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·光纤缆 光纤拉丝+成缆</div>
-<div class="tsr" data-stock="烽火通信" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">烽火通信</span><span class="tcd">600498</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">光纤缆龙头</span></div>
-<div class="tsr" data-stock="亨通光电" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">亨通光电</span><span class="tcd">600487</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">海缆+光纤</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·连接器 光连接器+配线架</div>
-<div class="tsr" data-stock="太辰光" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">太辰光</span><span class="tcd">300570</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">MPO连接器</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ 藤仓涨价+AI拉动需求</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="长飞光纤"><span class="tsn">长飞光纤</span><span class="tcd">1.601869</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="亨通光电"><span class="tsn">亨通光电</span><span class="tcd">1.600487</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 光纤预制棒+涂料</div>
+<div class="tsr" data-stock="长飞光纤"><span class="tsn">长飞光纤</span><span class="tcd">1.601869</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">光纤预制棒龙头</span></div>
+<div class="tsr" data-stock="中天科技"><span class="tsn">中天科技</span><span class="tcd">1.600522</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">棒纤缆一体化</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="中天科技"><span class="tsn">中天科技</span><span class="tcd">1.600522</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="烽火通信"><span class="tsn">烽火通信</span><span class="tcd">1.600498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 光纤拉丝+成缆</div>
+<div class="tsr" data-stock="烽火通信"><span class="tsn">烽火通信</span><span class="tcd">1.600498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">光纤缆龙头</span></div>
+<div class="tsr" data-stock="亨通光电"><span class="tsn">亨通光电</span><span class="tcd">1.600487</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">海缆+光纤</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="太辰光"><span class="tsn">太辰光</span><span class="tcd">0.300570</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="仕佳光子"><span class="tsn">仕佳光子</span><span class="tcd">1.688313</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 光连接器+配线架</div>
+<div class="tsr" data-stock="太辰光"><span class="tsn">太辰光</span><span class="tcd">0.300570</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">MPO连接器</span></div>
 </div>
 </div>
 </div>
@@ -439,19 +378,17 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 受益于行业集中度提升且中报业绩高增长确定性强的头</div>
 <div class="tsr" data-stock="中信证券"><span class="tsn">中信证券</span><span class="tcd">1.600030</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
 <div class="tsr" data-stock="广发证券"><span class="tsn">广发证券</span><span class="tcd">0.000776</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
 <div class="tsr" data-stock="国泰海通"><span class="tsn">国泰海通</span><span class="tcd">1.601211</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
 <div class="tsr" data-stock="华泰证券"><span class="tsn">华泰证券</span><span class="tcd">1.601688</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
 <div class="tsr" data-stock="招商证券"><span class="tsn">招商证券</span><span class="tcd">1.600999</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
-<div class="tsr" data-stock="东方财富"><span class="tsn">东方财富</span><span class="tcd">0.300059</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="同花顺"><span class="tsn">同花顺</span><span class="tcd">0.300033</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="中金公司"><span class="tsn">中金公司</span><span class="tcd">1.601995</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 </div>
+<div class="tsr" data-stock="东方财富"><span class="tsn">东方财富</span><span class="tcd">0.300059</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="同花顺"><span class="tsn">同花顺</span><span class="tcd">0.300033</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="中金公司"><span class="tsn">中金公司</span><span class="tcd">1.601995</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -470,15 +407,11 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 玻璃原片与TGV技术布局</div>
 <div class="tsr" data-stock="凯盛科技"><span class="tsn">凯盛科技</span><span class="tcd">1.600552</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
 <div class="tsr" data-stock="旗滨集团"><span class="tsn">旗滨集团</span><span class="tcd">1.601636</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
 <div class="tsr" data-stock="戈碧迦"><span class="tsn">戈碧迦</span><span class="tcd">1.835438</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
 <div class="tsr" data-stock="帝尔激光"><span class="tsn">帝尔激光</span><span class="tcd">0.300776</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
 <div class="tsr" data-stock="德龙激光"><span class="tsn">德龙激光</span><span class="tcd">1.688170</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
 <div class="tsr" data-stock="东威科技"><span class="tsn">东威科技</span><span class="tcd">1.688700</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
 <div class="tsr" data-stock="芯碁微装"><span class="tsn">芯碁微装</span><span class="tcd">1.688630</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">玻璃原片与TGV技术布局</span></div>
@@ -502,13 +435,11 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="科济药业"><span class="tsn">科济药业</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="传奇生物"><span class="tsn">传奇生物</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="药明巨诺"><span class="tsn">药明巨诺</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="金斯瑞生物科技"><span class="tsn">金斯瑞生物科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="科济药业"><span class="tsn">科济药业</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="传奇生物"><span class="tsn">传奇生物</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="药明巨诺"><span class="tsn">药明巨诺</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="金斯瑞生物科技"><span class="tsn">金斯瑞生物科技</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -527,18 +458,16 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="中国对日钨原料出口管制"><span class="tsn">中国对日钨原料出口管制</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="中钨高新"><span class="tsn">中钨高新</span><span class="tcd">0.000657</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="中国对日钨原料出口管制"><span class="tsn">中国对日钨原料出口管制</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="中钨高新"><span class="tsn">中钨高新</span><span class="tcd">0.000657</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="厦门钨业"><span class="tsn">厦门钨业</span><span class="tcd">1.600549</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="欧科亿"><span class="tsn">欧科亿</span><span class="tcd">1.688308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="华锐精密"><span class="tsn">华锐精密</span><span class="tcd">1.688059</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="新锐股份"><span class="tsn">新锐股份</span><span class="tcd">1.688257</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="鼎泰高科"><span class="tsn">鼎泰高科</span><span class="tcd">0.301377</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="厦门钨业"><span class="tsn">厦门钨业</span><span class="tcd">1.600549</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="欧科亿"><span class="tsn">欧科亿</span><span class="tcd">1.688308</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="华锐精密"><span class="tsn">华锐精密</span><span class="tcd">1.688059</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="新锐股份"><span class="tsn">新锐股份</span><span class="tcd">1.688257</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="鼎泰高科"><span class="tsn">鼎泰高科</span><span class="tcd">0.301377</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 资产注入后成为PCB钨棒及上游高纯钨粉核心供应商</div>
 <div class="tsr" data-stock="江钨装备"><span class="tsn">江钨装备</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">资产注入后成为PCB钨棒及上游高纯钨粉核心供应商</span></div>
 </div>
 </div>
@@ -557,35 +486,21 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tsl" style="margin-top:8px"><div class="t-sg"><div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">🔗 产业链分析</div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">上游·零部件 减速器+电机+传感器</div>
-<div class="tsr" data-stock="斯菱智驱" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">斯菱智驱</span><span class="tcd">301550</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">谐波减速器</span></div>
-<div class="tsr" data-stock="科达利" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">科达利</span><span class="tcd">002850</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">谐波减速器</span></div>
-<div class="tsr" data-stock="峰岹科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">峰岹科技</span><span class="tcd">688279</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电机驱动芯片</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">中游·执行器 旋转/线性执行器</div>
-<div class="tsr" data-stock="三花智控" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">三花智控</span><span class="tcd">002050</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">执行器总成</span></div>
-<div class="tsr" data-stock="拓普集团" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">拓普集团</span><span class="tcd">601689</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">电驱总成</span></div>
-<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">下游·结构件 丝杠+轻量化材料</div>
-<div class="tsr" data-stock="恒立液压" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">恒立液压</span><span class="tcd">601100</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">丝杠环节</span></div>
-<div class="tsr" data-stock="贝斯特" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">贝斯特</span><span class="tcd">300580</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">丝杠+壳体</span></div>
-<div class="tsr" data-stock="福赛科技" style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8"><span class="tsn" style="font-size:12px;font-weight:600">福赛科技</span><span class="tcd">301529</span><span class="tsr2" style="color:#7C4FC4;font-style:italic">PEEK轻量化</span></div>
-</div></div>
+<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">⚡ 特斯拉得州工厂进度超预期</div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="拓普集团"><span class="tsn">拓普集团</span><span class="tcd">1.601689</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">总成环节核心供应商</span></div>
-<div class="tsr" data-stock="三花智控"><span class="tsn">三花智控</span><span class="tcd">0.002050</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">总成环节核心供应商</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 减速器+电机+传感器</div>
+<div class="tsr" data-stock="斯菱智驱"><span class="tsn">斯菱智驱</span><span class="tcd">0.301550</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">谐波减速器</span></div>
+<div class="tsr" data-stock="科达利"><span class="tsn">科达利</span><span class="tcd">0.002850</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">谐波减速器</span></div>
+<div class="tsr" data-stock="峰岹科技"><span class="tsn">峰岹科技</span><span class="tcd">1.688279</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电机驱动芯片</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="科达利"><span class="tsn">科达利</span><span class="tcd">0.002850</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">总成环节核心供应商</span></div>
-<div class="tsr" data-stock="斯菱智驱"><span class="tsn">斯菱智驱</span><span class="tcd">0.301550</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">总成环节核心供应商</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 旋转/线性执行器</div>
+<div class="tsr" data-stock="三花智控"><span class="tsn">三花智控</span><span class="tcd">0.002050</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">执行器总成</span></div>
+<div class="tsr" data-stock="拓普集团"><span class="tsn">拓普集团</span><span class="tcd">1.601689</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电驱总成</span></div>
 </div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="峰岹科技"><span class="tsn">峰岹科技</span><span class="tcd">1.688279</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电机环节稀缺标的</span></div>
-<div class="tsr" data-stock="恒帅股份"><span class="tsn">恒帅股份</span><span class="tcd">0.300969</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电机环节稀缺标的</span></div>
-<div class="tsr" data-stock="福赛科技"><span class="tsn">福赛科技</span><span class="tcd">0.301529</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">电机环节稀缺标的</span></div>
-<div class="tsr" data-stock="贝斯特"><span class="tsn">贝斯特</span><span class="tcd">0.300580</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">丝杠环节</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 丝杠+轻量化材料</div>
 <div class="tsr" data-stock="恒立液压"><span class="tsn">恒立液压</span><span class="tcd">1.601100</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">丝杠环节</span></div>
-<div class="tsr" data-stock="浙江荣泰"><span class="tsn">浙江荣泰</span><span class="tcd">1.603119</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">丝杠环节</span></div>
+<div class="tsr" data-stock="贝斯特"><span class="tsn">贝斯特</span><span class="tcd">0.300580</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">丝杠+壳体</span></div>
+<div class="tsr" data-stock="福赛科技"><span class="tsn">福赛科技</span><span class="tcd">0.301529</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">PEEK轻量化</span></div>
 </div>
 </div>
 </div>
@@ -604,15 +519,13 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="利元亨"><span class="tsn">利元亨</span><span class="tcd">1.688499</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="先导智能"><span class="tsn">先导智能</span><span class="tcd">0.300450</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="利元亨"><span class="tsn">利元亨</span><span class="tcd">1.688499</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="先导智能"><span class="tsn">先导智能</span><span class="tcd">0.300450</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="上海洗霸"><span class="tsn">上海洗霸</span><span class="tcd">1.603200</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="三祥新材"><span class="tsn">三祥新材</span><span class="tcd">1.603663</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="上海洗霸"><span class="tsn">上海洗霸</span><span class="tcd">1.603200</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="三祥新材"><span class="tsn">三祥新材</span><span class="tcd">1.603663</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 加速全固态电池验证和量产导入的头部电池厂</div>
 <div class="tsr" data-stock="国轩高科"><span class="tsn">国轩高科</span><span class="tcd">0.002074</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速全固态电池验证和量产导入的头部电池厂</span></div>
 <div class="tsr" data-stock="亿纬锂能"><span class="tsn">亿纬锂能</span><span class="tcd">0.300014</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速全固态电池验证和量产导入的头部电池厂</span></div>
 <div class="tsr" data-stock="宁德时代"><span class="tsn">宁德时代</span><span class="tcd">0.300750</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速全固态电池验证和量产导入的头部电池厂</span></div>
@@ -634,19 +547,21 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="终极物理方案"><span class="tsn">终极物理方案</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="国机精工"><span class="tsn">国机精工</span><span class="tcd">0.002046</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#4CAF5012;color:#4CAF50;font-size:10px">上游 </div>
+<div class="tsr" data-stock="终极物理方案"><span class="tsn">终极物理方案</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="国机精工"><span class="tsn">国机精工</span><span class="tcd">0.002046</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="四方达"><span class="tsn">四方达</span><span class="tcd">0.300179</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="沃尔德"><span class="tsn">沃尔德</span><span class="tcd">1.688028</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="四方达"><span class="tsn">四方达</span><span class="tcd">0.300179</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="沃尔德"><span class="tsn">沃尔德</span><span class="tcd">1.688028</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 加速布局上游MPCVD核心产能</div>
 <div class="tsr" data-stock="力量钻石"><span class="tsn">力量钻石</span><span class="tcd">0.301071</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速布局上游MPCVD核心产能</span></div>
 <div class="tsr" data-stock="惠丰钻石"><span class="tsn">惠丰钻石</span><span class="tcd">1.839725</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速布局上游MPCVD核心产能</span></div>
 <div class="tsr" data-stock="中兵红箭"><span class="tsn">中兵红箭</span><span class="tcd">0.000519</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">加速布局上游MPCVD核心产能</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 与核心客户合作且具备低成本能源优势</div>
 <div class="tsr" data-stock="恒盛能源"><span class="tsn">恒盛能源</span><span class="tcd">1.605580</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">与核心客户合作且具备低成本能源优势</span></div>
+</div>
+<div class="t-sg"><div class="t-gl" style="background:#2196F312;color:#2196F3;font-size:10px">下游 转型切入金刚石激光加工环节</div>
 <div class="tsr" data-stock="共达电声"><span class="tsn">共达电声</span><span class="tcd">0.002655</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">转型切入金刚石激光加工环节</span></div>
 </div>
 </div>
@@ -666,13 +581,11 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="宁德时代"><span class="tsn">宁德时代</span><span class="tcd">0.300750</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="鼎胜新材"><span class="tsn">鼎胜新材</span><span class="tcd">1.603876</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="欣旺达"><span class="tsn">欣旺达</span><span class="tcd">0.300207</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="鹏辉能源"><span class="tsn">鹏辉能源</span><span class="tcd">0.300438</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="宁德时代"><span class="tsn">宁德时代</span><span class="tcd">0.300750</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="鼎胜新材"><span class="tsn">鼎胜新材</span><span class="tcd">1.603876</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="欣旺达"><span class="tsn">欣旺达</span><span class="tcd">0.300207</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="鹏辉能源"><span class="tsn">鹏辉能源</span><span class="tcd">0.300438</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -691,12 +604,10 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="乖宝宠物"><span class="tsn">乖宝宠物</span><span class="tcd">0.301498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="中宠股份"><span class="tsn">中宠股份</span><span class="tcd">0.002891</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="佩蒂股份"><span class="tsn">佩蒂股份</span><span class="tcd">0.300673</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="乖宝宠物"><span class="tsn">乖宝宠物</span><span class="tcd">0.301498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="中宠股份"><span class="tsn">中宠股份</span><span class="tcd">0.002891</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="佩蒂股份"><span class="tsn">佩蒂股份</span><span class="tcd">0.300673</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -715,18 +626,14 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="刚性需求"><span class="tsn">刚性需求</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="确定性的增量市场"><span class="tsn">确定性的增量市场</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="嘉泽新能"><span class="tsn">嘉泽新能</span><span class="tcd">1.601619</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="中国天楹"><span class="tsn">中国天楹</span><span class="tcd">0.000035</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l3">相关标的</div>
-<div class="tsr" data-stock="电投绿能"><span class="tsn">电投绿能</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="华电科工"><span class="tsn">华电科工</span><span class="tcd">1.601226</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
-<div class="tsr" data-stock="中集安瑞科"><span class="tsn">中集安瑞科</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">相关标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="刚性需求"><span class="tsn">刚性需求</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="确定性的增量市场"><span class="tsn">确定性的增量市场</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="嘉泽新能"><span class="tsn">嘉泽新能</span><span class="tcd">1.601619</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="中国天楹"><span class="tsn">中国天楹</span><span class="tcd">0.000035</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="电投绿能"><span class="tsn">电投绿能</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="华电科工"><span class="tsn">华电科工</span><span class="tcd">1.601226</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="中集安瑞科"><span class="tsn">中集安瑞科</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -745,13 +652,11 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </span>
 </div>
 <div class="tsl">
-<div class="t-sg"><div class="t-gl l1">龙头首选</div>
-<div class="tsr" data-stock="日出东方"><span class="tsn">日出东方</span><span class="tcd">1.603366</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-<div class="tsr" data-stock="美的集团"><span class="tsn">美的集团</span><span class="tcd">0.000333</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心标的</span></div>
-</div>
-<div class="t-sg"><div class="t-gl l2">弹性机会</div>
-<div class="tsr" data-stock="万和电气"><span class="tsn">万和电气</span><span class="tcd">0.002543</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
-<div class="tsr" data-stock="海尔智家"><span class="tsn">海尔智家</span><span class="tcd">1.600690</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">弹性标的</span></div>
+<div class="t-sg"><div class="t-gl" style="background:#FF980012;color:#FF9800;font-size:10px">中游 核心标的</div>
+<div class="tsr" data-stock="日出东方"><span class="tsn">日出东方</span><span class="tcd">1.603366</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="美的集团"><span class="tsn">美的集团</span><span class="tcd">0.000333</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="万和电气"><span class="tsn">万和电气</span><span class="tcd">0.002543</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
+<div class="tsr" data-stock="海尔智家"><span class="tsn">海尔智家</span><span class="tcd">1.600690</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2"></span></div>
 </div>
 </div>
 </div>
@@ -771,8 +676,8 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tr2">📌 在过去一周，智谱于6月17日前后发布并开源GLM-5.2，其在代码生成和长程任务上的能力已进入全球第一梯队，在部分权威评测中与Claude Opus 4.8处于可比区间，尤其在海外顶尖模型Fable 5受限后，其“Opus平替”的口碑迅速确立。</div>
-<div class="tbb" style="border-left-color:#9B59B6">📘 "这不仅是技术追赶的里程碑，更标志着国产头部模型正从低价竞争转向凭借顶尖能力获得定价权的新阶段，其年内连续提价和API调用量不降反升验证了高质量Token的商业价值，同时，该模型发布首日即全面适配国产算力平台，解决了AI自主可控的核心叙事。"</div>
+<div class="tr2">📌 在过去一周，智谱于6月17日前后发布并开源GLM-5.2，其在代码生成和长程任务上的能力已进入全球第一梯队，在部分权威评测中与Claude Opus 4.8处于...</div>
+<div class="tbb" style="border-left-color:#9B59B6">📘 "这不仅是技术追赶的里程碑，更标志着国产头部模型正从低价竞争转向凭借顶尖能力获得定价权的新阶段，其年内连续提价和API调用"</div>
 <div class="tsl">
 <div class="tsr" data-stock="智谱"><span class="tsn">智谱</span><span class="tcd"></span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心前瞻标的</span></div>
 <div class="tsr" data-stock="寒武纪"><span class="tsn">寒武纪</span><span class="tcd">1.688256</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
@@ -794,8 +699,8 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 </div>
 </span>
 </div>
-<div class="tr2">📌 昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链从巨头垂直整合的封闭模式，正式转向开放的社会化分工。</div>
-<div class="tbb" style="border-left-color:#9B59B6">📘 "昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链从巨头垂直整合的封闭模式，正式转向开放的社会化分工。"</div>
+<div class="tr2">📌 昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现期，更标志着CPO产业链从巨头垂直整合的...</div>
+<div class="tbb" style="border-left-color:#9B59B6">📘 "昨晚剑桥科技官宣启动CPO专用200mW外置光源ELSFP的备料，这一动作不仅证实了英伟达等下游客户的批量订单已进入兑现"</div>
 <div class="tsl">
 <div class="tsr" data-stock="剑桥科技"><span class="tsn">剑桥科技</span><span class="tcd">1.603083</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">核心前瞻标的</span></div>
 <div class="tsr" data-stock="源杰科技"><span class="tsn">源杰科技</span><span class="tcd">1.688498</span><span class="tsc" data-field="pct">-0.00%</span><span class="tsr2">前瞻弹性标的</span></div>
@@ -809,131 +714,131 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 <div class="alpha-list">
 <div class="asc">
 <span class="ar ldr">★</span>
-<div class="ai"><span class="an">长期业绩弹性和平台化估值</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ai"><span class="an">长期业绩弹性和平台化估值</span><span class="ab">75</span><span class="ar2"></span></div>
 <div class="ap" data-stock="长期业绩弹性和平台化估值" data-field="pct">-0.00%</div>
 </div>
 <div class="asc">
 <span class="ar ldr">★</span>
-<div class="ai"><span class="an">长川科技</span><span class="ab">75</span><span class="ar2">核心标的</span></div>
+<div class="ai"><span class="an">长川科技</span><span class="ab">75</span><span class="ar2"></span></div>
 <div class="ap" data-stock="长川科技" data-field="pct">-0.00%</div>
 </div>
 <div class="asc">
 <span class="ar ldr">★</span>
-<div class="ai"><span class="an">产业链价值通胀</span><span class="ab">74</span><span class="ar2">核心标的</span></div>
+<div class="ai"><span class="an">华峰测控</span><span class="ab">75</span><span class="ar2"></span></div>
+<div class="ap" data-stock="华峰测控" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar ldr">★</span>
+<div class="ai"><span class="an">产业链价值通胀</span><span class="ab">74</span><span class="ar2"></span></div>
 <div class="ap" data-stock="产业链价值通胀" data-field="pct">-0.00%</div>
 </div>
 <div class="asc">
 <span class="ar ldr">★</span>
-<div class="ai"><span class="an">核心供应商的业绩兑现</span><span class="ab">74</span><span class="ar2">核心标的</span></div>
+<div class="ai"><span class="an">核心供应商的业绩兑现</span><span class="ab">74</span><span class="ar2"></span></div>
 <div class="ap" data-stock="核心供应商的业绩兑现" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar ldr">★</span>
-<div class="ai"><span class="an">兆易创新</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="兆易创新" data-field="pct">-0.00%</div>
 </div>
 </div>
 <div class="s2" style="margin-top:14px;font-size:14px">📋 Alpha精选池（20只 · 按综合评分排序）</div>
 <div class="alpha-list">
 <div class="asc">
 <span class="ar">·</span>
-<div class="ai"><span class="an">北京君正</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="北京君正" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">验证中报的利润兑现能力</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="验证中报的利润兑现能力" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">建滔积层板</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="建滔积层板" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">中国动力</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="中国动力" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">应流股份</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="应流股份" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">国瓷材料</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="国瓷材料" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">爱迪特</span><span class="ab">73</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="爱迪特" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">长电科技</span><span class="ab">70</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="长电科技" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">通富微电</span><span class="ab">70</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="通富微电" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">云天化</span><span class="ab">69</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="云天化" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">兴发集团</span><span class="ab">69</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="兴发集团" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">长飞光纤</span><span class="ab">69</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="长飞光纤" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">亨通光电</span><span class="ab">69</span><span class="ar2">核心标的</span></div>
-<div class="ap" data-stock="亨通光电" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">中信证券</span><span class="ab">68</span><span class="ar2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
-<div class="ap" data-stock="中信证券" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">广发证券</span><span class="ab">68</span><span class="ar2">受益于行业集中度提升且中报业绩高增长确定性强的头部券商</span></div>
-<div class="ap" data-stock="广发证券" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">旗滨集团</span><span class="ab">68</span><span class="ar2">玻璃原片与TGV技术布局</span></div>
-<div class="ap" data-stock="旗滨集团" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">华峰测控</span><span class="ab">65</span><span class="ar2">弹性标的</span></div>
-<div class="ap" data-stock="华峰测控" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">精智达</span><span class="ab">65</span><span class="ar2">深度绑定大客户的存储测试设备龙头</span></div>
-<div class="ap" data-stock="精智达" data-field="pct">-0.00%</div>
-</div>
-<div class="asc">
-<span class="ar">·</span>
-<div class="ai"><span class="an">强瑞技术</span><span class="ab">64</span><span class="ar2">弹性标的</span></div>
+<div class="ai"><span class="an">强瑞技术</span><span class="ab">74</span><span class="ar2"></span></div>
 <div class="ap" data-stock="强瑞技术" data-field="pct">-0.00%</div>
 </div>
 <div class="asc">
 <span class="ar">·</span>
-<div class="ai"><span class="an">金富科技</span><span class="ab">64</span><span class="ar2">弹性标的</span></div>
+<div class="ai"><span class="an">金富科技</span><span class="ab">74</span><span class="ar2"></span></div>
 <div class="ap" data-stock="金富科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">中国巨石</span><span class="ab">73</span><span class="ar2">电子布龙头</span></div>
+<div class="ap" data-stock="中国巨石" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">宏和科技</span><span class="ab">73</span><span class="ar2">电子布弹性最大</span></div>
+<div class="ap" data-stock="宏和科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">圣泉集团</span><span class="ab">73</span><span class="ar2">树脂供应商</span></div>
+<div class="ap" data-stock="圣泉集团" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">中国动力</span><span class="ab">73</span><span class="ar2"></span></div>
+<div class="ap" data-stock="中国动力" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">应流股份</span><span class="ab">73</span><span class="ar2"></span></div>
+<div class="ap" data-stock="应流股份" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">杰瑞股份</span><span class="ab">73</span><span class="ar2"></span></div>
+<div class="ap" data-stock="杰瑞股份" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">潍柴动力</span><span class="ab">73</span><span class="ar2"></span></div>
+<div class="ap" data-stock="潍柴动力" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">东方锆业</span><span class="ab">73</span><span class="ar2">锆矿资源+氯氧化锆</span></div>
+<div class="ap" data-stock="东方锆业" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">龙佰集团</span><span class="ab">73</span><span class="ar2">氯氧化锆产能最大</span></div>
+<div class="ap" data-stock="龙佰集团" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">三祥新材</span><span class="ab">73</span><span class="ar2">电熔氧化锆龙头</span></div>
+<div class="ap" data-stock="三祥新材" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">长电科技</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="长电科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">通富微电</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="通富微电" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">华天科技</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="华天科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">盛合晶微</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="盛合晶微" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">京东方A</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="京东方A" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">沃格光电</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="沃格光电" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">凯盛科技</span><span class="ab">70</span><span class="ar2"></span></div>
+<div class="ap" data-stock="凯盛科技" data-field="pct">-0.00%</div>
+</div>
+<div class="asc">
+<span class="ar">·</span>
+<div class="ai"><span class="an">长飞光纤</span><span class="ab">69</span><span class="ar2">光纤预制棒龙头</span></div>
+<div class="ap" data-stock="长飞光纤" data-field="pct">-0.00%</div>
 </div>
 </div>
 </div>

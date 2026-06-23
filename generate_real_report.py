@@ -282,7 +282,7 @@ def format_topic_for_pipeline(topic, rank, all_secids):
             sid = all_secids.get(sname, "")
             item = {
                 "name": sname, "code": sid,
-                "reason": reason_map.get(sname, "") or ("核心标的" if i < 2 else ("弹性标的" if i < 4 else "相关标的")),
+                "reason": reason_map.get(sname, "") or "",  # 无原文理由时留空（不用"核心标的"等通用词）
                 "alpha": stock_alpha["alpha_total"],
                 "change_pct": 0,
             }

@@ -55,9 +55,9 @@ body{font-family:'Inter Tight',-apple-system,sans-serif;background:#E4E1DC;color
 .tsl{display:flex;flex-direction:column;gap:6px}
 .t-sg{margin-bottom:4px}
 .t-gl{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:3px}
-.t-gl.l1{background:#C4433A12;color:#C4433A}
-.t-gl.l2{background:#E87A2012;color:#E87A20}
-.t-gl.l3{background:#3E54CE12;color:#3E54CE}
+.chain-up{background:#4CAF5012;color:#4CAF50}
+.chain-mid{background:#FF980012;color:#FF9800}
+.chain-down{background:#2196F312;color:#2196F3}
 .tsr{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #F5F4F2;font-size:12px;flex-wrap:wrap;transition:background .3s}
 .tsr:last-child{border-bottom:none}
 .tsn{font-weight:700;font-size:13px;color:#151515;min-width:56px}
@@ -214,10 +214,11 @@ HEAT_COLOR = {
     "low": "#3E54CE",     # < 60
 }
 
-TIER_STYLE = {
-    1: ("龙头首选", "l1"),
-    2: ("弹性机会", "l2"),
-    3: ("相关标的", "l3"),
+# 产业链位置样式
+CHAIN_LABEL_STYLE = {
+    "上游": ("上游", "#4CAF50"),
+    "中游": ("中游", "#FF9800"),
+    "下游": ("下游", "#2196F3"),
 }
 
 EDITION_META = {
@@ -293,7 +294,7 @@ def render_market_summary(summary: Dict) -> str:
 
 
 def render_topic_card(topic: Dict, popup_id: str) -> str:
-    """单个主题卡片"""
+    """单个主题卡片 - 产业链上中下游驱动"""
     rank = topic.get("rank", 0)
     title = topic.get("title", "")
     stage = topic.get("stage", "持续")
@@ -301,20 +302,19 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
     heat = topic.get("heat", 0)
     hc = _heat_color(heat)
 
-    # 热度拆解
     hb = topic.get("heat_breakdown", {})
     org = hb.get("机构关注度", 0)
     mkt = hb.get("市场确认度", 0)
     cat = hb.get("催化质量", 0)
 
-    # AI摘要 & 蓝宝书原文
+    # 📌 AI总结（精简）
     ai_summary = topic.get("ai_summary", "")
+    # 📘 蓝宝书重点
     bluebook_quote = topic.get("bluebook_quote", "")
 
-    # 标的分组
-    stock_groups = topic.get("stock_groups", [])
+    # 产业链分组 (替代旧 tier 分组)
+    chain_groups = topic.get("chain_groups", [])
 
-    # 构建 HTML
     parts = [f"""<div class="tc">
 <div class="th">
 <span class="tr">TOP{rank}</span>
@@ -330,30 +330,40 @@ def render_topic_card(topic: Dict, popup_id: str) -> str:
 </span>
 </div>"""]
 
-    # AI 摘要
+    # AI 摘要（精简）
     if ai_summary:
         parts.append(f'<div class="tr2">📌 {ai_summary}</div>')
 
-    # 蓝宝书原文
+    # 蓝宝书重点
     if bluebook_quote:
-        parts.append(f'<div class="tbb">📘 "{bluebook_quote}"</div>')
+        parts.append(f'<div class="tbb">📘 {bluebook_quote}</div>')
 
-    # 产业链分析
+    # 产业链驱动 k-v
     chain = topic.get("industry_chain")
-    if chain and chain.get("nodes"):
-        parts.append(_render_chain_section(chain))
+    if chain and chain.get("key_driver"):
+        parts.append(
+            f'<div style="font-size:11px;color:#7C4FC4;margin:6px 0 4px;font-weight:500">'
+            f'⚡ {chain["key_driver"]}</div>'
+        )
 
-    # 标的分层
-    if stock_groups:
+    # 产业链分组渲染
+    if chain_groups:
         parts.append('<div class="tsl">')
-        for group in stock_groups:
-            tier = group.get("tier", 1)
-            tier_label, tier_class = TIER_STYLE.get(tier, (f"层级{tier}", "l3"))
-            stocks = group.get("stocks", [])
+        for cg in chain_groups:
+            level = cg.get("level", "")
+            role = cg.get("role", "")
+            stocks = cg.get("stocks", [])
             if not stocks:
                 continue
 
-            parts.append(f'<div class="t-sg"><div class="t-gl {tier_class}">{tier_label}</div>')
+            # 产业链标签颜色
+            label, color = CHAIN_LABEL_STYLE.get(level, (level, "#999"))
+
+            parts.append(
+                f'<div class="t-sg"><div class="t-gl" style="background:{color}12;color:{color};font-size:10px">'
+                f'{label} {role}</div>'
+            )
+
             for s in stocks:
                 name = s.get("name", "")
                 code = s.get("code", "")
@@ -441,40 +451,6 @@ def _fmt_pct(pct: float) -> tuple:
     pct_str = f"+{pct:.2f}%" if pct > 0 else f"{pct:.2f}%"
     dir_class = "up" if pct > 0 else "dn"
     return (pct_str, dir_class)
-
-
-def _render_chain_section(chain: Dict) -> str:
-    """产业链分析区块"""
-    if not chain or not chain.get("nodes"):
-        return ""
-
-    parts = ['<div class="tsl" style="margin-top:8px">'
-             '<div class="t-sg">'
-             '<div class="t-gl" style="background:#7C4FC412;color:#7C4FC4;font-size:11px">'
-             '🔗 产业链分析</div>']
-
-    for node in chain.get("nodes", []):
-        node_stocks = node.get("stocks", [])
-        if not node_stocks:
-            continue
-        level = node.get("level", "")
-        role = node.get("role", "")
-        parts.append(
-            f'<div style="font-size:11px;color:#7C4FC4;margin:4px 0 2px;font-weight:600">'
-            f'{level} {role}</div>'
-        )
-        for s in node_stocks:
-            parts.append(
-                f'<div class="tsr" data-stock="{s["name"]}" '
-                f'style="font-size:11px;padding:2px 0;border-bottom:1px dashed #F0EEF8">'
-                f'<span class="tsn" style="font-size:12px;font-weight:600">{s["name"]}</span>'
-                f'<span class="tcd">{s.get("code", "")}</span>'
-                f'<span class="tsr2" style="color:#7C4FC4;font-style:italic">{s.get("catalyst", "")}</span>'
-                f'</div>'
-            )
-
-    parts.append('</div></div>')
-    return "\n".join(parts)
 
 
 def render_alpha_row(stock: Dict, is_leader: bool = False) -> str:

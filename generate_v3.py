@@ -152,34 +152,37 @@ def _split_summary_v2(raw_summary: str):
     if not sentences:
         return clean[:120], ""
 
-    # 📌 AI总结: 前1-2句（事件描述 + 边际变化），总共不超过150字
+    # 📌 AI总结: 前1句（事件描述），max 80字
     ai_parts = []
     ai_len = 0
-    for s in sentences[:3]:
-        if ai_len + len(s) < 180:
-            ai_parts.append(s)
-            ai_len += len(s)
-    ai_summary = "。".join(ai_parts) + "。"
+    for s in sentences[:2]:
+        short_s = s[:80] if len(s) > 80 else s
+        if ai_len + len(short_s) < 80:
+            ai_parts.append(short_s)
+            ai_len += len(short_s)
+        else:
+            break
+    ai_summary = "。".join(ai_parts)
+    if ai_summary and not ai_summary.endswith("。"):
+        ai_summary += "。"
+    if not ai_summary:
+        ai_summary = analysis_part[:80] + "..."
 
-    # 📘 蓝宝书重点: 找到包含核心逻辑的句子（"标志着"、"投资逻辑"、"核心"等）
-    key_markers = ["标志着", "投资逻辑", "核心边际", "边际变化", "市场正交易",
-                   "市场确认", "这一变化", "预期将从", "逻辑已从"]
-    bluebook_parts = []
+    # 📘 蓝宝书重点: 核心逻辑句，max 60字
+    key_markers = ["标志着", "投资逻辑", "核心边际", "市场正交易",
+                   "这一变化", "预期将从", "逻辑已从"]
+    bluebook_quote = ""
     for s in sentences:
         if any(m in s for m in key_markers):
-            bluebook_parts.append(s)
-            if len(bluebook_parts) >= 2:
+            bluebook_quote = s[:60] if len(s) > 60 else s
+            break
+
+    if not bluebook_quote:
+        # 取第二句（跳过纯事件描述），max 50字
+        for s in sentences[1:]:
+            if len(s) > 10:
+                bluebook_quote = s[:50] if len(s) > 50 else s
                 break
-
-    if not bluebook_parts:
-        # 取中间1句（最有信息量的）
-        mid = len(sentences) // 2
-        if mid < len(sentences):
-            bluebook_parts = [sentences[mid]]
-
-    bluebook_quote = "。".join(bluebook_parts[:2])
-    if bluebook_quote:
-        bluebook_quote += "。"
 
     return ai_summary.strip(), bluebook_quote.strip()
 
@@ -233,35 +236,31 @@ def get_industry_chain(topic_title: str, topic_stocks: list) -> dict:
 
 def topic_to_v3(topic: dict, rank: int, secids: dict, live_quotes: dict = None,
                 mid_reasons: list = None) -> dict:
-    """将 topic 转换为 render_engine 格式"""
+    """将 topic 转换为 render_engine 格式，产业链驱动"""
     live_quotes = live_quotes or {}
 
-    # 📌📘 内容拆分
+    # 📌📘 内容拆分（精简）
     summary_raw = topic.get("summary_raw", "")
     ai_summary, bluebook_quote = _split_summary_v2(summary_raw)
 
-    # 构建按理由分组的标的映射
+    # 构建理由映射
     reason_map = {}
     if mid_reasons:
         for sr in mid_reasons:
             name = sr["name"]
             reason = sr.get("reason", "")
-            if name not in reason_map:
+            if name and name not in reason_map:
                 reason_map[name] = reason
 
-    stock_groups = []
+    # 降平所有标的（不再分层）
+    all_stocks = []
     for tier_group in topic.get("stocks", []):
-        tier_name = tier_group.get("tier", "相关标的")
-        tier_num = TIER_MAP.get(tier_name, 3)
         items = tier_group.get("items", [])
-
-        stocks = []
         for item in items:
             name = item.get("name", "")
             code = item.get("code", "")
             pct = item.get("change_pct", 0)
 
-            # 用实时行情覆盖
             if name in live_quotes:
                 q = live_quotes[name]
                 pct_raw = q.get("change_pct", 0)
@@ -270,24 +269,16 @@ def topic_to_v3(topic: dict, rank: int, secids: dict, live_quotes: dict = None,
                 if not code and q.get("code"):
                     code = q["code"]
 
-            # 推荐理由：优先用Alpha派原文，否则用已有的
-            reason = reason_map.get(name, "")
-            if not reason:
-                reason = item.get("reason", "")
+            reason = reason_map.get(name, "") or item.get("reason", "")
 
-            stocks.append({
-                "name": name,
-                "code": code,
-                "pct": pct,
-                "reason": reason,
+            all_stocks.append({
+                "name": name, "code": code, "pct": pct, "reason": reason,
             })
 
-        if stocks:
-            stock_groups.append({"tier": tier_num, "stocks": stocks})
-
-    # 产业链
-    all_names = [s["name"] for g in stock_groups for s in g["stocks"]]
+    # 产业链分组
+    all_names = [s["name"] for s in all_stocks]
     chain = get_industry_chain(topic.get("title", ""), all_names)
+    chain_groups = _build_chain_groups(all_stocks, chain)
 
     return {
         "rank": rank,
@@ -301,9 +292,96 @@ def topic_to_v3(topic: dict, rank: int, secids: dict, live_quotes: dict = None,
         },
         "ai_summary": ai_summary,
         "bluebook_quote": bluebook_quote,
-        "stock_groups": stock_groups,
-        "industry_chain": chain,  # 新字段
+        "chain_groups": chain_groups,
+        "industry_chain": chain,
     }
+
+
+def _build_chain_groups(all_stocks: list, chain: dict) -> list:
+    """
+    构建产业链分组：优先匹配数据库链，否则按理由自动推导
+    返回: [{level: "上游"|"中游"|"下游", role: "...", stocks: [...]}]
+    """
+    if not all_stocks:
+        return []
+
+    # 尝试用数据库链分组
+    if chain and chain.get("nodes"):
+        groups = []
+        node_order = []  # 记录节点顺序
+        for node in chain["nodes"]:
+            node_stocks = []
+            for ns in node.get("stocks", []):
+                # 找匹配的标的
+                for s in all_stocks:
+                    if s["name"] == ns["name"]:
+                        node_stocks.append({
+                            "name": s["name"],
+                            "code": s.get("code", ns.get("code", "")),
+                            "pct": s.get("pct", 0),
+                            "reason": ns.get("catalyst", s.get("reason", "")),
+                        })
+                        break
+            if node_stocks:
+                # 解析节点名称为 上游/中游/下游
+                node_name = node.get("level", "")
+                if "上游" in node_name:
+                    level = "上游"
+                elif "中游" in node_name:
+                    level = "中游"
+                elif "下游" in node_name:
+                    level = "下游"
+                else:
+                    level = node_name
+
+                groups.append({
+                    "level": level,
+                    "role": node.get("role", ""),
+                    "stocks": node_stocks,
+                })
+
+        if len(groups) >= 2:
+            return groups
+
+    # 自动推导：按推荐理由分组（理由常描述产业位置）
+    reason_groups = {}
+    for s in all_stocks:
+        reason = s.get("reason", "").strip()
+        if reason in ("核心标的", "弹性标的", "相关标的", "龙头首选", "弹性机会", "", "前瞻弹性标的", "核心前瞻标的"):
+            key = "核心标的"
+        else:
+            key = reason
+
+        if key not in reason_groups:
+            reason_groups[key] = {"stocks": [], "reason": reason}
+        reason_groups[key]["stocks"].append({
+            "name": s["name"], "code": s.get("code", ""),
+            "pct": s.get("pct", 0), "reason": s.get("reason", ""),
+        })
+
+    # 简单映射：第一组→上游，最后一组→下游，其余→中游
+    keys = list(reason_groups.keys())
+    if len(keys) == 1:
+        # 单组：全归中游
+        level = "中游" if len(all_stocks) > 1 else ""
+        return [{"level": level, "role": keys[0][:20], "stocks": reason_groups[keys[0]]["stocks"]}]
+
+    groups = []
+    for i, k in enumerate(keys):
+        if i == 0:
+            level = "上游"
+        elif i == len(keys) - 1:
+            level = "下游"
+        else:
+            level = "中游"
+        role = k if k != "核心标的" else ""
+        groups.append({
+            "level": level,
+            "role": role[:24],
+            "stocks": reason_groups[k]["stocks"],
+        })
+
+    return groups
 
 
 def build_market_summary(topics: list, stocks: list, live_quotes: dict) -> dict:
@@ -319,7 +397,7 @@ def build_market_summary(topics: list, stocks: list, live_quotes: dict) -> dict:
 
     rising_tags = []
     for t in sorted_topics:
-        for g in t.get("stock_groups", []):
+        for g in t.get("chain_groups", []):
             if any(s.get("pct", 0) > 5 for s in g.get("stocks", [])):
                 tag = t['title']
                 if tag not in rising_tags:
@@ -359,7 +437,7 @@ def build_alpha_list(topics: list) -> tuple:
     seen = set()
 
     for topic in sorted(topics, key=lambda t: t["heat"], reverse=True):
-        for g in topic.get("stock_groups", []):
+        for g in topic.get("chain_groups", []):
             for s in g.get("stocks", []):
                 name = s["name"]
                 if name in seen:
@@ -367,8 +445,17 @@ def build_alpha_list(topics: list) -> tuple:
                 seen.add(name)
 
                 topic_heat = topic["heat"] / 100 * 60
-                tier_bonus = (4 - g["tier"]) * 10
-                alpha = min(int(topic_heat + tier_bonus), 99)
+                # 产业位置加分: 上游+30, 中游+20, 下游+10
+                level = g.get("level", "")
+                if level == "上游":
+                    pos_bonus = 30
+                elif level == "中游":
+                    pos_bonus = 20
+                elif level == "下游":
+                    pos_bonus = 10
+                else:
+                    pos_bonus = 15
+                alpha = min(int(topic_heat + pos_bonus), 99)
 
                 all_stocks.append({
                     "name": name,
@@ -470,7 +557,7 @@ def generate_edition(edition: str, date_str: str, date_display: str,
     # 4. 市场摘要
     all_v3_stocks = []
     for t in v3_topics:
-        for g in t.get("stock_groups", []):
+        for g in t.get("chain_groups", []):
             all_v3_stocks.extend(g.get("stocks", []))
     market_summary = build_market_summary(v3_topics, all_v3_stocks, live_quotes)
     market_summary["total_opp"] = len(raw_opp)
