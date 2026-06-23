@@ -53,5 +53,5 @@ jobs:
           git config user.name "BluebookMax Bot"
           git config user.email "bot@bluebook.max"
           git add manifest.json *.html data-*.json 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "auto: $(date -u +'%Y-%m-%d %H:%M') 报告更新"
+          git diff --staged --quiet || git commit -m "auto: $(date -u +'%Y-%m-%d %H:%M') 报告更新 · 蓝宝书Max v2"
           git push

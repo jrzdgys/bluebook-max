@@ -156,12 +156,51 @@ def start_playwright_context(profile_name: Optional[str] = None, headless: bool 
             headless=headless,
             args=[
                 "--disable-blink-features=AutomationControlled",
-                "--disable-features=TranslateUI",
+                "--disable-features=TranslateUI,BackForwardCache",
                 "--no-first-run",
+                "--no-default-browser-check",
+                "--disable-infobars",
+                "--disable-web-security",
+                "--disable-features=IsolateOrigins,site-per-process",
             ],
             viewport={"width": 1440, "height": 900},
             locale="zh-CN",
+            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
         )
+
+        # Anti-detection: modify navigator properties
+        context.add_init_script("""
+            // Remove webdriver flag
+            Object.defineProperty(navigator, 'webdriver', { get: () => false });
+            
+            // Fake plugins  
+            Object.defineProperty(navigator, 'plugins', { 
+                get: () => [1, 2, 3, 4, 5] 
+            });
+            
+            // Languages
+            Object.defineProperty(navigator, 'languages', { 
+                get: () => ['zh-CN', 'zh', 'en'] 
+            });
+            
+            // Permissions
+            const originalQuery = window.navigator.permissions.query;
+            window.navigator.permissions.query = (parameters) => (
+                parameters.name === 'notifications' ?
+                Promise.resolve({ state: Notification.permission }) :
+                originalQuery(parameters)
+            );
+            
+            // Chrome object
+            window.chrome = { runtime: {} };
+            
+            // Override toString
+            HTMLCanvasElement.prototype.toDataURL = new Proxy(HTMLCanvasElement.prototype.toDataURL, {
+                apply(target, self, args) {
+                    return Reflect.apply(target, self, args);
+                }
+            });
+        """)
     except Exception as e:
         error_msg = str(e)
         if "Target page, context or browser has been closed" in error_msg or "profile" in error_msg.lower():
@@ -173,6 +212,15 @@ def start_playwright_context(profile_name: Optional[str] = None, headless: bool 
 
     context.set_default_timeout(30000)
     page = context.new_page()
+
+    # Apply playwright-stealth for advanced anti-detection
+    try:
+        from playwright_stealth import stealth_sync
+        stealth_sync(page)
+        print("🛡️  Stealth 反检测已启用")
+    except ImportError:
+        pass
+
     return pw, context, page
 
 

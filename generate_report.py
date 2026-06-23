@@ -18,13 +18,36 @@ from pathlib import Path
 OUTPUT_DIR = Path.cwd()
 
 # HTML 模板
+# 付费墙 CSS（注入到每个报告页面）
+PAYWALL_CSS = """
+.pw-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10000;display:flex;align-items:center;justify-content:center;animation:pwFadeIn .3s ease}
+@keyframes pwFadeIn{from{opacity:0}to{opacity:1}}
+.pw-card{background:#fff;border-radius:24px;padding:48px 40px;max-width:420px;width:92%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.18);animation:pwSlideUp .4s cubic-bezier(.16,1,.3,1)}
+@keyframes pwSlideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.pw-icon{font-size:52px;margin-bottom:16px}
+.pw-title{font-size:22px;font-weight:700;color:#1D1D1F;margin-bottom:12px}
+.pw-desc{font-size:14px;color:#86868B;line-height:1.7;margin-bottom:28px}
+.pw-input-group{display:flex;gap:8px;margin-bottom:12px}
+.pw-input{flex:1;padding:12px 16px;border:1.5px solid #E5E5EA;border-radius:12px;font-size:15px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;text-align:center;letter-spacing:2px;outline:none;transition:border-color .15s}
+.pw-input:focus{border-color:#0071E3}
+.pw-btn{padding:12px 24px;background:#0071E3;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
+.pw-btn:hover{background:#0077ED}
+.pw-btn:disabled{opacity:.6;cursor:not-allowed}
+.pw-error{color:#FF3B30;font-size:13px;margin-top:8px;display:none}
+.pw-footer{margin-top:28px;padding-top:20px;border-top:1px solid #F2F2F7}
+.pw-footer p{font-size:13px;color:#AEAEB2;margin-bottom:10px}
+.pw-zsxq-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:linear-gradient(135deg,#1AAD19,#0F8F0F);color:#fff;border-radius:12px;text-decoration:none;font-size:14px;font-weight:600;transition:all .15s}
+.pw-zsxq-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,173,25,.3)}
+"""
+
 HTML_TEMPLATE = """<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-paywall="true">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>蓝宝书Max - {edition_label} - {date_display}</title>
     <style>
+        """ + PAYWALL_CSS + """
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
@@ -315,6 +338,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 
+<!-- 付费墙容器（未认证时自动弹出） -->
+<div id="paywall-container"></div>
+
 <!-- 顶部导航 -->
 <nav class="top-nav">
     <a href="index.html" class="brand">📘 蓝宝书<span>Max</span></a>
@@ -380,6 +406,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <a href="https://www.eastmoney.com" target="_blank">东方财富</a>
     </div>
 </div>
+
+<script src="/bluebook-max/paywall.js"></script>
 
 </body>
 </html>"""
