@@ -189,11 +189,16 @@ const Paywall = {
     const btn = document.getElementById("pw-submit-btn2");
     const err = document.getElementById("pw-error2");
 
-    // 关闭按钮：关闭付费墙，显示"只有付费会员可查看"提示
+    // 关闭按钮：关闭付费墙
     closeBtn.addEventListener("click", () => {
       if (overlay) overlay.remove();
-      // 显示一个友好的空状态
+      // 导航页：什么都不做（已经全开放，不需要块）
+      const isNav = !document.documentElement.getAttribute("data-paywall");
+      if (isNav) return;
+      // 报告页：显示付费引导
       const c = document.querySelector(".container") || document.body;
+      const existing = document.getElementById("pw-blocked-msg");
+      if (existing) existing.remove();
       const msg = document.createElement("div");
       msg.id = "pw-blocked-msg";
       msg.style.cssText = "text-align:center;padding:80px 20px;color:#86868B";
