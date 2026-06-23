@@ -244,92 +244,233 @@ h4 { font-size: 16px; font-weight: 600; }
 }
 
 
-/* ===== 报告专用样式 ===== */
-.report-header {
-  padding: var(--space-xl) 0 var(--space-lg);
-  border-bottom: 1px solid var(--separator);
-  margin-bottom: var(--space-xl);
+/* ===== 报告专用样式 v4 ===== */
+:root{
+  --rp-bg:#F5F5F7;--rp-card:#FFFFFF;--rp-text:#1D1D1F;--rp-sub:#86868B;
+  --rp-accent:#0071E3;--rp-up:#E74C3C;--rp-down:#27AE60;
 }
-.report-header .back {
-  font-size: 13px; color: var(--accent); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--space-lg);
-  transition: opacity var(--duration-fast);
-}
-.report-header .back:hover { opacity: .7; }
-.report-header .version-tag {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 4px 12px; border-radius: 100px;
-  font-size: 12px; font-weight: 600; margin-bottom: var(--space-sm);
-}
-.report-header .version-tag.domestic { background: #EDE4DC; color: #A07858; }
-.report-header .version-tag.global { background: #DEE5F7; color: #3E54CE; }
-.report-header .live-dot {
-  display: inline-block; width: 6px; height: 6px; background: #34C759;
-  border-radius: 50%; animation: pulse 2s infinite;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--rp-bg);color:var(--rp-text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 
-.t-card { margin-bottom: var(--space-md); }
-.t-group-label {
-  font-size: 10px; font-weight: 600; letter-spacing: .3px; margin-bottom: 4px;
-  padding: 2px 8px; border-radius: 100px; display: inline-block;
+/* ---- 报告头（Hero风格） ---- */
+.rp-hero{
+  background:#fff;padding:36px 24px 28px;text-align:center;
+  border-bottom:1px solid #E5E5EA;margin-bottom:20px;
 }
-.t-group-label.l1 { background: #FFF0EF; color: var(--up); }
-.t-group-label.l2 { background: #FFF5E7; color: var(--warning); }
-.t-group-label.l3 { background: #E8F2FD; color: var(--accent); }
-
-.ts-row {
-  display: flex; align-items: center; gap: 8px; padding: 5px 0;
-  border-bottom: 1px solid var(--border-light); font-size: 12px;
+.rp-hero .rp-edition{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:100px;font-size:12px;font-weight:700;margin-bottom:14px;
 }
-.ts-row:last-child { border-bottom: none; }
-.ts-name { font-weight: 700; font-size: 13px; min-width: 56px; }
-.ts-code { font-size: 10px; color: var(--text-tertiary); }
-.ts-chg { font-weight: 700; font-size: 13px; min-width: 54px; text-align: right; }
-.ts-chg.up { color: var(--up); }
-.ts-chg.down { color: var(--down); }
-.ts-reason { font-size: 11px; color: var(--text-secondary); flex: 1; }
-
-.alpha-row { transition: all var(--duration-fast) var(--ease-out); }
-.alpha-row:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
-
-.report-footer {
-  margin-top: var(--space-2xl); padding-top: var(--space-lg);
-  border-top: 1px solid var(--separator);
+.rp-hero .rp-edition.am{background:#FFF5E7;color:#FF9500}
+.rp-hero .rp-edition.md{background:#FFF0E0;color:#E8870A}
+.rp-hero .rp-edition.pm{background:#EEF0FF;color:#5E5CE6}
+.rp-hero .rp-date{
+  font-size:clamp(24px,5vw,32px);font-weight:800;letter-spacing:-.5px;margin-bottom:4px;
 }
-.report-footer .disclaimer {
-  font-size: 11px; color: var(--text-tertiary); line-height: 1.6;
+.rp-hero .rp-subtitle{
+  font-size:13px;color:var(--rp-sub);
+}
+.rp-hero .rp-stats{
+  display:flex;justify-content:center;gap:24px;margin-top:16px;flex-wrap:wrap;
+}
+.rp-hero .rp-stat{text-align:center}
+.rp-hero .rp-stat .n{font-size:20px;font-weight:700}
+.rp-hero .rp-stat .l{font-size:11px;color:var(--rp-sub)}
+.rp-hero .rp-back{
+  display:inline-block;margin-bottom:12px;font-size:12px;color:var(--rp-accent);
+  text-decoration:none;transition:opacity .15s;
+}
+.rp-hero .rp-back:hover{opacity:.7}
+
+/* ---- 容器 ---- */
+.rp-container{max-width:900px;margin:0 auto;padding:0 16px 60px}
+
+/* ---- 情绪摘要 ---- */
+.rp-sentiment{
+  background:linear-gradient(135deg,#FFF9F0,#FFF0E0);
+  border:1px solid #FFE8CC;border-radius:14px;padding:20px 22px;margin-bottom:20px;
+}
+.rp-sentiment h3{color:#C47A00;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.rp-sentiment .one-liner{font-size:15px;font-weight:700;color:#1D1D1F;line-height:1.6}
+.rp-sentiment .signal-tag{
+  display:inline-block;margin-top:8px;padding:3px 10px;border-radius:100px;
+  font-size:11px;font-weight:600;
+}
+.signal-bullish{background:#FFF0F0;color:#E74C3C}
+.signal-bearish{background:#F0FFF0;color:#27AE60}
+.signal-neutral{background:#F0F0FF;color:#5E5CE6}
+
+/* ---- 主题卡片 ---- */
+.t-card{
+  background:#fff;border-radius:14px;padding:22px 20px;margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);transition:all .15s;
+  border:1px solid #F2F2F7;
+}
+.t-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.t-card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.t-card .heat-score{
+  font-size:26px;font-weight:800;min-width:40px;line-height:1;text-align:center;
+}
+.t-card .heat-label{font-size:9px;color:var(--rp-sub);text-align:center;margin-top:2px}
+.t-card .t-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.t-card .t-rank{
+  font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;padding:2px 6px;border-radius:4px;
+}
+.t-card .t-title{font-size:17px;font-weight:700;letter-spacing:-.3px;flex:1}
+.t-card .t-state{
+  font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;
+}
+.state-main{background:#FFF0EF;color:#E74C3C}
+.state-strong{background:#FFF5E7;color:#E8870A}
+.state-cont{background:#E8F2FD;color:#0071E3}
+.state-hatch{background:#F5EEFF;color:#AF52DE}
+.t-card .t-summary{font-size:13px;color:var(--rp-sub);line-height:1.5;margin-bottom:0}
+.t-card .t-quote{
+  font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:8px;
+  line-height:1.6;border-left:3px solid #D4C8BC;margin-top:10px;
 }
 
-@media (max-width: 640px) {
-  .t-card > div:first-child { flex-direction: column; gap: 8px; }
+/* ---- 产业链 ---- */
+.chain-bar{
+  display:flex;gap:6px;align-items:stretch;margin:14px 0;flex-wrap:wrap;
+}
+.chain-node{
+  flex:1;min-width:140px;background:#F9F9FB;border-radius:10px;
+  padding:12px 14px;border:1px solid #EEEEF2;
+}
+.chain-node .cn-label{font-size:11px;font-weight:600;color:#86868B;margin-bottom:6px}
+.chain-stock{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px}
+.chain-stock .cs-name{font-weight:600}
+.chain-stock .cs-code{font-size:10px;color:#AEAEB2}
+.chain-stock .cs-catalyst{font-size:10px;color:var(--rp-accent);margin-left:auto}
+.chain-driver{
+  font-size:11px;font-weight:600;color:var(--rp-sub);margin-top:6px;text-align:center;
+}
+
+/* ---- 标的分层 ---- */
+.t-tier{margin-top:12px}
+.t-tier-label{
+  font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;
+  display:inline-block;margin-bottom:4px;
+}
+.t-tier-label.l1{background:#FFF0EF;color:#E74C3C}
+.t-tier-label.l2{background:#FFF5E7;color:#E8870A}
+.t-tier-label.l3{background:#E8F2FD;color:#0071E3}
+.ts-row{
+  display:flex;align-items:center;gap:8px;padding:4px 0;
+  border-bottom:1px solid #F5F5F7;font-size:13px;
+}
+.ts-row:last-child{border-bottom:none}
+.ts-name{font-weight:700;min-width:56px}
+.ts-code{font-size:11px;color:var(--rp-sub)}
+.ts-chg{font-weight:700;min-width:56px;text-align:right}
+.ts-chg.up{color:var(--rp-up)}
+.ts-chg.down{color:var(--rp-down)}
+.ts-reason{font-size:11px;color:var(--rp-sub);flex:1;text-align:right}
+
+/* ---- 情绪标的 ---- */
+.rp-sentiment-pick{
+  background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border-radius:12px;
+  padding:14px 16px;margin-top:12px;
+}
+.rp-sentiment-pick .sp-header{font-size:12px;font-weight:700;color:#C47A00;margin-bottom:8px}
+.rp-sentiment-pick .sp-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px}
+.rp-sentiment-pick .sp-name{font-weight:700}
+.rp-sentiment-pick .sp-chg{font-weight:600}
+.rp-sentiment-pick .sp-reason{font-size:11px;color:var(--rp-sub);margin-left:auto}
+
+/* ---- 板块标题 ---- */
+.rp-section-title{
+  font-size:18px;font-weight:700;margin:28px 0 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.rp-section-title .count{font-size:13px;font-weight:400;color:var(--rp-sub)}
+
+/* ---- 机会前瞻 ---- */
+.opp-card{
+  background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;
+  border:1px solid #F2F2F7;border-left:3px solid #AF52DE;
+}
+.opp-card .opp-tag{
+  font-size:11px;font-weight:600;color:#AF52DE;background:#F5EEFF;
+  padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:6px;
+}
+.opp-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.opp-card p{font-size:13px;color:var(--rp-sub);line-height:1.5}
+
+/* ---- Alpha精选 ---- */
+.alpha-row{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:#fff;border-radius:10px;margin-bottom:4px;
+  border:1px solid #F2F2F7;transition:all .15s;
+}
+.alpha-row:hover{border-color:var(--rp-accent);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.alpha-row .ar-star{font-size:14px;color:#FFB800}
+.alpha-row .ar-name{font-weight:700;font-size:14px}
+.alpha-row .ar-code{font-size:11px;color:var(--rp-sub)}
+.alpha-row .ar-score{
+  font-size:10px;font-weight:700;color:#fff;background:#1D1D1F;
+  padding:2px 6px;border-radius:3px;line-height:1;
+}
+.alpha-row .ar-reason{font-size:12px;color:var(--rp-sub);flex:1}
+.alpha-row .ar-chg{font-weight:600;font-size:13px}
+.alpha-row .ar-chg.up{color:var(--rp-up)}
+.alpha-row .ar-chg.down{color:var(--rp-down)}
+
+/* ---- Footer ---- */
+.rp-footer{
+  text-align:center;padding:32px 0;margin-top:32px;
+  border-top:1px solid #E5E5EA;color:var(--rp-sub);font-size:11px;line-height:1.8;
+}
+
+/* ---- 响应式 ---- */
+@media(max-width:640px){
+  .rp-hero{padding:24px 14px 20px}
+  .rp-hero .rp-date{font-size:22px}
+  .rp-hero .rp-stats{gap:14px}
+  .t-card-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .t-card .heat-score{font-size:22px;min-width:auto;display:flex;align-items:center;gap:6px}
+  .t-card .heat-label{margin-top:0;display:inline}
+  .chain-bar{flex-direction:column}
+  .ts-row{flex-wrap:wrap;font-size:12px}
+  .ts-reason{flex:auto;width:100%;text-align:left;padding-left:64px}
+  .alpha-row{flex-wrap:wrap;gap:6px}
+  .alpha-row .ar-reason{flex:auto;width:100%}
+  .rp-sentiment{padding:16px}
+  .rp-sentiment .one-liner{font-size:14px}
+}
 </style>
 </head>
 <body>
 <div id="paywall-container"></div>
-<div class="container">
+<div class="rp-container">
 
-  <!-- Header -->
-  <div class="report-header">
-    <a class="back" href="/bluebook-max/">‹ 返回导航</a>
-    <div>
-      <span class="version-tag domestic">☀️ 国内版</span>
-      <span class="live-dot"></span>
-      <span style="font-size:11px;color:var(--text-tertiary)">交易日12:00更新</span>
+  <!-- ===== 报告头（Hero） ===== -->
+  <div class="rp-hero">
+    <a class="rp-back" href="/bluebook-max/">‹ 返回导航页</a>
+    <div class="rp-edition noon">☀️ 午间版</div>
+    <div class="rp-date">2026-06-23</div>
+    <div class="rp-subtitle">交易日12:00更新</div>
+    <div class="rp-stats">
+      <div class="rp-stat"><div class="n">18</div><div class="l">热点主题</div></div>
+      <div class="rp-stat"><div class="n">112</div><div class="l">相关标的</div></div>
+      <div class="rp-stat"><div class="n">3</div><div class="l">机会前瞻</div></div>
     </div>
-    <h1 style="margin-top:8px">蓝宝书Max</h1>
-    <p style="font-size:15px;color:var(--text-secondary);margin-top:4px">
-      2026-06-23 午间版 · 18个热点主题 · 112只标的 · 午盘加速上行，AI芯片+上游材料双主线强化
-    </p>
   </div>
 
-  <!-- 市场摘要 -->
-  <div class="card" style="background:linear-gradient(135deg,#FFF9F0,#FFF0E0);border:1px solid #FFE8CC;margin-bottom:var(--space-xl)">
-    <h4 style="color:#C47A00;margin-bottom:8px">📋 市场情绪速览</h4>
-    <p style="font-size:14px;font-weight:600;line-height:1.6">午盘最强方向：氧化锆涨停封板超预期（爱迪特封单30万手）→ AI算力芯片午盘加速拉升（寒武纪涨3.5%）→ CCL涨价机构密集调研（生益科技4%+）→ 存储利基补涨启动（普冉6%+）</p>
+  <!-- ===== 市场情绪速览 ===== -->
+  <div class="rp-sentiment">
+    <h3>📋 市场情绪速览</h3>
+    <div class="one-liner">午盘最强方向：氧化锆涨停封板超预期（爱迪特封单30万手）→ AI算力芯片午盘加速拉升（寒武纪涨3.5%）→ CCL涨价机构密集调研（生益科技4%+）→ 存储利基补涨启动（普冉6%+）</div>
+    <span class="signal-tag signal-neutral">午盘加速上行，AI芯片+上游材料双主线强化</span>
   </div>
 
-  <!-- 主题列表 -->
-  <h2 style="margin-bottom:var(--space-lg)">🔥 热点主题 <span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">18个</span></h2>
+  <!-- ===== 热点主题 ===== -->
+  <div class="rp-section-title">🔥 热点主题 <span class="count">18个</span></div>
   
         <div class="card t-card animate-in" style="animation-delay:0.0s;border-left:3px solid var(--up)">
           <div style="display:flex;align-items:flex-start;gap:12px">
@@ -1098,8 +1239,8 @@ h4 { font-size: 16px; font-weight: 600; }
     </div>
         </div>
 
-  <!-- 机会前瞻 -->
-  <h2 style="margin-top:var(--space-2xl);margin-bottom:var(--space-lg)">🔮 机会前瞻 <span style="font-size:14px;font-weight:400;color:var(--text-tertiary)">3个</span></h2>
+  <!-- ===== 机会前瞻 ===== -->
+  <div class="rp-section-title">🔮 机会前瞻 <span class="count">3个</span></div>
         <div class="card animate-in" style="border-left:3px solid var(--state-hatch)">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
             <span style="font-size:11px;font-weight:600;color:var(--state-hatch);background:#F5EEFF;padding:2px 8px;border-radius:100px">🔮 机会前瞻</span>
@@ -1125,10 +1266,8 @@ h4 { font-size: 16px; font-weight: 600; }
           <div style="font-size:12px;color:#888;background:#F8F6F3;padding:10px 14px;border-radius:var(--radius-sm);border-left:3px solid #AF52DE">📘 光伏底部信号初现，HJT技术路线订单验证是板块反转关键。</div>
         </div>
 
-  <!-- Alpha排行 -->
-  
-  <h2 style="margin-top:var(--space-2xl);margin-bottom:var(--space-lg)">★ Alpha精选</h2>
-  <div style="margin-bottom:var(--space-xl)">
+  <!-- ===== Alpha精选 ===== -->
+  <div class="rp-section-title">★ Alpha精选</div>
         <div class="alpha-row" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:4px;border:1px solid var(--border-light)">
           <span style="font-size:14px;color:var(--gold)">★</span>
           <span style="font-weight:700;font-size:14px">爱迪特</span>
@@ -1168,60 +1307,38 @@ h4 { font-size: 16px; font-weight: 600; }
           <span style="font-size:10px;font-weight:700;color:#fff;background:var(--text-primary);padding:1px 5px;border-radius:3px">70</span>
           <span style="font-size:12px;color:var(--text-secondary);flex:1">利基存储午盘补涨+弹性最大</span>
           <span style="font-weight:600;font-size:13px;color:var(--up)" class="up">+6.35%</span>
-        </div></div>
-  
+        </div>
 
-  <!-- Footer -->
-  <div class="report-footer">
-    <p class="disclaimer">
-      ⚡ 蓝宝书Max v2 · 2026-06-23 午间版 · 数据来源：Alpha派蓝宝书 · 产业链分析：AI辅助<br>
-      📊 主题热度 = 机构关注度 + 市场确认度 + 催化质量 · 🎯 短线情绪标的 = 涨跌幅 × 催化确定性 × 筹码结构<br>
-      ⚠️ 本报告为机构投研信息聚合参考，不构成投资建议
-    </p>
+  <!-- ===== Footer ===== -->
+  <div class="rp-footer">
+    蓝宝书Max · 2026-06-23 午间版<br>
+    数据来源：Alpha派蓝宝书 · 产业链分析：AI辅助<br>
+    📊 热度 = 机构关注度×市场确认度×催化质量<br>
+    ⚠️ 本报告为机构投研信息聚合参考，不构成投资建议
   </div>
 
 </div>
 
 <script>
-// 实时行情（东方财富API）
-const SECID_MAP = {{"爱迪特": "0.301580", "国瓷材料": "0.300285", "东方锆业": "0.002167", "龙佰集团": "0.002601", "西陇科学": "0.002584", "寒武纪": "1.688256", "海光信息": "1.688041", "景嘉微": "0.300474", "芯原股份": "1.688521", "中芯国际": "1.688981", "生益科技": "1.600183", "金安国纪": "0.002636", "华正新材": "1.603186", "宏和科技": "1.603256", "兆易创新": "1.603986", "江波龙": "0.301308", "普冉股份": "1.688766", "佰维存储": "1.688525", "德明利": "0.001309", "香农芯创": "0.300475", "强瑞技术": "0.301128", "飞龙股份": "0.002536", "裕同科技": "0.002831", "旭光电子": "1.600353", "中瓷电子": "0.003031", "金博股份": "1.688598", "长飞光纤": "1.601869"}};
-const API_URL = 'https://push2.eastmoney.com/api/qt/ulist.np/get';
-
-async function fetchPrices() {
-  const allSecids = [...new Set(Object.values(SECID_MAP))];
-  const allData = [];
-  for (let i=0; i<allSecids.length; i+=50) {
-    const batch = allSecids.slice(i,i+50);
-    const url = API_URL+'?secids='+batch.join(',')+'&fields=f2,f3,f12,f14&_='+Date.now();
-    try {
-      const r = await fetch(url); const j = await r.json();
-      if (j.data?.diff) allData.push(...j.data.diff);
-    } catch(e) {}
-  }
-  return allData;
-}
-
-function updatePrices(data) {
-  const pm = {};
-  data.forEach(d => pm[d.f14] = {pct:(d.f3||0)/100,price:(d.f2||0)/100});
-
-  document.querySelectorAll('[data-stock]').forEach(el => {
-    const name = el.getAttribute('data-stock');
-    const d = pm[name]; if (!d) return;
-    let tgt = el.querySelector('[data-field]') || el;
-    const pctStr = (d.pct>=0?'+':'')+d.pct.toFixed(2)+'%';
-    if (tgt.textContent.trim() !== pctStr) {
-      tgt.textContent = pctStr;
-      tgt.className = tgt.className.replace(/\bup\b|\bdown\b/g,'').trim()+' '+(d.pct>=0?'up':'down');
+var SECID_MAP={{"爱迪特": "0.301580", "国瓷材料": "0.300285", "东方锆业": "0.002167", "龙佰集团": "0.002601", "西陇科学": "0.002584", "寒武纪": "1.688256", "海光信息": "1.688041", "景嘉微": "0.300474", "芯原股份": "1.688521", "中芯国际": "1.688981", "生益科技": "1.600183", "金安国纪": "0.002636", "华正新材": "1.603186", "宏和科技": "1.603256", "兆易创新": "1.603986", "江波龙": "0.301308", "普冉股份": "1.688766", "佰维存储": "1.688525", "德明利": "0.001309", "香农芯创": "0.300475", "强瑞技术": "0.301128", "飞龙股份": "0.002536", "裕同科技": "0.002831", "旭光电子": "1.600353", "中瓷电子": "0.003031", "金博股份": "1.688598", "长飞光纤": "1.601869"}};
+var API_URL='https://push2.eastmoney.com/api/qt/ulist.np/get';
+(async function P(){
+  async function F(){
+    var s=[...new Set(Object.values(SECID_MAP))],d=[];
+    for(var i=0;i<s.length;i+=50){
+      var u=API_URL+'?secids='+s.slice(i,i+50).join(',')+'&fields=f2,f3,f12,f14&_='+Date.now();
+      try{var r=await fetch(u),j=await r.json();if(j.data&&j.data.diff)d.push(...j.data.diff)}catch(e){}
     }
-  });
-}
-
-async function loop() {
-  try { const d = await fetchPrices(); updatePrices(d); } catch(e) {}
-  setTimeout(loop, 5000);
-}
-loop();
+    var m={};d.forEach(function(x){m[x.f14]={p:(x.f3||0)/100,Q:(x.f2||0)/100}});
+    document.querySelectorAll('[data-stock]').forEach(function(e){
+      var n=e.getAttribute('data-stock'),v=m[n];if(!v)return;
+      var t=e.querySelector('[data-field]')||e,s=(v.p>=0?'+':'')+v.p.toFixed(2)+'%';
+      if(t.textContent.trim()!==s){t.textContent=s;t.className=t.className.replace(/\bup\b|\bdown\b/g,'').trim()+' '+(v.p>=0?'up':'down')}
+    });
+  }
+  setInterval(function(){try{F()}catch(e){}},5000);
+  try{F()}catch(e){}
+})();
 </script>
 <script src="/bluebook-max/codes.js"></script>
 <script src="/bluebook-max/paywall.js"></script>

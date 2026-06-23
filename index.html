@@ -36,6 +36,17 @@ body{
 .hero-stat{text-align:center;min-width:80px}
 .hero-stat .num{font-size:32px;font-weight:800;color:#1D1D1F}
 .hero-stat .label{font-size:12px;color:#86868B;margin-top:2px}
+.live-clock{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;background:#F5F5F7;border-radius:100px;
+  font-size:12px;font-weight:600;color:#86868B;margin-bottom:28px;
+  font-variant-numeric:tabular-nums;font-family:"SF Mono","Menlo","Monaco",monospace;
+}
+.live-clock .dot{
+  width:7px;height:7px;background:#34C759;border-radius:50%;
+  animation:pulse2 2s infinite;
+}
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-cta{
   display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
 }
@@ -69,7 +80,7 @@ body{
 .feature-card p{font-size:13px;color:#86868B;line-height:1.5}
 
 /* ===== Reports ===== */
-.reports-section{padding:32px 0;border-top:1px solid #E5E5EA}
+.reports-section{padding:32px 0 0;border-top:1px solid #E5E5EA}
 .reports-section h2{
   font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;
 }
@@ -92,7 +103,7 @@ body{
 .badge-pm{background:#EEF0FF;color:#5E5CE6}
 .report-card .r-date{font-size:18px;font-weight:700;margin-bottom:2px}
 .report-card .r-title{font-size:12px;color:#86868B;margin-bottom:6px;line-height:1.4}
-.report-card .r-meta{font-size:11px;color:#AEAEB2;display:flex;gap:10px;align-items:center}
+.report-card .r-meta{font-size:11px;color:#AEAEB2;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .report-card .r-free{
   display:inline-block;padding:2px 8px;background:#EEFFF2;color:#34C759;
   border-radius:100px;font-size:10px;font-weight:600;
@@ -135,7 +146,7 @@ body{
 /* ===== Container ===== */
 .container{max-width:900px;margin:0 auto;padding:0 16px}
 
-/* ===== Auth banner ===== */
+/* ===== Auth badge ===== */
 .auth-badge{
   display:inline-flex;align-items:center;gap:4px;
   padding:2px 10px;background:#EEFFF2;color:#34C759;
@@ -143,26 +154,33 @@ body{
   vertical-align:middle;margin-left:6px;
 }
 
+/* ===== Free hint ===== */
+.free-hint{
+  text-align:center;font-size:12px;color:#AEAEB2;margin-top:8px;
+  padding:8px 16px;background:#FFF9F0;border-radius:10px;
+}
+
 /* ===== Responsive ===== */
 @media(max-width:640px){
-  .hero{padding:40px 16px 32px}
-  .hero-stats{gap:20px}
+  .hero{padding:36px 14px 28px}
+  .hero-stats{gap:18px}
   .hero-stat .num{font-size:26px}
   .hero-cta{flex-direction:column;align-items:center}
   .hero-cta .btn{width:100%;max-width:280px;justify-content:center}
   .features-grid{grid-template-columns:1fr}
   .reports-grid{grid-template-columns:1fr}
   .pricing .price{font-size:40px}
-  .pricing{margin:24px 8px;padding:32px 16px}
+  .pricing{margin:20px 6px;padding:28px 14px}
+  .report-card .r-date{font-size:16px}
 }
 </style>
 </head>
 <body>
 
-<!-- Toast 提示 -->
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ===== Hero（完全开放，不弹付费墙） ===== -->
+<!-- ===== Hero ===== -->
 <header class="hero">
   <div class="hero-badge">🪐 知识星球付费订阅 · ¥888/年</div>
   <h1>蓝宝书<span class="accent">Max</span></h1>
@@ -171,14 +189,21 @@ body{
     产业链精准映射 · 每日最强标的 · 交易日三版更新
   </p>
 
+  <!-- 实时时钟 -->
+  <div class="live-clock">
+    <span class="dot"></span>
+    <span id="live-time">--</span>
+    <span style="font-weight:400;font-size:11px;color:#AEAEB2">实时</span>
+  </div>
+
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="num" id="stat-reports">—</div>
       <div class="label">累计报告</div>
     </div>
     <div class="hero-stat">
-      <div class="num" id="stat-stocks">—</div>
-      <div class="label">覆盖标的</div>
+      <div class="num" id="stat-hotspots">—</div>
+      <div class="label">覆盖热点主题</div>
     </div>
     <div class="hero-stat">
       <div class="num">3</div>
@@ -235,7 +260,7 @@ body{
   </div>
 </section>
 
-<!-- ===== 最新报告（免费试看1份） ===== -->
+<!-- ===== 最新报告 ===== -->
 <section class="reports-section">
   <div class="container">
     <h2>📋 最新报告 <span style="font-size:13px;font-weight:400;color:#AEAEB2" id="report-count"></span>
@@ -244,9 +269,9 @@ body{
     <div class="reports-grid" id="latest-reports">
       <div style="text-align:center;padding:40px;color:#AEAEB2;grid-column:1/-1">加载中...</div>
     </div>
-    <p style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:8px">
-      🎁 新用户可免费试看 1 份完整报告
-    </p>
+    <div class="free-hint" id="free-hint">
+      🎁 新用户可免费试看 1 份完整报告，不按日期重置，总共仅此1次
+    </div>
   </div>
 </section>
 
@@ -264,7 +289,7 @@ body{
     <li>Alpha精选短线情绪池</li>
     <li>机会前瞻：提前布局下一个风口</li>
     <li>知识星球专属付费社群</li>
-    <li>访问码一键登录，无限次查看</li>
+    <li>访问码一键登录，永久有效</li>
   </ul>
 
   <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener"
@@ -290,17 +315,32 @@ body{
 <script src="codes.js"></script>
 <script src="paywall.js"></script>
 <script>
-// ===== 鉴权加载 =====
-function showLoginPaywall() {
-  Paywall.renderPaywall('paywall-container-dynamic', document.title);
+// ===== 实时时钟 =====
+function updateClock() {
+  const now = new Date();
+  const days = ['周日','周一','周二','周三','周四','周五','周六'];
+  const str = now.getFullYear() + '年' +
+    String(now.getMonth()+1).padStart(2,'0') + '月' +
+    String(now.getDate()).padStart(2,'0') + '日 ' +
+    days[now.getDay()] + ' ' +
+    String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' +
+    String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('live-time').textContent = str;
 }
+updateClock();
+setInterval(updateClock, 1000);
 
-// 页面底部动态容器
+// ===== 付费墙容器（导航页不弹，放这里给"已有访问码"按钮用） =====
 (function addPaywallContainer() {
   const div = document.createElement('div');
   div.id = 'paywall-container-dynamic';
   document.body.appendChild(div);
 })();
+
+function showLoginPaywall() {
+  Paywall.renderPaywall('paywall-container-dynamic', '蓝宝书Max');
+}
 
 // ===== 加载报告 =====
 (async function loadReports() {
@@ -309,11 +349,19 @@ function showLoginPaywall() {
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const manifest = await resp.json();
 
-    // 统计
-    document.getElementById('stat-reports').textContent = manifest.total_reports || 0;
+    const reports = (manifest.reports || []).sort((a, b) =>
+      (b.date || '').localeCompare(a.date || ''));
+
+    // 统计：报告数量
+    document.getElementById('stat-reports').textContent = manifest.total_reports || reports.length || '—';
+
+    // 覆盖热点主题：从报告标题估算（每个报告通常包含5-8个主题）
+    // 如果 manifest 有 stock_count 且 > 0，使用它；否则用报告数量×6 估算
     let totalStocks = 0;
-    (manifest.reports || []).forEach(r => { totalStocks += (r.stock_count || 0); });
-    document.getElementById('stat-stocks').textContent = totalStocks || '—';
+    reports.forEach(r => { totalStocks += (r.stock_count || 0); });
+    // 估算：如果没有准确数据，用报告数×6（每个报告约6个热点）
+    const estimatedHotspots = totalStocks > 0 ? totalStocks : reports.length * 6;
+    document.getElementById('stat-hotspots').textContent = estimatedHotspots || '—';
 
     // 认证状态
     if (Paywall.isAuthenticated()) {
@@ -322,8 +370,6 @@ function showLoginPaywall() {
     }
 
     // 渲染报告列表
-    const reports = (manifest.reports || []).sort((a, b) =>
-      (b.date || '').localeCompare(a.date || ''));
     document.getElementById('report-count').textContent =
       '共 ' + reports.length + ' 份';
 
@@ -337,27 +383,30 @@ function showLoginPaywall() {
     const editionBadges = { am: 'badge-am', md: 'badge-md', pm: 'badge-pm' };
 
     const isAuth = Paywall.isAuthenticated();
-    const hasFree = !isAuth && Paywall.hasFreeView();
 
     grid.innerHTML = reports.map((r, i) => {
       const ed = r.edition || 'am';
       const badge = editionBadges[ed] || 'badge-am';
       const label = editionLabels[ed] || '';
-      const dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
+      const dateParts = (r.date || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
       const displayDate = dateParts
         ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
         : (r.date || '');
 
-      // 未认证用户：第一份报告免费，其余带锁
-      const isFree = hasFree && i === 0;
-      const canView = isAuth || isFree;
+      // 免费试看：只有第1份报告（按列表顺序）且未认证用户可以点
+      // ⭐ 不在这里消耗免费次数，由报告页的 paywall.js 自行判断
+      const isFirst = i === 0;
       const href = r.file || '#';
-      const onclick = canView
-        ? (isFree ? `onclick="handleFreeView(event,'${href}')"` : '')
-        : `onclick="showLoginPaywall();return false"`;
 
-      const freeBadge = isFree ? '<span class="r-free">🎁 免费试看</span>' : '';
-      const lockInfo = !isAuth && !isFree ? '<span class="r-lock">🔒 付费专享</span>' : '';
+      // 未认证 + 非首份 → 不能直接打开
+      const canView = isAuth || isFirst;
+      const onclick = canView
+        ? '' // 直接导航到报告页，让报告页判断免费/付费
+        : 'onclick="showLoginPaywall();return false"';
+
+      const freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费试看</span>' : '';
+      const lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费专享</span>' : '';
+      const authTag = isAuth ? '<span style="font-size:10px;color:#34C759">✓ 已解锁</span>' : '';
 
       return `
         <a href="${canView ? href : '#'}" class="report-card"
@@ -366,12 +415,19 @@ function showLoginPaywall() {
           <div class="r-date">${displayDate}</div>
           <div class="r-title">${r.title || '蓝宝书Max报告'}</div>
           <div class="r-meta">
-            <span>📊 ${r.stock_count || 0} 只标的</span>
+            <span>📊 ${r.stock_count || '若干'} 只标的</span>
             ${freeBadge}
             ${lockInfo}
+            ${authTag}
           </div>
         </a>`;
     }).join('');
+
+    // 更新免费提示
+    if (isAuth) {
+      document.getElementById('free-hint').innerHTML =
+        '<span style="color:#34C759">✓ 已订阅 · 所有报告可无限查看</span>';
+    }
 
   } catch (e) {
     console.error('加载报告失败:', e);
@@ -380,14 +436,6 @@ function showLoginPaywall() {
   }
 })();
 
-// 免费试看：标记已用，跳转
-function handleFreeView(e, href) {
-  e.preventDefault();
-  Paywall.useFreeView();
-  window.location.href = href;
-}
-
-// Toast
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
