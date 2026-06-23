@@ -1,43 +1,62 @@
 {
   "name": "蓝宝书Max",
-  "last_updated": "2026-06-23 23:30:00",
-  "updated": "2026-06-23T23:30:00",
-  "total_reports": 4,
+  "description": "Alpha派蓝宝书热点自动抓取与分析报告",
+  "last_updated": "2026-06-24 00:16:58",
+  "updated": "2026-06-24T00:16:58.292749",
+  "total_reports": 6,
   "reports": [
     {
-      "file": "mc-20260623.html",
-      "edition": "mc",
-      "label": "晨会版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月23日",
-      "stock_count": 155
+      "file": "reports/pm-20260624.html",
+      "edition": "pm",
+      "label": "午间版",
+      "date": "20260624",
+      "date_display": "2026年06月24日",
+      "title": "蓝宝书Max 午间版 - 2026年06月24日",
+      "stock_count": 0
     },
     {
-      "file": "pm-20260623.html",
-      "edition": "pm",
+      "file": "reports/md-20260623.html",
+      "edition": "md",
       "label": "午间版",
       "date": "20260623",
       "date_display": "2026年06月23日",
       "title": "蓝宝书Max 午间版 - 2026年06月23日",
-      "stock_count": 63
+      "stock_count": 0
     },
     {
-      "file": "ev-20260623.html",
-      "edition": "ev",
-      "label": "晚间版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月23日",
-      "stock_count": 42
+      "file": "reports/mc-20260624.html",
+      "edition": "mc",
+      "label": "晨会版",
+      "date": "20260624",
+      "date_display": "2026年06月24日",
+      "title": "蓝宝书Max 晨会版 - 2026年06月24日",
+      "stock_count": 0
     },
     {
-      "file": "gv-20260623.html",
+      "file": "reports/gv-20260624.html",
       "edition": "gv",
+      "label": "全球版",
+      "date": "20260624",
+      "date_display": "2026年06月24日",
+      "title": "蓝宝书Max 全球版 - 2026年06月24日",
+      "stock_count": 0
+    },
+    {
+      "file": "reports/global-20260623.html",
+      "edition": "global",
       "label": "全球版",
       "date": "20260623",
       "date_display": "2026年06月23日",
       "title": "蓝宝书Max 全球版 - 2026年06月23日",
+      "stock_count": 0
+    },
+    {
+      "file": "reports/am-20260623.html",
+      "edition": "am",
+      "label": "晨会版",
+      "date": "20260623",
+      "date_display": "2026年06月23日",
+      "title": "蓝宝书Max 晨会版 - 2026年06月23日",
       "stock_count": 0
     }
   ]

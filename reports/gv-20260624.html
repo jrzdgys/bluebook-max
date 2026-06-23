@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>蓝宝书Max · 2026年06月24日 全球版</title>
+    <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px}
+    .w{max-width:900px;margin:0 auto}
+    .sh{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+    .sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+    .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
+    .sh h1{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+    .sh h1 .badge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;background:#EDE4DC;color:#7B5B3A}
+    .sh .live-row{display:flex;align-items:center;gap:12px;font-size:11px;color:rgba(255,255,255,.5);margin-bottom:4px}
+    .sh .live-dot{width:7px;height:7px;background:#34C759;border-radius:50%}
+    .sh .live-dot.closed{background:#FF9500}
+    @keyframes pls{0%,100%{opacity:1}50%{opacity:.3}}
+    .sh .live-dot.live{animation:pls 2s infinite}
+    .stats-row{display:flex;gap:20px;flex-wrap:wrap}
+    .stats-row .st{text-align:center;min-width:70px;background:rgba(255,255,255,.06);padding:10px 14px;border-radius:10px}
+    .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+    .stats-row .st span{font-size:10px;color:rgba(255,255,255,.45)}
+    .ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
+    .ms{font-size:13px;color:#515154;background:#F5F5F7;padding:14px 18px;border-radius:10px;margin-bottom:20px;line-height:1.7}
+    .section-title{font-size:14px;font-weight:700;margin-bottom:12px;color:#1D1D1F;display:flex;align-items:center;gap:6px}
+    .tc{background:#fff;border:1px solid #E5E5EA;border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:all .15s}
+    .tc:hover{border-color:#0071E3;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .tc-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    .tc-rank{font-size:11px;font-weight:700;color:#86868B;min-width:36px}
+    .tc-name{font-size:14px;font-weight:700;flex:1}
+    .tc-stage{font-size:10px;padding:2px 10px;border-radius:20px;font-weight:600;white-space:nowrap}
+    .tc-heat-wrap{display:flex;align-items:center;gap:4px;position:relative}
+    .tc-heat{font-size:20px;font-weight:800;cursor:pointer}
+    .tc-info{font-size:10px;color:#86868B;cursor:pointer;position:relative}
+    .tc-info:hover{color:#0071E3}
+    .hp{display:none;position:fixed;background:#1D1D1F;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;z-index:9999;white-space:nowrap;box-shadow:0 12px 40px rgba(0,0,0,.35);max-width:320px}
+    .hp::before{content:'';position:absolute;left:-6px;top:16px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:7px solid #1D1D1F}
+    .hp.right::before{left:auto;right:-6px;border-right:none;border-left:7px solid #1D1D1F}
+    .hp-title{font-weight:600;margin-bottom:4px;color:rgba(255,255,255,.6);font-size:10px}
+    .hp-scores{line-height:1.8}
+    .hp-line{display:flex;justify-content:space-between;gap:16px}
+    .hp-line .hl{color:rgba(255,255,255,.6)}
+    .hp-line .hv{font-weight:600;font-variant-numeric:tabular-nums}
+    .tc-desc{font-size:12px;color:#515154;line-height:1.6;margin-bottom:8px}
+    .tc-quote{font-size:11px;color:#86868B;font-style:italic;padding:6px 0 6px 12px;border-left:3px solid #E5E5EA;margin-bottom:10px}
+    .sg{margin-bottom:8px}
+    .gl{font-size:10px;font-weight:700;margin-bottom:4px;padding:2px 10px;border-radius:6px;display:inline-block}
+    .gl.l1{background:#FFF0E6;color:#E8870A}
+    .gl.l2{background:#EEF0FF;color:#5E5CE6}
+    .gl.l3{background:#F2F2F7;color:#86868B}
+    .sr{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;font-size:13px;transition:background .1s}
+    .sr:hover{background:#F5F5F7}
+    .sr .sn{font-weight:600;min-width:58px;font-size:13px}
+    .sr .sc{font-size:10px;color:#AEAEB2;min-width:40px}
+    .sr .sp{font-size:12px;font-weight:600;min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
+    .sr .sp.up{color:#C4433A}
+    .sr .sp.dn{color:#34C759}
+    .sr .spp{font-size:12px;font-weight:600;min-width:52px;text-align:right;font-variant-numeric:tabular-nums}
+    .sr .spp.up{color:#C4433A}
+    .sr .spp.dn{color:#34C759}
+    .sr .sr2{font-size:10px;color:#AEAEB2;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .fo{text-align:center;padding:20px;font-size:11px;color:#C7C7CC}
+    .fo a{color:#86868B;text-decoration:none}
+    @media(max-width:640px){
+      body{padding:6px}
+      .sh{padding:18px 14px 14px}
+      .sh-date{font-size:16px}
+      .sh h1{font-size:18px}
+      .ct{padding:12px 14px 20px}
+      .tc{padding:12px 14px}
+      .stats-row{gap:8px}
+      .stats-row .st{min-width:60px;padding:8px 10px}
+      .stats-row .st strong{font-size:20px}
+      .sr{flex-wrap:wrap;gap:2px 4px;padding:6px 4px}
+      .sr .sn{min-width:auto;font-size:12px}
+      .sr .sc{font-size:9px;min-width:auto}
+      .sr .sp{font-size:11px;min-width:auto}
+      .sr .spp{font-size:11px;min-width:auto}
+      .sr .sr2{font-size:11px;flex-basis:100%;text-align:left;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;color:#86868B;line-height:1.5;padding-top:2px;border-top:1px dotted #E5E5EA;margin-top:2px}
+      .tc-header{gap:4px}
+      .tc-name{font-size:13px;flex:1 1 100%}
+      .hp{max-width:260px;font-size:11px}
+    }
+    </style>
+    </head>
+    <body>
+    <div class="w">
+    <div class="sh">
+    <div class="sh-top">
+    <span class="sh-date" id="header-date">2026年6月23日</span>
+    <span class="sh-edition" id="header-edition">☀️ 午间版</span>
+    </div>
+    <h1>机构观点快照<span class="badge">国内版 🧡</span></h1>
+    <div class="live-row">
+    <span class="live-dot closed" id="live-dot"></span>
+    <span id="live-text">收盘价 · 加载中</span>
+    <span style="margin-left:auto;font-size:10px;color:rgba(255,255,255,.3)" id="update-time">更新 2026-06-23 11:35</span>
+    </div>
+    <div class="stats-row">
+    <div class="st"><strong id="stat-topics">10</strong><span>全部主题</span></div>
+    <div class="st"><strong id="stat-opp">0</strong><span>机会前瞻</span></div>
+    <div class="st"><strong id="stat-stocks">63</strong><span>推荐标的</span></div>
+    </div>
+    </div>
+    <div class="ct">
+    <div class="ms" id="market-summary">📌 午间更新聚焦三大主线：英伟达Rubin全面液冷引爆热管理产业链价值重估；存储芯片Q3涨价预期飙升至50%确认AI驱动结构性短缺；半导体设备国产替代因日本出口管制从长期选项变为短期强制任务。</div>
+    <div class="section-title" id="topics-header">🔥 全部主题（10个）</div>
+    <div id="topics-container"></div>
+    </div>
+    <div class="fo">
+    蓝宝书Max · 数据来源 <a href="https://alphapai-web.rabyte.cn" target="_blank">Alpha派</a> · 行情数据由东方财富提供 · 更新时间 <span id="footer-time">--</span>
+    </div>
+    </div>
+    <script type="application/json" id="edition-data">{"edition":{"type":"gv","label":"全球版","date":"2026-06-24","dateDisplay":"2026年06月24日","updateTime":"2026-06-24 08:03"},"stats":{"topics":24,"stocks":30,"opportunities":0},"marketSummary":"今日聚焦：美国授权伊朗临时出口原油，作为和平协议一部分、市场整体、SpaceX启动200亿美元债券发行，为AI扩张提供资金。机构积极布局，结构性机会突出。","topics":[{"topic":"美国授权伊朗临时出口原油，作为和平协议一部分","heat":73,"stage":"📈强化","summary":"美国政府发布了一项为期60天的通用许可证，授权伊朗在全球市场（包括美国）销售原油和石油产品，以推动与伊朗的和平谈判","quote":"此举被视为美方重大政策转向，旨在通过提供经济利益换取伊朗在核问题及地区安全上的合作，市场预期此举将缓解全球原油供应紧张局","alphaIndex":10,"scores":{"inst":60,"market":5,"catalyst":8,"total":73,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"美国航空(AAL)","reason":"AAL","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"联合航空(UAL)","reason":"AAL","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"雪佛龙(CVX)","reason":"CVX","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"相关标的","items":[{"name":"埃克森美孚(XOM)","reason":"CVX","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"市场整体","heat":70,"stage":"📈强化","summary":"隔夜市场整体表现分化，纳斯达克100指数(QQQ)收跌25个基点，而半导体板块在存储和设备股的带动下逆市大涨2%","quote":"市场的主要压力来自于大型科技股的普遍回调，其中Google(GOOGL)和Amazon(AMZN)跌幅达5%，Micro","alphaIndex":10,"scores":{"inst":60,"market":5,"catalyst":5,"total":70,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"大型科技股的普遍回调","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"5%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"3%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"相关标的","items":[{"name":"2%","reason":"相关标的","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"SpaceX启动200亿美元债券发行，为AI扩张提供资金","heat":69,"stage":"📈强化","summary":"SpaceX首次进入投资级债券市场，计划发行至少200亿美元的债券，为其在人工智能领域的扩张提供资金","quote":"此次发债在公司创纪录的IPO后进行，旨在利用其充裕的现金储备和获得的BBB级信用评级，通过债务市场而非股权为长期扩张提供","alphaIndex":9,"scores":{"inst":54,"market":5,"catalyst":10,"total":69,"avgPct":0,"catalystLabel":"高置信"},"groups":[{"label":"龙头首选","items":[{"name":"Nvidia(NVDA)","reason":"NVDA","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"Vertiv(VRT)","reason":"VRT","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"Eaton(ETN)","reason":"VRT","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"存储芯片走强，美光(MU)在财报前上涨7%","heat":67,"stage":"📈强化","summary":"在财报发布前，存储芯片股表现强劲，美光(MU)上涨7%，SanDisk(SNDK)上涨4%","quote":"Jefferies的最新渠道调查显示，DRAM价格在Q3和Q4的涨幅预期（分别为30%和40%）高于市场共识","alphaIndex":9,"scores":{"inst":54,"market":5,"catalyst":8,"total":67,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"7%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"4%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"英国首相斯塔默宣布辞职，伯纳姆有望接任首相","heat":67,"stage":"📈强化","summary":"因民调支持率持续低迷及党内压力，英国首相基尔·斯塔默宣布辞职，大曼彻斯特市长安迪·伯纳姆成为最热门的继任者","quote":"由于主要竞争对手公开支持，市场普遍预期此次权力交接将平稳进行，英镑和英国国债在该消息后均出现上涨，反映出市场对政治不确定","alphaIndex":9,"scores":{"inst":54,"market":5,"catalyst":8,"total":67,"avgPct":0,"catalystLabel":"跟踪"},"groups":[]},{"topic":"SpaceX(SPCX)重挫16%，轨道计算可行性遭质疑","heat":64,"stage":"➡️持续","summary":"SpaceX(SPCX)股价大跌16%，Keybanc以中性评级覆盖该股","quote":"同时，有研究报告对轨道计算的商业化可行性提出质疑，指出其在热管理、电力输送和资产寿命经济性方面面临重大工程瓶颈，导致市场","alphaIndex":9,"scores":{"inst":54,"market":5,"catalyst":5,"total":64,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"16%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"英特尔(INTC)上涨5%，EMIB-T技术获市场关注","heat":64,"stage":"➡️持续","summary":"英特尔(INTC)股价上涨5%，主要驱动因素包括Mizuho看好其EMIB-T技术作为CoWoS-L替代方案的潜力，以及Jeff Pu指出公司通过14A制程和EMIB-T…","quote":"公司高管在访谈中表达了对2030-2032年基本面改善的信心，并强调了CPU在AI Agent和推理场景中的需求回升","alphaIndex":9,"scores":{"inst":54,"market":5,"catalyst":5,"total":64,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"5%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"半导体设备股再创新高，LRCX(+5%)、AMAT(+4%)走强","heat":61,"stage":"➡️持续","summary":"半导体设备龙头延续强势，Lam Research(LRCX)上涨5%，Applied Materials(AMAT)上涨4%，股价双双创下历史新高，反映了市场对半导体资本…","quote":"半导体设备龙头延续强势，Lam Research(LRCX)上涨5%，Applied Materials(AMAT)上涨","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":8,"total":61,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"5%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"4%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"奈飞(NFLX)下跌6%，机构数据预警用户增长放缓","heat":61,"stage":"➡️持续","summary":"奈飞(NFLX)股价下跌6%，触及52周新低","quote":"M Science发布报告称，跟踪数据显示本季度的全球净增用户数可能为2022年以来最弱，主要由于美国市场用户流失率回升","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":8,"total":61,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"6%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"Meta向印度Cred投资9亿美元，其创始人将执掌WhatsApp","heat":61,"stage":"➡️持续","summary":"Meta Platforms宣布向印度金融科技初创公司Cred投资9亿美元，获得约20%的股份","quote":"作为交易的一部分，Cred创始人Kunal Shah将加入Meta，接任WhatsApp新负责人，此举旨在利用其在印度市","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":8,"total":61,"avgPct":0,"catalystLabel":"跟踪"},"groups":[]},{"topic":"艾伯维(AbbVie)以109亿美元收购Apogee以加强免疫学管线","heat":61,"stage":"➡️持续","summary":"艾伯维(AbbVie)宣布将以10.9亿美元的总价收购Apogee Therapeutics，这是其五年来最大规模的收购","quote":"此次交易旨在获取Apogee在研的针对特应性皮炎和哮喘等炎症性疾病的治疗方案，以加强艾伯维在免疫学领域的后期产品管线，应","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":8,"total":61,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"AbbVie(ABBV)","reason":"ABBV","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"Getty Images(GETY)暴涨90%，与OpenAI达成内容授权协议","heat":58,"stage":"➡️持续","summary":"Getty Images(GETY)宣布与OpenAI达成内容授权协议，其图片库将接入ChatGPT的搜索功能","quote":"受此消息提振，公司股价一度飙升145%，最终收涨90%","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":5,"total":58,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"90%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"光学板块集体走强，Coherent(COHR)领涨","heat":58,"stage":"➡️持续","summary":"在多份积极的卖方报告和管理层会议纪要提振下，光学板块集体上涨，Coherent(COHR)上涨9%，Lumentum(LITE)上涨5%，Ciena(CIEN)和Corn…","quote":"JPM认为Coherent的毛利率、收发器需求和定价环境健康","alphaIndex":8,"scores":{"inst":48,"market":5,"catalyst":5,"total":58,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"9%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"5%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"7.5%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"高通(Qualcomm)或以40亿美元收购AI芯片初创公司Modular","heat":55,"stage":"➡️持续","summary":"高通(Qualcomm)正就以约40亿美元的价格收购AI芯片初创公司Modular Inc.进行深入谈判","quote":"此次收购若达成，将显著增强高通在AI芯片市场的产品组合和技术实力，以更好地与行业领导者英伟达(Nvidia)展开竞争，尤","alphaIndex":7,"scores":{"inst":42,"market":5,"catalyst":8,"total":55,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"40亿美元","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"模拟芯片普遍走强，安森美(ON)大涨8%","heat":52,"stage":"➡️持续","summary":"模拟芯片板块整体表现强劲，安森美半导体(ON)大涨8%，德州仪器(TXN)、ADI、意法半导体(STM)、恩智浦(NXPI)等也录得2-4%​的涨幅","quote":"模拟芯片板块整体表现强劲，安森美半导体(ON)大涨8%，德州仪器(TXN)、ADI、意法半导体(STM)、恩智浦(NXP","alphaIndex":7,"scores":{"inst":42,"market":5,"catalyst":5,"total":52,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"8%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"2-4%​","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"维谛技术(VRT)上涨8%，受益于轨道计算叙事降温","heat":52,"stage":"➡️持续","summary":"作为地面数据中心散热解决方案的领导者，维谛技术(VRT)被市场视为轨道计算叙事的主要受损方之一","quote":"随着市场对轨道计算可行性的担忧加剧，公司股价受益上涨8%","alphaIndex":7,"scores":{"inst":42,"market":5,"catalyst":5,"total":52,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"8%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"软件板块普遍疲软，Palantir(PLTR)领跌","heat":52,"stage":"➡️持续","summary":"软件板块整体表现疲软，Palantir(PLTR)下跌7%，MongoDB(MDB)下跌4%，Oracle(ORCL)下跌5%","quote":"包括SAP、Intuit(INTU)、Workday(WDAY)在内的多只应用软件股股价触及新低","alphaIndex":7,"scores":{"inst":42,"market":5,"catalyst":5,"total":52,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"7%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"4%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"5%","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"Robinhood拟发行20亿美元可转债，部分用于股票回购","heat":51,"stage":"➡️持续","summary":"金融科技公司Robinhood宣布计划通过发行20亿美元于2029年到期的可转换债券进行融资","quote":"公司计划将所得款项中的约3.2亿美元用于回购公司股票，其余资金主要用于支付对冲交易成本以限制未来股权稀释，此举旨在优化资","alphaIndex":6,"scores":{"inst":36,"market":5,"catalyst":10,"total":51,"avgPct":0,"catalystLabel":"高置信"},"groups":[]},{"topic":"博通(AVGO)下跌4.5%，受谷歌TPU合作传闻影响","heat":49,"stage":"🌱孵化","summary":"博通(AVGO)股价下跌4.5%，市场传闻称Google(GOOGL)正与联发科就TPU V9芯片进行更紧密的合作，引发了投资者对博通未来AI芯片业务的担忧","quote":"博通(AVGO)股价下跌4.5%，市场传闻称Google(GOOGL)正与联发科就TPU V9芯片进行更紧密的合作，引发","alphaIndex":6,"scores":{"inst":36,"market":5,"catalyst":8,"total":49,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"4.5%","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"前美联储主席艾伦·格林斯潘去世，享年100岁","heat":46,"stage":"🌱孵化","summary":"前美联储主席艾伦·格林斯潘于周一去世，享年100岁","quote":"他执掌美联储长达18年，其任期覆盖了美国经济的长期繁荣（“大缓和”时期），但其宽松的货币政策和放松监管的理念也被认为是2","alphaIndex":6,"scores":{"inst":36,"market":5,"catalyst":5,"total":46,"avgPct":0,"catalystLabel":"跟踪"},"groups":[]},{"topic":"CRH斥资85亿美元收购Arcosa，加码北美基建需求","heat":43,"stage":"🌱孵化","summary":"爱尔兰建材巨头CRH宣布将以85亿美元现金收购美国基础设施产品公司Arcosa","quote":"此次收购旨在加强CRH在北美市场的业务布局，并扩大其在美国基础设施建设需求浪潮中的敞口，显示出对该领域长期增长前景的看好","alphaIndex":5,"scores":{"inst":30,"market":5,"catalyst":8,"total":43,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"CRH(CRH)","reason":"CRH","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"雪佛龙(Chevron)与微软(Microsoft)达成数据中心供电协议","heat":43,"stage":"🌱孵化","summary":"雪佛龙(Chevron)与微软(Microsoft)签署协议，将合作开发一个天然气发电设施，为微软位于西得克萨斯州的数据中心直接供电","quote":"这一合作是能源公司与科技巨头为解决AI算力带来的巨大能源消耗而直接结盟的最新案例，凸显了数据中心电力供应已成为关键瓶颈","alphaIndex":5,"scores":{"inst":30,"market":5,"catalyst":8,"total":43,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"Chevron(CVX)","reason":"CVX","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"Vertiv(VRT)","reason":"VRT","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"Eaton(ETN)","reason":"VRT","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"AI初创公司Groq在业务转型后完成6.5亿美元融资","heat":37,"stage":"🌱孵化","summary":"AI芯片初创公司Groq在将其大部分芯片资产出售给英伟达并转型为数据中心运营商后，宣布完成新一轮6.5亿美元的融资","quote":"该笔资金将用于扩张其数据中心网络，以满足日益增长的AI推理需求，这反映出资本正持续涌入AI基础设施服务领域","alphaIndex":4,"scores":{"inst":24,"market":5,"catalyst":8,"total":37,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"扩张其数据中心网络","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]}]},{"topic":"电动汽车制造商Lucid宣布裁员18%并调整高管团队","heat":37,"stage":"🌱孵化","summary":"电动汽车制造商Lucid Group宣布将裁减约18%的美国员工，同时其首席运营官离职","quote":"在电动车市场竞争加剧、需求放缓的背景下，此举是公司为削减成本、提升盈利能力而采取的最新举措，也反映了部分造车新势力面临的","alphaIndex":4,"scores":{"inst":24,"market":5,"catalyst":8,"total":37,"avgPct":0,"catalystLabel":"跟踪"},"groups":[{"label":"龙头首选","items":[{"name":"裁减约18%的美国员工","reason":"龙头首选","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"弹性机会","items":[{"name":"削减成本、提升盈利能力","reason":"弹性机会","price":null,"pct":null,"pe":null,"marketCap":null},{"name":"Tesla(TSLA)","reason":"TSLA","price":null,"pct":null,"pe":null,"marketCap":null}]},{"label":"相关标的","items":[{"name":"Rivian(RIVN)","reason":"TSLA","price":null,"pct":null,"pe":null,"marketCap":null}]}]}],"secidMap":{}}</script>
+    <script>
+    var ED=JSON.parse(document.getElementById('edition-data').textContent);
+    function ht(h){if(h>=85)return'#C4433A';if(h>=65)return'#E67E22';if(h>=50)return'#2E86C1';return'#7D8B8F'}
+    function sb(h){if(h>=85)return'#C4433A15';if(h>=65)return'#E67E2215';if(h>=50)return'#2E86C115';return'#7D8B8F15'}
+    function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<690)||(t>=780&&t<900)}
+    function ts(){var n=new Date();return n.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+    document.title='蓝宝书Max · '+ED.edition.dateDisplay+' '+ED.edition.label;
+    document.getElementById('header-date').textContent=ED.edition.dateDisplay;
+    document.getElementById('header-edition').textContent='☀️ '+ED.edition.label;
+    document.getElementById('stat-topics').textContent=ED.stats.topics;
+    document.getElementById('stat-opp').textContent=ED.stats.opportunities;
+    document.getElementById('stat-stocks').textContent=ED.stats.stocks;
+    document.getElementById('market-summary').textContent='📌 '+ED.marketSummary;
+    document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）';
+    document.getElementById('update-time').textContent='更新 '+(ED.edition.updateTime||'');
+    var C=document.getElementById('topics-container'),OP=null,LC={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};
+    ED.topics.forEach(function(t,i){var r=i+1,c=ht(t.heat),b=sb(t.heat);var sc=t.scores||{};var gh='';
+    t.groups.forEach(function(g){if(!g.items||!g.items.length)return;var lc=LC[g.label]||'l3';
+    var rows=g.items.map(function(s){var cd=ED.secidMap[s.name]||'';var cn=cd.replace(/^[01]\./,'');var pd=(s.price!=null)?s.price.toFixed(2):'--';var pctD=(s.pct!=null)?((s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'):'';var pctC=(s.pct!=null)?(s.pct>=0?' up':' dn'):'';
+    return'<div class="sr" data-stock="'+s.name+'" data-secid="'+cd+'"><span class="sn">'+s.name+'</span><span class="sc">'+cn+'</span><span class="sp'+pctC+'">'+pd+'</span><span class="spp'+pctC+'">'+pctD+'</span><span class="sr2" title="'+(s.reason||g.label)+'">'+(s.reason||g.label)+'</span></div>'}).join('');
+    gh+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
+    var card=document.createElement('div');card.className='tc';card.innerHTML='<div class="tc-header"><span class="tc-rank">TOP'+r+'</span><span class="tc-name">'+t.topic+'</span><span class="tc-stage" style="background:'+b+';color:'+c+'">'+t.stage+'</span><div class="tc-heat-wrap"><span class="tc-heat" style="color:'+c+'" data-idx="'+i+'">'+t.heat+'</span><span class="tc-info" data-idx="'+i+'">ⓘ</span></div></div><div class="tc-desc">'+t.summary+'</div>'+(t.quote?'<div class="tc-quote">📘 '+t.quote+'</div>':'')+gh;C.appendChild(card)});
+    var PE=document.createElement('div');PE.className='hp';PE.id='spu';document.body.appendChild(PE);
+    function sp(idx,ae){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{};var ins=sc.inst||Math.round(t.heat*0.55);var mk=sc.market||Math.round(t.heat*0.25);var ct=sc.catalyst||Math.round(t.heat*0.20);PE.innerHTML='<div class="hp-title">'+t.topic+' · 热度构成</div><div class="hp-scores"><div class="hp-line"><span class="hl">机构关注度</span><span class="hv">'+ins+'/60</span></div><div class="hp-line"><span class="hl">市场确认度</span><span class="hv">'+mk+'/25</span></div><div class="hp-line"><span class="hl">催化强度</span><span class="hv">'+ct+'/15</span></div><div class="hp-line" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.15)"><span class="hl">综合热度</span><span class="hv" style="color:'+ht(t.heat)+'">'+t.heat+'/100</span></div></div>';var re=ae.getBoundingClientRect();var pw=280;var x=re.right+10;var y=re.top-20;if(x+pw>window.innerWidth-10){x=re.left-pw-10;PE.classList.add('right')}else{PE.classList.remove('right')}if(y<10)y=10;if(y+120>window.innerHeight)y=window.innerHeight-130;PE.style.left=x+'px';PE.style.top=y+'px';PE.style.display='block';OP=idx}
+    function hp(){PE.style.display='none';OP=null}
+    document.querySelectorAll('.tc-info,.tc-heat').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);if(OP===idx){hp()}else{sp(idx,this)}})});
+    document.addEventListener('click',function(e){if(!PE.contains(e.target))hp()});
+    window.addEventListener('scroll',function(){if(OP!=null)hp()},{passive:true});
+    window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
+    var TD=isTH(),RI=TD?15000:60000;
+    function uli(){var d=document.getElementById('live-dot'),t=document.getElementById('live-text');if(isTH()){d.className='live-dot live';t.textContent='实时行情 · '+ts()}else{d.className='live-dot closed';t.textContent='收盘价 · '+ts()}}
+    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var d=pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(!isTH()&&d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});uli();document.getElementById('footer-time').textContent=ts()}catch(e){}}
+    uli();fq();setInterval(fq,RI);setInterval(function(){uli()},60000);
+    </script>
+    </body>
+    </html>
