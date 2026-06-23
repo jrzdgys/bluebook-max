@@ -5,9 +5,11 @@
   主题热度 = 机构关注度(0-40) + 市场确认度(0-35) + 催化质量(0-25)
   标的 Alpha = 产业链位势(0-30) + 弹性系数(0-30) + 筹码质量(0-40)
 """
-import json, re, sys
+import json, re, sys, time as _time
 from pathlib import Path
 from datetime import datetime
+
+import requests as _requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 
@@ -129,6 +131,48 @@ def score_stock(stock_name, chain_context, position_in_summary):
         "alpha_total": chain_pos + elasticity + chip_quality,
         "secid": secid,
     }
+
+
+def fetch_realtime_quotes(secid_map):
+    """从东方财富API拉取所有标的的实时行情（服务端调用，午间版用）"""
+    if not secid_map:
+        return {}
+
+    secids = list(set(secid_map.values()))
+    quotes = {}
+    sess = _requests.Session()
+    sess.headers.update({
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Referer": "https://quote.eastmoney.com/",
+    })
+
+    for i in range(0, len(secids), 50):
+        batch = secids[i:i + 50]
+        try:
+            params = {
+                "fltt": "2",
+                "fields": "f2,f3,f4,f12,f14",
+                "secids": ",".join(batch),
+                "_": str(int(_time.time() * 1000)),
+            }
+            resp = sess.get(
+                "https://push2.eastmoney.com/api/qt/ulist.np/get",
+                params=params, timeout=10
+            )
+            data = resp.json()
+            if data.get("data") and data["data"].get("diff"):
+                for item in data["data"]["diff"]:
+                    name = item.get("f14", "")
+                    quotes[name] = {
+                        "price": item.get("f2"),
+                        "change_pct": item.get("f3") or 0,
+                        "code": item.get("f12", ""),
+                    }
+        except Exception as e:
+            print(f"  ⚠️ 实时行情批量拉取异常: {e}")
+
+    print(f"  📊 实时行情: 拉取 {len(secids)} 个标的，成功 {len(quotes)} 个")
+    return quotes
 
 
 def build_secid_map(stock_names):
@@ -351,56 +395,175 @@ def generate_all():
         f.write(g_html)
     print(f"  ✅ 全球版: {g_path} ({len(g_html)/1024:.1f} KB, {len(global_formatted)} 主题)")
 
-    # ---- 午间版（从晨会数据派生，真实数据） ----
-    # 选取热度最高的6个主题作为午间视角
+    # ---- 午间版（真实午盘行情版） ----
+    print("\n☀️  生成午间版（拉取实时行情）...")
     ds = datetime.now(CST)
-    noon_topics = sorted(am_formatted, key=lambda x: x["heat"], reverse=True)[:8]
 
-    # 午间版摘要重新撰写（加入午盘视角）
-    noon_prefixes = [
-        "午盘持续走强，", "午盘加速拉升，", "午盘涨幅扩大，",
-        "午盘维持强势，", "午盘资金持续流入，", "午盘高位震荡，",
-        "午盘分化加剧，核心标的坚挺，", "午盘情绪延续，",
-    ]
-    for i, t in enumerate(noon_topics):
-        p = noon_prefixes[i % len(noon_prefixes)]
-        t["summary"] = p + t.get("title", "")
+    # 拉取所有标的的实时行情
+    realtime_quotes = fetch_realtime_quotes(secids)
 
-    noon_secids = {k: v for k, v in secids.items()}
-    noon_sentiment, noon_signal = make_sentiment([t["heat"] for t in noon_topics], "am")
+    # 选取热度最高的8个主题
+    noon_topics_raw = sorted(am_formatted, key=lambda x: x["heat"], reverse=True)[:8]
 
-    # Alpha精选TOP5
+    # 深度拷贝午间topic并注入真实涨跌幅
+    import copy
+    noon_topics = copy.deepcopy(noon_topics_raw)
+
+    # 收集所有午间标的数据用于分析
+    all_noon_stocks = []  # {name, change_pct, topic_title}
+
+    for t in noon_topics:
+        topic_title = t["title"]
+        stocks_data = t.get("stocks", [])
+
+        # 计算该主题标的的平均涨跌幅
+        topic_changes = []
+
+        for tier_data in stocks_data:
+            items = tier_data.get("items", [])
+            for item in items:
+                name = item.get("name", "")
+                rt = realtime_quotes.get(name, {})
+                real_chg = rt.get("change_pct", 0)
+                if real_chg is None:
+                    real_chg = 0
+                item["change_pct"] = real_chg
+                topic_changes.append(real_chg)
+                all_noon_stocks.append({
+                    "name": name, "change_pct": real_chg,
+                    "topic": topic_title,
+                })
+
+            # 按实际涨跌幅重新排序（涨多的在前）
+            items.sort(key=lambda x: x.get("change_pct", 0) or 0, reverse=True)
+
+        # 根据该主题真实涨跌幅重写摘要
+        avg_chg = sum(topic_changes) / len(topic_changes) if topic_changes else 0
+        up_count = sum(1 for c in topic_changes if c > 0) if topic_changes else 0
+        down_count = sum(1 for c in topic_changes if c < 0) if topic_changes else 0
+        total = len(topic_changes)
+
+        # 找该主题表现最好的3个标的
+        best = sorted(all_noon_stocks[-total:] if total > 0 else [],
+                       key=lambda x: x.get("change_pct", 0) or 0, reverse=True)[:3]
+        best_names = "、".join([b["name"] for b in best]) if best else ""
+
+        if up_count > total * 0.6:
+            noon_summary = f"午盘该方向持续走强，{total}只标的中{up_count}只上涨"
+            if best_names:
+                noon_summary += f"，{best_names}领涨"
+        elif up_count > down_count:
+            noon_summary = f"午盘该方向分化上行，{up_count}只上涨/{down_count}只回调"
+            if best_names:
+                noon_summary += f"，{best_names}表现突出"
+        elif down_count > up_count:
+            noon_summary = f"午盘该方向整体承压，{down_count}只回调/{up_count}只翻红"
+            if best_names:
+                noon_summary += f"，仅{best_names}逆势走强"
+        else:
+            noon_summary = f"午盘该方向横盘整理，涨跌互现"
+
+        noon_summary += f"，平均涨跌幅{avg_chg:+.2f}%。{t.get('summary','')[:60]}"
+        t["summary"] = noon_summary
+
+    # Alpha精选TOP5：基于真实涨幅重新排序
+    noon_stocks_sorted = sorted(all_noon_stocks, key=lambda x: x.get("change_pct", 0) or 0, reverse=True)
     noon_alpha = []
-    for f in sorted(noon_topics, key=lambda x: x["heat"], reverse=True)[:5]:
-        first_tier = f["stocks"][0] if f["stocks"] else None
-        first_item = first_tier["items"][0] if first_tier else None
-        if first_item:
-            noon_alpha.append({
-                "name": first_item["name"], "code": first_item["code"],
-                "alpha": f["heat"], "reason": f["title"][:30],
-                "change_pct": 0,
-            })
+    seen_alpha = set()
+    for s in noon_stocks_sorted:
+        if s["name"] in seen_alpha:
+            continue
+        seen_alpha.add(s["name"])
+        sid = secids.get(s["name"], "")
+        noon_alpha.append({
+            "name": s["name"], "code": sid,
+            "alpha": int(abs(s.get("change_pct", 0)) * 10) + 60,
+            "reason": s["topic"][:30],
+            "change_pct": s.get("change_pct", 0),
+        })
+        if len(noon_alpha) >= 5:
+            break
 
+    # 午间机会前瞻：找涨幅最大的板块和异动标的
+    # 按主题聚合涨幅
+    topic_perf = {}
+    for s in all_noon_stocks:
+        t = s["topic"]
+        if t not in topic_perf:
+            topic_perf[t] = []
+        topic_perf[t].append(s)
+
+    noon_opportunities = []
+    # 找平均涨幅最高的板块
+    topic_ranks = []
+    for tname, stocks in topic_perf.items():
+        avg = sum(s["change_pct"] for s in stocks) / len(stocks) if stocks else 0
+        topic_ranks.append((tname, avg, stocks))
+    topic_ranks.sort(key=lambda x: x[1], reverse=True)
+
+    if topic_ranks:
+        top_topic = topic_ranks[0]
+        top_stocks = sorted(top_topic[2], key=lambda x: x["change_pct"] or 0, reverse=True)[:3]
+        top_names = "、".join([s["name"] for s in top_stocks])
+        noon_opportunities.append({
+            "title": f"午盘领涨方向：{top_topic[0][:20]}",
+            "summary": f"早盘该方向整体走强，板块平均涨幅{top_topic[1]:+.2f}%，{top_names}等标的领涨。关注午后能否延续强势。",
+            "bluebook_quote": f"早盘{top_topic[0][:15]}方向资金明显流入，{top_names}涨幅居前，午后关注量能是否持续。",
+        })
+
+    if len(topic_ranks) > 1:
+        second_topic = topic_ranks[1]
+        second_stocks = sorted(second_topic[2], key=lambda x: x["change_pct"] or 0, reverse=True)[:2]
+        second_names = "、".join([s["name"] for s in second_stocks])
+        noon_opportunities.append({
+            "title": f"午盘异动关注：{second_topic[0][:20]}",
+            "summary": f"该方向同步走强，{second_names}涨幅居前。午盘情绪若能延续，午后或有进一步表现。",
+            "bluebook_quote": f"{second_topic[0][:15]}方向在早盘获得资金关注，{second_names}等标的异动明显，值得午后跟踪。",
+        })
+
+    # 如果只有1个机会，补充一个
+    if len(noon_opportunities) < 2:
+        noon_opportunities.append({
+            "title": "午盘观察：关注午后量能变化",
+            "summary": "早盘多个方向轮动活跃，午后关注成交量能否持续放大，决定反弹持续性。",
+            "bluebook_quote": "午盘量能是判断当日行情持续性的关键指标，关注成交额能否突破早盘峰值。",
+        })
+
+    # 午间市场情绪
+    all_changes = [s["change_pct"] for s in all_noon_stocks if s.get("change_pct") is not None]
+    noon_avg_chg = sum(all_changes) / len(all_changes) if all_changes else 0
+    noon_up_ratio = sum(1 for c in all_changes if c > 0) / len(all_changes) if all_changes else 0
+
+    if noon_up_ratio > 0.65:
+        noon_signal = "强势做多"
+        noon_sig_cls = "signal-bullish"
+    elif noon_up_ratio > 0.45:
+        noon_signal = "积极看多"
+        noon_sig_cls = "signal-bullish"
+    elif noon_up_ratio > 0.30:
+        noon_signal = "结构性轮动"
+        noon_sig_cls = "signal-neutral"
+    else:
+        noon_signal = "谨慎观望"
+        noon_sig_cls = "signal-neutral"
+
+    noon_sentiment = (
+        f"午盘概览：覆盖{len(all_noon_stocks)}只标的，{int(noon_up_ratio*100)}%上涨"
+        f"，平均涨跌幅{noon_avg_chg:+.2f}%。"
+        + (f"早盘情绪{noon_signal}，最强方向为{noon_opportunities[0]['title'].split('：')[1] if noon_opportunities else 'AI算力'}。"
+           if noon_opportunities else "")
+    )
+
+    noon_secids_map = {k: v for k, v in secids.items()}
     noon_stats = {
         "total_topics": len(noon_topics),
-        "total_stocks": sum(len(t.get("stocks", [])) for t in noon_topics),
-        "total_opportunities": 2,
+        "total_stocks": len(all_noon_stocks),
+        "total_opportunities": len(noon_opportunities),
         "market_signal": noon_signal,
         "summary": noon_sentiment,
         "alpha_top5": noon_alpha,
-        "opportunities": [
-            {
-                "title": "午盘异动：存储芯片利基市场补涨",
-                "summary": "午盘存储板块DRAM持续强势，NAND方向出现补涨苗头",
-                "bluebook_quote": "存储涨价从DDR5向DDR4、利基DRAM扩散，最终将全面传导至NAND。补涨行情重点看利基型号缺口最大的公司。",
-            },
-            {
-                "title": "午盘观察：光伏底部反弹信号初现",
-                "summary": "午盘光伏板块止跌反弹，HJT设备龙头获海外订单催化",
-                "bluebook_quote": "光伏底部信号初现，HJT技术路线订单验证是板块反转关键。",
-            },
-        ],
-        "secid_map": noon_secids,
+        "opportunities": noon_opportunities,
+        "secid_map": noon_secids_map,
     }
 
     noon_html = generate_report_html(
@@ -412,7 +575,8 @@ def generate_all():
     noon_path = reports_dir / "md-20260623.html"
     with open(noon_path, "w", encoding="utf-8") as f:
         f.write(noon_html)
-    print(f"  ✅ 午间版: {noon_path} ({len(noon_html)/1024:.1f} KB, {len(noon_topics)} 主题(从晨会版真数据派生))")
+    realtime_count = len([s for s in all_noon_stocks if s.get("change_pct", 0) != 0])
+    print(f"  ✅ 午间版: {noon_path} ({len(noon_html)/1024:.1f} KB, {len(noon_topics)} 主题, {realtime_count}/{len(all_noon_stocks)} 只标的有实时行情)")
 
     print(f"\n🎉 三份报告全部生成！")
     print(f"   📊 评分算法: 热度=机构{len([t for t in am_formatted if t.get('org_attention',0)>30])}条高机构关注 | 共{len(secids)}个标的有实时行情")
