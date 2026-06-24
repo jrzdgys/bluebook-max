@@ -23,7 +23,7 @@
                           │
                           ▼
               ┌─────────────────────────┐
-              │    HTML 模板 (冻结)      │
+              │    HTML 模板 ()      │
               │  · CSS: 5791 chars      │
               │  · JS:  5892 chars      │
               │  · 纯客户端渲染          │
@@ -37,7 +37,7 @@
 
 ---
 
-## 二、HTML 模板架构（冻结）
+## 二、HTML 模板架构
 
 ### 2.1 CSS 核心规范
 
@@ -248,7 +248,7 @@ file字段使用根目录文件名（如 `mc-20260624.html`），**不使用** `
 - [ ] 各版本数据完整提取（滚动到底，确认无遗漏）
 - [ ] ED JSON生成（含AI摘要/引用，无...截断）
 - [ ] 行情数据写入（腾讯API收盘价 + secidMap）
-- [ ] HTML文件生成（使用冻结模板，仅替换ED JSON）
+- [ ] HTML文件生成（使用模板，仅替换ED JSON）
 - [ ] manifest.json更新（去重、根路径、正确edition代码）
 - [ ] index.html验证（排序使用!=null、颜色正确、editionLabels正确）
 - [ ] Git push + raw.githubusercontent.com验证
