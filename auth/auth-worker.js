@@ -1,11 +1,15 @@
 /**
- * 蓝宝书Max · 设备绑定鉴权 Worker v1
+ * 蓝宝书Max · 设备绑定鉴权 Worker v2
  * ====================================
  *
  * 端点:
- *   POST /activate  — 验码 + Canvas指纹 + 签发 token + 绑定设备(≤2台)
- *   POST /verify    — 验 token（自包含，纯计算，不读KV）
- *   POST /unbind    — Admin 解绑设备
+ *   POST /activate      — 验码 + Canvas指纹 + 签发 token + 绑定设备(≤2台)
+ *   POST /verify        — 验 token（自包含，纯计算，不读KV）
+ *   POST /unbind        — Admin 解绑设备
+ *   POST /list          — Admin 列出全部激活码
+ *   POST /info          — Admin 查询单个激活码详情
+ *   POST /codes/create  — Admin 批量生成激活码
+ *   POST /codes/delete  — Admin 删除单个激活码
  *
  * Token 结构:
  *   base64(sha256(fp|secret|expires)).fp.expires
@@ -16,10 +20,6 @@
  *   recover:{FP} → { code, lastIP, lastSeen }
  */
 
-// ============================================================
-//  引入 Crypto API (Cloudflare Workers 原生支持 Web Crypto)
-// ============================================================
-
 const TOKEN_EXPIRES_MS = 30 * 24 * 60 * 60 * 1000; // 30 天
 const MAX_DEVICES = 2;
 const RECOVER_DAYS = 30;
@@ -29,7 +29,6 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // CORS — 允许蓝宝书Max域名
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -50,7 +49,7 @@ export default {
 
       switch (path) {
         case '/activate':
-          return handleActivate(body, env, corsHeaders, request);
+          return handleActivate(body, env, corsHeaders);
         case '/verify':
           return handleVerify(body, env, corsHeaders);
         case '/unbind':
@@ -61,6 +60,8 @@ export default {
           return handleInfo(body, env, corsHeaders);
         case '/codes/create':
           return handleCreateCode(body, env, corsHeaders);
+        case '/codes/delete':
+          return handleDeleteCode(body, env, corsHeaders);
         default:
           return jsonResponse({ error: 'Not found' }, 404, corsHeaders);
       }
@@ -73,8 +74,8 @@ export default {
 // ============================================================
 //  POST /activate
 // ============================================================
-async function handleActivate(body, env, corsHeaders, request) {
-  const { code, fp } = body;
+async function handleActivate(body, env, corsHeaders) {
+  const { code, fp, clientIP } = body;
   if (!code || !fp) {
     return jsonResponse({ ok: false, error: '缺少激活码或设备指纹' }, 400, corsHeaders);
   }
@@ -82,19 +83,17 @@ async function handleActivate(body, env, corsHeaders, request) {
   const codeKey = `code:${code}`;
   let codeData = await env.AUTH_CODES.get(codeKey, 'json');
 
-  // 码不存在
   if (!codeData) {
     return jsonResponse({ ok: false, error: '无效的激活码' }, 403, corsHeaders);
   }
 
-  // 码已过期
   if (Date.now() > new Date(codeData.expiresAt).getTime()) {
     return jsonResponse({ ok: false, error: '激活码已过期' }, 403, corsHeaders);
   }
 
   const devices = codeData.devices || [];
 
-  // === 情况1: 首次激活 ===
+  // 情况1: 首次激活
   if (devices.length === 0) {
     const token = await signToken(fp, env.TOKEN_SECRET);
     const deviceInfo = {
@@ -108,10 +107,9 @@ async function handleActivate(body, env, corsHeaders, request) {
       devices,
       used: true,
     }));
-    // 写入 recover 记录
     await env.AUTH_CODES.put(`recover:${fp}`, JSON.stringify({
       code,
-      lastIP: _clientIP || "",
+      lastIP: clientIP || "",
       lastSeen: new Date().toISOString(),
     }));
     return jsonResponse({
@@ -123,7 +121,7 @@ async function handleActivate(body, env, corsHeaders, request) {
     }, 200, corsHeaders);
   }
 
-  // === 情况2: 已在设备列表中（清缓存恢复） ===
+  // 情况2: 已在设备列表中（清缓存恢复）
   const existingDevice = devices.find(d => d.fp === fp);
   if (existingDevice) {
     const token = await signToken(fp, env.TOKEN_SECRET);
@@ -139,10 +137,8 @@ async function handleActivate(body, env, corsHeaders, request) {
     }, 200, corsHeaders);
   }
 
-  // === 情况3: 设备已满 ===
+  // 情况3: 设备已满
   if (devices.length >= MAX_DEVICES) {
-    // 检查清缓存恢复条件：同IP + <30天
-        /* _clientIP passed as parameter */
     const lastDevice = devices[devices.length - 1];
     const daysSinceLast = (Date.now() - new Date(lastDevice.lastSeen).getTime())
       / (24 * 60 * 60 * 1000);
@@ -155,7 +151,6 @@ async function handleActivate(body, env, corsHeaders, request) {
       }, 403, corsHeaders);
     }
 
-    // 超过30天无活跃 → 替换最早的设备
     const oldest = devices.reduce((a, b) =>
       new Date(a.lastSeen) < new Date(b.lastSeen) ? a : b
     );
@@ -175,7 +170,7 @@ async function handleActivate(body, env, corsHeaders, request) {
     }, 200, corsHeaders);
   }
 
-  // === 情况4: 还有设备名额 → 绑新设备 ===
+  // 情况4: 还有设备名额 → 绑新设备
   const token = await signToken(fp, env.TOKEN_SECRET);
   const newDevice = {
     fp,
@@ -186,7 +181,7 @@ async function handleActivate(body, env, corsHeaders, request) {
   await env.AUTH_CODES.put(codeKey, JSON.stringify({ ...codeData, devices }));
   await env.AUTH_CODES.put(`recover:${fp}`, JSON.stringify({
     code,
-    lastIP: _clientIP || "",
+    lastIP: clientIP || "",
     lastSeen: new Date().toISOString(),
   }));
   return jsonResponse({
@@ -199,7 +194,6 @@ async function handleActivate(body, env, corsHeaders, request) {
 
 // ============================================================
 //  POST /verify
-//  自包含 token 验证，不读 KV
 // ============================================================
 async function handleVerify(body, env, corsHeaders) {
   const { token } = body;
@@ -236,11 +230,14 @@ async function handleUnbind(body, env, corsHeaders) {
   }
 
   if (fp) {
-    // 解绑指定设备
     codeData.devices = (codeData.devices || []).filter(d => d.fp !== fp);
   } else {
-    // 解绑全部设备
     codeData.devices = [];
+  }
+
+  // 如果全部解绑，标记为未使用
+  if (codeData.devices.length === 0) {
+    codeData.used = false;
   }
 
   await env.AUTH_CODES.put(codeKey, JSON.stringify(codeData));
@@ -293,8 +290,8 @@ async function handleInfo(body, env, corsHeaders) {
     return jsonResponse({ ok: false, error: '缺少激活码' }, 400, corsHeaders);
   }
 
-  const codeKey = 'code:' + code;
-  const codeData = await env.AUTH_CODES.get(codeKey, 'json');
+  const codeKey = `code:${code}`;
+  let codeData = await env.AUTH_CODES.get(codeKey, 'json');
   if (!codeData) {
     return jsonResponse({ ok: false, error: '激活码不存在' }, 404, corsHeaders);
   }
@@ -307,7 +304,6 @@ async function handleInfo(body, env, corsHeaders) {
     createdAt: codeData.createdAt,
   }, 200, corsHeaders);
 }
-
 
 // ============================================================
 //  POST /codes/create  (Admin — 批量生成激活码)
@@ -328,7 +324,7 @@ async function handleCreateCode(body, env, corsHeaders) {
   for (const code of codes) {
     const codeKey = 'code:' + code;
     const existing = await env.AUTH_CODES.get(codeKey, 'json');
-    if (existing) continue; // 跳过已存在的码
+    if (existing) continue;
     await env.AUTH_CODES.put(codeKey, JSON.stringify({
       devices: [],
       expiresAt,
@@ -342,6 +338,38 @@ async function handleCreateCode(body, env, corsHeaders) {
     created,
     expiresAt,
     total: codes.length,
+  }, 200, corsHeaders);
+}
+
+// ============================================================
+//  POST /codes/delete  (Admin — 删除单个激活码)
+// ============================================================
+async function handleDeleteCode(body, env, corsHeaders) {
+  const { admin_key, code } = body;
+  if (admin_key !== env.ADMIN_KEY) {
+    return jsonResponse({ ok: false, error: '管理员密钥错误' }, 403, corsHeaders);
+  }
+  if (!code) {
+    return jsonResponse({ ok: false, error: '缺少激活码' }, 400, corsHeaders);
+  }
+
+  const codeKey = 'code:' + code;
+  const existing = await env.AUTH_CODES.get(codeKey, 'json');
+  if (!existing) {
+    return jsonResponse({ ok: false, error: '激活码不存在' }, 404, corsHeaders);
+  }
+
+  // 如果已绑定设备，先删除 recover 记录
+  const devices = existing.devices || [];
+  for (const device of devices) {
+    await env.AUTH_CODES.delete('recover:' + device.fp);
+  }
+
+  await env.AUTH_CODES.delete(codeKey);
+
+  return jsonResponse({
+    ok: true,
+    message: '已删除激活码 ' + code,
   }, 200, corsHeaders);
 }
 
@@ -365,15 +393,12 @@ async function verifyToken(token, secret) {
     const [hash, fp, expiresStr] = parts;
     const expires = parseInt(expiresStr, 10);
 
-    // 过期检查
     if (Date.now() > expires) return { ok: false };
 
-    // hash 校验
     const payload = `${fp}|${secret}|${expires}`;
     const hashBuf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload));
     const expected = btoa(String.fromCharCode(...new Uint8Array(hashBuf)));
 
-    // 常数时间比较防止时序攻击
     if (hash.length !== expected.length) return { ok: false };
     let mismatch = 0;
     for (let i = 0; i < hash.length; i++) {
