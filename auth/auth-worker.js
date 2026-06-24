@@ -55,6 +55,12 @@ export default {
           return handleVerify(body, env, corsHeaders);
         case '/unbind':
           return handleUnbind(body, env, corsHeaders);
+        case '/list':
+          return handleList(body, env, corsHeaders);
+        case '/info':
+          return handleInfo(body, env, corsHeaders);
+        case '/codes/create':
+          return handleCreateCode(body, env, corsHeaders);
         default:
           return jsonResponse({ error: 'Not found' }, 404, corsHeaders);
       }
@@ -112,6 +118,7 @@ async function handleActivate(body, env, corsHeaders, request) {
       ok: true,
       token,
       expires: Date.now() + TOKEN_EXPIRES_MS,
+      expiresAt: codeData.expiresAt,
       devicesLeft: MAX_DEVICES - devices.length,
     }, 200, corsHeaders);
   }
@@ -126,6 +133,7 @@ async function handleActivate(body, env, corsHeaders, request) {
       ok: true,
       token,
       expires: Date.now() + TOKEN_EXPIRES_MS,
+      expiresAt: codeData.expiresAt,
       devicesLeft: MAX_DEVICES - devices.length,
       recovered: true,
     }, 200, corsHeaders);
@@ -161,6 +169,7 @@ async function handleActivate(body, env, corsHeaders, request) {
       ok: true,
       token,
       expires: Date.now() + TOKEN_EXPIRES_MS,
+      expiresAt: codeData.expiresAt,
       devicesLeft: 0,
       recovered: true,
     }, 200, corsHeaders);
@@ -239,6 +248,100 @@ async function handleUnbind(body, env, corsHeaders) {
   return jsonResponse({
     ok: true,
     devicesLeft: MAX_DEVICES - (codeData.devices || []).length,
+  }, 200, corsHeaders);
+}
+
+// ============================================================
+//  POST /list  (Admin — 列出全部激活码)
+// ============================================================
+async function handleList(body, env, corsHeaders) {
+  const { admin_key } = body;
+  if (admin_key !== env.ADMIN_KEY) {
+    return jsonResponse({ ok: false, error: '管理员密钥错误' }, 403, corsHeaders);
+  }
+
+  const codeList = [];
+  let cursor = undefined;
+  do {
+    const listResult = await env.AUTH_CODES.list({ prefix: 'code:', cursor, limit: 100 });
+    for (const key of listResult.keys) {
+      const codeData = await env.AUTH_CODES.get(key.name, 'json');
+      codeList.push({
+        code: key.name.replace('code:', ''),
+        devices: (codeData?.devices || []).length,
+        maxDevices: MAX_DEVICES,
+        expiresAt: codeData?.expiresAt || null,
+        createdAt: codeData?.createdAt || null,
+        used: codeData?.used || false,
+      });
+    }
+    cursor = listResult.cursor;
+  } while (cursor);
+
+  return jsonResponse({ ok: true, codes: codeList }, 200, corsHeaders);
+}
+
+// ============================================================
+//  POST /info  (Admin — 查询单个激活码详情)
+// ============================================================
+async function handleInfo(body, env, corsHeaders) {
+  const { admin_key, code } = body;
+  if (admin_key !== env.ADMIN_KEY) {
+    return jsonResponse({ ok: false, error: '管理员密钥错误' }, 403, corsHeaders);
+  }
+  if (!code) {
+    return jsonResponse({ ok: false, error: '缺少激活码' }, 400, corsHeaders);
+  }
+
+  const codeKey = 'code:' + code;
+  const codeData = await env.AUTH_CODES.get(codeKey, 'json');
+  if (!codeData) {
+    return jsonResponse({ ok: false, error: '激活码不存在' }, 404, corsHeaders);
+  }
+
+  return jsonResponse({
+    ok: true,
+    code,
+    devices: codeData.devices || [],
+    expiresAt: codeData.expiresAt,
+    createdAt: codeData.createdAt,
+  }, 200, corsHeaders);
+}
+
+
+// ============================================================
+//  POST /codes/create  (Admin — 批量生成激活码)
+// ============================================================
+async function handleCreateCode(body, env, corsHeaders) {
+  const { admin_key, codes, days } = body;
+  if (admin_key !== env.ADMIN_KEY) {
+    return jsonResponse({ ok: false, error: '管理员密钥错误' }, 403, corsHeaders);
+  }
+  if (!codes || !Array.isArray(codes) || codes.length === 0) {
+    return jsonResponse({ ok: false, error: '缺少激活码列表' }, 400, corsHeaders);
+  }
+
+  const expiresAt = new Date(Date.now() + (days || 365) * 24 * 60 * 60 * 1000).toISOString();
+  const createdAt = new Date().toISOString();
+  let created = 0;
+
+  for (const code of codes) {
+    const codeKey = 'code:' + code;
+    const existing = await env.AUTH_CODES.get(codeKey, 'json');
+    if (existing) continue; // 跳过已存在的码
+    await env.AUTH_CODES.put(codeKey, JSON.stringify({
+      devices: [],
+      expiresAt,
+      createdAt,
+    }));
+    created++;
+  }
+
+  return jsonResponse({
+    ok: true,
+    created,
+    expiresAt,
+    total: codes.length,
   }, 200, corsHeaders);
 }
 

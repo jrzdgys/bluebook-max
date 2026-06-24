@@ -16,6 +16,7 @@
 const WORKER_URL    = "https://bluebook-auth.bluebookmax.workers.dev";
 const AUTH_KEY      = "bbm_auth_token";
 const FP_CACHE_KEY  = "bbm_fp_cache";
+const EXPIRES_KEY    = "bbm_expires_at";
 
 // ===== 设备指纹采集 =====
 // 主指纹：navigator + screen + timezone（稳定）
@@ -246,8 +247,15 @@ const Paywall = {
       const result = await Paywall.activate(code);
       if (result.ok) {
         hideModal();
-        if (onSuccess) onSuccess();
-        else window.location.reload();
+        const expiry = Paywall.formatExpiry();
+        const expiryMsg = expiry ? '有效期至 ' + expiry : '';
+        if (onSuccess) {
+          if (expiryMsg) console.log('蓝宝书Max ' + expiryMsg);
+          onSuccess();
+        } else {
+          if (expiryMsg) alert('激活成功！' + expiryMsg);
+          window.location.reload();
+        }
       } else {
         showError(result.error || '激活失败，请检查激活码');
         btn.disabled = false;
@@ -288,13 +296,33 @@ const Paywall = {
     this.showActivationModal(null);
   },
 
+  // ---------- 获取到期日 ----------
+  getExpiryDate() {
+    const expiresAt = localStorage.getItem(EXPIRES_KEY);
+    if (!expiresAt) return null;
+    const date = new Date(expiresAt);
+    return isNaN(date.getTime()) ? null : date;
+  },
+
+  // ---------- 到期日格式化 ----------
+  formatExpiry() {
+    const date = this.getExpiryDate();
+    if (!date) return '';
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '/' + m + '/' + d;
+  },
+
   // ---------- 报告页 lock icon 装饰 ----------
   lockIcon() {
     return '<span class="lock-icon">🔒</span>';
   },
 
   unlockBadge() {
-    return '<span class="unlock-badge">✓ 已订阅</span>';
+    const expiry = this.formatExpiry();
+    const text = expiry ? '✓ 已订阅 · 有效期至 ' + expiry : '✓ 已订阅';
+    return '<span class="unlock-badge">' + text + '</span>';
   },
 };
 
