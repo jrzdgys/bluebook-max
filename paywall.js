@@ -14,8 +14,26 @@
 const ZSXQ_URL = "https://t.zsxq.com/6iVvp";
 const ZSXQ_NAME = "蓝宝书Max";
 
-const AUTH_KEY  = "bbmax_auth_v4";
-const FREE_KEY  = "bbmax_free_v4";       // 免费试看过的报告文件路径（JSON数组）
+// ===== Cloudflare Worker 鉴权 (一人一码) =====
+// 部署 Worker 后，把下面这行改成你的 Worker 地址
+const WORKER_URL = "https://bluebook-auth.你的用户名.workers.dev";
+
+const AUTH_KEY  = "bbmax_auth_v5";
+const FREE_KEY  = "bbmax_free_v5";
+
+// ===== 设备指纹 =====
+async function getFingerprint() {
+  const data = [
+    navigator.hardwareConcurrency || 4,
+    screen.colorDepth,
+    screen.width + "x" + screen.height,
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+    navigator.language,
+  ].join("|");
+  const enc = new TextEncoder();
+  const buf = await crypto.subtle.digest("SHA-256", enc.encode(data));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
 
 const Paywall = {
 
@@ -75,12 +93,55 @@ const Paywall = {
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
   },
 
-  // ===== 验证访问码 =====
+  // ===== 验证访问码（v5: Worker API 一人一码） =====
   async verify(code) {
     if (!code || code.trim().length < 4) {
       return { success: false, message: "访问码格式不正确" };
     }
+
     const hash = await this.sha256(code.trim());
+    const fp = await getFingerprint();
+
+    // 尝试 Worker API
+    try {
+      const resp = await fetch(WORKER_URL + "/bind", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: hash, fingerprint: fp }),
+      });
+      const data = await resp.json();
+
+      if (data.ok) {
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          valid: true,
+          codeHash: hash,
+          fingerprint: fp,
+          boundAt: data.boundAt || Date.now(),
+          codePrefix: code.trim().substring(0, 2),
+        }));
+        return { success: true, message: data.message || "验证成功！欢迎加入蓝宝书Max" };
+      }
+
+      if (data.reason === "already_bound") {
+        return { success: false, message: "⚠️ 此访问码已被其他设备绑定。\n每个码限一台设备使用，请联系管理员重新分配。" };
+      }
+
+      // Worker 不可达或其他错误 → 回退到本地验证
+      if (data.reason === "error" || data.reason === "not_found") {
+        return this._localVerify(hash, code);
+      }
+
+      return { success: false, message: data.message || "验证失败，请重试" };
+
+    } catch (e) {
+      // Worker 不可达 → 回退到本地验证
+      console.warn("[蓝宝书Max] Worker 不可达，回退本地验证:", e.message);
+      return this._localVerify(hash, code);
+    }
+  },
+
+  // ===== 本地验证回退 =====
+  async _localVerify(hash, code) {
     if (typeof VALID_HASHES !== "undefined" && VALID_HASHES.includes(hash)) {
       const idx = VALID_HASHES.indexOf(hash);
       localStorage.setItem(AUTH_KEY, JSON.stringify({
@@ -92,6 +153,30 @@ const Paywall = {
       return { success: true, message: "验证成功！欢迎加入蓝宝书Max" };
     }
     return { success: false, message: "访问码无效，请在知识星球「" + ZSXQ_NAME + "」获取最新码" };
+  },
+
+  // ===== 登录态校验 (Worker 复核) =====
+  async revalidate() {
+    const auth = this.getAuthInfo();
+    if (!auth.valid || !auth.codeHash || !auth.fingerprint) return true; // 本地回退模式，跳过复核
+
+    try {
+      const fp = await getFingerprint();
+      const resp = await fetch(WORKER_URL + "/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: auth.codeHash, fingerprint: fp }),
+      });
+      const data = await resp.json();
+      if (!data.ok) {
+        // 设备不匹配 → 清除登录态
+        this.logout();
+        return false;
+      }
+    } catch (e) {
+      // Worker 不可达 → 放行（不因服务故障阻止已登录用户）
+    }
+    return true;
   },
 
   logout() {

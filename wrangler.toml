@@ -1,0 +1,7 @@
+name = "bluebook-auth"
+main = "auth-worker.js"
+compatibility_date = "2025-01-01"
+
+[[kv_namespaces]]
+binding = "SUBS"
+id = "PLACEHOLDER_KV_ID"

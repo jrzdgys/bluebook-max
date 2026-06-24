@@ -335,8 +335,7 @@ def build_ed_json(edition, raw_topics, raw_opp, live_prices=None, date_str="2026
         mood = "机构积极布局，结构性机会突出"
     else:
         mood = "市场轮动加速，关注主线清晰的方向"
-    # 改用分行 bullet 格式
-    market_summary = "今日聚焦\n · " + "\n · ".join(top3_names)
+    market_summary = f"今日聚焦：{'、'.join(top3_names)}。{mood}。"
 
     # 日期显示
     date_parts = date_str.split("-")
@@ -354,7 +353,6 @@ def build_ed_json(edition, raw_topics, raw_opp, live_prices=None, date_str="2026
         "stats": {
             "topics": len(topics) - opp_count,
             "stocks": len(set(all_stock_names)),
-            "avgHeat": round(sum(t["heat"] for t in topics) / len(topics)) if topics else 0,
             "opportunities": opp_count,
         },
         "marketSummary": market_summary,
