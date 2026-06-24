@@ -1,380 +1,329 @@
 /**
- * 蓝宝书Max · 付费墙鉴权系统 v4
- * ==============================
+ * 蓝宝书Max · 设备绑定鉴权系统
+ * =============================
  *
- * 规则：
- *   索引页（index.html）→ 完全开放，不弹付费墙
- *   报告页（reports/*.html）→ 免费试看 1 份（按文件路径记录，不按日期重置）
- *                           → 第2份起弹出付费墙，需输入访问码
- *                           → 付费墙有关闭按钮，可关闭（但不看内容）
+ * 一人一号，绑定≤2台设备。
+ * Token 自包含（纯计算验证，不读 KV）。
+ * Canvas 指纹 + 容差匹配（兼容 iOS Safari）。
+ * 清缓存恢复机制：同码+同IP+30天内自动识别。
  *
- * 星球：蓝宝书Max · https://t.zsxq.com/6iVvp
+ * 部署前配置：
+ *   1. 部署 Cloudflare Worker (见 auth-worker.js)
+ *   2. 将 WORKER_URL 改为实际 Worker 地址
  */
 
-const ZSXQ_URL = "https://t.zsxq.com/6iVvp";
-const ZSXQ_NAME = "蓝宝书Max";
+// ===== 配置 =====
+const WORKER_URL    = "https://bluebook-auth.你的用户名.workers.dev";
+const AUTH_KEY      = "bbm_auth_token";
+const FP_CACHE_KEY  = "bbm_fp_cache";
 
-// ===== Cloudflare Worker 鉴权 (一人一码) =====
-// 部署 Worker 后，把下面这行改成你的 Worker 地址
-const WORKER_URL = "https://bluebook-auth.你的用户名.workers.dev";
+// ===== 设备指纹采集 =====
+// 主指纹：navigator + screen + timezone（稳定）
+// 辅助指纹：Canvas（iOS Safari 可能变化，用于容差匹配）
+async function collectFingerprint() {
+  const nav = {
+    ua: navigator.userAgent,
+    platform: navigator.platform,
+    lang: navigator.language,
+    cores: navigator.hardwareConcurrency || 4,
+    mem: navigator.deviceMemory || 0,
+    pdf: navigator.pdfViewerEnabled || false,
+    vendor: navigator.vendor || '',
+  };
 
-const AUTH_KEY  = "bbmax_auth_v5";
-const FREE_KEY  = "bbmax_free_v5";
+  const scr = {
+    w: screen.width,
+    h: screen.height,
+    dpr: window.devicePixelRatio || 1,
+    cd: screen.colorDepth || 24,
+  };
 
-// ===== 设备指纹 =====
-async function getFingerprint() {
-  const data = [
-    navigator.hardwareConcurrency || 4,
-    screen.colorDepth,
-    screen.width + "x" + screen.height,
-    Intl.DateTimeFormat().resolvedOptions().timeZone,
-    navigator.language,
-  ].join("|");
-  const enc = new TextEncoder();
-  const buf = await crypto.subtle.digest("SHA-256", enc.encode(data));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  // Canvas 指纹（兼容 iOS）
+  const canvasHash = await getCanvasHash();
+
+  // 组合主关键串（用于精确匹配）
+  const stableParts = [
+    nav.ua,
+    nav.platform,
+    nav.lang,
+    scr.w, scr.h,
+    scr.dpr,
+    tz,
+  ].join('|||');
+
+  // 完整指纹 hash
+  const fp = await sha256(stableParts + '|||' + canvasHash);
+
+  return {
+    hash: fp,
+    canvas: canvasHash,      // 单独存，用于容差匹配
+    stable: stableParts,      // 存用于恢复时的快速匹配
+  };
 }
 
+// Canvas 指纹（简化，兼容 iOS 隐私模式）
+function getCanvasHash() {
+  try {
+    const c = document.createElement('canvas');
+    c.width = 200; c.height = 50;
+    const ctx = c.getContext('2d');
+    if (!ctx) return 'no-canvas';
+
+    // 写固定文字
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = '16px "Arial",sans-serif';
+    ctx.fillStyle = '#1D1D1F';
+    ctx.fillText('蓝宝书Max', 10, 30);
+    ctx.fillStyle = '#0071E3';
+    ctx.fillRect(10, 10, 40, 20);
+
+    // iOS Safari 隐私模式可能返回空，捕获这种情况
+    const data = c.toDataURL();
+    if (data.length < 100) return 'canvas-blocked';
+    return data.substring(50, 250); // 取中间段作为指纹
+
+  } catch(e) {
+    return 'canvas-error';
+  }
+}
+
+// SHA-256 hash
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256',
+    new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf))
+    .map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ===== Paywall 对象（与 index.html 的调用点兼容） =====
 const Paywall = {
 
-  // ===== 认证 =====
+  // ---------- 鉴权 ----------
+
   isAuthenticated() {
+    const t = localStorage.getItem(AUTH_KEY);
+    if (!t) return false;
+    // 简单格式检查
+    const parts = t.split('.');
+    return parts.length === 3 && parts[1].length > 0;
+  },
+
+  getToken() {
+    return localStorage.getItem(AUTH_KEY);
+  },
+
+  // ---------- 验证 token（自包含，不请求 Worker） ----------
+  // 前端只做基础格式校验，真正的签名验证由 Worker 完成
+  // 这里返回 token 中的过期时间用于本地缓存判断
+  getTokenExpiry() {
     try {
-      const a = JSON.parse(localStorage.getItem(AUTH_KEY) || "{}");
-      return a.valid === true;
-    } catch { return false; }
+      const t = this.getToken();
+      if (!t) return 0;
+      const expires = parseInt(t.split('.')[2], 10);
+      return isNaN(expires) ? 0 : expires;
+    } catch { return 0; }
   },
 
-  getAuthInfo() {
-    try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "{}"); }
-    catch { return {}; }
+  isTokenExpired() {
+    return Date.now() > this.getTokenExpiry();
   },
 
-  // ===== 免费试看（按文件路径记录，仅1份） =====
-  _getFreeList() {
-    try { return JSON.parse(localStorage.getItem(FREE_KEY) || "[]"); }
-    catch { return []; }
-  },
+  // ---------- 远程验证（调用 Worker /verify） ----------
 
-  _saveFreeList(list) {
-    localStorage.setItem(FREE_KEY, JSON.stringify(list));
-  },
+  async verifyWithWorker() {
+    const token = this.getToken();
+    if (!token) return { ok: false, error: 'no_token' };
 
-  /** 当前页面还可以免费看吗？ */
-  hasFreeView() {
-    if (this.isAuthenticated()) return false; // 已付费无需免费
-    const list = this._getFreeList();
-    // 只有列表为空（从未看过任何免费报告）才能再看
-    return list.length === 0;
-  },
-
-  /** 标记当前页面已免费看过（页面加载成功后调用） */
-  useFreeView() {
-    const path = this._currentReportPath();
-    const list = this._getFreeList();
-    if (!list.includes(path)) {
-      list.push(path);
-      this._saveFreeList(list);
-    }
-  },
-
-  /** 当前报告在网站内的相对路径 */
-  _currentReportPath() {
     try {
-      const u = new URL(window.location.href);
-      return u.pathname.replace(/\/$/, "") || "/";
-    } catch { return "/"; }
-  },
-
-  // ===== SHA-256 =====
-  async sha256(message) {
-    const enc = new TextEncoder();
-    const buf = await crypto.subtle.digest("SHA-256", enc.encode(message));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
-  },
-
-  // ===== 验证访问码（v5: Worker API 一人一码） =====
-  async verify(code) {
-    if (!code || code.trim().length < 4) {
-      return { success: false, message: "访问码格式不正确" };
-    }
-
-    const hash = await this.sha256(code.trim());
-    const fp = await getFingerprint();
-
-    // 尝试 Worker API
-    try {
-      const resp = await fetch(WORKER_URL + "/bind", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: hash, fingerprint: fp }),
+      const res = await fetch(WORKER_URL + '/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
       });
-      const data = await resp.json();
-
-      if (data.ok) {
-        localStorage.setItem(AUTH_KEY, JSON.stringify({
-          valid: true,
-          codeHash: hash,
-          fingerprint: fp,
-          boundAt: data.boundAt || Date.now(),
-          codePrefix: code.trim().substring(0, 2),
-        }));
-        return { success: true, message: data.message || "验证成功！欢迎加入蓝宝书Max" };
+      const data = await res.json();
+      return data;
+    } catch(e) {
+      // Worker 不可达时，本地 token 未过期则放行
+      if (!this.isTokenExpired()) {
+        return { ok: true, offline: true };
       }
-
-      if (data.reason === "already_bound") {
-        return { success: false, message: "⚠️ 此访问码已被其他设备绑定。\n每个码限一台设备使用，请联系管理员重新分配。" };
-      }
-
-      // Worker 不可达或其他错误 → 回退到本地验证
-      if (data.reason === "error" || data.reason === "not_found") {
-        return this._localVerify(hash, code);
-      }
-
-      return { success: false, message: data.message || "验证失败，请重试" };
-
-    } catch (e) {
-      // Worker 不可达 → 回退到本地验证
-      console.warn("[蓝宝书Max] Worker 不可达，回退本地验证:", e.message);
-      return this._localVerify(hash, code);
+      return { ok: false, error: 'worker_unreachable' };
     }
   },
 
-  // ===== 本地验证回退 =====
-  async _localVerify(hash, code) {
-    if (typeof VALID_HASHES !== "undefined" && VALID_HASHES.includes(hash)) {
-      const idx = VALID_HASHES.indexOf(hash);
-      localStorage.setItem(AUTH_KEY, JSON.stringify({
-        valid: true,
-        codeId: idx,
-        activatedAt: Date.now(),
-        codePrefix: code.trim().substring(0, 2),
-      }));
-      return { success: true, message: "验证成功！欢迎加入蓝宝书Max" };
-    }
-    return { success: false, message: "访问码无效，请在知识星球「" + ZSXQ_NAME + "」获取最新码" };
-  },
+  // ---------- 激活（调用 Worker /activate） ----------
 
-  // ===== 登录态校验 (Worker 复核) =====
-  async revalidate() {
-    const auth = this.getAuthInfo();
-    if (!auth.valid || !auth.codeHash || !auth.fingerprint) return true; // 本地回退模式，跳过复核
+  async activate(code) {
+    const fpData = await collectFingerprint();
 
     try {
-      const fp = await getFingerprint();
-      const resp = await fetch(WORKER_URL + "/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: auth.codeHash, fingerprint: fp }),
+      const res = await fetch(WORKER_URL + '/activate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: code.toUpperCase(),
+          fp: fpData.hash,
+        }),
       });
-      const data = await resp.json();
-      if (!data.ok) {
-        // 设备不匹配 → 清除登录态
-        this.logout();
-        return false;
+      const data = await res.json();
+
+      if (data.ok && data.token) {
+        localStorage.setItem(AUTH_KEY, data.token);
+        // 缓存指纹用于恢复
+        try {
+          localStorage.setItem(FP_CACHE_KEY, JSON.stringify({
+            hash: fpData.hash,
+            canvas: fpData.canvas,
+            stable: fpData.stable,
+          }));
+        } catch {}
       }
-    } catch (e) {
-      // Worker 不可达 → 放行（不因服务故障阻止已登录用户）
+
+      return data;
+    } catch(e) {
+      return { ok: false, error: '网络错误，请检查网络后重试' };
     }
-    return true;
   },
+
+  // ---------- 清除认证 ----------
 
   logout() {
     localStorage.removeItem(AUTH_KEY);
-    localStorage.removeItem(FREE_KEY);
+    localStorage.removeItem(FP_CACHE_KEY);
   },
 
-  // ===== 付费墙 UI（可关闭） =====
-  renderPaywall(containerId, reportTitle) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+  // ---------- 激活弹窗 ----------
 
-    const title = reportTitle || document.title || "";
+  showActivationModal(onSuccess) {
+    const overlay = document.getElementById('auth-overlay');
+    if (overlay) {
+      overlay.style.display = 'flex';
+      const input = document.getElementById('auth-code');
+      if (input) setTimeout(() => input.focus(), 200);
+      return;
+    }
 
-    container.innerHTML = `
-    <div class="pw-overlay" id="pw-overlay"
-         style="position:fixed;top:0;left:0;width:100%;height:100%;
-                background:rgba(0,0,0,.6);backdrop-filter:blur(16px);
-                -webkit-backdrop-filter:blur(16px);z-index:10000;
-                display:flex;align-items:center;justify-content:center;
-                animation:pwFade .3s ease">
-      <style>
-        @keyframes pwFade{from{opacity:0}to{opacity:1}}
-        @keyframes pwSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        .pw-card2{
-          background:#fff;border-radius:20px;padding:40px 32px;
-          max-width:420px;width:92%;text-align:center;
-          box-shadow:0 20px 60px rgba(0,0,0,.18);
-          animation:pwSlide .4s cubic-bezier(.16,1,.3,1);
-          position:relative;margin:auto;
-        }
-        .pw-close2{
-          position:absolute;top:10px;right:14px;
-          width:32px;height:32px;border:none;background:#F2F2F7;
-          border-radius:50%;font-size:16px;color:#86868B;
-          cursor:pointer;display:flex;align-items:center;justify-content:center;
-          transition:all .15s;line-height:1;
-        }
-        .pw-close2:hover{background:#E5E5EA;color:#1D1D1F}
-        .pw-icon2{font-size:44px;margin-bottom:12px}
-        .pw-card2 h2{font-size:20px;font-weight:700;color:#1D1D1F;margin-bottom:8px}
-        .pw-desc2{font-size:13px;color:#86868B;line-height:1.6;margin-bottom:24px}
-        .pw-input2{
-          width:100%;padding:12px 16px;border:1.5px solid #E5E5EA;border-radius:12px;
-          font-size:15px;font-family:inherit;text-align:center;letter-spacing:1px;
-          outline:none;transition:border-color .15s;margin-bottom:10px;
-          -webkit-appearance:none;-moz-appearance:none;appearance:none;
-        }
-        .pw-input2:focus{border-color:#0071E3}
-        .pw-btn2{
-          width:100%;padding:12px;background:#0071E3;color:#fff;border:none;
-          border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;
-          font-family:inherit;transition:all .15s;
-        }
-        .pw-btn2:hover{background:#0077ED}
-        .pw-btn2:disabled{opacity:.6;cursor:not-allowed}
-        .pw-err2{color:#FF3B30;font-size:12px;margin-top:8px;min-height:20px}
-        .pw-ft2{
-          margin-top:24px;padding-top:20px;border-top:1px solid #F2F2F7;
-          font-size:12px;color:#AEAEB2;
-        }
-        .pw-ft2 a{
-          display:inline-flex;align-items:center;gap:6px;margin-top:10px;
-          padding:10px 24px;background:linear-gradient(135deg,#1AAD19,#0F8F0F);
-          color:#fff;border-radius:12px;text-decoration:none;
-          font-size:13px;font-weight:600;transition:all .15s;
-        }
-        .pw-ft2 a:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,173,25,.3)}
-      </style>
-      <div class="pw-card2">
-        <button class="pw-close2" id="pw-close2" title="关闭">✕</button>
-        <div class="pw-icon2">🔐</div>
-        <h2>知识星球付费会员专享</h2>
-        <p class="pw-desc2">
-          ${title}<br>
-          蓝宝书Max 为付费订阅产品<br>
-          年费 ¥888，加入「${ZSXQ_NAME}」获取访问码
-        </p>
+    // 弹窗还不存在 → 创建
+    this._createModal(onSuccess);
+  },
 
-        <input class="pw-input2" type="text" id="pw-code-input2"
-               placeholder="输入访问码" autocomplete="off" maxlength="64">
-        <button class="pw-btn2" id="pw-submit-btn2">验证访问码</button>
-        <div class="pw-err2" id="pw-error2"></div>
+  _createModal(onSuccess) {
+    // 移除旧的（如果存在）
+    const old = document.getElementById('auth-overlay');
+    if (old) old.remove();
 
-        <div class="pw-ft2">
-          <p style="margin-bottom:8px">没有访问码？加入知识星球获取</p>
-          <a href="${ZSXQ_URL}" target="_blank" rel="noopener">🪐 加入蓝宝书Max · 年费 ¥888</a>
-        </div>
-      </div>
-    </div>`;
+    const overlay = document.createElement('div');
+    overlay.id = 'auth-overlay';
+    overlay.className = 'auth-overlay';
+    overlay.innerHTML =
+      '<div class="auth-modal">' +
+      '  <div class="auth-icon">📘</div>' +
+      '  <h2>蓝宝书Max</h2>' +
+      '  <p class="auth-desc">请输入您的访问码激活账号</p>' +
+      '  <input class="auth-input" id="auth-code" placeholder="BBM-XXXXXXXX" maxlength="14" autocomplete="off" autocorrect="off" spellcheck="false">' +
+      '  <button class="auth-btn" id="auth-btn">激活</button>' +
+      '  <div class="auth-error" id="auth-error"></div>' +
+      '  <div class="auth-recover">已有账号？输入激活码后系统会自动识别设备，重新激活。</div>' +
+      '  <div class="auth-footer">激活即表示同意服务条款 · 每账号限绑定 2 台设备</div>' +
+      '</div>';
 
-    const overlay = document.getElementById("pw-overlay");
-    const closeBtn = document.getElementById("pw-close2");
-    const input = document.getElementById("pw-code-input2");
-    const btn = document.getElementById("pw-submit-btn2");
-    const err = document.getElementById("pw-error2");
+    document.body.appendChild(overlay);
 
-    // 关闭按钮：关闭付费墙
-    closeBtn.addEventListener("click", () => {
-      if (overlay) overlay.remove();
-      // 导航页：什么都不做（已经全开放，不需要块）
-      const isNav = !document.documentElement.getAttribute("data-paywall");
-      if (isNav) return;
-      // 报告页：显示付费引导
-      const c = document.querySelector(".container") || document.body;
-      const existing = document.getElementById("pw-blocked-msg");
-      if (existing) existing.remove();
-      const msg = document.createElement("div");
-      msg.id = "pw-blocked-msg";
-      msg.style.cssText = "text-align:center;padding:80px 20px;color:#86868B";
-      msg.innerHTML = `
-        <div style="font-size:48px;margin-bottom:20px">🔐</div>
-        <h2 style="font-size:20px;color:#1D1D1F;margin-bottom:8px">付费会员专享内容</h2>
-        <p style="font-size:14px;margin-bottom:24px">蓝宝书Max 为知识星球付费产品，年费 ¥888</p>
-        <a href="${ZSXQ_URL}" target="_blank" rel="noopener"
-           style="display:inline-flex;align-items:center;gap:6px;padding:12px 28px;
-                  background:linear-gradient(135deg,#1AAD19,#0F8F0F);color:#fff;
-                  border-radius:12px;text-decoration:none;font-size:14px;font-weight:600">
-          🪐 加入${ZSXQ_NAME} · ¥888/年
-        </a>
-        <p style="margin-top:18px;font-size:12px;color:#AEAEB2">
-          已付费？<a href="javascript:location.reload()" style="color:#0071E3;cursor:pointer">刷新页面</a> 重新验证
-        </p>`;
-      if (c) c.innerHTML = "";
-      if (c) c.appendChild(msg);
-    });
+    // 事件绑定
+    const input = document.getElementById('auth-code');
+    const btn = document.getElementById('auth-btn');
 
-    // 验证按钮
-    const doVerify = async () => {
+    const doActivate = async () => {
+      const code = input.value.trim();
+      if (!code) { showError('请输入激活码'); return; }
       btn.disabled = true;
-      btn.textContent = "验证中...";
-      err.textContent = "";
-      const result = await Paywall.verify(input.value);
-      if (result.success) {
-        window.location.reload();
+      btn.textContent = '验证中...';
+      clearError();
+
+      const result = await Paywall.activate(code);
+      if (result.ok) {
+        hideModal();
+        if (onSuccess) onSuccess();
+        else window.location.reload();
       } else {
-        err.textContent = result.message;
+        showError(result.error || '激活失败，请检查激活码');
         btn.disabled = false;
-        btn.textContent = "验证访问码";
-        input.focus(); input.select();
+        btn.textContent = '激活';
+        input.focus();
       }
     };
-    btn.addEventListener("click", doVerify);
-    input.addEventListener("keydown", e => { if (e.key === "Enter") doVerify(); });
-    setTimeout(() => input.focus(), 300);
+
+    btn.addEventListener('click', doActivate);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') doActivate();
+    });
+    input.addEventListener('input', () => clearError());
+    setTimeout(() => input.focus(), 200);
+
+    function showError(msg) {
+      const el = document.getElementById('auth-error');
+      if (el) el.textContent = msg;
+    }
+    function clearError() {
+      const el = document.getElementById('auth-error');
+      if (el) el.textContent = '';
+    }
+    function hideModal() {
+      const o = document.getElementById('auth-overlay');
+      if (o) o.style.display = 'none';
+    }
   },
 
-  // ===== 装饰 =====
-  lockIcon() { return '<span style="font-size:14px;margin-left:4px;opacity:.5">🔒</span>'; },
+  // ---------- 登录按钮回调（index.html 调用） ----------
+  showLogin() {
+    this.showActivationModal(null);
+  },
+
+  // ---------- 报告页 lock icon 装饰 ----------
+  lockIcon() {
+    return '<span class="lock-icon">🔒</span>';
+  },
+
   unlockBadge() {
-    return '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:#EEFFF2;color:#34C759;border-radius:100px;font-size:11px;font-weight:600">✓ 已订阅</span>';
+    return '<span class="unlock-badge">✓ 已订阅</span>';
   },
 };
 
-// ===== 页面自动检测（仅报告页） =====
-document.addEventListener("DOMContentLoaded", () => {
-  const needsAuth = document.documentElement.getAttribute("data-paywall") === "true";
-  if (!needsAuth) return;
+// ===== 页面初始化检测（自动执行） =====
 
-  // 确保 codes.js 已加载
-  if (typeof VALID_HASHES === "undefined") {
-    console.warn("[蓝宝书Max] codes.js 未加载，无法验证访问码");
-    return;
-  }
+// 报告页 <html data-paywall="true"> 时启用付费墙
+document.addEventListener('DOMContentLoaded', async () => {
+  const needsAuth = document.documentElement.getAttribute('data-paywall') === 'true';
+  if (!needsAuth) return;
 
   // 已认证 → 直接放行
   if (Paywall.isAuthenticated()) {
-    document.documentElement.classList.add("bb-authenticated");
+    document.documentElement.classList.add('bb-authenticated');
     return;
   }
 
-  // 有免费试看次数 → 放行，页面加载完毕后再标记
-  if (Paywall.hasFreeView()) {
-    document.documentElement.classList.add("bb-free-view");
-
-    // 显示底部免费试看提示条
-    const banner = document.createElement("div");
-    banner.style.cssText =
-      "position:fixed;bottom:0;left:0;right:0;z-index:9999;" +
-      "background:linear-gradient(135deg,#FFF9F0,#FFF0E0);" +
-      "color:#C47A00;text-align:center;padding:8px 16px;" +
-      "font-size:12px;font-weight:600;" +
-      "box-shadow:0 -2px 12px rgba(0,0,0,.06);" +
-      "display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap";
-    banner.innerHTML =
-      '🎁 免费试看中 · <a href="' + ZSXQ_URL +
-      '" target="_blank" rel="noopener" style="color:#1AAD19;font-weight:700;text-decoration:none">加入知识星球 ¥888/年 →</a>' +
-      ' · <span style="font-weight:400;color:#A0720A">仅此1份，下次需付费</span>';
-    document.body.appendChild(banner);
-
-    // ⭐ 关键：页面加载成功后再标记已使用（不在导航页提前消耗）
-    window.addEventListener("load", () => {
-      Paywall.useFreeView();
-    });
-    return;
-  }
-
-  // 无认证也无免费次数 → 弹付费墙（带关闭按钮）
-  const title = document.title || "";
-  Paywall.renderPaywall("paywall-container", title);
+  // 未认证 → 弹激活窗
+  const title = document.title || '';
+  Paywall.showActivationModal(() => {
+    window.location.reload();
+  });
 });
+
+// ===== 导航页认证状态更新（index.html 在事件中调用） =====
+window.__bbmRefreshAuth = function() {
+  const isAuth = Paywall.isAuthenticated();
+  const badge = document.getElementById('auth-badge');
+  if (badge) {
+    badge.innerHTML = isAuth ? Paywall.unlockBadge() : '';
+  }
+  const btn = document.getElementById('btn-nav-login');
+  if (btn) {
+    btn.textContent = isAuth ? '已订阅' : '订阅';
+    btn.style.background = isAuth
+      ? 'rgba(52,199,89,.1)'
+      : 'rgba(0,113,227,.08)';
+    btn.style.color = isAuth ? '#34C759' : '#0071E3';
+  }
+};

@@ -249,6 +249,47 @@ body{
   .hero-stats{gap:16px}
   .hero-stat{min-width:70px}
 }
+
+/* ===== Auth Modal (device binding) ===== */
+.auth-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+}
+.auth-modal {
+  background: rgba(255,255,255,.95);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-radius: 20px; padding: 40px 32px;
+  max-width: 380px; width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  text-align: center;
+}
+.auth-icon { font-size: 48px; margin-bottom: 12px; }
+.auth-modal h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+.auth-desc { font-size: 14px; color: #86868B; margin-bottom: 24px; }
+.auth-input {
+  width: 100%; padding: 14px 18px;
+  border: 2px solid #E5E5EA; border-radius: 14px;
+  font-size: 18px; text-align: center; letter-spacing: 2px;
+  font-family: "SF Mono",Menlo,monospace;
+  outline: none; transition: border-color .2s;
+  box-sizing: border-box;
+}
+.auth-input:focus { border-color: #0071E3; }
+.auth-btn {
+  width: 100%; padding: 14px; margin-top: 14px;
+  background: #0071E3; color: #fff; border: none;
+  border-radius: 14px; font-size: 16px; font-weight: 600;
+  cursor: pointer; transition: all .2s; font-family: inherit;
+}
+.auth-btn:hover { background: #0060C0; }
+.auth-btn:disabled { opacity: .4; cursor: not-allowed; }
+.auth-error { color: #C4433A; font-size: 13px; margin-top: 12px; min-height: 20px; }
+.auth-recover { font-size: 12px; color: #AEAEB2; margin-top: 16px; line-height: 1.5; }
+.auth-footer { font-size: 11px; color: #AEAEB2; margin-top: 24px; line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -265,7 +306,7 @@ body{
         <span class="dot"></span><span class="text">已订阅</span>
       </span>
       <span class="nav-time" id="nav-time">--</span>
-      <button class="nav-login" id="btn-nav-login" onclick="showLoginPaywall()">登录</button>
+      <button class="nav-login" id="btn-nav-login" onclick="showLoginPaywall();return false">登录</button>
     </div>
   </div>
 </nav>
@@ -298,7 +339,7 @@ body{
     <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
       🪐 加入蓝宝书Max · ¥888/年
     </a>
-    <button class="btn btn-outline" onclick="showLoginPaywall()">
+    <button class="btn btn-outline" onclick="showLoginPaywall();return false">
       🔑 已有访问码
     </button>
   </div>
@@ -433,7 +474,12 @@ setInterval(updateClock, 30000);
 })();
 
 function showLoginPaywall() {
-  Paywall.renderPaywall('paywall-container-dynamic', '蓝宝书Max');
+  if (Paywall.isAuthenticated()) {
+    Paywall.logout();
+    window.location.reload();
+    return;
+  }
+  Paywall.showActivationModal(function() { window.location.reload(); });
 }
 
 function renderCard(r, isFirst, isAuth, editionLabels) {
