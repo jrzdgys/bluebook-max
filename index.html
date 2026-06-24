@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="蓝宝书Max - 机构级A股投研情报，Alpha派蓝宝书全链路自动化，每日最强标的。知识星球付费订阅 ¥888/年。">
+<meta name="description" content="蓝宝书Max - 机构级A股投研情报，四版全时段覆盖，三层智能分级，盘中实时行情。知识星球付费订阅 ¥888/年。">
 <title>蓝宝书Max · 机构级投研情报</title>
 <style>
 /* ===== Reset & Base ===== */
@@ -119,18 +119,18 @@ body{
   transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:rgba(0,0,0,.12);
 }
 .report-card:hover::before{opacity:1}
-.report-card.gv{--accent:#30B46E}
-.report-card.mc{--accent:#FF9500}
-.report-card.pm{--accent:#0071E3}
-.report-card.ev{--accent:#AF52DE}
+.report-card.am{--accent:#FF9500}
+.report-card.md{--accent:#E8870A}
+.report-card.pm{--accent:#5E5CE6}
+.report-card.global{--accent:#0071E3}
 .report-card-header{display:flex;align-items:center;gap:10px}
 .r-badge{
   padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.3px;
 }
-.r-badge.gv{background:rgba(48,180,110,.1);color:#30B46E}
-.r-badge.mc{background:rgba(255,149,0,.1);color:#FF9500}
-.r-badge.pm{background:rgba(0,113,227,.1);color:#0071E3}
-.r-badge.ev{background:rgba(175,82,222,.1);color:#AF52DE}
+.r-badge.am{background:rgba(255,149,0,.1);color:#FF9500}
+.r-badge.md{background:rgba(232,135,10,.1);color:#E8870A}
+.r-badge.pm{background:rgba(94,92,230,.1);color:#5E5CE6}
+.r-badge.global{background:rgba(0,113,227,.1);color:#0071E3}
 .r-date{font-size:20px;font-weight:700;letter-spacing:-.3px}
 .r-title{
   font-size:13px;color:#86868B;line-height:1.5;
@@ -275,7 +275,7 @@ body{
   <div class="hero-badge">🪐 知识星球付费订阅 · ¥888/年</div>
   <h1>蓝宝书<span class="accent">Max</span></h1>
   <p class="subtitle">
-    基于 Alpha 派蓝宝书的机构级投研情报<br>
+    机构级A股投研情报<br>
     四版全时段覆盖 · 三层智能分级 · 盘中实时行情
   </p>
 
@@ -311,7 +311,7 @@ body{
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
         <h3>三层智能分级</h3>
-        <p>龙头首选 / 弹性机会 / 相关标的，Alpha 派原文驱动决策树自动分类</p>
+        <p>龙头首选 / 弹性机会 / 相关标的，决策树自动分类，机构原文驱动</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
@@ -336,7 +336,7 @@ body{
       <div class="feature-card">
         <div class="feature-icon">📋</div>
         <h3>推荐理由照抄原文</h3>
-        <p>每只标的的推荐理由直接引用 Alpha 派原文，不编造不修改</p>
+        <p>推荐理由直接引用机构研报原文，不编造不修改</p>
       </div>
     </div>
   </div>
@@ -383,12 +383,12 @@ body{
       <p class="price-desc">每天不到 2.5 元，获取机构级投研情报</p>
 
       <ul class="pricing-features">
-        <li>每日晨会版 + 午间版 + 晚间版</li>
-        <li>最强标的三层分级，直出买卖逻辑</li>
-        <li>产业链上下游精准映射</li>
-        <li>实时行情叠加，每3秒刷新</li>
-        <li>Alpha精选短线情绪池</li>
-        <li>访问码一键登录，永久有效</li>
+        <li>每日晨会版 + 午间版 + 晚间版 + 全球版</li>
+        <li>三层智能分级，龙头 / 弹性 / 相关一目了然</li>
+        <li>盘中实时行情，15 秒轮询，红涨绿跌</li>
+        <li>三层独立评分，机构关注度 + 市场信号 + 催化强度</li>
+        <li>智能摘要提炼，AI 生成 ≤85 字事件摘要 + ≤60 字核心引用</li>
+        <li>一人一码设备绑定，永久有效</li>
       </ul>
 
       <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
@@ -406,8 +406,7 @@ body{
       股市有风险，投资需谨慎。过往表现不预示未来收益。
     </p>
     <p class="brand">
-      蓝宝书Max · 数据来源：<a href="https://www.alphapai.com" target="_blank" rel="noopener">Alpha派</a> &
-      <a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>
+      蓝宝书Max · 行情数据由<a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>提供 · 自动更新
     </p>
   </div>
 </footer>
@@ -503,14 +502,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
 
     var todayGrid = document.getElementById('today-reports');
     var todayCount = 0;
-    var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
-
     if (todayReports.length > 0) {
-      todayReports.sort(function(a, b) {
-        var oa = editionOrder[a.r.edition] || 99;
-        var ob = editionOrder[b.r.edition] || 99;
-        return oa - ob;
-      });
       todayCount = todayReports.length;
       todayGrid.innerHTML = '<div class="date-group">' +
         '<div class="date-label"><span class="dot today-dot"></span>今天<span class="count">' + todayCount + '份</span></div>' +
@@ -535,11 +527,6 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       var historyHTML = '';
       historyDates.forEach(function(dateKey) {
         var items = historyMap[dateKey];
-        items.sort(function(a, b) {
-          var oa = editionOrder[a.r.edition] || 99;
-          var ob = editionOrder[b.r.edition] || 99;
-          return oa - ob;
-        });
         var dateParts = (dateKey || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
         var displayDate = dateParts
           ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
