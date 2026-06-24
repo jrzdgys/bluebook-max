@@ -273,33 +273,48 @@ const Paywall = {
     const btn = document.getElementById('auth-btn');
 
     const doActivate = async () => {
-      const code = input.value.trim();
-      if (!code) { showError('请输入激活码'); return; }
-      btn.disabled = true;
-      btn.textContent = '验证中...';
-      clearError();
+      try {
+        const code = input.value.trim();
+        if (!code) { showError('请输入激活码'); return; }
+        btn.disabled = true;
+        btn.textContent = '验证中...';
+        clearError();
 
-      const result = await Paywall.activate(code);
-      if (result.ok) {
-        hideModal();
-        const expiry = Paywall.formatExpiry();
-        const expiryMsg = expiry ? '有效期至 ' + expiry : '';
-        if (onSuccess) {
-          if (expiryMsg) console.log('蓝宝书Max ' + expiryMsg);
-          onSuccess();
+        const safetyTimer = setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = '激活';
+          showError('请求超时，请检查网络后重试');
+        }, 10000);
+
+        const result = await Paywall.activate(code);
+        clearTimeout(safetyTimer);
+        
+        if (result.ok) {
+          hideModal();
+          const expiry = Paywall.formatExpiry();
+          const expiryMsg = expiry ? '有效期至 ' + expiry : '';
+          if (onSuccess) {
+            if (expiryMsg) console.log('蓝宝书Max ' + expiryMsg);
+            onSuccess();
+          } else {
+            if (expiryMsg) alert('激活成功！' + expiryMsg);
+            window.location.reload();
+          }
         } else {
-          if (expiryMsg) alert('激活成功！' + expiryMsg);
-          window.location.reload();
+          showError(result.error || '激活失败，请检查激活码');
+          btn.disabled = false;
+          btn.textContent = '激活';
+          input.focus();
         }
-      } else {
-        showError(result.error || '激活失败，请检查激活码');
+      } catch(e) {
+        console.error('激活异常:', e);
+        showError('系统错误: ' + (e.message || '未知错误'));
         btn.disabled = false;
         btn.textContent = '激活';
-        input.focus();
       }
     };
 
-    btn.addEventListener('click', doActivate);
+    btn.addEventListener('click', doActivate);btn.addEventListener('click', doActivate);
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter') doActivate();
     });
