@@ -24,7 +24,7 @@
     .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
     .stats-row .st span{font-size:10px;color:rgba(255,255,255,.45)}
     .ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
-    .ms{font-size:13px;color:#515154;background:#F5F5F7;padding:14px 18px;border-radius:10px;margin-bottom:20px;line-height:1.7}
+    .ms{font-size:13px;color:#515154;background:#F5F5F7;padding:14px 18px;border-radius:10px;margin-bottom:20px;line-height:1.7;white-space:pre-line}
     .section-title{font-size:14px;font-weight:700;margin-bottom:12px;color:#1D1D1F;display:flex;align-items:center;gap:6px}
     .tc{background:#fff;border:1px solid #E5E5EA;border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:all .15s}
     .tc:hover{border-color:#0071E3;box-shadow:0 4px 16px rgba(0,0,0,.06)}
@@ -37,8 +37,7 @@
     .tc-info{font-size:10px;color:#86868B;cursor:pointer;position:relative}
     .tc-info:hover{color:#0071E3}
     .hp{display:none;position:fixed;background:#1D1D1F;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;z-index:9999;white-space:nowrap;box-shadow:0 12px 40px rgba(0,0,0,.35);max-width:320px}
-    .hp::before{content:'';position:absolute;left:-6px;top:16px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:7px solid #1D1D1F}
-    .hp.right::before{left:auto;right:-6px;border-right:none;border-left:7px solid #1D1D1F}
+    .hp::before{content:'';position:absolute;top:-6px;right:20px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #1D1D1F}
     .hp-title{font-weight:600;margin-bottom:4px;color:rgba(255,255,255,.6);font-size:10px}
     .hp-scores{line-height:1.8}
     .hp-line{display:flex;justify-content:space-between;gap:16px}
@@ -101,12 +100,13 @@
     </div>
     <div class="stats-row">
     <div class="st"><strong id="stat-topics">10</strong><span>全部主题</span></div>
-    <div class="st"><strong id="stat-opp">0</strong><span>机会前瞻</span></div>
+    <div class="st"><strong id="stat-avgheat">0</strong><span>平均热度</span></div>
     <div class="st"><strong id="stat-stocks">63</strong><span>推荐标的</span></div>
     </div>
     </div>
     <div class="ct">
-    <div class="ms" id="market-summary">📌 午间更新聚焦三大主线：英伟达Rubin全面液冷引爆热管理产业链价值重估；存储芯片Q3涨价预期飙升至50%确认AI驱动结构性短缺；半导体设备国产替代因日本出口管制从长期选项变为短期强制任务。</div>
+    <div class="ms" id="market-summary">📌 今日聚焦
+ · 加载中...</div>
     <div class="section-title" id="topics-header">🔥 全部主题（10个）</div>
     <div id="topics-container"></div>
     </div>
@@ -119,17 +119,17 @@
     var ED=JSON.parse(document.getElementById('edition-data').textContent);
     function ht(h){if(h>=85)return'#C4433A';if(h>=65)return'#E67E22';if(h>=50)return'#2E86C1';return'#7D8B8F'}
     function sb(h){if(h>=85)return'#C4433A15';if(h>=65)return'#E67E2215';if(h>=50)return'#2E86C115';return'#7D8B8F15'}
-    function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<690)||(t>=780&&t<900)}
+    function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<900)}
     function ts(){var n=new Date();return n.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
     document.title='蓝宝书Max · '+ED.edition.dateDisplay+' '+ED.edition.label;
     document.getElementById('header-date').textContent=ED.edition.dateDisplay;
     document.getElementById('header-edition').textContent='☀️ '+ED.edition.label;
     document.getElementById('stat-topics').textContent=ED.stats.topics;
-    document.getElementById('stat-opp').textContent=ED.stats.opportunities;
+    document.getElementById('stat-avgheat').textContent=ED.stats.avgHeat;
     document.getElementById('stat-stocks').textContent=ED.stats.stocks;
     document.getElementById('market-summary').textContent='📌 '+ED.marketSummary;
-    document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）';
-    document.getElementById('update-time').textContent='更新 '+(ED.edition.updateTime||'');
+    document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）· 按综合热度降序';
+    var _ut=ED.edition.updateTime||'';var _tp=_ut.split(' ');document.getElementById('update-time').textContent='更新于 '+ED.edition.dateDisplay+' '+(_tp[1]||'');
     var C=document.getElementById('topics-container'),OP=null,LC={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};
     ED.topics.forEach(function(t,i){var r=i+1,c=ht(t.heat),b=sb(t.heat);var sc=t.scores||{};var gh='';
     t.groups.forEach(function(g){if(!g.items||!g.items.length)return;var lc=LC[g.label]||'l3';
@@ -138,15 +138,15 @@
     gh+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
     var card=document.createElement('div');card.className='tc';card.innerHTML='<div class="tc-header"><span class="tc-rank">TOP'+r+'</span><span class="tc-name">'+t.topic+'</span><span class="tc-stage" style="background:'+b+';color:'+c+'">'+t.stage+'</span><div class="tc-heat-wrap"><span class="tc-heat" style="color:'+c+'" data-idx="'+i+'">'+t.heat+'</span><span class="tc-info" data-idx="'+i+'">ⓘ</span></div></div><div class="tc-desc">'+t.summary+'</div>'+(t.quote?'<div class="tc-quote">📘 '+t.quote+'</div>':'')+gh;C.appendChild(card)});
     var PE=document.createElement('div');PE.className='hp';PE.id='spu';document.body.appendChild(PE);
-    function sp(idx,ae){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{};var ins=sc.inst||Math.round(t.heat*0.55);var mk=sc.market||Math.round(t.heat*0.25);var ct=sc.catalyst||Math.round(t.heat*0.20);PE.innerHTML='<div class="hp-title">'+t.topic+' · 热度构成</div><div class="hp-scores"><div class="hp-line"><span class="hl">机构关注度</span><span class="hv">'+ins+'/60</span></div><div class="hp-line"><span class="hl">市场确认度</span><span class="hv">'+mk+'/25</span></div><div class="hp-line"><span class="hl">催化强度</span><span class="hv">'+ct+'/15</span></div><div class="hp-line" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.15)"><span class="hl">综合热度</span><span class="hv" style="color:'+ht(t.heat)+'">'+t.heat+'/100</span></div></div>';var re=ae.getBoundingClientRect();var pw=280;var x=re.right+10;var y=re.top-20;if(x+pw>window.innerWidth-10){x=re.left-pw-10;PE.classList.add('right')}else{PE.classList.remove('right')}if(y<10)y=10;if(y+120>window.innerHeight)y=window.innerHeight-130;PE.style.left=x+'px';PE.style.top=y+'px';PE.style.display='block';OP=idx}
-    function hp(){PE.style.display='none';OP=null}
-    document.querySelectorAll('.tc-info,.tc-heat').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);if(OP===idx){hp()}else{sp(idx,this)}})});
+    function sp(idx,ae){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{};var ins=sc.inst||Math.round(t.heat*0.55);var mk=sc.market||Math.round(t.heat*0.25);var ct=sc.catalyst||Math.round(t.heat*0.20);PE.innerHTML='<div class="hp-title">'+t.topic+' · 热度构成</div><div class="hp-scores"><div class="hp-line"><span class="hl">机构关注度</span><span class="hv">'+ins+'/60</span></div><div class="hp-line"><span class="hl">市场确认度</span><span class="hv">'+mk+'/25</span></div><div class="hp-line"><span class="hl">催化强度</span><span class="hv">'+ct+'/15</span></div><div class="hp-line" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.15)"><span class="hl">综合热度</span><span class="hv" style="color:'+ht(t.heat)+'">'+t.heat+'/100</span></div></div>';var card=ae.closest('.tc');if(card){card.style.position='relative';card.style.overflow='visible';card.appendChild(PE)};var re=ae.getBoundingClientRect();var cr=card.getBoundingClientRect();var pw=Math.min(280,card.offsetWidth-20);PE.style.position='absolute';PE.style.width=pw+'px';PE.style.maxWidth='none';PE.style.top=(re.bottom-cr.top+6)+'px';PE.style.left='auto';PE.style.right=(cr.right-re.right)+'px';PE.style.boxShadow='0 6px 20px rgba(0,0,0,.18)';PE.style.zIndex='100';PE.style.borderRadius='10px';PE.style.whiteSpace='normal';PE.style.margin='0';PE.style.display='block';OP=idx}
+    function hp(){PE.style.display='none';OP=null;if(PE.parentNode!=document.body)document.body.appendChild(PE)}
+    document.querySelectorAll('.tc-info').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);if(OP===idx){hp()}else{sp(idx,this)}})});
     document.addEventListener('click',function(e){if(!PE.contains(e.target))hp()});
     window.addEventListener('scroll',function(){if(OP!=null)hp()},{passive:true});
     window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
     var TD=isTH(),RI=TD?15000:60000;
-    function uli(){var d=document.getElementById('live-dot'),t=document.getElementById('live-text');if(isTH()){d.className='live-dot live';t.textContent='实时行情 · '+ts()}else{d.className='live-dot closed';t.textContent='收盘价 · '+ts()}}
-    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var d=pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(!isTH()&&d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});uli();document.getElementById('footer-time').textContent=ts()}catch(e){}}
+    function uli(){var d=document.getElementById('live-dot'),t=document.getElementById('live-text');if(isTH()){d.className='live-dot live';t.textContent='盘中 · '+ts()}else{d.className='live-dot closed';t.textContent='盘后 · '+ts()}}
+    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTH()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
     uli();fq();setInterval(fq,RI);setInterval(function(){uli()},60000);
     </script>
     </body>
