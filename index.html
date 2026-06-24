@@ -505,7 +505,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     var todayCount = 0;
     if (todayReports.length > 0) {
       todayReports.sort(function(a, b) {
-        return (editionOrder[a.r.edition] || 99) - (editionOrder[b.r.edition] || 99);
+        return ((editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99) - (editionOrder[b.r.edition] != null ? editionOrder[b.r.edition] : 99));
       });
       todayCount = todayReports.length;
       todayGrid.innerHTML = '<div class="date-group">' +
@@ -532,7 +532,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       historyDates.forEach(function(dateKey) {
         var items = historyMap[dateKey];
         items.sort(function(a, b) {
-          return (editionOrder[a.r.edition] || 99) - (editionOrder[b.r.edition] || 99);
+          return ((editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99) - (editionOrder[b.r.edition] != null ? editionOrder[b.r.edition] : 99));
         });
         var dateParts = (dateKey || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
         var displayDate = dateParts
