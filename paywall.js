@@ -92,11 +92,28 @@ function getCanvasHash() {
 
 // SHA-256 hash
 async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256',
-    new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf))
-    .map(b => b.toString(16).padStart(2, '0')).join('');
-}
+      if (!crypto || !crypto.subtle || !crypto.subtle.digest) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0;
+        }
+        return 'fp_' + Math.abs(hash).toString(16);
+      }
+      try {
+        const buf = await crypto.subtle.digest('SHA-256',
+          new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf))
+          .map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch(e) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0;
+        }
+        return 'fp_' + Math.abs(hash).toString(16);
+      }
+    }
 
 // ===== Paywall 对象（与 index.html 的调用点兼容） =====
 const Paywall = {
@@ -134,59 +151,77 @@ const Paywall = {
   // ---------- 远程验证（调用 Worker /verify） ----------
 
   async verifyWithWorker() {
-    const token = this.getToken();
-    if (!token) return { ok: false, error: 'no_token' };
+        const token = this.getToken();
+        if (!token) return { ok: false, error: 'no_token' };
 
-    try {
-      const res = await fetch(WORKER_URL + '/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token }),
-      });
-      const data = await res.json();
-      return data;
-    } catch(e) {
-      // Worker 不可达时，本地 token 未过期则放行
-      if (!this.isTokenExpired()) {
-        return { ok: true, offline: true };
-      }
-      return { ok: false, error: 'worker_unreachable' };
-    }
-  },
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+
+        try {
+          const res = await fetch(WORKER_URL + '/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token }),
+            signal: controller.signal,
+          });
+          clearTimeout(timeout);
+          const data = await res.json();
+          return data;
+        } catch(e) {
+          clearTimeout(timeout);
+          if (e.name === 'AbortError') {
+            return { ok: false, error: '请求超时，请检查网络后重试' };
+          }
+          return { ok: false, error: '网络错误，请检查网络后重试' };
+        }
+      },
 
   // ---------- 激活（调用 Worker /activate） ----------
 
   async activate(code) {
-    const fpData = await collectFingerprint();
-
-    try {
-      const res = await fetch(WORKER_URL + '/activate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          code: code.toUpperCase(),
-          fp: fpData.hash,
-        }),
-      });
-      const data = await res.json();
-
-      if (data.ok && data.token) {
-        localStorage.setItem(AUTH_KEY, data.token);
-        // 缓存指纹用于恢复
+        let fpData;
         try {
-          localStorage.setItem(FP_CACHE_KEY, JSON.stringify({
-            hash: fpData.hash,
-            canvas: fpData.canvas,
-            stable: fpData.stable,
-          }));
-        } catch {}
-      }
+          fpData = await collectFingerprint();
+        } catch(e) {
+          return { ok: false, error: '\u8bbe\u5907\u6307\u7eb9\u91c7\u96c6\u5931\u8d25\uff0c\u8bf7\u786e\u4fdd\u4f7f\u7528\u5b89\u5168\u8fde\u63a5(HTTPS)\u8bbf\u95ee' };
+        }
 
-      return data;
-    } catch(e) {
-      return { ok: false, error: '网络错误，请检查网络后重试' };
-    }
-  },
+        const timeout = setTimeout(() => {
+          const btn = document.getElementById('auth-btn');
+          if (btn) { btn.disabled = false; btn.textContent = '\u6fc0\u6d3b'; }
+        }, 15000);
+
+        try {
+          const res = await fetch(WORKER_URL + '/activate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              code: code.toUpperCase(),
+              fp: fpData.hash,
+              canvas: fpData.canvas,
+              stable: fpData.stable,
+            }),
+          });
+          clearTimeout(timeout);
+          const data = await res.json();
+
+          if (data.ok && data.token) {
+            try { localStorage.setItem(AUTH_KEY, data.token); } catch {}
+            try {
+              localStorage.setItem(FP_CACHE_KEY, JSON.stringify({
+                hash: fpData.hash,
+                canvas: fpData.canvas,
+                stable: fpData.stable,
+              }));
+            } catch {}
+          }
+
+          return data;
+        } catch(e) {
+          clearTimeout(timeout);
+          return { ok: false, error: '\u7f51\u7edc\u9519\u8bef\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u540e\u91cd\u8bd5' };
+        }
+      },
 
   // ---------- 清除认证 ----------
 
