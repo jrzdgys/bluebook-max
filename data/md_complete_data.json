@@ -1,0 +1,1439 @@
+{
+  "report": {
+    "id": "e7T_eOKWRZCF-oVN3LNWS_DleOmdHwE58Y49p3UD99k=",
+    "title": "6月23日 午间版 | 英伟达全面液冷、存储芯片价格大涨、国产AI芯片共振",
+    "content": null,
+    "contentJson": [
+      {
+        "title": "市场热点",
+        "children": [
+          {
+            "summary": "在过去24小时内，随着英伟达于美国时间6月21日正式发文详解Rubin平台，市场对AI散热的认知已从“风液混合”的过渡方案彻底转向“全面液冷”的终局标配。这一事件的边际变化在于，液冷不再是可选项，而是下一代AI基础设施的准入门槛，由此触发了**整个热管理产业链的价值重估，投资逻辑从寻找单纯的供应商，转向挖掘在CDU、微通道冷板、高压快接头等环节具备核心技术且能承接价值量5倍以上增长**的龙头企业。<br><br>关注：**英维克**/**申菱环境**/**高澜股份**（CDU及系统方案商），**飞龙股份**/**大元泵业**（核心部件水泵），**金富科技**/**鼎通科技**/**裕同科技**（冷板及快接头等精密组件），**海科新源**/**石大胜华**（冷却液核心原料丙二醇），**工业富联**（整机柜集成）",
+            "topicName": "英伟达Rubin平台采用全面液冷方案",
+            "index": 10,
+            "id": 26139
+          },
+          {
+            "summary": "过去24小时内，国产AI芯片领域迎来新品发布与订单预期的共振，继飞腾A1000智算芯片亮相后，市场对华为、天数智芯等下半年新品及头部厂商Q2业绩的乐观预期显著增强。投资逻辑已从“国产替代”叙事升级为“量价齐升”的业绩兑现期，市场焦点正转向**那些能够锁定先进制程产能并获得头部互联网大厂订单的芯片设计公司**，其业绩确定性与弹性最高。<br><br>关注：**寒武纪**/**海光信息**（Q2业绩预期乐观，订单与供应链改善明确），**天数智芯**（获字节跳动大额订单，新品发布在即），**中芯国际**/**华虹宏力**（AI芯片订单外溢及代工涨价），**沐曦股份**/**壁仞科技**（二线厂商订单突破，实现从1到N放量）",
+            "topicName": "国产AI芯片迎订单与新品发布共振",
+            "index": 9,
+            "id": 26140
+          },
+          {
+            "summary": "6月22日，行业专家将Q3存储价格预期猛然上调至环比增长40-50%，远超此前15-20%的市场共识，这一边际变化的核心在于AI对HBM及企业级SSD的产能挤占已传导至全品类，并得到韩国最新出口数据和下游客户抢购老旧DRAM现象的交叉验证。这标志着市场正从评估周期性复苏转向定价**AI驱动的结构性供给短缺**，预期Q3英伟达Rubin平台等新增需求将进一步激化供需矛盾，**存储价格的上涨斜率和持续性或将远超当前模型的预测**。<br><br>关注：**江波龙**/**佰维存储**/**德明利**（存储模组厂，价格高弹性直接增厚业绩），**兆易创新**/**普冉股份**（存储设计公司，受益于全品类价格上涨），**北方华创**/**中微公司**（晶圆厂扩产拉动上游设备需求）",
+            "topicName": "传26年Q3存储芯片价格或环比上涨50%",
+            "index": 9,
+            "id": 26141
+          },
+          {
+            "summary": "日本于6月22日正式敲定对先进封装设备的出口管制，将后道设备的国产化从长期选项变为短期内的强制任务，彻底引爆了后道设备及零部件的紧急替代需求。这一外部强制性催化，叠加6月23日**长川科技**超预期的Q2业绩指引所验证的行业内生高景气，市场正交易**地缘政治倒逼后道设备订单激增与全产业链订单饱满、产能为王的双重加速逻辑**。<br><br>关注：**深科达**/**新益昌**/**金海通**（日本出口管制落地，后道先进封装设备国产替代最直接受益者），**长川科技**/**华峰测控**（测试设备龙头，业绩验证行业高景气，国产算力放量驱动需求），**北方华创**/**中微公司**/**华海清科**（前道设备平台龙头，受益于存储及先进制程扩产，订单持续上修），**富创精密**/**新莱应材**/**机器人**（零部件环节供需紧张，涨价逻辑兑现且受益于设备厂产能扩张）",
+            "topicName": "半导体设备国产化迎历史性机遇",
+            "index": 8,
+            "id": 26142
+          },
+          {
+            "summary": "今日市场交易的核心逻辑，是台积电确认削减28nm产能以支援先进封装，此举在供给端为国内晶圆代工创造了明确的订单外溢和涨价窗口。这一变化验证了国产晶圆代工正从周期性复苏转向**由AI需求外溢和供给格局优化驱动的量价齐升阶段**，其作为**核心战略资产的价值正在被市场重估**。<br><br>关注：**中芯国际**/**华虹宏力**（直接受益于产能紧张、订单外溢及价格上涨），**寒武纪**/**海光信息**/**芯原股份**（国产算力芯片放量，构成上游核心需求），**柏诚股份**/**北方华创**/**中微公司**（晶圆厂资本开支扩产的核心受益标的）",
+            "topicName": "中芯国际与华虹宏力稼动率接近满载",
+            "index": 7,
+            "id": 26143
+          },
+          {
+            "summary": "6月22日，受日本光纤巨头藤仓因北美AI数据中心需求旺盛、供给紧张而推进提价的消息催化，A股光纤板块应声大涨。这标志着**AI算力竞赛正从算力层向底层物理传输介质蔓延**，市场确认光纤环节已进入**供需失衡驱动的量价齐升阶段**，具备海外突破能力的国内厂商将直接受益于价格上涨带来的巨大业绩弹性。<br><br>关注：**长飞光纤**/**亨通光电**/**中天科技**（AI数据中心需求外溢导致光纤供不应求，国际巨头提价打开国内厂商量价齐升空间），**天孚通信**/**光库科技**（高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升），**源杰科技**/**云南锗业**（上游光芯片关键材料磷化铟等面临扩产瓶颈，供需缺口有望驱动价格持续上行），**福晶科技**（隔离器等光通信上游物料环节同样出现短缺，存在涨价预期）",
+            "topicName": "光通信板块景气度持续提升",
+            "index": 7,
+            "id": 26144
+          },
+          {
+            "summary": "6月23日，扬杰科技发布全系产品涨价10%-15%的通知，标志着功率半导体行业第二轮涨价趋势正式确立。此轮涨价由AI电源、新能源等下游需求旺盛及上游8寸产能紧缺共同驱动，**不仅直接提升了IDM厂商的盈利弹性，更强化了功率半导体作为AI算力核心环节的价值重估逻辑**。<br><br>关注：**扬杰科技**/**新洁能**/**士兰微**（IDM模式，充分受益于AI电源驱动的本轮涨价，盈利弹性大），**芯联集成**（国内8寸代工龙头，产能规模最大，涨价受益最直接），**东微半导**（AI业务敞口高）",
+            "topicName": "扬杰科技发布全系产品涨价函",
+            "index": 6,
+            "id": 26145
+          },
+          {
+            "summary": "昨夜今晨（6月22日晚-23日），随着英伟达官宣其Rubin平台将全面采用“无软管”的全液冷架构，市场迅速将焦点转向刚性波纹管的供应链；最新的边际变化在于，市场确认**金富科技不仅是Tier-1奇宏的核心供应商，更是获得了英伟达的直接认可并被推荐给富士康**，这标志着其从间接供应走向了核心地位，业绩兑现的确定性大幅提升。<br><br>关注：**金富科技**（英伟达液冷波纹管核心供应商，获其认可并推荐给新客户，Q2业绩有望率先兑现）/**五洋自控**（液冷波纹管及Manifold代工，有望升级为Tier1）/**英维克**/**申菱环境**（Tier1系统方案商，受益于液冷方案整体放量）/**飞龙股份**/**大元泵业**（液冷泵等核心零部件供应商）",
+            "topicName": "金富科技成英伟达液冷波纹管核心供应商",
+            "index": 6,
+            "id": 26146
+          },
+          {
+            "summary": "在过去24小时内，券商板块在放量大涨后，市场逻辑已从单纯的低估值修复转向确认其作为科技行情的“卖铲人”角色。核心边际变化在于，市场不再将其视为与科技股争夺流动性的对手，而是通过**科创板跟投等机制直接分享科技产业一级市场红利的稀缺标的**，这种**基本面与估值的极端背离和机构的低配状态正迎来共振修复**。<br><br>关注：**中信证券**/**国泰海通**/**华泰证券**（受益于行业集中度提升和业务综合优势的头部券商），**中金公司**/**中信建投**/**招商证券**（科创板跟投业务占比较高，业绩弹性更大），**财通证券**（具备转股及并购重组预期）",
+            "topicName": "券商板块被指为科技行情卖铲人",
+            "index": 6,
+            "id": 26147
+          },
+          {
+            "summary": "本周深圳渠道商千台级服务器确认入关，标志着AI算力硬件的交付瓶颈正在被打破，产业渠道开始实质性回暖。这一进展直接打通了算力租赁公司从订单到收入的“最后一公里”，**市场预期将从关注订单规模转向聚焦Q2及下半年的业绩兑现**，板块复苏逻辑得到关键验证。<br><br>关注：**利通电子**/**盛视科技**（服务器陆续到货，业绩即将兑现），**智微智能**/**协创数据**/**赛意信息**（算力租赁核心标的，渠道回暖验证业务逻辑），**恒铭达**（进入英伟达服务器供应链，分享产业增长）",
+            "topicName": "传深圳渠道商有千台级服务器入关",
+            "index": 5,
+            "id": 26148
+          }
+        ]
+      }
+    ],
+    "audio": "hot_topic/mp3/2026/06/23/午报.mp3",
+    "batchName": "午报",
+    "date": "2026-06-23",
+    "updateTime": "2026-06-23 11:35:12",
+    "read": false,
+    "listen": false,
+    "duration": 650,
+    "marketType": 21,
+    "titleReplaced": false
+  },
+  "batch_list": null,
+  "intercepted": [
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/authorization/user/info",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "id": 312238,
+          "uid": "1216053837371015168",
+          "name": "季风",
+          "email": "15723100253@163.com",
+          "mobile": "15723100253",
+          "regionCode": "+86",
+          "mobileValidateFlag": 1,
+          "passwordFlag": 1,
+          "status": null,
+          "type": "2",
+          "blacklistFlag": 0,
+          "institutionId": 5272,
+          "orgName": null,
+          "roleName": "研究员",
+          "roleId": 6,
+          "createTime": "2026-06-13 22:21:36",
+          "source": 2,
+          "channelCode": "0",
+          "industryList": null,
+          "informationFlag": 1,
+          "trialFlag": 0,
+          "trialBeginTime": null,
+          "totalAmount": 0,
+          "trialAmount": 0,
+          "remainAmount": 0,
+          "cardAuditStatus": 0,
+          "cooperateFlag": 0,
+          "institutionManager": 0,
+          "institutionSuperManager": 0,
+          "productType": 4,
+          "personalEndTime": "9999-12-31 23:59:59",
+          "personalAmount": null,
+          "remainPersonalAmount": null,
+          "productEndTime": null,
+          "productAmount": null,
+          "remainProductAmount": null,
+          "personalEnd": null,
+          "productEnd": null,
+          "institutionCode": "HINST7000000000015561",
+          "institutionName": "海南盛丰私募基金管理有限公司",
+          "institutionCooperateFlag": 2,
+          "institutionEmailServer": "hnsffund.com,weiwei.vip,163.com,yeah.net,qq.com,126.com",
+          "institution": "盛丰基金",
+          "surveyStatus": 1,
+          "loginTime": "2026-06-23 14:03:42",
+          "psnCode": null,
+          "pageResources": null,
+          "cardAuthFlag": null,
+          "cardAuthModifyFlag": null,
+          "inviteFlag": null,
+          "receiveInvitationFlag": 0,
+          "swFirstIndustryFlag": null,
+          "favorIndustryFlag": 0,
+          "freeProductFlag": null,
+          "threeMonthExperienceFlag": null,
+          "upgradeFlag": null,
+          "expertSummaryFlag": 0,
+          "noviceGuideDiscovery": 0,
+          "noviceGuideSquareResearch": 0,
+          "noviceGuideConceptResearch": 0,
+          "noviceGuideDiscoveryView": 0,
+          "informationFlowHoldingClickFlag": 0,
+          "noviceGuideStock": 0,
+          "followStockInitFlag": 1,
+          "followStockExistFlag": 1,
+          "noviceGuideSummaryReservation": 0,
+          "noviceGuideEtfLaunchTip": 0,
+          "noviceGuideEtfOperation": 0,
+          "noviceGuideStockGroup": 0,
+          "storageServiceUrl": "https://alphapai-storage.rabyte.cn/storage/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "radioStorageServiceUrl": "https://alphapai-storage.rabyte.cn/radio/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "reportStorageServiceUrl": "https://alphapai-storage.rabyte.cn/report/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "researchReportStorageServiceUrl": "https://alphapai-storage.rabyte.cn/research-report/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "audioRecorderStorageServiceUrl": "https://alphapai-storage.rabyte.cn/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "convertSummaryStorageServiceUrl": "https://alphapai-storage.rabyte.cn/convert-summary/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "callingCardStorageServiceUrl": "https://alphapai-storage.rabyte.cn/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "shareStorageServiceUrl": "https://alphapai-storage.rabyte.cn/{{path}}",
+          "translateStorageServiceUrl": "https://alphapai-storage.rabyte.cn/translate/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "profilePictureStorageServiceUrl": "https://alphapai-storage.rabyte.cn/translate/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "knowledgeStorageServiceUrl": "https://alphapai-storage.rabyte.cn/knowledge/{{path}}?authorization={{authorization}}&platform={{platform}}",
+          "summaryHiddenFlag": 0,
+          "institutionEmailCheckFlag": 1,
+          "regularVerifyFlag": 1,
+          "openId": null,
+          "unionId": null,
+          "officialOpenId": null,
+          "whitelistMode": 1,
+          "institutionIdString": "5272",
+          "roleIdString": "6"
+        }
+      },
+      "path": "v2/authorization/user/info"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/mix/question/list",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": [
+          "小米汽车的供应链有哪些？",
+          "火山引擎AIoT大会上展现了哪些投资机会？",
+          "申万各行业已公布2024年报的行业业绩情况？",
+          "2025年数据中心最新提价情况？",
+          "如何看待名创优品收购永辉超市？",
+          "铜、金价格暴涨，大宗商品价格未来如何演绎？",
+          "近期美国关税的政策？",
+          "如何给特斯拉估值？",
+          "机器人板块有哪些新方向值得关注？",
+          "深圳市在半导体设备板块的布局？",
+          "当前啤酒行业成本变化判断？",
+          "高争民爆市场近期的政策变化？",
+          "牛肉周期当前处于什么时间点？",
+          "军工板块最近有哪些公司公告了订单？",
+          "未来一个月全球AI行业有哪些值得关注的会议？",
+          "财政部支持国有大型商业银行补充核心一级资本有哪些积极影响？",
+          "AI家电行业有哪些公司具备竞争优势？",
+          "俄罗斯流感对医药行业的业绩拉动？",
+          "可控核聚变技术国内有哪些投资？",
+          "小米AI智能眼镜BOM成本构成？"
+        ]
+      },
+      "path": "mix/question/list"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/paipai/langChain/service/browser/plugin/query",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": "{\"notes\":\"研值功能上线，充值解锁更多任务权限\",\"version\":\"1.1.1\",\"url\":\"https://rabyte-saas-resource.rabyte.cn/frontend/extension/package/prod/alphapai-extension-v1.1.1.zip\"}"
+      },
+      "path": "paipai/langChain/service/browser/plugin/query"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/authorization/user/customerManager/detail",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "mobile": "19125366610",
+          "name": "李佳聲",
+          "showCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/李佳聲-横版.png",
+          "wxCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/WechatIMG1414.jpg",
+          "downloadCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/李佳聲-竖版.png",
+          "enterpriseWxUrl": "https://work.weixin.qq.com/ca/cawcdebff23228ed9d"
+        }
+      },
+      "path": "v2/authorization/user/customerManager/detail"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/config/user/menu/custom/value",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": 0
+      },
+      "path": "v2/config/user/menu/custom/value"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/reading/share/permissions/approval/pending-count",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": 0
+      },
+      "path": "reading/share/permissions/approval/pending-count"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/authorization/user/customerManager/detail",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "mobile": "19125366610",
+          "name": "李佳聲",
+          "showCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/李佳聲-横版.png",
+          "wxCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/WechatIMG1414.jpg",
+          "downloadCardUrl": "https://alphapai-storage.rabyte.cn/customer-manager/calling-card/2023-10-16/李佳聲-竖版.png",
+          "enterpriseWxUrl": "https://work.weixin.qq.com/ca/cawcdebff23228ed9d"
+        }
+      },
+      "path": "v2/authorization/user/customerManager/detail"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/paipai/aiTask/completed/disconnected",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": null
+      },
+      "path": "paipai/aiTask/completed/disconnected"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/config/user/menu/mine",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": "[{\"address\":\"/reading/home/my-focus\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":false,\"icon\":\"icon-shouye\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":1,\"isFixed\":true,\"isNew\":false,\"name\":\"首页\",\"specClass\":\"\",\"value\":\"myFocus\"},{\"address\":\"/reading/paipai/index\",\"display\":true,\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"\",\"iconImg\":\"https://alphapai-web.rabyte.cn/external/alpha/data_storage/file/nav/ai-copilot.png\",\"iconImgActive\":\"https://alphapai-web.rabyte.cn/external/alpha/data_storage/file/nav/ai-copilot-active.png\",\"id\":3,\"isFixed\":false,\"isNew\":false,\"name\":\"PaiPai\",\"specClass\":\"\",\"value\":\"paipai\"},{\"address\":\"/reading/paiwork\",\"display\":true,\"flag\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAA4VBMVEUAAAD4fCr5m1z3gCv+yqr9xKD2eyr9gjL3fCz2fCr2fCv4ikD3fSr2eyr3fCr+1bz3fCr/wZ/9yKb9xqX4fCv9yan4fCz6pHD7sH/5oWb7omb2jET9yKj+y636soX1ein/z6/6m13+z7P9vpf6rHn5llP3hDb+z7P+z7L8w5/4iUD3fy34hDf2fSv80rn7n2j6j0r3fCr3fCv3fi35lVP3gzb6oWb4j0n7rXr8soP6p3D9vpb3iUD8uI35m13+0LT5ml39xKD7uI34iUD9xKH7p3D5j0n9yan9yqr4ikD4hDYNQYg3AAAAMXRSTlMAf/4g/v7fEEDvYP7fz7+fnyDfgG9AMCDvv59wb2BgUBD+7+7f39+/v7+vn4+PUEAwRVpzUwAAAY9JREFUOMulkId6gjAQgA9QURx1a93deyStHZZSsFpt3/+BegFMgkbwa3/IZf25HMC/MbWytaOYI4QYkEw2QxjNZLNOCUWzkGxqhEGplZwTtd3uN8gKSCITUU2tlE0olNVg4hV4sAhqcI+T9WdUpWY1Aywi0KDMuoLy6gwUw/sZuWYwMpRFDilXMeSCmrX1232nSIkMpf4JQ/mPxPdLh0ogYxE11G9DWS0QXqUshfOCuV6psGSbhbpQb7im9OVqS9IWDZPR1ZyNRAW5cJNG84nSLa5KizRMFUUTqpxG0vixclSlG6IYC/UhiSuuno5j+Rlfc/XStu287fOZx4avP8x/sx5Dl6vdZ8aXH3jDl3PPVfMxnhMQ7DuuruuOrruO4zoHLgYc4QKuY98Bwd1TLC2Q007mk4B5GOZi2gGZVvtlK8ctiDB43Ua7AmvU3jlTfIJuinEAG/TeVBw1QEGlOpul0zN8PA97D6N3UQE1tWpqsVguUqllyg/VPmxl1D/7WHF43oB4Kre1PaTXGMHf+QUvNrI24JglFAAAAABJRU5ErkJggg==\",\"flagStyle\":\"height: 14px;right: 4px;left: calc(100% - 16px);top: -1px\",\"hideable\":true,\"icon\":\"icon-gongzuotai\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":19,\"isFixed\":false,\"isNew\":false,\"name\":\"PaiWork\",\"specClass\":\"\",\"value\":\"ai-workbench\"},{\"address\":\"/reading/knowledge-base\",\"display\":true,\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-yunpan\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":18,\"isFixed\":false,\"isNew\":false,\"name\":\"云盘\",\"specClass\":\"\",\"value\":\"knowledge-base\"},{\"address\":\"/reading/paipai/index?menu=convert\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-zhuanji\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":4,\"isFixed\":false,\"isNew\":false,\"name\":\"转记\",\"specClass\":\"\",\"value\":\"convert-meeting\"},{\"address\":\"/reading/home/calendar\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-rili\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":6,\"isFixed\":false,\"isNew\":false,\"name\":\"日历\",\"specClass\":\"\",\"value\":\"calendar\"},{\"address\":\"/reading/home/stock\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-gegu\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":8,\"isFixed\":false,\"isNew\":false,\"name\":\"个股\",\"specClass\":\"\",\"value\":\"stock\"},{\"address\":\"/reading/home/segment\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-bankuai\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":9,\"isFixed\":false,\"isNew\":false,\"name\":\"板块\",\"specClass\":\"\",\"value\":\"plate\"},{\"address\":\"/reading/home/meeting\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-jiyao\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":11,\"isFixed\":false,\"isNew\":false,\"name\":\"会议\",\"specClass\":\"\",\"value\":\"meeting\"},{\"address\":\"/reading/home/public-roadshow\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-luyan\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":12,\"isFixed\":false,\"isNew\":false,\"name\":\"万家会议\",\"specClass\":\"\",\"value\":\"public-roadshow\"},{\"address\":\"/reading/home/report\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"margin-left: 0; transform: translateX(-50%);\",\"hideable\":true,\"icon\":\"icon-yanbao1\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":14,\"isFixed\":false,\"isNew\":false,\"name\":\"研报\",\"specClass\":\"\",\"value\":\"report\"},{\"address\":\"/reading/home/comment\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-dianping1\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":13,\"isFixed\":false,\"isNew\":false,\"name\":\"点评\",\"specClass\":\"\",\"value\":\"comment\"},{\"address\":\"/reading/paipai/index?menu=translate\",\"display\":false,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-fanyi\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":5,\"isFixed\":false,\"isNew\":false,\"name\":\"翻译\",\"specClass\":\"\",\"value\":\"translate-tool\"},{\"address\":\"/reading/home/etf\",\"display\":false,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-ETF\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":10,\"isFixed\":false,\"isNew\":false,\"name\":\"ETF\",\"specClass\":\"\",\"value\":\"etf-index\"},{\"address\":\"/reading/foreign-market\",\"display\":false,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-xinxiaoxi\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":7,\"isFixed\":false,\"isNew\":false,\"name\":\"海外\",\"specClass\":\"\",\"value\":\"foreignMarket\"},{\"address\":\"/reading/home/research\",\"display\":false,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-tiaoyan\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":15,\"isFixed\":false,\"isNew\":false,\"name\":\"调研\",\"specClass\":\"\",\"value\":\"survey\"},{\"address\":\"/reading/social-media/index\",\"display\":true,\"flag\":\"\",\"flagStyle\":\"\",\"hideable\":true,\"icon\":\"icon-shemei\",\"iconImg\":\"\",\"iconImgActive\":\"\",\"id\":17,\"isFixed\":false,\"isNew\":false,\"name\":\"社媒\",\"specClass\":\"\",\"value\":\"social-media\"}]"
+      },
+      "path": "v2/config/user/menu/mine"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/v2/authorization/institution/allow/file/upload",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": 1
+      },
+      "path": "v2/authorization/institution/allow/file/upload"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/mix/hot/topic/stock/list",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "publicList": [
+            {
+              "stockCode": "003018.SZ",
+              "stockName": "金富科技",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": 3.19683,
+              "institutionType": "公募",
+              "rank": 1
+            },
+            {
+              "stockCode": "000988.SZ",
+              "stockName": "华工科技",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -5.95981,
+              "institutionType": "公募",
+              "rank": 2
+            },
+            {
+              "stockCode": "603005.SH",
+              "stockName": "晶方科技",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": 0.36536,
+              "institutionType": "公募",
+              "rank": 3
+            },
+            {
+              "stockCode": "603757.SH",
+              "stockName": "大元泵业",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": 10.00486,
+              "institutionType": "公募",
+              "rank": 4
+            },
+            {
+              "stockCode": "688120.SH",
+              "stockName": "华海清科",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -0.46363,
+              "institutionType": "公募",
+              "rank": 5
+            },
+            {
+              "stockCode": "688469.SH",
+              "stockName": "芯联集成",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": 4.99445,
+              "institutionType": "公募",
+              "rank": 6
+            },
+            {
+              "stockCode": "689009.SH",
+              "stockName": "九号公司",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -2.41176,
+              "institutionType": "公募",
+              "rank": 7
+            },
+            {
+              "stockCode": "02328.HK",
+              "stockName": "中国财险",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -4.09357,
+              "institutionType": "公募",
+              "rank": 8
+            },
+            {
+              "stockCode": "688079.SH",
+              "stockName": "美迪凯",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -2.81642,
+              "institutionType": "公募",
+              "rank": 9
+            },
+            {
+              "stockCode": "00100.HK",
+              "stockName": "MINIMAX-W",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "公募"
+              ],
+              "dod": -18.99432,
+              "institutionType": "公募",
+              "rank": 10
+            }
+          ],
+          "privateList": [
+            {
+              "stockCode": "09985.HK",
+              "stockName": "卫龙美味",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": -0.80972,
+              "institutionType": "私募",
+              "rank": 1
+            },
+            {
+              "stockCode": "603681.SH",
+              "stockName": "永冠新材",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 0.16598,
+              "institutionType": "私募",
+              "rank": 2
+            },
+            {
+              "stockCode": "01364.HK",
+              "stockName": "古茗",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": -0.19569,
+              "institutionType": "私募",
+              "rank": 3
+            },
+            {
+              "stockCode": "300604.SZ",
+              "stockName": "长川科技",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 3.60907,
+              "institutionType": "私募",
+              "rank": 4
+            },
+            {
+              "stockCode": "301297.SZ",
+              "stockName": "富乐德",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 2.7112,
+              "institutionType": "私募",
+              "rank": 5
+            },
+            {
+              "stockCode": "300659.SZ",
+              "stockName": "中孚信息",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 6.55738,
+              "institutionType": "私募",
+              "rank": 6
+            },
+            {
+              "stockCode": "301580.SZ",
+              "stockName": "爱迪特",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 12.48021,
+              "institutionType": "私募",
+              "rank": 7
+            },
+            {
+              "stockCode": "688622.SH",
+              "stockName": "禾信仪器",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": 0.06569,
+              "institutionType": "私募",
+              "rank": 8
+            },
+            {
+              "stockCode": "01911.HK",
+              "stockName": "华兴资本控股",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": -3.22581,
+              "institutionType": "私募",
+              "rank": 9
+            },
+            {
+              "stockCode": "688777.SH",
+              "stockName": "中控技术",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "私募"
+              ],
+              "dod": -3.24141,
+              "institutionType": "私募",
+              "rank": 10
+            }
+          ],
+          "insuranceList": [
+            {
+              "stockCode": "001391.SZ",
+              "stockName": "国货航",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -1.36054,
+              "institutionType": "保险",
+              "rank": 1
+            },
+            {
+              "stockCode": "000672.SZ",
+              "stockName": "上峰材料",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": 5.75693,
+              "institutionType": "保险",
+              "rank": 2
+            },
+            {
+              "stockCode": "600487.SH",
+              "stockName": "亨通光电",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -1.79805,
+              "institutionType": "保险",
+              "rank": 3
+            },
+            {
+              "stockCode": "002975.SZ",
+              "stockName": "博杰股份",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -4.21983,
+              "institutionType": "保险",
+              "rank": 4
+            },
+            {
+              "stockCode": "06682.HK",
+              "stockName": "范式智能",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -3.67107,
+              "institutionType": "保险",
+              "rank": 5
+            },
+            {
+              "stockCode": "688400.SH",
+              "stockName": "凌云光",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -3.69447,
+              "institutionType": "保险",
+              "rank": 6
+            },
+            {
+              "stockCode": "688190.SH",
+              "stockName": "云路股份",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -2.90249,
+              "institutionType": "保险",
+              "rank": 7
+            },
+            {
+              "stockCode": "688114.SH",
+              "stockName": "华大智造",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": 0.09864,
+              "institutionType": "保险",
+              "rank": 8
+            },
+            {
+              "stockCode": "688308.SH",
+              "stockName": "欧科亿",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": -8.1652,
+              "institutionType": "保险",
+              "rank": 9
+            },
+            {
+              "stockCode": "688313.SH",
+              "stockName": "仕佳光子",
+              "feature": [
+                "特性"
+              ],
+              "feature2": [
+                "保险"
+              ],
+              "dod": 7.25829,
+              "institutionType": "保险",
+              "rank": 10
+            }
+          ],
+          "updateTime": "2026-06-23 13:26:45"
+        }
+      },
+      "path": "mix/hot/topic/stock/list"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/reading/search/history?type=90",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": [
+          "万华化学",
+          "国泰海通周期论剑"
+        ]
+      },
+      "path": "reading/search/history?type=90"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/paipai/langChain/service/image/analysis/list",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "analysisListList": []
+        }
+      },
+      "path": "paipai/langChain/service/image/analysis/list"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/mix/hot/topic/report/list/v2?pageNum=1&pageSize=20&id=-gtmrarYRB0KFVL6EXpdRKItFu_SzwylZHpXajJ73eo%3D&word=&isUs=false&marketType=",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "pageNum": 1,
+          "pageSize": 20,
+          "totalPageNum": 52,
+          "totalSize": 1036,
+          "data": [
+            {
+              "id": "-gtmrarYRB0KFVL6EXpdRKItFu_SzwylZHpXajJ73eo=",
+              "title": "6月23日 午间版 | 英伟达全面液冷、存储芯片价格大涨、国产AI芯片共振",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/23/午报.mp3",
+              "batchName": "午报",
+              "date": "2026-06-23",
+              "updateTime": "2026-06-23 11:35:12",
+              "read": true,
+              "listen": false,
+              "duration": 650,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "nP8-F3yyd3OWxK11bHQmOLBtL1AUYEI-B7mxnhFOxDM=",
+              "title": "6月23日 全球版 | 伊朗原油出口获授权、SpaceX为AI发债、英首相辞职英镑上涨",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/23/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-23",
+              "updateTime": "2026-06-23 08:03:10",
+              "read": false,
+              "listen": false,
+              "duration": 713,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "LI1bdqrbnpbpKfrGzBzASu_BLuDQyN83pHwMXRYZjlE=",
+              "title": "6月23日 晨会版 | 长川科技业绩加速、英伟达确认全面液冷、CCL覆铜板多轮提价",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/23/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-23",
+              "updateTime": "2026-06-23 07:05:54",
+              "read": false,
+              "listen": false,
+              "duration": 1479,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "t27vDFjWp-x46UFrXO9bF3Ty_DiSzWvzXvwLs8pG-fA=",
+              "title": "6月22日 晚间版 | 券商跟投利润大增、存储芯片超预期涨价、藤仓上调指引并提价",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/22/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-22",
+              "updateTime": "2026-06-22 20:06:27",
+              "read": false,
+              "listen": false,
+              "duration": 1461,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "0Iit81L01HNTBNxDS_BqEgBZds0jqv-5CbhK1AHYdqs=",
+              "title": "6月22日 午间版 | CCL五轮提价、国芯跑国模闭环、蓝思TGV年底投产",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/22/午报.mp3",
+              "batchName": "午报",
+              "date": "2026-06-22",
+              "updateTime": "2026-06-22 11:36:18",
+              "read": false,
+              "listen": false,
+              "duration": 704,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "e181W7FDYoQSQ3_3JU9f3l60cXGqCaDwhTug2A1q6UI=",
+              "title": "6月22日 全球版 | 霍尔木兹海峡恢复通航、美联储转向鹰派、苹果英伟达英特尔合作",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/22/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-22",
+              "updateTime": "2026-06-22 08:03:10",
+              "read": false,
+              "listen": false,
+              "duration": 847,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "8LQSL0lAsDQ-_M0iaLedJysKc5q05YBaF7wUhRgmAJE=",
+              "title": "6月22日 晨会版 | 东曹氧化锆断供、AI算力芯片涨价抢单、覆铜板CCL再涨价",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/22/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-22",
+              "updateTime": "2026-06-22 07:05:55",
+              "read": false,
+              "listen": false,
+              "duration": 1412,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "n9BRKmWo40PvXG0FV5bacVG_HbwIDJLDoRUOTAPZd6k=",
+              "title": "6月21日 全球版 | 霍尔木兹海峡恢复通航、美联储鹰派转向、AI引发电力需求激增",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/21/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-21",
+              "updateTime": "2026-06-21 08:02:30",
+              "read": true,
+              "listen": false,
+              "duration": 810,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "dLJiTLZoYTm2F7ZcDWql5Ix4jby46H6HZBmq40wVYjE=",
+              "title": "6月21日 晚间版 | AI上游材料全面涨价、存储芯片全线涨价、半导体设备国产化出海",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/21/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-21",
+              "updateTime": "2026-06-21 20:05:30",
+              "read": false,
+              "listen": false,
+              "duration": 1493,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "XLblV4fTiHK8nYaF1G1xdpF3_3swJXepSI3imF7Vh_E=",
+              "title": "6月20日 全球版 | 美联储鹰派信号、谷歌人才流向Anthropic、美伊和平谈判推迟",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/20/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-20",
+              "updateTime": "2026-06-20 08:03:39",
+              "read": false,
+              "listen": false,
+              "duration": 930,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "BmygpTWXfc8rRp1MtzeMquGGSKbJmU-Ea2JjoqjOluk=",
+              "title": "6月20日 晚间版 | AI算力遭遇电力瓶颈、AI驱动存储价值重估、国产半导体设备出海",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/20/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-20",
+              "updateTime": "2026-06-20 20:04:33",
+              "read": false,
+              "listen": false,
+              "duration": 1369,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "7qaBNN4n9mbMB2N6VRtolEUD6s4Pf9h2jzijSVTU_Z4=",
+              "title": "6月19日 晚间版 | 苹果出资扩产DRAM、美方关切EUV入华、建滔积层板再度涨价",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/19/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-19",
+              "updateTime": "2026-06-19 20:06:00",
+              "read": false,
+              "listen": false,
+              "duration": 1365,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "lgqI2FiQGufwqHV692WpMs-UNKUtn4aG8QB79_KZHgE=",
+              "title": "6月19日 全球版 | 美联储主席鹰派首秀、美伊重开霍尔木兹海峡、SpaceX发债扩张AI",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/19/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-19",
+              "updateTime": "2026-06-19 08:02:25",
+              "read": false,
+              "listen": false,
+              "duration": 893,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "FpfOnWXeygmUicr65cfCAwDO8ZceUvyQ8vcj5bZhVyg=",
+              "title": "6月18日 晚间版 | 建滔积层板涨价、字节洽购天数智芯、uniQure疗法获FDA认可",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/18/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-18",
+              "updateTime": "2026-06-18 20:05:53",
+              "read": false,
+              "listen": false,
+              "duration": 1457,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "1_k2hySeYzS_azHg9X7eFVSlJcwSiw-3319PQ4PcrHg=",
+              "title": "6月18日 午间版 | 美联储预计年内加息、电容龙头提价、钨棒供给短缺",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/18/午报.mp3",
+              "batchName": "午报",
+              "date": "2026-06-18",
+              "updateTime": "2026-06-18 11:48:37",
+              "read": false,
+              "listen": false,
+              "duration": 682,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "m6ZhackYiiEv3pD4ZBaXuQjJlOI7WJdwS-6rlfKedSw=",
+              "title": "6月18日 晨会版 | 覆铜板开启涨价潮、冰轮环境订单爆发、台积电入局玻璃基板",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/18/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-18",
+              "updateTime": "2026-06-18 07:06:12",
+              "read": false,
+              "listen": false,
+              "duration": 1397,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "v_wfr5BK8WU0LazM6M_bc_stP3Bo4EsY3UqSPZJRYGQ=",
+              "title": "6月18日 全球版 | 美联储预计年内加息、伊朗获准出口石油、SpaceX上市后股价飙升",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic_us_prd/mp3/2026/06/18/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-18",
+              "updateTime": "2026-06-18 08:03:14",
+              "read": false,
+              "listen": false,
+              "duration": 695,
+              "marketType": 30,
+              "titleReplaced": false
+            },
+            {
+              "id": "xPyMxO7Dowra_dxlBQqKLBwZUnTWliaeyP9fWe8-O0A=",
+              "title": "6月17日 晚间版 | 覆铜板CCL涨价、台积电CoWoS玻璃基板、国产半导体设备订单大增",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/17/晚报.mp3",
+              "batchName": "晚报",
+              "date": "2026-06-17",
+              "updateTime": "2026-06-17 20:06:04",
+              "read": false,
+              "listen": false,
+              "duration": 1458,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "C1K97QnqbRdN9yi2nzcG1p6jVZGeVavq2SjieqLs4qA=",
+              "title": "6月17日 午间版 | 覆铜板涨价、台积电验证玻璃基板、DRAM液冷成趋势",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/17/午报.mp3",
+              "batchName": "午报",
+              "date": "2026-06-17",
+              "updateTime": "2026-06-17 11:34:45",
+              "read": false,
+              "listen": false,
+              "duration": 721,
+              "marketType": 21,
+              "titleReplaced": false
+            },
+            {
+              "id": "37S_pWpKxzF5Hr4k0Dy0q49OECdDrfGyVPKOcjjwc-I=",
+              "title": "6月17日 晨会版 | 建滔积层板再度提价、台积电发布玻璃基板计划、罗博特科官宣CPO合作",
+              "content": null,
+              "contentJson": null,
+              "audio": "hot_topic/mp3/2026/06/17/晨报.mp3",
+              "batchName": "晨报",
+              "date": "2026-06-17",
+              "updateTime": "2026-06-17 07:05:52",
+              "read": false,
+              "listen": false,
+              "duration": 1432,
+              "marketType": 21,
+              "titleReplaced": false
+            }
+          ]
+        }
+      },
+      "path": "mix/hot/topic/report/list/v2?pageNum=1&pageSize=20&id=-gtmrarYRB0KFVL6EXpdRKItFu_SzwylZHpXajJ73eo%3D&word=&isUs=false&marketType="
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/point/user/grant/daily-login",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "success": false,
+          "grantedPoints": 2,
+          "message": "研值已到账，无需重复发放"
+        }
+      },
+      "path": "point/user/grant/daily-login"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/reading/hot/word?type=90",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": [
+          {
+            "word": "智谱",
+            "score": 1.0
+          },
+          {
+            "word": "光电共封装",
+            "score": 2.0
+          },
+          {
+            "word": "国盛证券",
+            "score": 3.0
+          },
+          {
+            "word": "HBM",
+            "score": 4.0
+          },
+          {
+            "word": "中钨高新",
+            "score": 5.0
+          },
+          {
+            "word": "服务器",
+            "score": 6.0
+          },
+          {
+            "word": "寒武纪",
+            "score": 7.0
+          },
+          {
+            "word": "加息",
+            "score": 8.0
+          },
+          {
+            "word": "MINIMAX",
+            "score": 9.0
+          },
+          {
+            "word": "消费建材",
+            "score": 10.0
+          }
+        ]
+      },
+      "path": "reading/hot/word?type=90"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/reading/stock/hot/recommend",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": [
+          {
+            "code": "300604.SZ",
+            "name": "长川科技",
+            "changePct": 3.60907,
+            "num": 221
+          },
+          {
+            "code": "603757.SH",
+            "name": "大元泵业",
+            "changePct": 10.00486,
+            "num": 178
+          },
+          {
+            "code": "600353.SH",
+            "name": "旭光电子",
+            "changePct": 5.86453,
+            "num": 175
+          },
+          {
+            "code": "300285.SZ",
+            "name": "国瓷材料",
+            "changePct": -7.47219,
+            "num": 139
+          },
+          {
+            "code": "603663.SH",
+            "name": "三祥新材",
+            "changePct": 5.67332,
+            "num": 127
+          },
+          {
+            "code": "300274.SZ",
+            "name": "阳光电源",
+            "changePct": -7.54925,
+            "num": 116
+          },
+          {
+            "code": "002281.SZ",
+            "name": "光迅科技",
+            "changePct": -3.27804,
+            "num": 97
+          },
+          {
+            "code": "600549.SH",
+            "name": "厦门钨业",
+            "changePct": -10.0,
+            "num": 96
+          },
+          {
+            "code": "002648.SZ",
+            "name": "卫星化学",
+            "changePct": 10.00437,
+            "num": 91
+          },
+          {
+            "code": "300757.SZ",
+            "name": "罗博特科",
+            "changePct": -4.76355,
+            "num": 89
+          },
+          {
+            "code": "06869.HK",
+            "name": "长飞光纤光缆",
+            "changePct": -8.04196,
+            "num": 89
+          },
+          {
+            "code": "600392.SH",
+            "name": "盛和资源",
+            "changePct": -9.59977,
+            "num": 89
+          },
+          {
+            "code": "688548.SH",
+            "name": "广钢气体",
+            "changePct": 2.08442,
+            "num": 88
+          },
+          {
+            "code": "300782.SZ",
+            "name": "卓胜微",
+            "changePct": -0.48051,
+            "num": 88
+          },
+          {
+            "code": "002655.SZ",
+            "name": "共达电声",
+            "changePct": 0.23469,
+            "num": 88
+          },
+          {
+            "code": "688662.SH",
+            "name": "富信科技",
+            "changePct": 3.04391,
+            "num": 87
+          },
+          {
+            "code": "002837.SZ",
+            "name": "英维克",
+            "changePct": 3.62225,
+            "num": 85
+          },
+          {
+            "code": "603083.SH",
+            "name": "剑桥科技",
+            "changePct": 2.20348,
+            "num": 84
+          },
+          {
+            "code": "300088.SZ",
+            "name": "长信科技",
+            "changePct": -4.23484,
+            "num": 72
+          }
+        ]
+      },
+      "path": "reading/stock/hot/recommend"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/mix/hot/topic/report/detail/v2?id=-gtmrarYRB0KFVL6EXpdRKItFu_SzwylZHpXajJ73eo%3D&isUs=false",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "id": "e7T_eOKWRZCF-oVN3LNWS_DleOmdHwE58Y49p3UD99k=",
+          "title": "6月23日 午间版 | 英伟达全面液冷、存储芯片价格大涨、国产AI芯片共振",
+          "content": null,
+          "contentJson": [
+            {
+              "title": "市场热点",
+              "children": [
+                {
+                  "summary": "在过去24小时内，随着英伟达于美国时间6月21日正式发文详解Rubin平台，市场对AI散热的认知已从“风液混合”的过渡方案彻底转向“全面液冷”的终局标配。这一事件的边际变化在于，液冷不再是可选项，而是下一代AI基础设施的准入门槛，由此触发了**整个热管理产业链的价值重估，投资逻辑从寻找单纯的供应商，转向挖掘在CDU、微通道冷板、高压快接头等环节具备核心技术且能承接价值量5倍以上增长**的龙头企业。<br><br>关注：**英维克**/**申菱环境**/**高澜股份**（CDU及系统方案商），**飞龙股份**/**大元泵业**（核心部件水泵），**金富科技**/**鼎通科技**/**裕同科技**（冷板及快接头等精密组件），**海科新源**/**石大胜华**（冷却液核心原料丙二醇），**工业富联**（整机柜集成）",
+                  "topicName": "英伟达Rubin平台采用全面液冷方案",
+                  "index": 10,
+                  "id": 26139
+                },
+                {
+                  "summary": "过去24小时内，国产AI芯片领域迎来新品发布与订单预期的共振，继飞腾A1000智算芯片亮相后，市场对华为、天数智芯等下半年新品及头部厂商Q2业绩的乐观预期显著增强。投资逻辑已从“国产替代”叙事升级为“量价齐升”的业绩兑现期，市场焦点正转向**那些能够锁定先进制程产能并获得头部互联网大厂订单的芯片设计公司**，其业绩确定性与弹性最高。<br><br>关注：**寒武纪**/**海光信息**（Q2业绩预期乐观，订单与供应链改善明确），**天数智芯**（获字节跳动大额订单，新品发布在即），**中芯国际**/**华虹宏力**（AI芯片订单外溢及代工涨价），**沐曦股份**/**壁仞科技**（二线厂商订单突破，实现从1到N放量）",
+                  "topicName": "国产AI芯片迎订单与新品发布共振",
+                  "index": 9,
+                  "id": 26140
+                },
+                {
+                  "summary": "6月22日，行业专家将Q3存储价格预期猛然上调至环比增长40-50%，远超此前15-20%的市场共识，这一边际变化的核心在于AI对HBM及企业级SSD的产能挤占已传导至全品类，并得到韩国最新出口数据和下游客户抢购老旧DRAM现象的交叉验证。这标志着市场正从评估周期性复苏转向定价**AI驱动的结构性供给短缺**，预期Q3英伟达Rubin平台等新增需求将进一步激化供需矛盾，**存储价格的上涨斜率和持续性或将远超当前模型的预测**。<br><br>关注：**江波龙**/**佰维存储**/**德明利**（存储模组厂，价格高弹性直接增厚业绩），**兆易创新**/**普冉股份**（存储设计公司，受益于全品类价格上涨），**北方华创**/**中微公司**（晶圆厂扩产拉动上游设备需求）",
+                  "topicName": "传26年Q3存储芯片价格或环比上涨50%",
+                  "index": 9,
+                  "id": 26141
+                },
+                {
+                  "summary": "日本于6月22日正式敲定对先进封装设备的出口管制，将后道设备的国产化从长期选项变为短期内的强制任务，彻底引爆了后道设备及零部件的紧急替代需求。这一外部强制性催化，叠加6月23日**长川科技**超预期的Q2业绩指引所验证的行业内生高景气，市场正交易**地缘政治倒逼后道设备订单激增与全产业链订单饱满、产能为王的双重加速逻辑**。<br><br>关注：**深科达**/**新益昌**/**金海通**（日本出口管制落地，后道先进封装设备国产替代最直接受益者），**长川科技**/**华峰测控**（测试设备龙头，业绩验证行业高景气，国产算力放量驱动需求），**北方华创**/**中微公司**/**华海清科**（前道设备平台龙头，受益于存储及先进制程扩产，订单持续上修），**富创精密**/**新莱应材**/**机器人**（零部件环节供需紧张，涨价逻辑兑现且受益于设备厂产能扩张）",
+                  "topicName": "半导体设备国产化迎历史性机遇",
+                  "index": 8,
+                  "id": 26142
+                },
+                {
+                  "summary": "今日市场交易的核心逻辑，是台积电确认削减28nm产能以支援先进封装，此举在供给端为国内晶圆代工创造了明确的订单外溢和涨价窗口。这一变化验证了国产晶圆代工正从周期性复苏转向**由AI需求外溢和供给格局优化驱动的量价齐升阶段**，其作为**核心战略资产的价值正在被市场重估**。<br><br>关注：**中芯国际**/**华虹宏力**（直接受益于产能紧张、订单外溢及价格上涨），**寒武纪**/**海光信息**/**芯原股份**（国产算力芯片放量，构成上游核心需求），**柏诚股份**/**北方华创**/**中微公司**（晶圆厂资本开支扩产的核心受益标的）",
+                  "topicName": "中芯国际与华虹宏力稼动率接近满载",
+                  "index": 7,
+                  "id": 26143
+                },
+                {
+                  "summary": "6月22日，受日本光纤巨头藤仓因北美AI数据中心需求旺盛、供给紧张而推进提价的消息催化，A股光纤板块应声大涨。这标志着**AI算力竞赛正从算力层向底层物理传输介质蔓延**，市场确认光纤环节已进入**供需失衡驱动的量价齐升阶段**，具备海外突破能力的国内厂商将直接受益于价格上涨带来的巨大业绩弹性。<br><br>关注：**长飞光纤**/**亨通光电**/**中天科技**（AI数据中心需求外溢导致光纤供不应求，国际巨头提价打开国内厂商量价齐升空间），**天孚通信**/**光库科技**（高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升），**源杰科技**/**云南锗业**（上游光芯片关键材料磷化铟等面临扩产瓶颈，供需缺口有望驱动价格持续上行），**福晶科技**（隔离器等光通信上游物料环节同样出现短缺，存在涨价预期）",
+                  "topicName": "光通信板块景气度持续提升",
+                  "index": 7,
+                  "id": 26144
+                },
+                {
+                  "summary": "6月23日，扬杰科技发布全系产品涨价10%-15%的通知，标志着功率半导体行业第二轮涨价趋势正式确立。此轮涨价由AI电源、新能源等下游需求旺盛及上游8寸产能紧缺共同驱动，**不仅直接提升了IDM厂商的盈利弹性，更强化了功率半导体作为AI算力核心环节的价值重估逻辑**。<br><br>关注：**扬杰科技**/**新洁能**/**士兰微**（IDM模式，充分受益于AI电源驱动的本轮涨价，盈利弹性大），**芯联集成**（国内8寸代工龙头，产能规模最大，涨价受益最直接），**东微半导**（AI业务敞口高）",
+                  "topicName": "扬杰科技发布全系产品涨价函",
+                  "index": 6,
+                  "id": 26145
+                },
+                {
+                  "summary": "昨夜今晨（6月22日晚-23日），随着英伟达官宣其Rubin平台将全面采用“无软管”的全液冷架构，市场迅速将焦点转向刚性波纹管的供应链；最新的边际变化在于，市场确认**金富科技不仅是Tier-1奇宏的核心供应商，更是获得了英伟达的直接认可并被推荐给富士康**，这标志着其从间接供应走向了核心地位，业绩兑现的确定性大幅提升。<br><br>关注：**金富科技**（英伟达液冷波纹管核心供应商，获其认可并推荐给新客户，Q2业绩有望率先兑现）/**五洋自控**（液冷波纹管及Manifold代工，有望升级为Tier1）/**英维克**/**申菱环境**（Tier1系统方案商，受益于液冷方案整体放量）/**飞龙股份**/**大元泵业**（液冷泵等核心零部件供应商）",
+                  "topicName": "金富科技成英伟达液冷波纹管核心供应商",
+                  "index": 6,
+                  "id": 26146
+                },
+                {
+                  "summary": "在过去24小时内，券商板块在放量大涨后，市场逻辑已从单纯的低估值修复转向确认其作为科技行情的“卖铲人”角色。核心边际变化在于，市场不再将其视为与科技股争夺流动性的对手，而是通过**科创板跟投等机制直接分享科技产业一级市场红利的稀缺标的**，这种**基本面与估值的极端背离和机构的低配状态正迎来共振修复**。<br><br>关注：**中信证券**/**国泰海通**/**华泰证券**（受益于行业集中度提升和业务综合优势的头部券商），**中金公司**/**中信建投**/**招商证券**（科创板跟投业务占比较高，业绩弹性更大），**财通证券**（具备转股及并购重组预期）",
+                  "topicName": "券商板块被指为科技行情卖铲人",
+                  "index": 6,
+                  "id": 26147
+                },
+                {
+                  "summary": "本周深圳渠道商千台级服务器确认入关，标志着AI算力硬件的交付瓶颈正在被打破，产业渠道开始实质性回暖。这一进展直接打通了算力租赁公司从订单到收入的“最后一公里”，**市场预期将从关注订单规模转向聚焦Q2及下半年的业绩兑现**，板块复苏逻辑得到关键验证。<br><br>关注：**利通电子**/**盛视科技**（服务器陆续到货，业绩即将兑现），**智微智能**/**协创数据**/**赛意信息**（算力租赁核心标的，渠道回暖验证业务逻辑），**恒铭达**（进入英伟达服务器供应链，分享产业增长）",
+                  "topicName": "传深圳渠道商有千台级服务器入关",
+                  "index": 5,
+                  "id": 26148
+                }
+              ]
+            }
+          ],
+          "audio": "hot_topic/mp3/2026/06/23/午报.mp3",
+          "batchName": "午报",
+          "date": "2026-06-23",
+          "updateTime": "2026-06-23 11:35:12",
+          "read": false,
+          "listen": false,
+          "duration": 650,
+          "marketType": 21,
+          "titleReplaced": false
+        }
+      },
+      "path": "mix/hot/topic/report/detail/v2?id=-gtmrarYRB0KFVL6EXpdRKItFu_SzwylZHpXajJ73eo%3D&isUs=false"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/mix/hot/topic/report/transfer/id/batch",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "26144": "WFj0Ok1jVhX6UGdCveVgyTtaphevqTHWlwBkEeJDleY=",
+          "26145": "XRNGP1f83rGXEPvPGNGtiL9fv9tPf74BNjpXXrwR0gc=",
+          "26146": "0ip2OZFtPotECFUMnOEV1HPkPb0F553Vw14JnWMpBf8=",
+          "26147": "kKK2N3IS_Hja4IYU2bbBIsdWaDk7gOSj5cDscAXl-sQ=",
+          "26148": "G6hRUkp5KkZ4zCPqNWeGL-GeS0Yt3c9m5ofEHJchJT8=",
+          "26139": "k37xU4y9edPQGg4jHv02IW5cYybUK8iGILuSzF6oods=",
+          "26140": "q4krxQowBti1FGYNIjEgcA6-NUCRWoA8s00Y_yfXQDw=",
+          "26141": "Wkzd88fQDqIGw_zrot5hLpvIgvhhCJP5L3VWM3ZbQ-s=",
+          "26142": "r3bs7eb-rPeCYPdOXPu0oRjCIiz7YW805Vx8xoDWaCI=",
+          "26143": "uBtFbJVgTMjqz28t7vFvqbL9hJsTNTAT6Qw9mxaQpKM="
+        }
+      },
+      "path": "mix/hot/topic/report/transfer/id/batch"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/point/user/accounts/my",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "ownerType": "PERSONAL",
+          "ownerRefId": "1216053837371015168",
+          "pointOwnerId": 9239,
+          "balance": 106,
+          "neverExpirePoints": 0,
+          "expiringBatches": [
+            {
+              "expireTime": "2026-07-01 03:59:59",
+              "expireTimeText": "2026-07-01 03:59:59",
+              "points": 106
+            }
+          ]
+        }
+      },
+      "path": "point/user/accounts/my"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/point/user/grant/daily-login",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "success": false,
+          "grantedPoints": 2,
+          "message": "研值已到账，无需重复发放"
+        }
+      },
+      "path": "point/user/grant/daily-login"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/point/user/accounts/my",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "ownerType": "PERSONAL",
+          "ownerRefId": "1216053837371015168",
+          "pointOwnerId": 9239,
+          "balance": 106,
+          "neverExpirePoints": 0,
+          "expiringBatches": [
+            {
+              "expireTime": "2026-07-01 03:59:59",
+              "expireTimeText": "2026-07-01 03:59:59",
+              "points": 106
+            }
+          ]
+        }
+      },
+      "path": "point/user/accounts/my"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/point/user/accounts/my",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": {
+          "ownerType": "PERSONAL",
+          "ownerRefId": "1216053837371015168",
+          "pointOwnerId": 9239,
+          "balance": 106,
+          "neverExpirePoints": 0,
+          "expiringBatches": [
+            {
+              "expireTime": "2026-07-01 03:59:59",
+              "expireTimeText": "2026-07-01 03:59:59",
+              "points": 106
+            }
+          ]
+        }
+      },
+      "path": "point/user/accounts/my"
+    },
+    {
+      "url": "https://o4505757754851328.ingest.sentry.io/api/4506313648504832/envelope/?sentry_key=838d792258bacec73c1fdabacdd7c9c4&sentry_version=7&sentry_client=sentry.javascript.vue%2F7.93.0",
+      "body": {
+        "detail": "Sentry dropped data due to a quota or internal rate limit being reached. This will not affect your application. See https://docs.sentry.io/product/accounts/quotas/ for more information."
+      },
+      "path": "4506313648504832/envelope/?sentry_key=838d792258bacec73c1fdabacdd7c9c4&sentry_version=7&sentry_client=sentry.javascript.vue%2F7.93.0"
+    },
+    {
+      "url": "https://alphapai-web.rabyte.cn/external/alpha/api/paipai/aiTask/completed/disconnected",
+      "body": {
+        "code": 200000,
+        "message": "SUCCESS",
+        "data": null
+      },
+      "path": "paipai/aiTask/completed/disconnected"
+    }
+  ],
+  "page_text": "\t\n季风\n106\n首页\nPaiPai\nPaiWork\n云盘\n转记\n日历\n个股\n板块\n会议\n更多\n全部\n国内\n全球\n国内6月23日午间版| 英伟达全面液冷、存储芯片价格大涨、国产AI芯片共振\n今天 11:35\n全球6月23日全球版| 伊朗原油出口获授权、SpaceX为AI发债、英首相辞职英镑上涨\n今天 08:03\n国内6月23日晨会版| 长川科技业绩加速、英伟达确认全面液冷、CCL覆铜板多轮提价\n今天 07:05\n国内6月22日晚间版| 券商跟投利润大增、存储芯片超预期涨价、藤仓上调指引并提价\n昨天 20:06\n国内6月22日午间版| CCL五轮提价、国芯跑国模闭环、蓝思TGV年底投产\n昨天 11:36\n全球6月22日全球版| 霍尔木兹海峡恢复通航、美联储转向鹰派、苹果英伟达英特尔合作\n昨天 08:03\n国内6月22日晨会版| 东曹氧化锆断供、AI算力芯片涨价抢单、覆铜板CCL再涨价\n昨天 07:05\n全球6月21日全球版| 霍尔木兹海峡恢复通航、美联储鹰派转向、AI引发电力需求激增\n06-21 08:02\n国内6月21日晚间版| AI上游材料全面涨价、存储芯片全线涨价、半导体设备国产化出海\n06-21 20:05\n全球6月20日全球版| 美联储鹰派信号、谷歌人才流向Anthropic、美伊和平谈判推迟\n06-20 08:03\n国内6月20日晚间版| AI算力遭遇电力瓶颈、AI驱动存储价值重估、国产半导体设备出海\n06-20 20:04\n国内6月19日晚间版| 苹果出资扩产DRAM、美方关切EUV入华、建滔积层板再度涨价\n06-19 20:06\n全球6月19日全球版| 美联储主席鹰派首秀、美伊重开霍尔木兹海峡、SpaceX发债扩张AI\n06-19 08:02\n国内6月18日晚间版| 建滔积层板涨价、字节洽购天数智芯、uniQure疗法获FDA认可\n06-18 20:05\n国内6月18日午间版| 美联储预计年内加息、电容龙头提价、钨棒供给短缺\n06-18 11:48\n国内6月18日晨会版| 覆铜板开启涨价潮、冰轮环境订单爆发、台积电入局玻璃基板\n06-18 07:06\n全球6月18日全球版| 美联储预计年内加息、伊朗获准出口石油、SpaceX上市后股价飙升\n06-18 08:03\n国内6月17日晚间版| 覆铜板CCL涨价、台积电CoWoS玻璃基板、国产半导体设备订单大增\n06-17 20:06\n国内6月17日午间版| 覆铜板涨价、台积电验证玻璃基板、DRAM液冷成趋势\n06-17 11:34\n国内6月17日晨会版| 建滔积层板再度提价、台积电发布玻璃基板计划、罗博特科官宣CPO合作\n06-17 07:05\n国内蓝宝书 6月23日午间版 | 英伟达全面液冷、存储芯片价格大涨、国产AI芯片共振\n今天 11:35\n分享\n播放\n时长：10:50\n根据Alpha派机构投研用户实时研究动态聚合整理生成\n市场热点\n根据当前时段机构关注的投资事件梳理，并按照热度排序\n1\n英伟达Rubin平台采用全面液冷方案\n\n在过去24小时内，随着英伟达于美国时间6月21日正式发文详解Rubin平台，市场对AI散热的认知已从“风液混合”的过渡方案彻底转向“全面液冷”的终局标配。这一事件的边际变化在于，液冷不再是可选项，而是下一代AI基础设施的准入门槛，由此触发了整个热管理产业链的价值重估，投资逻辑从寻找单纯的供应商，转向挖掘在CDU、微通道冷板、高压快接头等环节具备核心技术且能承接价值量5倍以上增长的龙头企业。\n\n关注：英维克/申菱环境/高澜股份（CDU及系统方案商），飞龙股份/大元泵业（核心部件水泵），金富科技/鼎通科技/裕同科技（冷板及快接头等精密组件），海科新源/石大胜华（冷却液核心原料丙二醇），工业富联（整机柜集成）\n\n2\n国产AI芯片迎订单与新品发布共振\n\n过去24小时内，国产AI芯片领域迎来新品发布与订单预期的共振，继飞腾A1000智算芯片亮相后，市场对华为、天数智芯等下半年新品及头部厂商Q2业绩的乐观预期显著增强。投资逻辑已从“国产替代”叙事升级为“量价齐升”的业绩兑现期，市场焦点正转向那些能够锁定先进制程产能并获得头部互联网大厂订单的芯片设计公司，其业绩确定性与弹性最高。\n\n关注：寒武纪/海光信息（Q2业绩预期乐观，订单与供应链改善明确），天数智芯（获字节跳动大额订单，新品发布在即），中芯国际/华虹宏力（AI芯片订单外溢及代工涨价），沐曦股份/壁仞科技（二线厂商订单突破，实现从1到N放量）\n\n3\n传26年Q3存储芯片价格或环比上涨50%\n\n6月22日，行业专家将Q3存储价格预期猛然上调至环比增长40-50%，远超此前15-20%的市场共识，这一边际变化的核心在于AI对HBM及企业级SSD的产能挤占已传导至全品类，并得到韩国最新出口数据和下游客户抢购老旧DRAM现象的交叉验证。这标志着市场正从评估周期性复苏转向定价AI驱动的结构性供给短缺，预期Q3英伟达Rubin平台等新增需求将进一步激化供需矛盾，存储价格的上涨斜率和持续性或将远超当前模型的预测。\n\n关注：江波龙/佰维存储/德明利（存储模组厂，价格高弹性直接增厚业绩），兆易创新/普冉股份（存储设计公司，受益于全品类价格上涨），北方华创/中微公司（晶圆厂扩产拉动上游设备需求）\n\n4\n半导体设备国产化迎历史性机遇\n\n日本于6月22日正式敲定对先进封装设备的出口管制，将后道设备的国产化从长期选项变为短期内的强制任务，彻底引爆了后道设备及零部件的紧急替代需求。这一外部强制性催化，叠加6月23日长川科技超预期的Q2业绩指引所验证的行业内生高景气，市场正交易地缘政治倒逼后道设备订单激增与全产业链订单饱满、产能为王的双重加速逻辑。\n\n关注：深科达/新益昌/金海通（日本出口管制落地，后道先进封装设备国产替代最直接受益者），长川科技/华峰测控（测试设备龙头，业绩验证行业高景气，国产算力放量驱动需求），北方华创/中微公司/华海清科（前道设备平台龙头，受益于存储及先进制程扩产，订单持续上修），富创精密/新莱应材/机器人（零部件环节供需紧张，涨价逻辑兑现且受益于设备厂产能扩张）\n\n5\n中芯国际与华虹宏力稼动率接近满载\n\n今日市场交易的核心逻辑，是台积电确认削减28nm产能以支援先进封装，此举在供给端为国内晶圆代工创造了明确的订单外溢和涨价窗口。这一变化验证了国产晶圆代工正从周期性复苏转向由AI需求外溢和供给格局优化驱动的量价齐升阶段，其作为核心战略资产的价值正在被市场重估。\n\n关注：中芯国际/华虹宏力（直接受益于产能紧张、订单外溢及价格上涨），寒武纪/海光信息/芯原股份（国产算力芯片放量，构成上游核心需求），柏诚股份/北方华创/中微公司（晶圆厂资本开支扩产的核心受益标的）\n\n6\n光通信板块景气度持续提升\n\n6月22日，受日本光纤巨头藤仓因北美AI数据中心需求旺盛、供给紧张而推进提价的消息催化，A股光纤板块应声大涨。这标志着AI算力竞赛正从算力层向底层物理传输介质蔓延，市场确认光纤环节已进入供需失衡驱动的量价齐升阶段，具备海外突破能力的国内厂商将直接受益于价格上涨带来的巨大业绩弹性。\n\n关注：长飞光纤/亨通光电/中天科技（AI数据中心需求外溢导致光纤供不应求，国际巨头提价打开国内厂商量价齐升空间），天孚通信/光库科技（高速率、高密度光互联方案NPO/CPO驱动FAU/MPO等无源器件迎来增量市场和价值提升），源杰科技/云南锗业（上游光芯片关键材料磷化铟等面临扩产瓶颈，供需缺口有望驱动价格持续上行），福晶科技（隔离器等光通信上游物料环节同样出现短缺，存在涨价预期）\n\n7\n扬杰科技发布全系产品涨价函\n\n6月23日，扬杰科技发布全系产品涨价10%-15%的通知，标志着功率半导体行业第二轮涨价趋势正式确立。此轮涨价由AI电源、新能源等下游需求旺盛及上游8寸产能紧缺共同驱动，不仅直接提升了IDM厂商的盈利弹性，更强化了功率半导体作为AI算力核心环节的价值重估逻辑。\n\n关注：扬杰科技/新洁能/士兰微（IDM模式，充分受益于AI电源驱动的本轮涨价，盈利弹性大），芯联集成（国内8寸代工龙头，产能规模最大，涨价受益最直接），东微半导（AI业务敞口高）\n\n8\n金富科技成英伟达液冷波纹管核心供应商\n\n昨夜今晨（6月22日晚-23日），随着英伟达官宣其Rubin平台将全面采用“无软管”的全液冷架构，市场迅速将焦点转向刚性波纹管的供应链；最新的边际变化在于，市场确认金富科技不仅是Tier-1奇宏的核心供应商，更是获得了英伟达的直接认可并被推荐给富士康，这标志着其从间接供应走向了核心地位，业绩兑现的确定性大幅提升。\n\n关注：金富科技（英伟达液冷波纹管核心供应商，获其认可并推荐给新客户，Q2业绩有望率先兑现）/五洋自控（液冷波纹管及Manifold代工，有望升级为Tier1）/英维克/申菱环境（Tier1系统方案商，受益于液冷方案整体放量）/飞龙股份/大元泵业（液冷泵等核心零部件供应商）\n\n9\n券商板块被指为科技行情卖铲人\n\n在过去24小时内，券商板块在放量大涨后，市场逻辑已从单纯的低估值修复转向确认其作为科技行情的“卖铲人”角色。核心边际变化在于，市场不再将其视为与科技股争夺流动性的对手，而是通过科创板跟投等机制直接分享科技产业一级市场红利的稀缺标的，这种基本面与估值的极端背离和机构的低配状态正迎来共振修复。\n\n关注：中信证券/国泰海通/华泰证券（受益于行业集中度提升和业务综合优势的头部券商），中金公司/中信建投/招商证券（科创板跟投业务占比较高，业绩弹性更大），财通证券（具备转股及并购重组预期）\n\n10\n传深圳渠道商有千台级服务器入关\n\n本周深圳渠道商千台级服务器确认入关，标志着AI算力硬件的交付瓶颈正在被打破，产业渠道开始实质性回暖。这一进展直接打通了算力租赁公司从订单到收入的“最后一公里”，市场预期将从关注订单规模转向聚焦Q2及下半年的业绩兑现，板块复苏逻辑得到关键验证。\n\n关注：利通电子/盛视科技（服务器陆续到货，业绩即将兑现），智微智能/协创数据/赛意信息（算力租赁核心标的，渠道回暖验证业务逻辑），恒铭达（进入英伟达服务器供应链，分享产业增长）\n\n免责声明：本文为基于公开信息通过人工智能技术进行整理，不构成任何投资建议。恕平台对内容不保证信息绝对准确性和时效性，请自行做出投资决策判断。"
+}
