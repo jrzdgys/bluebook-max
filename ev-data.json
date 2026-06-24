@@ -1,0 +1,1742 @@
+{
+  "topics": [
+    {
+      "topic": "AI驱动全球半导体扩产设备零部件迎涨价潮",
+      "heat": 95,
+      "stage": "🔥主升",
+      "alphaIndex": 1,
+      "summary": "6月24日，继台积电确认上调全线先进制程代工价格后，市场边际变化的核心在于三星、海力士等全球存储巨头因设备产能受限，已开始主动接洽中国设备厂商寻求深度合作。这标志着本轮由AI驱动的全球扩产，已将设备环节推为主要瓶颈，国内具备强产品力的设备及零部件龙头，其投资逻辑正从国产替代加速质变为进军全球核心供应链，定价权已清晰地转向供给侧。",
+      "quote": "三星、海力士等全球存储巨头因设备产能受限，已开始主动接洽中国设备厂商寻求深度合作，标志着国内设备龙头投资逻辑正从国产替代质变为进军全球核心供应链。",
+      "scores": {
+        "inst": 57,
+        "market": 23,
+        "catalyst": 15,
+        "total": 95,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "北方华创",
+              "reason": "产品具备全球竞争力，有望在海外设备紧缺下切入全球大厂供应链",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "中微公司",
+              "reason": "产品具备全球竞争力，有望在海外设备紧缺下切入全球大厂供应链",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "盛美上海",
+              "reason": "产品具备全球竞争力，有望在海外设备紧缺下切入全球大厂供应链",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "拓荆科技",
+              "reason": "产品具备全球竞争力，有望在海外设备紧缺下切入全球大厂供应链",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "富创精密",
+              "reason": "零部件环节受益于出海+市场膨胀+扩份额+涨价提利润的四重弹性，确定性更高",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "新莱应材",
+              "reason": "零部件环节受益于出海+市场膨胀+扩份额+涨价提利润的四重弹性，确定性更高",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "江丰电子",
+              "reason": "零部件环节受益于出海+市场膨胀+扩份额+涨价提利润的四重弹性，确定性更高",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "珂玛科技",
+              "reason": "零部件环节受益于出海+市场膨胀+扩份额+涨价提利润的四重弹性，确定性更高",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "三星电子将半数HBM产能分配给HBM4",
+      "heat": 91,
+      "stage": "🔥主升",
+      "alphaIndex": 2,
+      "summary": "过去24小时，市场对SK海力士放缓HBM4扩产的解读发生关键转变，从最初对AI需求放缓的担忧，转变为确认这是海力士为追求更高利润率的通用DRAM而进行的主动产能调配。这一策略分化为三星电子提供了绝佳的追赶窗口，其HBM4销售额已突破10亿美元，正凭借激进的资本开支和产能扩张加速抢占下一代HBM的市场份额。",
+      "quote": "SK海力士放缓HBM4扩产实为追求通用DRAM更高利润率的主动调配，三星电子HBM4销售额已突破10亿美元，正加速抢占下一代HBM市场份额。",
+      "scores": {
+        "inst": 54,
+        "market": 22,
+        "catalyst": 15,
+        "total": 91,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "三星电子",
+              "reason": "竞争对手策略调整带来HBM4份额扩张机遇",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "SK海力士",
+              "reason": "策略重心转向通用DRAM",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "澜起科技",
+              "reason": "内存接口芯片核心供应商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "兆易创新",
+              "reason": "受益于存储行业整体高景气度及国产替代逻辑",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "佰维存储",
+              "reason": "受益于存储行业整体高景气度及国产替代逻辑",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "建滔积层板等厂商上调PCB材料售价",
+      "heat": 89,
+      "stage": "🔥主升",
+      "alphaIndex": 3,
+      "summary": "在6月16日建滔积层板超预期提价15%后，市场在过去24小时内已将此事件确认为PCB上游材料全面进入高通胀超级周期的标志，价格传导已从CCL龙头扩散至二线厂商乃至下游PCB制造商。核心投资逻辑在于，由AI需求驱动、上游电子布等环节供给刚性缺口支撑的涨价趋势远未结束，产业链的盈利弹性释放才刚刚开始。",
+      "quote": "建滔积层板超预期提价15%后，价格传导已从CCL龙头扩散至二线厂商，由AI需求驱动、上游电子布供给刚性缺口支撑的涨价趋势远未结束。",
+      "scores": {
+        "inst": 53,
+        "market": 22,
+        "catalyst": 14,
+        "total": 89,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "建滔积层板",
+              "reason": "覆铜板龙头，直接受益于涨价和利润扩张",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "生益科技",
+              "reason": "覆铜板龙头，直接受益于涨价和利润扩张",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "华正新材",
+              "reason": "覆铜板龙头，直接受益于涨价和利润扩张",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中国巨石",
+              "reason": "电子布是核心瓶颈，供给紧张持续至2027年",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中材科技",
+              "reason": "电子布是核心瓶颈，供给紧张持续至2027年",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "国际复材",
+              "reason": "电子布是核心瓶颈，供给紧张持续至2027年",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "宏和科技",
+              "reason": "电子布是核心瓶颈，供给紧张持续至2027年",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "德福科技",
+              "reason": "上游关键原材料",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "铜冠铜箔",
+              "reason": "上游关键原材料",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "沪电股份",
+              "reason": "高端PCB厂商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "胜宏科技",
+              "reason": "高端PCB厂商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "光华科技",
+              "reason": "PCB制程升级带动高端化学品",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "天承科技",
+              "reason": "PCB制程升级带动高端化学品",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "鼎泰高科",
+              "reason": "PCB放量带动钻针等耗材需求增长",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中钨高新",
+              "reason": "PCB放量带动钻针等耗材需求增长",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "英伟达Rubin平台推动全场景液冷技术应用",
+      "heat": 88,
+      "stage": "🔥主升",
+      "alphaIndex": 4,
+      "summary": "市场对英伟达Rubin平台全液冷架构的解读进一步深化，确认了液冷将从可选升级变为AI基础设施的硬性标配，明确了2026年秋季量产出货的时间表。投资视角的核心边际变化在于，市场焦点已从渗透率提升的宏观预期转向挖掘具体环节的价值链通胀，单机柜液冷价值量从GB200时代的数万美元跃升至Rubin时代的15万美元以上。",
+      "quote": "英伟达Rubin平台全液冷架构确认液冷从可选升级变为AI硬性标配，单机柜液冷价值量从数万美元跃升至15万美元以上，国内厂商已获北美核心供应链批量订单。",
+      "scores": {
+        "inst": 52,
+        "market": 22,
+        "catalyst": 14,
+        "total": 88,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "英维克",
+              "reason": "系统集成与CDU/干冷器核心供应商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "申菱环境",
+              "reason": "系统集成与CDU/干冷器核心供应商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "金富科技",
+              "reason": "管路系统升级替代",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "骏鼎达",
+              "reason": "管路系统升级替代",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "大元泵业",
+              "reason": "CDU泵阀等核心部件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "飞龙股份",
+              "reason": "CDU泵阀等核心部件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "领益智造",
+              "reason": "UQD快接头/液冷Cage等精密组件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "鼎通科技",
+              "reason": "UQD快接头/液冷Cage等精密组件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "工业富联",
+              "reason": "服务器代工龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "思泉新材",
+              "reason": "上游导热材料需求提升",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "AI算力建设拉动光纤预制棒价格上涨",
+      "heat": 86,
+      "stage": "🔥主升",
+      "alphaIndex": 5,
+      "summary": "过去24小时，市场对AI算力拉动光纤需求的交易逻辑已从光纤预制棒本身进一步向上游溯源，聚焦到供给刚性更强、一季度长协价已跳涨80%的核心原料高纯四氯化硅环节。从投资视角看，这意味着产业链的利润正向上游最紧缺的原料端集中，具备高纯四氯化硅产能优势的企业将获得超额盈利弹性。",
+      "quote": "AI算力拉动光纤需求的交易逻辑已向上游溯源至核心原料高纯四氯化硅，一季度长协价已跳涨80%，具备产能优势的企业将获得超额盈利弹性。",
+      "scores": {
+        "inst": 51,
+        "market": 21,
+        "catalyst": 14,
+        "total": 86,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "江瀚新材",
+              "reason": "掌握高纯四氯化硅产能",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "三孚股份",
+              "reason": "掌握高纯四氯化硅产能",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "新安股份",
+              "reason": "掌握高纯四氯化硅产能",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "长飞光纤",
+              "reason": "棒纤缆一体化优势",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "亨通光电",
+              "reason": "棒纤缆一体化优势",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "中天科技",
+              "reason": "棒纤缆一体化优势",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "日本东曹暂停对华供应氧化锆粉体",
+      "heat": 84,
+      "stage": "📈强化",
+      "alphaIndex": 6,
+      "summary": "随着日本东曹因上游原料氧化钇断供而正式暂停氧化锆粉体供应，市场焦点已从下游的粉体和瓷块国产替代迅速向上游溯源至更为紧缺的核心前驱体正丙醇锆。国内粉体厂商扩产以承接东曹留下的全球市场空白，其产能释放的核心瓶颈在于前驱体供应，这使得国内唯一的正丙醇锆量产企业成为产业链价值重估中更为集中的受益环节。",
+      "quote": "日本东曹暂停氧化锆粉体供应后，市场焦点转向核心前驱体正丙醇锆，国内唯一量产该材料的企业将成为产业链价值重估的核心受益环节。",
+      "scores": {
+        "inst": 50,
+        "market": 21,
+        "catalyst": 13,
+        "total": 84,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "西陇科学",
+              "reason": "国内唯一量产高端氧化锆核心前驱体正丙醇锆",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "国瓷材料",
+              "reason": "国内氧化锆粉体龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "爱迪特",
+              "reason": "海外业务占比高牙科瓷块龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "东方锆业",
+              "reason": "锆产品生产商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "龙佰集团",
+              "reason": "锆产品生产商",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "三祥新材",
+              "reason": "钇稳定氧化锆粉体",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "商务部发文支持外资参与医药产业发展",
+      "heat": 83,
+      "stage": "📈强化",
+      "alphaIndex": 7,
+      "summary": "6月24日，商务部发布的《利用外资固稳促优行动方案》与同日启动的第12批国家集采形成鲜明对比，清晰地勾勒出医药行业创新开放与存量控费并行的双轨战略。方案中关于药品跨境分段生产、数据跨境流动管理、外资并购等具体举措，为CXO行业深度融入全球产业链提供了直接的政策背书，CXO龙头企业承接高附加值全球订单的确定性显著增强。",
+      "quote": "商务部方案明确支持药品跨境分段生产、数据跨境流动管理，为CXO行业深度融入全球产业链提供直接政策背书，龙头企业承接全球订单确定性显著增强。",
+      "scores": {
+        "inst": 49,
+        "market": 20,
+        "catalyst": 14,
+        "total": 83,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "药明康德",
+              "reason": "CXO龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "凯莱英",
+              "reason": "CXO龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "泰格医药",
+              "reason": "CXO龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "百济神州",
+              "reason": "具备全球化研发和商业化能力的头部药企",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "百利天恒",
+              "reason": "具备全球化研发和商业化能力的头部药企",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "康方生物",
+              "reason": "具备全球化研发和商业化能力的头部药企",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "信达生物",
+              "reason": "具备全球化研发和商业化能力的头部药企",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "恒瑞医药",
+              "reason": "具备全球化研发和商业化能力的头部药企",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "字节豆包专业版上线启动付费订阅",
+      "heat": 82,
+      "stage": "📈强化",
+      "alphaIndex": 8,
+      "summary": "6月24日，字节正式推出豆包专业版分级付费订阅，将此前展示的本地电脑操作、浏览器调用等高算力Agent能力全部划入付费权益。此举标志着大模型商业化正从单纯的API调用和流量增长，转向将具备生产力价值的Agent任务执行能力直接打包为订阅产品进行变现，率先探索从免费流量入口到付费生产力工具的闭环路径。",
+      "quote": "字节豆包专业版将高算力Agent能力划入付费权益，标志着大模型商业化从API调用转向Agent任务订阅变现，率先探索免费流量到付费工具的闭环路径。",
+      "scores": {
+        "inst": 49,
+        "market": 20,
+        "catalyst": 13,
+        "total": 82,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "润泽科技",
+              "reason": "算力需求增长）/寒武纪（国产算力芯片供应商）/华策影视（AI多模态内容生态）/金山办公/汉得信息（AI应用落地及生态伙伴",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "日本尼吉康上调全系铝电解电容价格",
+      "heat": 81,
+      "stage": "📈强化",
+      "alphaIndex": 9,
+      "summary": "围绕日本尼吉康涨价事件，市场焦点已从上游成本推动的普涨转向由AI服务器功耗革命引爆的结构性重定价，尤其在AI牛角电容等高端产品上，日系与国产的巨大价差揭示了国内龙头企业面临的并非简单的涨价周期，而是一次凭借产能优势和国产替代窗口实现利润率跨越式提升的战略机遇。",
+      "quote": "日本尼吉康涨价事件中，AI牛角电容等高端产品上日系与国产的巨大价差，为国内龙头企业提供了凭借产能优势实现利润率跨越式提升的战略机遇。",
+      "scores": {
+        "inst": 48,
+        "market": 20,
+        "catalyst": 13,
+        "total": 81,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "江海股份",
+              "reason": "牛角电容、超级电容、MLPC全线卡位AI）/艾华集团（AI电容产能布局领先）/万裕科技（受益于MLPC涨价及国产替代）/凯恩股份/时代新材（上游超容隔膜纸）/海星股份（电极箔供应商）/博迁新材/国瓷材料（MLCC上游粉体材料",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "长征十号乙运载火箭预计7月10日首飞",
+      "heat": 80,
+      "stage": "📈强化",
+      "alphaIndex": 10,
+      "summary": "长征十号乙运载火箭转运至海南文昌发射工位，并发布了7月10日至13日的航行警告，标志着我国新一代大推力可回收火箭的首飞任务进入最后准备阶段。这一系列动作是从预期走向兑现的确定性信号，一旦成功将彻底打开国内运力天花板，并率先引爆上游火箭产业链的估值弹性。",
+      "quote": "长征十号乙运载火箭已转运至发射工位，首飞任务进入最后准备阶段，成功后将彻底打开国内运力天花板，引爆上游火箭产业链估值弹性。",
+      "scores": {
+        "inst": 48,
+        "market": 20,
+        "catalyst": 12,
+        "total": 80,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "航天工程",
+              "reason": "火箭箭体结构与总装",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "广联航空",
+              "reason": "火箭箭体结构与总装",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "斯瑞新材",
+              "reason": "发动机材料与3D打印",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "铂力特",
+              "reason": "发动机材料与3D打印",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "超捷股份",
+              "reason": "箭体结构件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "海兰信",
+              "reason": "海上回收系统",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中国卫星",
+              "reason": "卫星总装",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "铖昌科技",
+              "reason": "星载相控阵T/R组件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "信科移动",
+              "reason": "卫星载荷",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "霍尔木兹海峡通航后油轮运费价格暴涨",
+      "heat": 79,
+      "stage": "📈强化",
+      "alphaIndex": 11,
+      "summary": "霍尔木兹海峡恢复通航后，石油运输需求上升，油轮运费价格大幅飙升。据报道，首个湾内VLCC租约成交价达WS550点，长锦商船更有租约TCE达百万美元/日。市场预期补库存需求将释放，油运市场进入高景气周期。",
+      "quote": "霍尔木兹海峡恢复通航后油轮运费暴涨，VLCC租约TCE达百万美元/日，补库存需求释放预期下油运市场进入高景气周期。",
+      "scores": {
+        "inst": 47,
+        "market": 19,
+        "catalyst": 13,
+        "total": 79,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": []
+    },
+    {
+      "topic": "传闻苹果可折叠iPhone于7月启动量产",
+      "heat": 78,
+      "stage": "📈强化",
+      "alphaIndex": 12,
+      "summary": "关于苹果折叠手机的传闻已从市场预期转变为可验证的供应链动作，多家渠道信息交叉印证相关核心零部件已启动小批量供货，明确指向今年9月发布。这一变化意味着苹果首款折叠机已进入实质性的生产准备阶段，投资逻辑的核心已从会不会出转向谁是核心供应商。",
+      "quote": "苹果折叠手机核心零部件已启动小批量供货，明确指向9月发布，投资逻辑从会不会出转向谁是核心供应商，供应链环节将进入价值重估。",
+      "scores": {
+        "inst": 46,
+        "market": 19,
+        "catalyst": 13,
+        "total": 78,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "达瑞电子",
+              "reason": "铰链与结构件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "华曙高科",
+              "reason": "铰链与结构件",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "凯盛科技",
+              "reason": "柔性屏幕与UTG玻璃",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "京东方A",
+              "reason": "柔性屏幕与UTG玻璃",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "鹏鼎控股",
+              "reason": "FPC用量提升",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "东山精密",
+              "reason": "FPC用量提升",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "博众精工",
+              "reason": "新产线设备与组装",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "立讯精密",
+              "reason": "新产线设备与组装",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "永兴材料与天华新能合作整合江西云母矿",
+      "heat": 77,
+      "stage": "📈强化",
+      "alphaIndex": 13,
+      "summary": "6月22日，永兴材料与天华新能正式签署协议，通过资产注入方式整合双方位于江西的相邻云母矿，是后续合并矿权并申请1800万吨/年开采许可的关键前置工作。这一整合将江西地区锂资源供给的不确定性转化为清晰的规模化生产路径，实质上是强强联合打造国内云母提锂巨头。",
+      "quote": "永兴材料与天华新能整合江西相邻云母矿，为申请1800万吨/年开采许可铺路，强强联合打造国内云母提锂巨头，资源确定性获显著重估。",
+      "scores": {
+        "inst": 46,
+        "market": 19,
+        "catalyst": 12,
+        "total": 77,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "永兴材料",
+              "reason": "资源整合落地",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "天华新能",
+              "reason": "资源整合落地",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "大中矿业",
+              "reason": "锂资源新贵",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "国城矿业",
+              "reason": "锂资源新贵",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "盛新锂能",
+              "reason": "锂资源新贵",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "盐湖股份",
+              "reason": "盐湖资源核心标的",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "藏格矿业",
+              "reason": "盐湖资源核心标的",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "赣锋锂业",
+              "reason": "全球锂业龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "天齐锂业",
+              "reason": "全球锂业龙头",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "国务院副总理调研时强调发展脑机接口产业",
+      "heat": 76,
+      "stage": "📈强化",
+      "alphaIndex": 14,
+      "summary": "6月22日至23日，国务院副总理在江苏调研时强调培育发展脑机接口未来产业，这是继多地医保收费目录落地、头部企业启动IPO后该行业获得的最高层级政策加持。这一顶层定调将加速推动脑机接口从主题投资向产业落地的估值重构，此前市场关注的支付端和退出端逻辑得到最高层级确认。",
+      "quote": "国务院副总理调研强调发展脑机接口产业，系该领域获最高层级政策加持，医保收费和IPO退出逻辑得到确认，产业化进程有望全面提速。",
+      "scores": {
+        "inst": 45,
+        "market": 19,
+        "catalyst": 12,
+        "total": 76,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "博睿康",
+              "reason": "侵入/半侵入式技术路径",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "心玮医疗",
+              "reason": "侵入/半侵入式技术路径",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "创新医疗",
+              "reason": "侵入/半侵入式技术路径",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "翔宇医疗",
+              "reason": "非侵入式技术与康复场景",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "伟思医疗",
+              "reason": "非侵入式技术与康复场景",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "麦澜德",
+              "reason": "非侵入式技术与康复场景",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "美好医疗",
+              "reason": "上游核心器件与植入耗材",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "迈普医学",
+              "reason": "上游核心器件与植入耗材",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "监管要求暂停私募跨境TRS业务规模新增",
+      "heat": 75,
+      "stage": "📈强化",
+      "alphaIndex": 15,
+      "summary": "6月24日市场获悉，监管通过券商窗口指导要求暂停私募跨境TRS业务的新增规模，旨在管控此前通过该灰色通道无序扩张的海外资产配置。此举终结了该工具野蛮生长的阶段，预示着未来跨境衍生品投资将全面纳入额度化、规范化的统一监管框架。",
+      "quote": "监管窗口指导暂停私募跨境TRS新增规模，终结该灰色通道野蛮生长阶段，未来跨境衍生品投资将纳入额度化、规范化统一监管框架。",
+      "scores": {
+        "inst": 45,
+        "market": 18,
+        "catalyst": 12,
+        "total": 75,
+        "avgPct": 0,
+        "catalystLabel": "确定性"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "中信证券",
+              "reason": "头部券商，跨境互换业务或受短期影响",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "华泰证券",
+              "reason": "头部券商，跨境互换业务或受短期影响",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "氨纶行业价差较年初扩大近50%",
+      "heat": 69,
+      "stage": "📈强化",
+      "alphaIndex": 16,
+      "summary": "截至6月23日，氨纶价差进一步扩大至14560元/吨，在产品价格持稳而原料成本回落的背景下发生，标志着行业正从价格驱动转向更为持续的利润驱动复苏阶段。行业资本开支周期已近尾声且未来供给高度集中，锁定了龙头企业在本轮上行周期中盈利能力扩张的高度确定性。",
+      "quote": "氨纶价差扩大至14560元/吨，行业从价格驱动转向利润驱动复苏阶段，资本开支周期近尾声且供给高度集中，龙头盈利能力扩张确定性高。",
+      "scores": {
+        "inst": 41,
+        "market": 17,
+        "catalyst": 11,
+        "total": 69,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "华峰化学",
+              "reason": "全球产能龙头，业绩弹性最大）/新乡化纤（产能规模居前）/泰和新材（同步受益于价差扩大",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "亚马逊签署德国史上最大单笔海风PPA",
+      "heat": 67,
+      "stage": "📈强化",
+      "alphaIndex": 17,
+      "summary": "6月19日，亚马逊与Skyborn Renewables签署了德国史上最大单笔600MW海上风电PPA，为波罗的海Gennaker零补贴项目提供了关键的融资保障。这一事件标志着欧洲海风建设正从政策驱动转向由科技巨头绿电刚需驱动的订单落地阶段，由于欧洲本土产能缺口持续扩大，看好具备出海能力的中国海风产业链。",
+      "quote": "亚马逊签署德国史上最大600MW海风PPA，欧洲海风建设从政策驱动转向科技巨头绿电刚需驱动，中国海风产业链出海确定性增强。",
+      "scores": {
+        "inst": 40,
+        "market": 16,
+        "catalyst": 11,
+        "total": 67,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "大金重工",
+              "reason": "欧洲海风需求外溢",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "天顺风能",
+              "reason": "欧洲海风需求外溢",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "海力风电",
+              "reason": "欧洲海风需求外溢",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "东方电缆",
+              "reason": "欧洲海风需求外溢",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中天科技",
+              "reason": "欧洲海风需求外溢",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "金雷股份",
+              "reason": "塔筒法兰环节",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "振江股份",
+              "reason": "塔筒法兰环节",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "日月股份",
+              "reason": "铸件环节",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "明阳电气",
+              "reason": "变压器环节",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "金盘科技",
+              "reason": "变压器环节",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "九部门联合发文培育壮大汽车后市场消费",
+      "heat": 65,
+      "stage": "📈强化",
+      "alphaIndex": 18,
+      "summary": "6月23日，九部门正式推出汽车后市场17条新政及40个试点城市清单，标志着政策重心从购买管理全面转向使用管理。此举通过破立扩优的顶层设计打破汽车改装、房车露营等领域的长期合规瓶颈，旨在将产业利润重心从前端整车销售向利润率更高的存量车服务市场转移。",
+      "quote": "九部门推出汽车后市场17条新政，政策重心从购买管理转向使用管理，打破改装、露营等合规瓶颈，万亿级后市场价值链将重塑。",
+      "scores": {
+        "inst": 39,
+        "market": 16,
+        "catalyst": 10,
+        "total": 65,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "永冠新材",
+              "reason": "汽车改装合规化",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "优信",
+              "reason": "二手车流通改革",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "富维股份",
+              "reason": "后市场全链条扩容",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "瑞玛精密",
+              "reason": "后市场全链条扩容",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "天润工业",
+              "reason": "后市场全链条扩容",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "中控技术TPT工业大模型推动AI减碳",
+      "heat": 63,
+      "stage": "➡️持续",
+      "alphaIndex": 19,
+      "summary": "关于中控技术TPT大模型的讨论焦点深化至其核心的AI决策能力，通过动态仿真与推演将工厂决策从试出来升级为算出来。这一边际变化标志着TPT的价值定位从执行层的降本增效工具跃升为战略性工业大脑，其核心价值在于以AI替代高成本的物理试错和人工决策，支撑其从项目制向高毛利订阅制商业模式转型。",
+      "quote": "中控技术TPT大模型从降本增效工具跃升为战略性工业大脑，以AI替代高成本物理试错，支撑从项目制向高毛利订阅制商业模式转型。",
+      "scores": {
+        "inst": 37,
+        "market": 15,
+        "catalyst": 11,
+        "total": 63,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "中控技术",
+              "reason": "工业AI大模型TPT开发者和核心受益者",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "中国石油",
+              "reason": "头部客户验证商业价值",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "中国石化",
+              "reason": "头部客户验证商业价值",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "相关标的",
+          "items": [
+            {
+              "name": "万华化学",
+              "reason": "头部客户验证商业价值",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "安克创新港股IPO在即",
+      "heat": 61,
+      "stage": "➡️持续",
+      "alphaIndex": 20,
+      "summary": "安克创新于6月24日在港交所招股，其H股较A股约两成的折价已引发股价回调，但市场关注点正从价差转向其超预期的基本面边际变化。核心逻辑在于欧洲阳台储能需求爆发及AI新品带动的高端化，正驱动公司进入新一轮增长周期，当前回调被视为捕捉业绩与估值双升的战略性买点。",
+      "quote": "安克创新港股IPO招股，H股较A股两成折价引发回调，但欧洲阳台储能爆发及AI新品高端化驱动新一轮增长周期，回调被视为战略性买点。",
+      "scores": {
+        "inst": 36,
+        "market": 15,
+        "catalyst": 10,
+        "total": 61,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "安克创新",
+              "reason": "港股IPO提供估值锚，储能及AI新品增长超预期",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "台积电2027年CoWoS产能分配方案流出",
+      "heat": 59,
+      "stage": "➡️持续",
+      "alphaIndex": 21,
+      "summary": "",
+      "quote": "",
+      "scores": {
+        "inst": 35,
+        "market": 14,
+        "catalyst": 10,
+        "total": 59,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "京东方A",
+              "reason": "CoWoS产能紧张加速玻璃基板等下一代封装技术布局",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        },
+        {
+          "label": "弹性机会",
+          "items": [
+            {
+              "name": "沃格光电",
+              "reason": "CoWoS产能紧张加速玻璃基板等下一代封装技术布局",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            },
+            {
+              "name": "凯盛科技",
+              "reason": "CoWoS产能紧张加速玻璃基板等下一代封装技术布局",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "航天电器升腾950连接器订单7月将放量",
+      "heat": 57,
+      "stage": "➡️持续",
+      "alphaIndex": 22,
+      "summary": "",
+      "quote": "",
+      "scores": {
+        "inst": 34,
+        "market": 14,
+        "catalyst": 9,
+        "total": 57,
+        "avgPct": 0,
+        "catalystLabel": "积极"
+      },
+      "groups": [
+        {
+          "label": "龙头首选",
+          "items": [
+            {
+              "name": "航天电器",
+              "reason": "昇腾950高速背板连接器核心供应商）/中航光电（国产算力连接器及光模块核心标的",
+              "price": null,
+              "pct": null,
+              "pe": null,
+              "marketCap": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "all_stocks": [
+    "SK海力士",
+    "万华化学",
+    "三孚股份",
+    "三星电子",
+    "三祥新材",
+    "东山精密",
+    "东方电缆",
+    "东方锆业",
+    "中信证券",
+    "中国卫星",
+    "中国巨石",
+    "中国石化",
+    "中国石油",
+    "中天科技",
+    "中微公司",
+    "中控技术",
+    "中材科技",
+    "中钨高新",
+    "亨通光电",
+    "京东方A",
+    "优信",
+    "伟思医疗",
+    "佰维存储",
+    "信科移动",
+    "信达生物",
+    "兆易创新",
+    "光华科技",
+    "凯盛科技",
+    "凯莱英",
+    "创新医疗",
+    "北方华创",
+    "华峰化学",
+    "华曙高科",
+    "华正新材",
+    "华泰证券",
+    "博众精工",
+    "博睿康",
+    "国城矿业",
+    "国瓷材料",
+    "国际复材",
+    "大中矿业",
+    "大元泵业",
+    "大金重工",
+    "天华新能",
+    "天承科技",
+    "天润工业",
+    "天顺风能",
+    "天齐锂业",
+    "安克创新",
+    "宏和科技",
+    "富创精密",
+    "富维股份",
+    "工业富联",
+    "广联航空",
+    "康方生物",
+    "建滔积层板",
+    "德福科技",
+    "心玮医疗",
+    "思泉新材",
+    "恒瑞医药",
+    "拓荆科技",
+    "振江股份",
+    "斯瑞新材",
+    "新安股份",
+    "新莱应材",
+    "日月股份",
+    "明阳电气",
+    "永兴材料",
+    "永冠新材",
+    "江丰电子",
+    "江海股份",
+    "江瀚新材",
+    "沃格光电",
+    "沪电股份",
+    "泰格医药",
+    "海兰信",
+    "海力风电",
+    "润泽科技",
+    "澜起科技",
+    "爱迪特",
+    "珂玛科技",
+    "瑞玛精密",
+    "生益科技",
+    "申菱环境",
+    "百利天恒",
+    "百济神州",
+    "盐湖股份",
+    "盛新锂能",
+    "盛美上海",
+    "立讯精密",
+    "美好医疗",
+    "翔宇医疗",
+    "胜宏科技",
+    "航天工程",
+    "航天电器",
+    "英维克",
+    "药明康德",
+    "藏格矿业",
+    "西陇科学",
+    "赣锋锂业",
+    "超捷股份",
+    "达瑞电子",
+    "迈普医学",
+    "金富科技",
+    "金盘科技",
+    "金雷股份",
+    "铂力特",
+    "铖昌科技",
+    "铜冠铜箔",
+    "长飞光纤",
+    "领益智造",
+    "飞龙股份",
+    "骏鼎达",
+    "鹏鼎控股",
+    "麦澜德",
+    "鼎泰高科",
+    "鼎通科技",
+    "龙佰集团"
+  ]
+}
