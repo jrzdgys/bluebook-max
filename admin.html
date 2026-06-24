@@ -2,163 +2,221 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>蓝宝书Max · 访问码管理</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓝宝书Max · 激活码管理</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
-  background:#F5F5F7;color:#1D1D1F;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:24px;
-}
-.card{
-  background:#fff;border-radius:20px;padding:40px;max-width:520px;width:100%;
-  box-shadow:0 4px 24px rgba(0,0,0,.06);
-}
-h1{font-size:24px;font-weight:700;margin-bottom:4px}
-.subtitle{font-size:14px;color:#86868B;margin-bottom:32px}
-.step{
-  background:#F5F5F7;border-radius:12px;padding:16px;margin-bottom:16px;
-}
-.step-num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:24px;height:24px;background:#0071E3;color:#fff;border-radius:50%;
-  font-size:12px;font-weight:700;margin-right:8px;
-}
-.step h3{font-size:15px;font-weight:600;display:flex;align-items:center;margin-bottom:10px}
-.input-row{display:flex;gap:8px}
-.input-row input{
-  flex:1;padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;
-  font-size:14px;font-family:inherit;outline:none;transition:border-color .15s;
-}
-.input-row input:focus{border-color:#0071E3}
-.input-row button{
-  padding:10px 20px;background:#0071E3;color:#fff;border:none;border-radius:10px;
-  font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;
-}
-.input-row button:hover{background:#0077ED}
-.result{
-  margin-top:12px;background:#EEFFF2;border:1px solid #B7EBC8;border-radius:10px;
-  padding:14px;display:none;
-}
-.result .hash{
-  font-family:'SF Mono',Menlo,monospace;font-size:13px;color:#1D1D1F;
-  word-break:break-all;line-height:1.6;margin-bottom:0;
-}
-.result .copy-btn{
-  margin-top:10px;padding:6px 16px;background:#34C759;color:#fff;
-  border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;
-}
-.result .line{
-  margin-top:12px;padding:8px 12px;background:#1D1D1F;border-radius:8px;
-  font-family:'SF Mono',Menlo,monospace;font-size:12px;color:#34C759;
-  word-break:break-all;
-}
-.note{
-  font-size:12px;color:#AEAEB2;margin-top:24px;line-height:1.6;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; padding: 20px; }
+.container { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 24px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+input, select { height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 14px; flex: 1; min-width: 200px; }
+input:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
+.btn { height: 36px; padding: 0 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.btn-primary { background: #0071e3; color: #fff; }
+.btn-primary:hover { background: #0066d6; }
+.btn-danger { background: #ff3b30; color: #fff; }
+.btn-sm { height: 28px; padding: 0 10px; font-size: 12px; }
+.btn-outline { background: transparent; border: 1px solid #d2d2d7; }
+.btn-outline:hover { background: #f5f5f7; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #e8e8ed; font-weight: 600; color: #6e6e73; font-size: 12px; text-transform: uppercase; }
+td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.badge-green { background: #e8f5e9; color: #2e7d32; }
+.badge-gray { background: #f0f0f0; color: #666; }
+.badge-red { background: #fce4ec; color: #c62828; }
+.key-input { font-family: 'SF Mono', monospace; font-size: 13px; }
+.msg { padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 8px; display: none; white-space: pre-wrap; }
+.msg-success { background: #e8f5e9; color: #2e7d32; display: block; }
+.msg-error { background: #fce4ec; color: #c62828; display: block; }
+.codes-output { background: #f5f5f7; border-radius: 8px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.8; margin-top: 8px; display: none; }
 </style>
 </head>
 <body>
+<div class="container">
+  <h1>🔑 蓝宝书Max · 激活码管理</h1>
 
-<!-- 密码门 -->
-<div class="card" id="password-gate">
-  <h1>🔐 蓝宝书Max · 管理员入口</h1>
-  <p class="subtitle">请输入管理密码以访问访问码管理功能</p>
-  <div class="input-row" style="margin-top:24px">
-    <input type="password" id="adminPassword" placeholder="请输入管理密码" maxlength="32"
-           onkeydown="if(event.key==='Enter')checkPassword()">
-    <button onclick="checkPassword()">验证</button>
-  </div>
-  <div id="pwd-error" style="color:#FF3B30;font-size:12px;margin-top:10px;display:none">密码错误，请重试</div>
-  <p class="note">默认密码：首次使用请修改 codes.js 中的 ADMIN_PASSWORD_HASH</p>
-</div>
-
-<!-- 主内容（初始隐藏） -->
-<div class="card" id="main-content" style="display:none">
-  <h1>🔐 蓝宝书Max · 访问码管理</h1>
-  <p class="subtitle">添加新访问码 → 复制哈希值 → 更新 codes.js → 部署</p>
-
-  <div class="step">
-    <h3><span class="step-num">1</span>输入新访问码</h3>
-    <div class="input-row">
-      <input type="text" id="codeInput" placeholder="例如：BLUEBOOK-2026-Q3" maxlength="64">
-      <button onclick="generateHash()">生成哈希</button>
+  <div class="card">
+    <div class="row">
+      <input type="password" id="adminKey" placeholder="管理员密钥 (ADMIN_KEY)" class="key-input" style="max-width:300px">
+      <button class="btn btn-primary" onclick="loadCodes()">📋 加载列表</button>
+      <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
+      <span id="statusText" style="color:#86868b;font-size:13px"></span>
     </div>
   </div>
 
-  <div class="step">
-    <h3><span class="step-num">2</span>复制下面这行，粘贴到 codes.js</h3>
-    <div class="result" id="result">
-      <div class="hash" id="hashDisplay"></div>
-      <div class="line" id="lineDisplay"></div>
-      <button class="copy-btn" onclick="copyLine()">📋 复制到剪贴板</button>
+  <div class="card" id="generateCard" style="display:none">
+    <div class="row">
+      <span>生成</span>
+      <input type="number" id="newCount" value="5" min="1" max="50" style="width:70px;flex:none">
+      <span>个，有效期</span>
+      <input type="number" id="newDays" value="365" min="1" max="3650" style="width:70px;flex:none">
+      <span>天</span>
+      <button class="btn btn-primary btn-sm" onclick="generateCodes()">✅ 确认生成</button>
+      <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
+    </div>
+    <div id="codesOutput" class="codes-output"></div>
+  </div>
+
+  <div id="msg" class="msg"></div>
+
+  <div class="card">
+    <div id="loading" style="text-align:center;padding:40px;color:#86868b;display:none">⏳ 加载中...</div>
+    <div id="tableWrap" style="display:none">
+      <div style="margin-bottom:12px;color:#6e6e73;font-size:13px">
+        共 <span id="totalCount">0</span> 个激活码
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>激活码</th>
+              <th>状态</th>
+              <th>设备</th>
+              <th>有效期至</th>
+              <th>创建于</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="codeTable"></tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-  <div class="step">
-    <h3><span class="step-num">3</span>部署到 GitHub</h3>
-    <p style="font-size:13px;color:#64748B;line-height:1.6">
-      在知识星球群发布新码 → 运行 <code style="background:#F5F5F7;padding:2px 6px;border-radius:4px">python3 push_to_github.py</code> 完成部署。<br>
-      旧码保留 7 天过渡，之后删除即可。
-    </p>
-  </div>
-
-  <p class="note">
-    ⚠️ 此页面纯本地运行，不会上传任何数据。SHA-256 哈希在浏览器中计算。<br>
-    管理密码哈希存储在 codes.js 的 ADMIN_PASSWORD_HASH 中。
-  </p>
 </div>
 
-<script src="codes.js"></script>
 <script>
-// ===== 密码验证 =====
-// 默认密码 "bluebook2026" 的 SHA-256 哈希
-const DEFAULT_HASH = "f8a8e7e3a2c0c6b5d4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1";
+const WORKER = 'https://bluebook-auth.bluebookmax.workers.dev';
 
-async function checkPassword() {
-  const pwd = document.getElementById('adminPassword').value.trim();
-  if (!pwd) return;
+function msg(text, type) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className = 'msg msg-' + type;
+}
+function clearMsg() {
+  document.getElementById('msg').className = 'msg';
+}
 
-  const encoder = new TextEncoder();
-  const data = encoder.encode(pwd);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+async function api(path, data) {
+  const r = await fetch(WORKER + path, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  return r.json();
+}
 
-  const expectedHash = (typeof ADMIN_PASSWORD_HASH !== 'undefined')
-    ? ADMIN_PASSWORD_HASH : DEFAULT_HASH;
+function getAdminKey() {
+  const k = document.getElementById('adminKey').value.trim();
+  if (!k) { msg('请先输入管理员密钥', 'error'); return null; }
+  localStorage.setItem('bbm_admin_key', k);
+  return k;
+}
 
-  if (hash === expectedHash) {
-    document.getElementById('password-gate').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
-  } else {
-    document.getElementById('pwd-error').style.display = 'block';
+function showGenerate() {
+  document.getElementById('generateCard').style.display = 'block';
+  document.getElementById('codesOutput').style.display = 'none';
+}
+function hideGenerate() {
+  document.getElementById('generateCard').style.display = 'none';
+}
+
+async function loadCodes() {
+  const admin_key = getAdminKey();
+  if (!admin_key) return;
+
+  clearMsg();
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('tableWrap').style.display = 'none';
+  document.getElementById('statusText').textContent = '加载中...';
+
+  const data = await api('/list', { admin_key });
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('statusText').textContent = '';
+
+  if (!data.ok) {
+    msg('❌ ' + (data.error || '加载失败'), 'error');
+    return;
+  }
+
+  const codes = data.codes || [];
+  document.getElementById('totalCount').textContent = codes.length;
+  document.getElementById('tableWrap').style.display = 'block';
+
+  const tbody = document.getElementById('codeTable');
+  const now = new Date();
+  tbody.innerHTML = codes.map(c => {
+    const used = c.used || c.devices > 0;
+    const expires = new Date(c.expiresAt);
+    const expired = expires < now;
+    const status = expired ? '<span class="badge badge-red">已过期</span>' :
+                   used ? '<span class="badge badge-green">已使用</span>' :
+                          '<span class="badge badge-gray">未使用</span>';
+    return '<tr>' +
+      '<td class="key-input" style="font-weight:500">' + c.code + '</td>' +
+      '<td>' + status + '</td>' +
+      '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
+      '<td>' + expires.toISOString().slice(0,10) + '</td>' +
+      '<td style="color:#86868b;font-size:12px">' + (c.createdAt ? new Date(c.createdAt).toISOString().slice(0,10) : '-') + '</td>' +
+      '<td>' + (c.devices > 0 ? '<button class="btn btn-danger btn-sm" onclick="unbindAll(\'' + c.code + '\')">解绑</button>' : '-') + '</td>' +
+      '</tr>';
+  }).join('');
+
+  if (codes.length === 0) {
+    msg('暂无激活码，点击"生成新码"创建', 'success');
   }
 }
 
-// ===== 访问码生成 =====
-async function generateHash() {
-  const code = document.getElementById('codeInput').value.trim();
-  if (!code) return alert('请输入访问码');
-
-  const encoder = new TextEncoder();
-  const data = encoder.encode(code);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
-
-  document.getElementById('hashDisplay').textContent = 'SHA-256: ' + hash;
-  document.getElementById('lineDisplay').textContent = '"' + hash + '", // ' + code;
-  document.getElementById('result').style.display = 'block';
+async function unbindAll(code) {
+  const admin_key = getAdminKey();
+  if (!admin_key || !confirm('确定解绑 ' + code + ' 的所有设备？')) return;
+  const data = await api('/unbind', { admin_key, code });
+  if (data.ok) {
+    msg('✅ 解绑成功！剩余设备位: ' + data.devicesLeft, 'success');
+    loadCodes();
+  } else {
+    msg('❌ ' + (data.error || '解绑失败'), 'error');
+  }
 }
 
-async function copyLine() {
-  const line = document.getElementById('lineDisplay').textContent;
-  await navigator.clipboard.writeText(line);
-  const btn = event.target;
-  btn.textContent = '✓ 已复制';
-  setTimeout(() => btn.textContent = '📋 复制到剪贴板', 2000);
+async function generateCodes() {
+  const admin_key = getAdminKey();
+  if (!admin_key) return;
+
+  const count = parseInt(document.getElementById('newCount').value) || 5;
+  const days = parseInt(document.getElementById('newDays').value) || 365;
+
+  // Generate unique codes locally
+  const codes = [];
+  while (codes.length < count) {
+    const rand = Array.from({length:4}, () => Math.floor(Math.random()*16).toString(16).toUpperCase()).join('');
+    const code = 'BBM-' + rand;
+    if (!codes.includes(code)) codes.push(code);
+  }
+
+  // Send to worker to inject into KV
+  const data = await api('/codes/create', { admin_key, codes, days });
+  if (data.ok) {
+    const expires = new Date(data.expiresAt).toISOString().slice(0,10);
+    const output = document.getElementById('codesOutput');
+    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码\n' +
+      '有效期至: ' + expires + '\n\n' +
+      codes.map(c => '  ' + c).join('\n');
+    output.style.display = 'block';
+    msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
+    loadCodes();
+  } else {
+    msg('❌ ' + (data.error || '生成失败'), 'error');
+  }
+}
+
+// Auto-load if key saved
+const savedKey = localStorage.getItem('bbm_admin_key');
+if (savedKey) {
+  document.getElementById('adminKey').value = savedKey;
+  loadCodes();
 }
 </script>
 </body>
