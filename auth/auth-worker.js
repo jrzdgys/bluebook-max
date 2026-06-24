@@ -50,7 +50,7 @@ export default {
 
       switch (path) {
         case '/activate':
-          return handleActivate(body, env, corsHeaders);
+          return handleActivate(body, env, corsHeaders, request);
         case '/verify':
           return handleVerify(body, env, corsHeaders);
         case '/unbind':
@@ -67,7 +67,7 @@ export default {
 // ============================================================
 //  POST /activate
 // ============================================================
-async function handleActivate(body, env, corsHeaders) {
+async function handleActivate(body, env, corsHeaders, request) {
   const { code, fp } = body;
   if (!code || !fp) {
     return jsonResponse({ ok: false, error: '缺少激活码或设备指纹' }, 400, corsHeaders);
@@ -105,7 +105,7 @@ async function handleActivate(body, env, corsHeaders) {
     // 写入 recover 记录
     await env.AUTH_CODES.put(`recover:${fp}`, JSON.stringify({
       code,
-      lastIP: request.headers.get('CF-Connecting-IP') || '',
+      lastIP: _clientIP || "",
       lastSeen: new Date().toISOString(),
     }));
     return jsonResponse({
@@ -134,7 +134,7 @@ async function handleActivate(body, env, corsHeaders) {
   // === 情况3: 设备已满 ===
   if (devices.length >= MAX_DEVICES) {
     // 检查清缓存恢复条件：同IP + <30天
-    const clientIP = request.headers.get('CF-Connecting-IP') || '';
+        /* _clientIP passed as parameter */
     const lastDevice = devices[devices.length - 1];
     const daysSinceLast = (Date.now() - new Date(lastDevice.lastSeen).getTime())
       / (24 * 60 * 60 * 1000);
@@ -177,7 +177,7 @@ async function handleActivate(body, env, corsHeaders) {
   await env.AUTH_CODES.put(codeKey, JSON.stringify({ ...codeData, devices }));
   await env.AUTH_CODES.put(`recover:${fp}`, JSON.stringify({
     code,
-    lastIP: request.headers.get('CF-Connecting-IP') || '',
+    lastIP: _clientIP || "",
     lastSeen: new Date().toISOString(),
   }));
   return jsonResponse({
