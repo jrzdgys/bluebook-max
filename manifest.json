@@ -1,9 +1,18 @@
 {
   "name": "蓝宝书Max",
-  "last_updated": "2026-06-24 02:00:00",
-  "updated": "2026-06-24T02:00:00",
-  "total_reports": 4,
+  "last_updated": "2026-06-24 09:45:00",
+  "updated": "2026-06-24T09:45:00",
+  "total_reports": 5,
   "reports": [
+    {
+      "file": "mc-20260624.html",
+      "edition": "mc",
+      "label": "晨会版",
+      "date": "20260624",
+      "date_display": "2026年06月24日",
+      "title": "蓝宝书Max 晨会版 - 2026年06月24日",
+      "stock_count": 65
+    },
     {
       "file": "mc-20260623-v2.html",
       "edition": "mc",
