@@ -153,7 +153,7 @@ body{
 .history-toggle .arrow{transition:transform .35s;font-size:12px}
 .history-toggle.open .arrow{transform:rotate(180deg)}
 .history-content{overflow:hidden;max-height:0;transition:max-height .45s ease}
-.history-content.show{max-height:6000px}
+.history-content.show{max-height:30000px}
 .history-content .date-group{margin-top:24px}
 
 /* ===== Features ===== */
@@ -540,7 +540,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     }
 
     var editionLabels = { gv: '全球版', mc: '晨会版', pm: '午间版', ev: '晚间版' };
-    var today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    var today = new Date().toLocaleString('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).replace(/-/g,'');
 
     var todayReports = [];
     var historyMap = {};
@@ -582,30 +582,41 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     document.getElementById('report-count').textContent = '共 ' + reports.length + ' 份';
 
     var historyDates = Object.keys(historyMap).sort().reverse();
-    if (historyDates.length > 0) {
-      var historyHTML = '';
-      historyDates.forEach(function(dateKey) {
-        var items = historyMap[dateKey];
-        items.sort(function(a, b) {
-          return ((editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99) - (editionOrder[b.r.edition] != null ? editionOrder[b.r.edition] : 99));
-        });
-        var dateParts = (dateKey || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
-        var displayDate = dateParts
-          ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
-          : dateKey;
-        historyHTML += '<div class="date-group">' +
-          '<div class="date-label"><span class="dot" style="background:#AEAEB2"></span>' + displayDate +
-          '<span class="count">' + items.length + '份</span></div>' +
-          '<div class="reports-grid">' +
-          items.map(function(item) { return renderCard(item.r, false, isAuth, editionLabels); }).join('') +
-          '</div></div>';
-      });
-      document.getElementById('history-reports').innerHTML = historyHTML;
-    } else {
-      document.getElementById('history-reports').innerHTML =
-        '<div class="empty-state"><div class="icon">📂</div>更多历史报告将陆续归档</div>';
-    }
-
+        if (historyDates.length > 0) {
+          var historyHTML = '', hiddenHTML = '';
+          var SHOW_INITIAL = 2;
+          historyDates.forEach(function(dateKey, di) {
+            var items = historyMap[dateKey];
+            items.sort(function(a, b) {
+              return ((editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99) - (editionOrder[b.r.edition] != null ? editionOrder[b.r.edition] : 99));
+            });
+            var dateParts = (dateKey || '').match(/(\d{4})(\d{2})(\d{2})/);
+            var displayDate = dateParts
+              ? dateParts[1] + '\u5e74' + dateParts[2] + '\u6708' + dateParts[3] + '\u65e5'
+              : dateKey;
+            var groupHTML = '<div class="date-group">' +
+              '<div class="date-label"><span class="dot" style="background:#AEAEB2"></span>' + displayDate +
+              '<span class="count">' + items.length + '\u4efd</span></div>' +
+              '<div class="reports-grid">' +
+              items.map(function(item) { return renderCard(item.r, false, isAuth, editionLabels); }).join('') +
+              '</div></div>';
+            if (di < SHOW_INITIAL) {
+              historyHTML += groupHTML;
+            } else {
+              hiddenHTML += groupHTML;
+            }
+          });
+          if (hiddenHTML) {
+            historyHTML += '<div id="history-more-wrap" style="text-align:center;margin-top:16px">' +
+              '<button id="history-more-btn" class="history-toggle" onclick="showMoreHistory()" style="padding:10px 28px;font-size:13px">' +
+              '\u663e\u793a\u66f4\u591a\u5386\u53f2\u62a5\u544a <span class="arrow">\u25be</span></button></div>' +
+              '<div id="history-hidden" style="display:none">' + hiddenHTML + '</div>';
+          }
+          document.getElementById('history-reports').innerHTML = historyHTML;
+        } else {
+          document.getElementById('history-reports').innerHTML =
+            '<div class="empty-state"><div class="icon">\ud83d\udcc2</div>\u66f4\u591a\u5386\u53f2\u62a5\u544a\u5c06\u9646\u7eed\u5f52\u6863</div>';
+        }
     if (isAuth) {
       document.getElementById('free-hint').innerHTML =
         '<span style="color:#34C759">✓ 已订阅 · 所有报告可无限查看</span>';
@@ -629,15 +640,15 @@ function toggleHistory() {
     btn.innerHTML = '查看历史报告 <span class="arrow">▾</span>';
   }
 }
+    function showMoreHistory() {
+      var hidden = document.getElementById('history-hidden');
+      var btn = document.getElementById('history-more-btn');
+      if (hidden) hidden.style.display = 'block';
+      if (btn) btn.style.display = 'none';
+    }
+    
 
-setTimeout(function() {
-  var hist = document.getElementById('history-reports');
-  if (hist && hist.querySelector('.date-group')) {
-    document.getElementById('history-content').classList.add('show');
-    document.getElementById('history-btn').classList.add('open');
-    document.getElementById('history-btn').innerHTML = '收起历史报告 <span class="arrow">▾</span>';
-  }
-}, 500);
+
 </script>
 </body>
 </html>
