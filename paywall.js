@@ -13,7 +13,7 @@
  */
 
 // ===== 配置 =====
-const WORKER_URL    = "https://bluebook-auth.你的用户名.workers.dev";
+const WORKER_URL    = "https://bluebook-auth.bluebookmax.workers.dev";
 const AUTH_KEY      = "bbm_auth_token";
 const FP_CACHE_KEY  = "bbm_fp_cache";
 
