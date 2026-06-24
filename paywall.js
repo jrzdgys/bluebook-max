@@ -219,6 +219,7 @@ const Paywall = {
     overlay.className = 'auth-overlay';
     overlay.innerHTML =
       '<div class="auth-modal">' +
+      '  <button class="auth-close" id="auth-close-btn" onclick="closeAuthModal()">×</button>' +
       '  <div class="auth-icon">📘</div>' +
       '  <h2>蓝宝书Max</h2>' +
       '  <p class="auth-desc">请输入您的访问码激活账号</p>' +
@@ -274,6 +275,12 @@ const Paywall = {
       const o = document.getElementById('auth-overlay');
       if (o) o.style.display = 'none';
     }
+    // Close button handler
+    document.getElementById('auth-close-btn').addEventListener('click', hideModal);
+  },
+  closeAuthModal() {
+    const o = document.getElementById('auth-overlay');
+    if (o) o.style.display = 'none';
   },
 
   // ---------- 登录按钮回调（index.html 调用） ----------
@@ -290,6 +297,11 @@ const Paywall = {
     return '<span class="unlock-badge">✓ 已订阅</span>';
   },
 };
+
+// ===== 全局关闭函数（供onclick调用） =====
+function closeAuthModal() {
+  Paywall.closeAuthModal();
+}
 
 // ===== 页面初始化检测（自动执行） =====
 
