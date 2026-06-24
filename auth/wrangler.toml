@@ -1,0 +1,16 @@
+name = "bluebook-auth"
+main = "src/worker.js"
+compatibility_date = "2026-06-24"
+
+# KV 命名空间 — 部署前需替换 ID
+# npx wrangler kv namespace create "AUTH_CODES"
+kv_namespaces = [
+  { binding = "AUTH_CODES", id = "YOUR_KV_ID_HERE" }
+]
+
+# 环境变量（部署前在 Dashboard 设置）
+# ADMIN_KEY: 管理员密钥，用于解绑设备
+# TOKEN_SECRET: Token 签名密钥，任意长随机字符串
+[vars]
+ADMIN_KEY = "change-me-to-random-string"
+TOKEN_SECRET = "change-me-to-64-char-random-string"
