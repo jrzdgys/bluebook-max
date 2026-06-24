@@ -119,18 +119,18 @@ body{
   transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:rgba(0,0,0,.12);
 }
 .report-card:hover::before{opacity:1}
-.report-card.am{--accent:#FF9500}
-.report-card.md{--accent:#E8870A}
-.report-card.pm{--accent:#5E5CE6}
-.report-card.global{--accent:#0071E3}
+.report-card.gv{--accent:#30B46E}
+.report-card.mc{--accent:#FF9500}
+.report-card.pm{--accent:#0071E3}
+.report-card.ev{--accent:#AF52DE}
 .report-card-header{display:flex;align-items:center;gap:10px}
 .r-badge{
   padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.3px;
 }
-.r-badge.am{background:rgba(255,149,0,.1);color:#FF9500}
-.r-badge.md{background:rgba(232,135,10,.1);color:#E8870A}
-.r-badge.pm{background:rgba(94,92,230,.1);color:#5E5CE6}
-.r-badge.global{background:rgba(0,113,227,.1);color:#0071E3}
+.r-badge.gv{background:rgba(48,180,110,.1);color:#30B46E}
+.r-badge.mc{background:rgba(255,149,0,.1);color:#FF9500}
+.r-badge.pm{background:rgba(0,113,227,.1);color:#0071E3}
+.r-badge.ev{background:rgba(175,82,222,.1);color:#AF52DE}
 .r-date{font-size:20px;font-weight:700;letter-spacing:-.3px}
 .r-title{
   font-size:13px;color:#86868B;line-height:1.5;
@@ -503,7 +503,14 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
 
     var todayGrid = document.getElementById('today-reports');
     var todayCount = 0;
+    var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
+
     if (todayReports.length > 0) {
+      todayReports.sort(function(a, b) {
+        var oa = editionOrder[a.r.edition] || 99;
+        var ob = editionOrder[b.r.edition] || 99;
+        return oa - ob;
+      });
       todayCount = todayReports.length;
       todayGrid.innerHTML = '<div class="date-group">' +
         '<div class="date-label"><span class="dot today-dot"></span>今天<span class="count">' + todayCount + '份</span></div>' +
@@ -528,6 +535,11 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       var historyHTML = '';
       historyDates.forEach(function(dateKey) {
         var items = historyMap[dateKey];
+        items.sort(function(a, b) {
+          var oa = editionOrder[a.r.edition] || 99;
+          var ob = editionOrder[b.r.edition] || 99;
+          return oa - ob;
+        });
         var dateParts = (dateKey || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
         var displayDate = dateParts
           ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
