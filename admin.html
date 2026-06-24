@@ -6,10 +6,27 @@
 <title>蓝宝书Max · 激活码管理</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; padding: 20px; }
-.container { max-width: 960px; margin: 0 auto; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,.08); width: 100%; }
+.container { width: 100%; max-width: 960px; margin: 20px; }
+
+/* Login screen */
+#loginScreen { max-width: 400px; margin: 0 auto; }
+#loginScreen .card { text-align: center; }
+#loginScreen h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+#loginScreen p { color: #86868b; font-size: 14px; margin-bottom: 24px; }
+#loginScreen input { width: 100%; height: 44px; border: 1px solid #d2d2d7; border-radius: 10px; padding: 0 14px; font-size: 15px; font-family: 'SF Mono', monospace; margin-bottom: 12px; }
+#loginScreen input:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
+#loginScreen .btn { width: 100%; height: 44px; border: none; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; background: #0071e3; color: #fff; }
+#loginScreen .btn:hover { background: #0066d6; }
+#loginScreen .btn:disabled { opacity: .5; cursor: not-allowed; }
+#loginScreen .error { color: #ff3b30; font-size: 13px; margin-top: 8px; display: none; }
+#loginScreen .hint { color: #86868b; font-size: 12px; margin-top: 16px; }
+#loginScreen .hint a { color: #0071e3; text-decoration: none; }
+
+/* Admin screen */
+#adminScreen { display: none; }
 h1 { font-size: 24px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 input, select { height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 14px; flex: 1; min-width: 200px; }
 input:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
@@ -28,41 +45,70 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
 .badge-gray { background: #f0f0f0; color: #666; }
 .badge-red { background: #fce4ec; color: #c62828; }
 .key-input { font-family: 'SF Mono', monospace; font-size: 13px; }
-.msg { padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 8px; display: none; white-space: pre-wrap; }
+.msg { padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 8px; white-space: pre-wrap; }
 .msg-success { background: #e8f5e9; color: #2e7d32; display: block; }
 .msg-error { background: #fce4ec; color: #c62828; display: block; }
 .codes-output { background: #f5f5f7; border-radius: 8px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.8; margin-top: 8px; display: none; }
+.header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.header-bar .user { font-size: 13px; color: #86868b; }
+.header-bar .logout { font-size: 13px; color: #0071e3; cursor: pointer; text-decoration: none; }
+.header-bar .logout:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>🔑 蓝宝书Max · 激活码管理</h1>
 
+<!-- ===== Login Screen ===== -->
+<div id="loginScreen" class="container">
   <div class="card">
-    <div class="row">
-      <input type="password" id="adminKey" placeholder="管理员密钥 (ADMIN_KEY)" class="key-input" style="max-width:300px">
+    <div style="font-size:40px;margin-bottom:12px">🔑</div>
+    <h1>管理员登录</h1>
+    <p>请输入管理员密钥以管理激活码</p>
+
+    <input type="password" id="loginKey" placeholder="管理员密钥 (ADMIN_KEY)" autocomplete="off">
+
+    <button class="btn" id="loginBtn" onclick="doLogin()">登录</button>
+
+    <div class="error" id="loginError">密钥错误，请重试</div>
+
+    <div class="hint">
+      忘记密钥？前往
+      <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 后台</a>
+      查看或重置 <code>ADMIN_KEY</code> 环境变量
+    </div>
+  </div>
+</div>
+
+<!-- ===== Admin Screen ===== -->
+<div id="adminScreen" class="container">
+  <div class="card" style="padding:20px 24px">
+    <div class="header-bar">
+      <h1 style="margin:0;font-size:20px">🔑 蓝宝书Max · 激活码管理</h1>
+      <div>
+        <span class="user" id="adminBadge"></span>
+        <a class="logout" onclick="doLogout()">退出</a>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
       <button class="btn btn-primary" onclick="loadCodes()">📋 加载列表</button>
       <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
-      <span id="statusText" style="color:#86868b;font-size:13px"></span>
     </div>
-  </div>
 
-  <div class="card" id="generateCard" style="display:none">
-    <div class="row">
-      <span>生成</span>
-      <input type="number" id="newCount" value="5" min="1" max="50" style="width:70px;flex:none">
-      <span>个，有效期</span>
-      <input type="number" id="newDays" value="365" min="1" max="3650" style="width:70px;flex:none">
-      <span>天</span>
-      <button class="btn btn-primary btn-sm" onclick="generateCodes()">✅ 确认生成</button>
-      <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
+    <div id="generateCard" style="display:none;background:#f5f5f7;border-radius:8px;padding:16px;margin-bottom:16px">
+      <div class="row">
+        <span>生成</span>
+        <input type="number" id="newCount" value="5" min="1" max="50" style="width:70px;flex:none">
+        <span>个，有效期</span>
+        <input type="number" id="newDays" value="365" min="1" max="3650" style="width:70px;flex:none">
+        <span>天</span>
+        <button class="btn btn-primary btn-sm" onclick="generateCodes()">✅ 确认</button>
+        <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
+      </div>
+      <div id="codesOutput" class="codes-output"></div>
     </div>
-    <div id="codesOutput" class="codes-output"></div>
-  </div>
 
-  <div id="msg" class="msg"></div>
+    <div id="msg" style="display:none"></div>
 
-  <div class="card">
     <div id="loading" style="text-align:center;padding:40px;color:#86868b;display:none">⏳ 加载中...</div>
     <div id="tableWrap" style="display:none">
       <div style="margin-bottom:12px;color:#6e6e73;font-size:13px">
@@ -89,30 +135,93 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
 
 <script>
 const WORKER = 'https://bluebook-auth.bluebookmax.workers.dev';
+const STORAGE_KEY = 'bbm_admin_token';
+const KEY_KEY = 'bbm_admin_key';
 
+// ---- Auth ----
+function getStoredKey() {
+  return localStorage.getItem(KEY_KEY) || '';
+}
+
+function doLogin() {
+  const key = document.getElementById('loginKey').value.trim();
+  if (!key) return;
+  document.getElementById('loginBtn').disabled = true;
+  document.getElementById('loginBtn').textContent = '验证中...';
+  document.getElementById('loginError').style.display = 'none';
+
+  // Verify by calling /list
+  fetch(WORKER + '/list', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ admin_key: key })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.ok) {
+      localStorage.setItem(KEY_KEY, key);
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      document.getElementById('adminBadge').textContent = '已登录';
+      loadCodes();
+    } else {
+      document.getElementById('loginError').textContent = data.error || '密钥错误';
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('loginBtn').disabled = false;
+      document.getElementById('loginBtn').textContent = '登录';
+    }
+  })
+  .catch(e => {
+    document.getElementById('loginError').textContent = '网络错误: ' + e.message;
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginBtn').textContent = '登录';
+  });
+}
+
+function doLogout() {
+  localStorage.removeItem(KEY_KEY);
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('loginKey').value = '';
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('loginBtn').textContent = '登录';
+}
+
+// Auto-login
+const savedKey = getStoredKey();
+if (savedKey) {
+  document.getElementById('loginKey').value = savedKey;
+  doLogin();
+}
+
+// Enter key support
+document.getElementById('loginKey').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+// ---- Admin Functions ----
 function msg(text, type) {
   const el = document.getElementById('msg');
   el.textContent = text;
   el.className = 'msg msg-' + type;
+  el.style.display = 'block';
 }
 function clearMsg() {
-  document.getElementById('msg').className = 'msg';
+  document.getElementById('msg').style.display = 'none';
+}
+
+function getKey() {
+  return getStoredKey();
 }
 
 async function api(path, data) {
   const r = await fetch(WORKER + path, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
+    body: JSON.stringify({ ...data, admin_key: getKey() })
   });
   return r.json();
-}
-
-function getAdminKey() {
-  const k = document.getElementById('adminKey').value.trim();
-  if (!k) { msg('请先输入管理员密钥', 'error'); return null; }
-  localStorage.setItem('bbm_admin_key', k);
-  return k;
 }
 
 function showGenerate() {
@@ -124,17 +233,12 @@ function hideGenerate() {
 }
 
 async function loadCodes() {
-  const admin_key = getAdminKey();
-  if (!admin_key) return;
-
   clearMsg();
   document.getElementById('loading').style.display = 'block';
   document.getElementById('tableWrap').style.display = 'none';
-  document.getElementById('statusText').textContent = '加载中...';
 
-  const data = await api('/list', { admin_key });
+  const data = await api('/list', {});
   document.getElementById('loading').style.display = 'none';
-  document.getElementById('statusText').textContent = '';
 
   if (!data.ok) {
     msg('❌ ' + (data.error || '加载失败'), 'error');
@@ -163,16 +267,11 @@ async function loadCodes() {
       '<td>' + (c.devices > 0 ? '<button class="btn btn-danger btn-sm" onclick="unbindAll(\'' + c.code + '\')">解绑</button>' : '-') + '</td>' +
       '</tr>';
   }).join('');
-
-  if (codes.length === 0) {
-    msg('暂无激活码，点击"生成新码"创建', 'success');
-  }
 }
 
 async function unbindAll(code) {
-  const admin_key = getAdminKey();
-  if (!admin_key || !confirm('确定解绑 ' + code + ' 的所有设备？')) return;
-  const data = await api('/unbind', { admin_key, code });
+  if (!confirm('确定解绑 ' + code + ' 的所有设备？')) return;
+  const data = await api('/unbind', { code });
   if (data.ok) {
     msg('✅ 解绑成功！剩余设备位: ' + data.devicesLeft, 'success');
     loadCodes();
@@ -182,13 +281,9 @@ async function unbindAll(code) {
 }
 
 async function generateCodes() {
-  const admin_key = getAdminKey();
-  if (!admin_key) return;
-
   const count = parseInt(document.getElementById('newCount').value) || 5;
   const days = parseInt(document.getElementById('newDays').value) || 365;
 
-  // Generate unique codes locally
   const codes = [];
   while (codes.length < count) {
     const rand = Array.from({length:4}, () => Math.floor(Math.random()*16).toString(16).toUpperCase()).join('');
@@ -196,13 +291,11 @@ async function generateCodes() {
     if (!codes.includes(code)) codes.push(code);
   }
 
-  // Send to worker to inject into KV
-  const data = await api('/codes/create', { admin_key, codes, days });
+  const data = await api('/codes/create', { codes, days });
   if (data.ok) {
     const expires = new Date(data.expiresAt).toISOString().slice(0,10);
     const output = document.getElementById('codesOutput');
-    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码\n' +
-      '有效期至: ' + expires + '\n\n' +
+    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码\n有效期至: ' + expires + '\n\n' +
       codes.map(c => '  ' + c).join('\n');
     output.style.display = 'block';
     msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
@@ -210,13 +303,6 @@ async function generateCodes() {
   } else {
     msg('❌ ' + (data.error || '生成失败'), 'error');
   }
-}
-
-// Auto-load if key saved
-const savedKey = localStorage.getItem('bbm_admin_key');
-if (savedKey) {
-  document.getElementById('adminKey').value = savedKey;
-  loadCodes();
 }
 </script>
 </body>
