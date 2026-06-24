@@ -94,7 +94,7 @@
 
 ## 四、导航页（index.html）
 
-### 4.1 报告排序 🔒
+### 4.1 报告排序
 
 ```js
 var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
@@ -109,7 +109,7 @@ var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
 
 排序应用于两处：today分组 + history分组。
 
-### 4.2 版本标签CSS类名 🔒
+### 4.2 版本标签CSS类名
 
 | CSS类 | 底色 | 字色 | 用途 |
 |-------|------|------|------|
