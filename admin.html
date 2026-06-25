@@ -79,9 +79,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
     <div class="error" id="loginError">密钥错误，请重试</div>
 
     <div class="hint">
-      忘记密钥？前往
-      <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 后台</a>
-      查看或重置 <code>ADMIN_KEY</code> 环境变量
+      🌐 密钥在 <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 环境变量</a>
     </div>
   </div>
 </div>
@@ -97,7 +95,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
       </div>
     </div>
 
-    <div id="statsBar" style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+    <div id="statsBar" style="display:none;gap:10px;margin-bottom:16px;flex-wrap:wrap">
       <div style="flex:1;min-width:70px;background:#f5f5f7;border-radius:10px;padding:10px;text-align:center">
         <div style="font-size:22px;font-weight:700" id="stat-total">-</div>
         <div style="font-size:11px;color:#86868b;margin-top:2px">总计</div>
@@ -116,6 +114,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
       </div>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+      
       <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
     </div>
 
@@ -130,7 +129,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
         <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
       </div>
       <div class="row" style="margin-top:8px;color:#86868b;font-size:12px">
-        <span>💡 新格式：BBM-8位字母数字组合（例：BBM-A3X7K9P2）</span>
+        <span>💡 新格式：BBM-8位字母数字（例：BBM-A3X7K9P2）</span>
       </div>
       <div id="codesOutput" class="codes-output"></div>
     </div>
@@ -141,13 +140,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
     <div id="tableWrap" style="display:none">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()" style="flex:2;min-width:120px">
-        <select id="statusFilter" onchange="filterCodes()" style="flex:1;min-width:90px;height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:13px;outline:none">
-          <option value="all">全部状态</option>
-          <option value="unused">未使用</option>
-          <option value="used">已使用</option>
-          <option value="expired">已过期</option>
-        </select>
-        <button class="btn btn-outline btn-sm" onclick="exportUnused()" style="white-space:nowrap">📋 导出未使用</button>
+        <select id="statusFilter" onchange="filterCodes()" style="flex:none;height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:13px;outline:none"><option value="all">全部状态</option><option value="unused">未使用</option><option value="used">已使用</option><option value="expired">已过期</option></select><button class="btn btn-outline btn-sm" onclick="exportUnused()" style="white-space:nowrap">📋 导出未使用</button>
         <span style="color:#6e6e73;font-size:13px;white-space:nowrap">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
       </div>
       <div style="overflow-x:auto">
@@ -303,9 +296,7 @@ function renderTable() {
   var statusVal = document.getElementById('statusFilter').value;
   var now3 = new Date();
   filteredCodes = allCodes.filter(function(c) {
-    // Text search
     if (searchQuery && !c.code.toLowerCase().includes(searchQuery)) return false;
-    // Status filter
     if (statusVal !== 'all') {
       var isExpired = new Date(c.expiresAt) < now3;
       var isUsed = c.devices > 0;
@@ -360,10 +351,10 @@ function renderTable() {
                    used ? '<span class="badge badge-green">已使用</span>' :
                           '<span class="badge badge-gray">未使用</span>';
     const hasDevices = c.devices > 0;
-        return '<tr>' +
+    return '<tr>' +
       '<td class="key-input" data-revealed="false">' +
         '<span class="code-masked" style="font-weight:500;font-family:\'SF Mono\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
-        '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(c.code) + '\')\" title="显示/隐藏">👁</button>' +
+        '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(c.code) + '\')" title="显示/隐藏">👁</button>' +
       '</td>' +
       '<td>' + status + '</td>' +
       '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
@@ -373,9 +364,9 @@ function renderTable() {
       '<td>' +
         '<div class="action-btns">' +
         (hasDevices
-          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')\" title="解绑设备">🔓 解绑</button>'
+          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')" title="解绑设备">🔓 解绑</button>'
           : '<span style="color:#ccc;font-size:11px">-</span>') +
-        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')\" title="删除此激活码">🗑️ 删除</button>' +
+        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')" title="删除此激活码">🗑️ 删除</button>' +
         '</div>' +
       '</td>' +
       '</tr>';
@@ -421,16 +412,16 @@ async function loadCodes() {
   allCodes = data.codes || [];
   document.getElementById('totalCount').textContent = allCodes.length;
 
-  // Update stats bar
-  var total = allCodes.length;
   var now2 = new Date();
   var used = allCodes.filter(function(c){return c.devices > 0;}).length;
   var expired = allCodes.filter(function(c){return new Date(c.expiresAt) < now2;}).length;
-  var unused = total - used - expired;
-  document.getElementById('stat-total').textContent = total;
+  var unused = allCodes.length - used - expired;
+  document.getElementById('stat-total').textContent = allCodes.length;
   document.getElementById('stat-used').textContent = used;
   document.getElementById('stat-unused').textContent = unused;
   document.getElementById('stat-expired').textContent = expired;
+  var sb = document.getElementById('statsBar');
+  if (sb) sb.style.display = 'flex';
 
   // Reset sort state
   sortField = null;
@@ -475,10 +466,10 @@ async function generateCodes() {
   const codes = [];
   const seen = new Set();
   while (codes.length < count) {
-    // 生成随机8位字母数字组合
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    // 生成随机8位数字
     let code;
     do {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       code = 'BBM-' + Array.from({length:8}, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
     } while (seen.has(code));
     seen.add(code);
@@ -487,22 +478,34 @@ async function generateCodes() {
 
   const data = await api('/codes/create', { codes, days });
   if (data.ok) {
-    const expires = new Date(data.expiresAt).toISOString().slice(0, 1
+    const expires = new Date(data.expiresAt).toISOString().slice(0, 10);
+    const output = document.getElementById('codesOutput');
+    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total - data.created) + ' 个重复）<br>有效期至: ' + expires + '<br><br>' +
+      codes.map((c, i) => '  ' + (i + 1) + '.  <strong>' + c + '</strong>').join('<br>');
+    output.style.display = 'block';
+    msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
+    loadCodes();
+  } else {
+    msg('❌ ' + (data.error || '生成失败'), 'error');
+  }
+}
+
+
 // Code visibility toggle
 function toggleCode(btn, code) {
   var td = btn.closest('td');
   var revealed = td.getAttribute('data-revealed') === 'true';
   if (revealed) {
-    td.innerHTML = '<span class="code-masked" style="font-weight:500;font-family:\'SF Mono\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
-      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(code) + '\')\" title="显示/隐藏">👁</button>';
+    td.innerHTML = '<span class="code-masked" style="font-weight:500;font-family:\\'SF Mono\\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
+      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\"'+escJsStr(code)+'\")" title="显示/隐藏">👁</button>';
     td.setAttribute('data-revealed', 'false');
   } else {
-    td.innerHTML = '<span style="font-weight:500;font-family:\'SF Mono\',monospace">' + escHtml(code) + '</span>' +
-      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(code) + '\')\" title="显示/隐藏">🙈</button>';
+    td.innerHTML = '<span style="font-weight:500;font-family:\\'SF Mono\\',monospace">' + escHtml(code) + '</span>' +
+      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\"'+escJsStr(code)+'\")" title="显示/隐藏">🙈</button>';
     td.setAttribute('data-revealed', 'true');
   }
 }
-// Relative time display
+// Relative time
 function timeAgo(ts) {
   if (!ts) return '从未';
   var diff = Date.now() - parseInt(ts, 10);
@@ -516,39 +519,31 @@ function timeAgo(ts) {
   if (days < 30) return days + '天前';
   return Math.floor(days/30) + '个月前';
 }
-// Export unused codes to clipboard
+// Export unused codes
 function exportUnused() {
-  var codes = allCodes.filter(function(c) {
-    var now = new Date();
-    return new Date(c.expiresAt) >= now && c.devices === 0;
-  }).map(function(c) { return c.code; });
-  if (codes.length === 0) { msg('\u6ca1\u6709\u672a\u4f7f\u7528\u7684\u6fc0\u6d3b\u7801', 'error'); return; }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(codes.join('\n')).then(function() {
-      msg('\u2705 \u5df2\u590d\u5236 ' + codes.length + ' \u4e2a\u672a\u4f7f\u7528\u6fc0\u6d3b\u7801\u5230\u526a\u8d34\u677f', 'success');
-    }).catch(function() { fallbackCopy(codes); });
-  } else { fallbackCopy(codes); }
+  var codes = [];
+  for (var i = 0; i < allCodes.length; i++) {
+    var c = allCodes[i];
+    if (new Date(c.expiresAt) >= new Date() && c.devices === 0) codes.push(c.code);
+  }
+  if (codes.length === 0) { msg('没有未使用的激活码', 'error'); return; }
+  copyText(codes.join('\n'), '✅ 已复制 ' + codes.length + ' 个未使用激活码到剪贴板');
 }
-function fallbackCopy(codes) {
+function copyText(text, successMsg) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() { msg(successMsg, 'success'); }).catch(function() { fallbackCopy(text, successMsg); });
+  } else { fallbackCopy(text, successMsg); }
+}
+function fallbackCopy(text, successMsg) {
   var ta = document.createElement('textarea');
-  ta.value = codes.join('\n');
-  ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); msg('\u2705 \u5df2\u590d\u5236 ' + codes.length + ' \u4e2a\u6fc0\u6d3b\u7801', 'success'); }
-  catch(e) { prompt('\u590d\u5236\u4ee5\u4e0b\u6fc0\u6d3b\u7801\uff1a', codes.join('\n')); }
+  try { document.execCommand('copy'); msg(successMsg, 'success'); } catch(e) { prompt('复制以下内容：', text); }
   document.body.removeChild(ta);
 }
-0);
-    const output = document.getElementById('codesOutput');
-    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total - data.created) + ' 个重复）<br>有效期至: ' + expires + '<br><br>' +
-      codes.map((c, i) => '  ' + (i + 1) + '.  <strong>' + c + '</strong>').join('<br>');
-    output.style.display = 'block';
-    msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '生成失败'), 'error');
-  }
-}
+// Mobile responsive
+(function(){var s=document.createElement('style');s.textContent='@media(max-width:480px){#loginScreen .card{padding:24px 20px;margin:10px}#loginScreen h1{font-size:20px}#loginScreen input{height:40px;font-size:14px}#loginScreen .btn{height:40px;font-size:14px}#statsBar>div{min-width:calc(50% - 10px);margin-bottom:6px}}';document.head.appendChild(s);})();
+
 </script>
 </body>
 </html>
