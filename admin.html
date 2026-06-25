@@ -307,17 +307,7 @@ async function loadCodes() {
   if (!data.ok) { msg('❌ ' + (data.error||'加载失败'), 'error'); return; }
   allCodes = data.codes || [];
   document.getElementById('totalCount').textContent = allCodes.length;
-  var now = new Date(), used = 0, expired = 0;
-  allCodes.forEach(function(c){
-    if (c.expiresAt && new Date(c.expiresAt) < now) expired++;
-    else if (c.devices > 0) used++;
-  });
-  document.getElementById('stat-total').textContent = allCodes.length;
-  document.getElementById('stat-used').textContent = used;
-  document.getElementById('stat-unused').textContent = allCodes.length - used - expired;
-  document.getElementById('stat-expired').textContent = expired;
-  document.getElementById('statsBar').style.display = 'flex';
-  sortField = null; sortAsc = true; currentPage = 1;
+  updateStats();  sortField = null; sortAsc = true; currentPage = 1;
   document.querySelectorAll('th').forEach(function(th){
     th.classList.remove('active');
     var ic = th.querySelector('.sort-icon');
@@ -325,6 +315,19 @@ async function loadCodes() {
   });
   document.getElementById('tableWrap').style.display = 'block';
   renderTable();
+}
+
+function updateStats() {
+  var now = new Date(), used = 0, expired = 0;
+  allCodes.forEach(function(c){
+    if (c.expiresAt && new Date(c.expiresAt) < now) expired++;
+    else if (c.devices > 0) used++;
+  });
+  document.getElementById("stat-total").textContent = allCodes.length;
+  document.getElementById("stat-used").textContent = used;
+  document.getElementById("stat-unused").textContent = allCodes.length - used - expired;
+  document.getElementById("stat-expired").textContent = expired;
+  document.getElementById("statsBar").style.display = "flex";
 }
 
 function sortBy(field) {
@@ -451,16 +454,30 @@ function timeAgo(ts) {
 }
 
 async function unbindAll(code) {
-  if (!confirm('确定解绑 ' + code + ' 的所有设备？\n解绑后该码将恢复为"未使用"状态。')) return;
+  if (!confirm('确定解绑 ' + code + ' 的所有设备？\\n解绑后该码将恢复为"未使用"状态。')) return;
   var data = await api('/unbind', {code:code});
-  if (data.ok) { msg('✅ 解绑成功！剩余设备位: '+data.devicesLeft, 'success'); loadCodes(); }
+  if (data.ok) {
+    msg('✅ 解绑成功！剩余设备位: '+data.devicesLeft, 'success');
+    allCodes.forEach(function(c){
+      if (c.code === code) { c.devices = 0; c.fingerprint = null; c.boundAt = null; }
+    });
+    updateStats();
+    renderTable();
+    setTimeout(function(){ loadCodes(); }, 3000);
+  }
   else { msg('❌ '+(data.error||'解绑失败'), 'error'); }
 }
 
 async function deleteCode(code) {
-  if (!confirm('⚠️ 确定要永久删除激活码 ' + code + ' 吗？\n此操作不可撤销！')) return;
+  if (!confirm('⚠️ 确定要永久删除激活码 ' + code + ' 吗？\\n此操作不可撤销！')) return;
   var data = await api('/codes/delete', {code:code});
-  if (data.ok) { msg('✅ '+(data.message||'删除成功'), 'success'); loadCodes(); }
+  if (data.ok) {
+    msg('✅ '+(data.message||'删除成功'), 'success');
+    allCodes = allCodes.filter(function(c){ return c.code !== code; });
+    updateStats();
+    renderTable();
+    setTimeout(function(){ loadCodes(); }, 3000);
+  }
   else { msg('❌ '+(data.error||'删除失败'), 'error'); }
 }
 
