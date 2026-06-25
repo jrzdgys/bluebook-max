@@ -271,7 +271,30 @@ var Paywall = {
 document.addEventListener('DOMContentLoaded', function() {
   var needsAuth = document.documentElement.getAttribute('data-paywall') === 'true';
   if (!needsAuth) return;
-  if (Paywall.isAuthenticated()) { document.documentElement.classList.add('bb-authenticated'); return; }
+  if (Paywall.isAuthenticated()) {
+    document.documentElement.classList.add('bb-authenticated');
+    var expiresAt = localStorage.getItem(EXPIRES_KEY);
+    if (expiresAt) {
+      var daysLeft = Math.ceil((parseInt(expiresAt, 10) - Date.now()) / 86400000);
+      if (daysLeft >= 0 && daysLeft <= 7) {
+        var banner = document.createElement('div');
+        banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:12px 20px;text-align:center;font-size:14px;font-weight:500;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:opacity .5s;cursor:pointer';
+        if (daysLeft <= 1) {
+          banner.style.background = 'rgba(255,59,48,.92)';
+          banner.style.color = '#fff';
+          banner.textContent = daysLeft === 0 ? '⚠️ 订阅将于今天到期，请及时续费' : '⚠️ 订阅将于明天到期，请及时续费';
+        } else {
+          banner.style.background = 'rgba(255,149,0,.92)';
+          banner.style.color = '#fff';
+          banner.textContent = '⚠️ 订阅将于 ' + daysLeft + ' 天后到期，续费请访问知识星球 →';
+        }
+        banner.onclick = function() { banner.style.opacity = '0'; setTimeout(function(){if(banner.parentNode)banner.parentNode.removeChild(banner);},500); };
+        document.body.appendChild(banner);
+        setTimeout(function() { banner.style.opacity = '0'; setTimeout(function(){if(banner.parentNode)banner.parentNode.removeChild(banner);},500); }, 8000);
+      }
+    }
+    return;
+  }
   Paywall.showActivationModal(function() { window.location.reload(); });
 });
 
