@@ -118,7 +118,10 @@
     var ED=JSON.parse(document.getElementById('edition-data').textContent);
     function ht(h){if(h>=85)return'#C4433A';if(h>=65)return'#E67E22';if(h>=50)return'#2E86C1';return'#7D8B8F'}
     function sb(h){if(h>=85)return'#C4433A15';if(h>=65)return'#E67E2215';if(h>=50)return'#2E86C115';return'#7D8B8F15'}
-    function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<900)}
+    function isMarketDay(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();return d!==0&&d!==6}
+    function isPreMarket(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var h=c.getHours(),m=c.getMinutes(),t=h*60+m;return t>=555&&t<570}
+    function isOpenMarket(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(!isMarketDay())return false;return t>=570&&t<900}
+    function isTrading(){return isPreMarket()||isOpenMarket()}
     function ts(){var n=new Date();return n.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
     document.title='蓝宝书Max · '+ED.edition.dateDisplay+' '+ED.edition.label;
     document.getElementById('header-date').textContent=ED.edition.dateDisplay;
@@ -152,9 +155,10 @@
     document.addEventListener('click',function(e){if(!PE.contains(e.target))hp()});
     window.addEventListener('scroll',function(){if(OP!=null)hp()},{passive:true});
     window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
-    var TD=isTH(),RI=TD?15000:60000;
-    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){var _pr=parseFloat(d.price);if(!isNaN(_pr)&&_pr!==0){spEl.textContent=_pr.toFixed(2)}var _pc=parseFloat(d.pct);if(!isNaN(_pc)){var cls=_pc>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(_pc>=0?'+':'')+_pc.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTH()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
-    fq();setInterval(fq,RI);
+    
+    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){var _pr=parseFloat(d.price);if(!isNaN(_pr)&&_pr!==0){spEl.textContent=_pr.toFixed(2)}var _pc=parseFloat(d.pct);if(!isNaN(_pc)){var cls=_pc>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(_pc>=0?'+':'')+_pc.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTrading()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
+    if(isMarketDay()){fq()}
+    var _ti=null;if(isTrading()){_ti=setInterval(function(){if(isTrading()){fq()}else{clearInterval(_ti);_ti=null}},10000)}
     
     
     </script>
