@@ -1,27 +1,33 @@
 /**
- * 蓝宝书Max · 访问码配置
- * ========================
- * 在这里管理所有有效的访问码哈希值。
- *
- * 🔧 如何添加新码：
- *   1. 打开 admin.html（浏览器打开这个文件）
- *   2. 输入新访问码 → 自动生成哈希值
- *   3. 把哈希值复制到下面数组里
- *   4. 在知识星球群发布新码
- *   5. 旧码保留 7 天过渡期后删除
- *
- * ⚠️ 不要把明文码写在这里！
- * ⚠️ 修改后需要重新部署到 GitHub
+ * 蓝宝书Max · 访问码配置 (自动同步)
  */
-
 const VALID_HASHES = [
-  // 初始访问码: BLUEBOOK-MAX-2026
-  "062e06e81a413b0fbaf7151dddf1129ec4d50368ece1e233e3fa24a759c88bfa",
+  // BBM-0299F91C [刚爱卿] expires:2027-06-24
+  "3fff83a6812c90bcd136336227321c2bd0425207e95a1f685d4f23ac83c8c3d4",
+  // BBM-0ED6F6C9 [璋]
+  "7bd41faabc4821d02871243db712dbbe40fd8fc96697236935b10b9f7e2291fe",
+  // BBM-2C3C2671 expires:2027-06-24
+  "75a2d60562ec545469925991f78c468d6c9e6887e513b51cf4eb7b6fb9a23c8e",
+  // BBM-2DC81CE9 expires:2027-06-24
+  "f3b921bc15d455d1413891b5676c94c02e49266226fe833fc575b7897d63548f",
+  // BBM-2FE75802 expires:2027-06-24
+  "7f7828ad88a2971f0b01af6194fab036ddb731603c35551821c594d1e8ca5227",
+  // BBM-8429A5P5 [管理员] expires:2029-03-21
+  "f93471fdcdabe58009fdf89f6e03ebbb278f71c15969de8c299a796b68ae1e40",
+  // BBM-8E7927A0 expires:2027-06-24
+  "254e3fef66ce3472dd350564637772fc596e8da6cb66464ccbc5f28f306714dc",
+  // BBM-B1DE573C expires:2027-06-24
+  "bad1a72da3047eab19c5b9b566f976e17149f028b07533f8093583219b614940",
+  // BBM-B5BEE243 expires:2027-06-24
+  "9e91207ca610a0d7572d309a0ce7f6c8ae61e92db4283e18c43e994031433e73",
+  // BBM-C2D9D956 expires:2027-06-24
+  "e19a1bf6bc3270fe3f4e0eebc2bedaf8831522c017fd2396d51737778f69c1f6",
+  // BBM-C3J22L2S
+  "7e1124e1250743b9015accb8f155116d0989ab1ef899abda6857b6d07db92777",
+  // BBM-E30F57F8 [似近] expires:2027-06-24
+  "a11f7160e4fe7d6ae660562197ea7e9a5a1886efcc23e3d9fe62216c0df06163",
+  // BBM-LDWVWT85 [黄文强] expires:2026-07-26
+  "86b0a457a5f80514305d1a9dda26d09499baf50017be893660c3dfa00e39d24a",
+  // BBM-Z7Q43IRJ [亮] expires:2026-07-26
+  "0ac2dabd075bf4ccbac1db5d09126b0bf8a1349b346fa2a6e1d9ddec21983129",
 ];
-
-/**
- * 管理后台密码哈希 (默认密码: bluebook2026)
- * 🔧 修改密码：运行 echo -n "新密码" | shasum -a 256
- *    然后把哈希值替换到下面
- */
-const ADMIN_PASSWORD_HASH = "84365e0a7aff7e062747a08c7a5f1a9bce92eb52a74f51e164757bb26a695bed";
