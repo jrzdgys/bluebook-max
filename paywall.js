@@ -29,6 +29,11 @@ function collectFingerprint() {
 
 function getCanvasHash() {
   return new Promise(function(resolve) {
+    // iOS WebKit: toDataURL() 同步阻塞主线程，直接跳过
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      resolve('ios-skip-' + Date.now());
+      return;
+    }
     var timer = setTimeout(function() { resolve('canvas-timeout-' + Date.now()); }, 3000);
     try {
       var c = document.createElement('canvas'); c.width = 200; c.height = 50;
@@ -211,10 +216,15 @@ var Paywall = {
     var doActivate = function() {
       var code = input.value.trim(); if (!code) { showError('请输入激活码'); return; }
       btn.disabled = true; btn.textContent = '验证中...'; clearError();
+      var safetyTimer = setTimeout(function() {
+        btn.disabled = false; btn.textContent = '激活账号';
+        showError('请求超时，请检查网络后重试');
+      }, 25000);
       Paywall.activate(code).then(function(result) {
+        clearTimeout(safetyTimer);
         if (result.ok) { hideModal(); if (onSuccess) onSuccess(); else window.location.reload(); }
         else { showError(result.error || '激活失败，请检查激活码'); btn.disabled = false; btn.textContent = '激活账号'; if (input) input.focus(); }
-      }).catch(function() { showError('系统错误，请稍后重试'); btn.disabled = false; btn.textContent = '激活账号'; });
+      }).catch(function() { clearTimeout(safetyTimer); showError('系统错误，请稍后重试'); btn.disabled = false; btn.textContent = '激活账号'; });
     };
     btn.addEventListener('click', doActivate);
     input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doActivate(); });
