@@ -5,6 +5,9 @@
     var EXPIRES_KEY = 'bbm_expires_at';
 
     function collectFingerprint() {
+      try {
+      console.log('[BBM] Collecting fingerprint...');
+      } catch(e){}
       return new Promise(function(resolve) {
         var nav = {
           ua: navigator.userAgent, platform: navigator.platform, lang: navigator.language,
@@ -28,7 +31,9 @@
     function getCanvasHash() {
       return new Promise(function(resolve) {
         if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-          resolve('ios-skip-' + Date.now());
+          var iosStable = (screen.width+'x'+screen.height+'|'+Intl.DateTimeFormat().resolvedOptions().timeZone+'|'+navigator.language);
+          var iosHash = 0; for(var i=0;i<iosStable.length;i++){iosHash=((iosHash<<5)-iosHash)+iosStable.charCodeAt(i);iosHash|=0;}
+          resolve('ios-' + Math.abs(iosHash).toString(16));
           return;
         }
         var timer = setTimeout(function() { resolve('canvas-timeout-' + Date.now()); }, 3000);
@@ -125,7 +130,7 @@
       activate: function(code) {
         return collectFingerprint().then(function(fpData) {
           var controller = new AbortController();
-          var timeout = setTimeout(function() { controller.abort(); }, 15000);
+          var timeout = setTimeout(function() { controller.abort(); }, 30000);
           return fetch(WORKER_URL + '/activate', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: code.toUpperCase(), fp: fpData.hash, canvas: fpData.canvas, stable: fpData.stable, ua: fpData.ua }),
@@ -135,14 +140,17 @@
             return res.json();
           }).then(function(data) {
             if (data.ok && data.token) {
+              console.log('[BBM] Activation successful, storing token');
               _storeToken(data.token, fpData);
             }
             return data;
           }).catch(function(e) {
             clearTimeout(timeout);
+            console.error('[BBM] Fetch error:', e.name, e.message);
             return { ok: false, error: '网络请求失败，请检查网络连接后重试' };
           });
-        }).catch(function() {
+        }).catch(function(e) {
+          console.error('[BBM] Fingerprint error:', e);
           return { ok: false, error: '设备指纹采集失败' };
         });
       },
@@ -163,11 +171,12 @@
         var btn = document.getElementById('auth-btn');
         var doActivate = function() {
           var code = input.value.trim(); if (!code) { showError('请输入激活码'); return; }
+          console.log('[BBM] Activating code:', code);
           btn.disabled = true; btn.textContent = '验证中...'; clearError();
           var safetyTimer = setTimeout(function() {
             btn.disabled = false; btn.textContent = '激活账号';
             showError('请求超时，请检查网络后重试');
-          }, 25000);
+          }, 35000);
           Paywall.activate(code).then(function(result) {
             clearTimeout(safetyTimer);
             if (result.ok) { hideModal(); if (onSuccess) onSuccess(); else window.location.reload(); }
