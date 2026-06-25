@@ -189,6 +189,7 @@ body{
   text-align:center;background:rgba(255,255,255,.7);border-radius:24px;padding:56px 24px;
   max-width:640px;margin:0 auto;border:1px solid rgba(0,0,0,.06);
 }
+.pricing .btn{display:inline-flex;margin:0 auto}
 .pricing h2{font-size:24px;font-weight:700;margin-bottom:12px}
 .pricing .price{font-size:64px;font-weight:800;color:#0071E3;letter-spacing:-2px;margin-bottom:6px;line-height:1}
 .pricing .price small{font-size:22px;font-weight:500;color:#86868B}
@@ -374,9 +375,9 @@ body{
 </section>
 
 <!-- ===== 历史报告（按周分组） ===== -->
-<section class="section" style="padding-top:0">
+<section class="section" style="padding-top:0;padding-bottom:24px">
   <div class="container">
-    <div class="section-title" style="margin-top:32px">📁 历史报告 <span class="count" id="history-count"></span></div>
+    <div class="section-title" style="margin-top:12px">📁 历史报告 <span class="count" id="history-count"></span></div>
       <div id="history-sections">
       <div class="empty-state" id="history-loading"><div class="icon">📂</div>加载中...</div>
     </div>
@@ -510,8 +511,8 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       document.getElementById('auth-badge').innerHTML=Paywall.unlockBadge();
       document.getElementById('nav-status').style.display='flex';
       document.getElementById('btn-nav-login').textContent='\u9000\u51fa';
-      document.getElementById('btn-nav-login').style.color='#34C759';
-      document.getElementById('btn-nav-login').style.background='rgba(52,199,89,.08)';
+      document.getElementById('btn-nav-login').style.color='#86868B';
+      document.getElementById('btn-nav-login').style.background='rgba(0,0,0,.04)';
     }
     if(!rps.length){
       document.getElementById('today-reports').innerHTML='<div class="empty-state"><div class="icon">\U0001f4e1</div>\u6682\u65e0\u62a5\u544a</div>';return;
