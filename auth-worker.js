@@ -1,146 +1,136 @@
-// 蓝宝书Max · 设备绑定鉴权 Worker (v2)
-    // KV binding: SUBS (在 Cloudflare Dashboard 配置)
-    // 部署: 粘贴此代码到 worker.js 后点"保存并部署"
+// 蓝宝书Max · 设备绑定鉴权 Worker (v3 - service worker)
+    // 此版本已部署到 Cloudflare Workers
+    // 部署方式：粘贴到 Quick Edit → 保存并部署
+    // KV binding 名称: AUTH_CODES (Cloudflare Dashboard中配置)
+    // Admin Key: 在 Cloudflare 环境变量中设置
 
     const CORS_HEADERS = {
       'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400',
     };
-    const ADMIN_KEY = 'bbmax-admin-2026';
+    const ADMIN_KEY = 'bbm-admin-2y0jPFwxk2MZQTfR';
     const MAX_DEVICES = 2;
 
-    function json(data, status = 200) {
-      return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } });
+    function json(data, status) {
+      if(!status) status = 200;
+      return new Response(JSON.stringify(data), { status: status, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } });
     }
 
-    export default {
-      async fetch(request, env) {
-        if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS_HEADERS });
-        if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
-        const url = new URL(request.url); const path = url.pathname;
-        try {
-          const body = await request.json();
-          switch (path) {
-            case '/activate': return handleActivate(body, env, request);
-            case '/verify': return handleVerify(body, env, request);
-            case '/unbind': return handleUnbind(body, env);
-            case '/list': return handleList(body, env);
-            case '/codes/create': return handleCodesCreate(body, env);
-            case '/codes/delete': return handleCodesDelete(body, env);
-            default: return json({ error: 'Not found' }, 404);
-          }
-        } catch (e) { return json({ error: e.message || 'Internal error' }, 500); }
-      },
-    };
-
-    async function handleActivate(body, env, request) {
-      const code = (body.code || '').toUpperCase().trim(); const fp = body.fp || '';
+    async function handleActivate(body, request) {
+      var code = (body.code || '').toUpperCase().trim(); var fp = body.fp || '';
       if (!code || !fp) return json({ ok: false, error: '缺少激活码或设备指纹' });
-      const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-
-      try { var sub = JSON.parse(await env.SUBS.get(code) || '{}'); } catch { sub = {}; }
-
-      // New bind
+      var ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+      var sub;
+      try { sub = JSON.parse(await AUTH_CODES.get(code) || '{}'); } catch(e) { sub = {}; }
       if (!sub.fingerprint) {
-        sub = { fingerprint: fp, devices: [{ fingerprint: fp, ip, lastSeen: Date.now() }], boundAt: Date.now(), lastAccess: Date.now() };
-        await env.SUBS.put(code, JSON.stringify(sub));
-        const token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
-        return json({ ok: true, reason: 'bound', token, message: '绑定成功！' });
+        sub = { fingerprint: fp, devices: [{ fingerprint: fp, ip: ip, lastSeen: Date.now() }], boundAt: Date.now(), lastAccess: Date.now() };
+        await AUTH_CODES.put(code, JSON.stringify(sub));
+        var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
+        return json({ ok: true, reason: 'bound', token: token, message: '绑定成功！' });
       }
-
-      // Same device
-      if (sub.fingerprint === fp || (sub.devices || []).some(d => d.fingerprint === fp)) {
-        sub.lastAccess = Date.now(); await env.SUBS.put(code, JSON.stringify(sub));
-        const token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
-        return json({ ok: true, reason: 'verified', token, message: '验证通过！' });
+      if (sub.fingerprint === fp || (sub.devices || []).some(function(d) { return d.fingerprint === fp; })) {
+        sub.lastAccess = Date.now(); await AUTH_CODES.put(code, JSON.stringify(sub));
+        var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
+        return json({ ok: true, reason: 'verified', token: token, message: '验证通过！' });
       }
-
-      // Device limit
-      if ((sub.devices || []).length >= MAX_DEVICES) {
-        return json({ ok: false, error: '此码已绑定满' + MAX_DEVICES + '台设备，请联系管理员解绑' });
-      }
-
-      // New device
-      sub.devices.push({ fingerprint: fp, ip, lastSeen: Date.now() });
-      sub.lastAccess = Date.now(); await env.SUBS.put(code, JSON.stringify(sub));
-      const token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
-      return json({ ok: true, reason: 'bound_new_device', token, message: '新设备绑定成功！' });
+      if ((sub.devices || []).length >= MAX_DEVICES) return json({ ok: false, error: '此码已绑定满' + MAX_DEVICES + '台设备，请联系管理员解绑' });
+      sub.devices.push({ fingerprint: fp, ip: ip, lastSeen: Date.now() });
+      sub.lastAccess = Date.now(); await AUTH_CODES.put(code, JSON.stringify(sub));
+      var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + Date.now();
+      return json({ ok: true, reason: 'bound_new_device', token: token, message: '新设备绑定成功！' });
     }
 
-    async function handleVerify(body, env, request) {
-      const token = body.token || ''; if (!token) return json({ ok: false, error: '缺少token' });
-      const parts = token.split('.'); if (parts.length < 3) return json({ ok: false, error: 'token格式错误' });
-      const fp = parts[1]; if (!fp) return json({ ok: false, error: 'token无效' });
-
-      // Scan KV for matching fp
-      let cursor; let found = null;
+    async function handleVerify(body) {
+      var token = body.token || ''; if (!token) return json({ ok: false, error: '缺少token' });
+      var parts = token.split('.'); if (parts.length < 3) return json({ ok: false, error: 'token格式错误' });
+      var fp = parts[1]; if (!fp) return json({ ok: false, error: 'token无效' });
+      var cursor; var found = null;
       try {
         do {
-          const result = await env.SUBS.list({ cursor });
-          for (const key of result.keys) {
-            const d = JSON.parse(await env.SUBS.get(key.name) || '{}');
-            if (d.fingerprint === fp || (d.devices || []).some(x => x.fingerprint === fp)) { found = key.name; break; }
+          var result = await AUTH_CODES.list({ cursor: cursor });
+          for (var i = 0; i < result.keys.length; i++) {
+            var d = JSON.parse(await AUTH_CODES.get(result.keys[i].name) || '{}');
+            if (d.fingerprint === fp || (d.devices || []).some(function(x) { return x.fingerprint === fp; })) { found = result.keys[i].name; break; }
           }
           cursor = result.cursor;
         } while (cursor && !found);
-      } catch {}
-
+      } catch(e) {}
       return found ? json({ ok: true, code: found }) : json({ ok: false, error: '未找到匹配的激活码' });
     }
 
-    async function handleUnbind(body, env) {
+    async function handleUnbind(body) {
       if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
-      const code = (body.code || '').toUpperCase().trim(); if (!code) return json({ ok: false, error: '缺少激活码' });
-      const deviceFp = body.deviceFp;
-      try { var sub = JSON.parse(await env.SUBS.get(code) || '{}'); } catch { sub = {}; }
-      if (!sub.fingerprint) return json({ ok: false, error: '激活码不存在' });
-
-      if (deviceFp) {
-        sub.devices = (sub.devices || []).filter(d => d.fingerprint !== deviceFp);
+      var code = (body.code || '').toUpperCase().trim(); if (!code) return json({ ok: false, error: '缺少激活码' });
+      if (body.deviceFp) {
+        var sub; try { sub = JSON.parse(await AUTH_CODES.get(code) || '{}'); } catch(e) { sub = {}; }
+        if (!sub.fingerprint) return json({ ok: false, error: '激活码不存在' });
+        sub.devices = (sub.devices || []).filter(function(d) { return d.fingerprint !== body.deviceFp; });
         if (sub.devices.length === 0) { sub.fingerprint = null; sub.boundAt = null; }
-        else if (sub.fingerprint === deviceFp) sub.fingerprint = sub.devices[0].fingerprint;
-        await env.SUBS.put(code, JSON.stringify(sub));
+        else if (sub.fingerprint === body.deviceFp) sub.fingerprint = sub.devices[0].fingerprint;
+        await AUTH_CODES.put(code, JSON.stringify(sub));
         return json({ ok: true, message: '设备已解绑', devices: sub.devices.length });
       }
-      await env.SUBS.delete(code);
+      await AUTH_CODES.delete(code);
       return json({ ok: true, message: '已完全解绑' });
     }
 
-    async function handleList(body, env) {
+    async function handleList(body) {
       if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
-      const list = []; let cursor;
+      var list = []; var cursor;
       try {
         do {
-          const result = await env.SUBS.list({ cursor });
-          for (const key of result.keys) {
-            const d = JSON.parse(await env.SUBS.get(key.name) || '{}');
-            list.push({ code: key.name, fingerprint: d.fingerprint ? (d.fingerprint.substring(0,20)+'...') : null, devices: (d.devices || []).length, boundAt: d.boundAt ? new Date(d.boundAt).toISOString() : null, lastAccess: d.lastAccess ? new Date(d.lastAccess).toISOString() : null });
+          var result = await AUTH_CODES.list({ cursor: cursor });
+          for (var i = 0; i < result.keys.length; i++) {
+            var d = JSON.parse(await AUTH_CODES.get(result.keys[i].name) || '{}');
+            list.push({ code: result.keys[i].name, fingerprint: d.fingerprint ? (d.fingerprint.substring(0,20)+'...') : null, devices: (d.devices || []).length, boundAt: d.boundAt ? new Date(d.boundAt).toISOString() : null, lastAccess: d.lastAccess ? new Date(d.lastAccess).toISOString() : null });
           }
           cursor = result.cursor;
         } while (cursor);
-      } catch {}
+      } catch(e) {}
       return json({ ok: true, codes: list });
     }
 
-    async function handleCodesCreate(body, env) {
+    async function handleCodesCreate(body) {
       if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
-      const { codes } = body; if (!codes || !Array.isArray(codes) || !codes.length) return json({ ok: false, error: '缺少激活码列表' });
-      const created = [];
-      for (const code of codes) {
+      var codes = body.codes; if (!codes || !Array.isArray(codes) || !codes.length) return json({ ok: false, error: '缺少激活码列表' });
+      var created = [];
+      for (var i = 0; i < codes.length; i++) {
         try {
-          const existing = JSON.parse(await env.SUBS.get(code) || '{}');
+          var existing = JSON.parse(await AUTH_CODES.get(codes[i]) || '{}');
           if (existing.fingerprint) continue;
-          await env.SUBS.put(code, JSON.stringify({ fingerprint: null, devices: [], createdAt: Date.now() }));
-          created.push(code);
-        } catch {}
+          await AUTH_CODES.put(codes[i], JSON.stringify({ fingerprint: null, devices: [], createdAt: Date.now() }));
+          created.push(codes[i]);
+        } catch(e) {}
       }
-      return json({ ok: true, created, count: created.length });
+      return json({ ok: true, created: created, count: created.length });
     }
 
-    async function handleCodesDelete(body, env) {
+    async function handleCodesDelete(body) {
       if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
-      const code = (body.code || '').toUpperCase().trim(); if (!code) return json({ ok: false, error: '缺少激活码' });
-      await env.SUBS.delete(code);
+      var code = (body.code || '').toUpperCase().trim(); if (!code) return json({ ok: false, error: '缺少激活码' });
+      await AUTH_CODES.delete(code);
       return json({ ok: true, message: '已删除' });
+    }
+
+    addEventListener('fetch', function(event) {
+      event.respondWith(handleRequest(event.request));
+    });
+
+    async function handleRequest(request) {
+      if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS_HEADERS });
+      if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+      var url = new URL(request.url); var path = url.pathname;
+      try {
+        var body = await request.json();
+        switch (path) {
+          case '/activate': return handleActivate(body, request);
+          case '/verify': return handleVerify(body);
+          case '/unbind': return handleUnbind(body);
+          case '/list': return handleList(body);
+          case '/codes/create': return handleCodesCreate(body);
+          case '/codes/delete': return handleCodesDelete(body);
+          default: return json({ error: 'Not found' }, 404);
+        }
+      } catch (e) { return json({ error: e.message || 'Internal error' }, 500); }
     }
     
