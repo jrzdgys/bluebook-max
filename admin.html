@@ -2,448 +2,163 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>蓝宝书Max · 激活码管理</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝宝书Max · 访问码管理</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-.card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,.08); width: 100%; }
-.container { width: 100%; max-width: 960px; margin: 20px; }
-
-/* Login screen */
-#loginScreen { max-width: 400px; margin: 0 auto; }
-#loginScreen .card { text-align: center; }
-#loginScreen h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
-#loginScreen p { color: #86868b; font-size: 14px; margin-bottom: 24px; }
-#loginScreen input { width: 100%; height: 44px; border: 1px solid #d2d2d7; border-radius: 10px; padding: 0 14px; font-size: 15px; font-family: 'SF Mono', monospace; margin-bottom: 12px; }
-#loginScreen input:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
-#loginScreen .btn { width: 100%; height: 44px; border: none; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; background: #0071e3; color: #fff; }
-#loginScreen .btn:hover { background: #0066d6; }
-#loginScreen .btn:disabled { opacity: .5; cursor: not-allowed; }
-#loginScreen .error { color: #ff3b30; font-size: 13px; margin-top: 8px; display: none; }
-#loginScreen .hint { color: #86868b; font-size: 12px; margin-top: 16px; }
-#loginScreen .hint a { color: #0071e3; text-decoration: none; }
-
-/* Admin screen */
-#adminScreen { display: none; }
-h1 { font-size: 24px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-input, select { height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 14px; outline: none; }
-input:focus, select:focus { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
-.btn { display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 16px; border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
-.btn-primary { background: #0071e3; color: #fff; }
-.btn-primary:hover { background: #0066d6; }
-.btn-outline { background: transparent; color: #0071e3; border: 1px solid #d2d2d7; }
-.btn-outline:hover { background: #f5f5f7; }
-.btn-danger { background: #ff3b30; color: #fff; }
-.btn-danger:hover { background: #d32f2f; }
-.btn-sm { height: 28px; padding: 0 10px; font-size: 12px; border-radius: 6px; }
-.btn-xs { height: 24px; padding: 0 8px; font-size: 11px; border-radius: 4px; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #e8e8ed; font-weight: 600; color: #6e6e73; font-size: 12px; text-transform: uppercase; cursor: pointer; user-select: none; white-space: nowrap; }
-th:hover { color: #1d1d1f; }
-th .sort-icon { display: inline-block; margin-left: 4px; opacity: 0.3; font-size: 10px; }
-th.active .sort-icon { opacity: 1; color: #0071e3; }
-td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.badge-green { background: #e8f5e9; color: #2e7d32; }
-.badge-gray { background: #f0f0f0; color: #666; }
-.badge-red { background: #fce4ec; color: #c62828; }
-.key-input { font-family: 'SF Mono', monospace; font-size: 13px; }
-.msg { padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 8px; white-space: pre-wrap; }
-.msg-success { background: #e8f5e9; color: #2e7d32; display: block; }
-.msg-error { background: #fce4ec; color: #c62828; display: block; }
-.codes-output { background: #f5f5f7; border-radius: 8px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.8; margin-top: 8px; display: none; max-height: 300px; overflow-y: auto; }
-.header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.header-bar .user { font-size: 13px; color: #86868b; }
-.header-bar .logout { font-size: 13px; color: #0071e3; cursor: pointer; text-decoration: none; }
-.header-bar .logout:hover { text-decoration: underline; }
-.search-box { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
-.search-box input { flex: 1; height: 36px; padding-left: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 10px center; }
-.action-btns { display: flex; gap: 4px; flex-wrap: nowrap; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#F5F5F7;color:#1D1D1F;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;
+}
+.card{
+  background:#fff;border-radius:20px;padding:40px;max-width:520px;width:100%;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+h1{font-size:24px;font-weight:700;margin-bottom:4px}
+.subtitle{font-size:14px;color:#86868B;margin-bottom:32px}
+.step{
+  background:#F5F5F7;border-radius:12px;padding:16px;margin-bottom:16px;
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;background:#0071E3;color:#fff;border-radius:50%;
+  font-size:12px;font-weight:700;margin-right:8px;
+}
+.step h3{font-size:15px;font-weight:600;display:flex;align-items:center;margin-bottom:10px}
+.input-row{display:flex;gap:8px}
+.input-row input{
+  flex:1;padding:10px 14px;border:1.5px solid #E5E5EA;border-radius:10px;
+  font-size:14px;font-family:inherit;outline:none;transition:border-color .15s;
+}
+.input-row input:focus{border-color:#0071E3}
+.input-row button{
+  padding:10px 20px;background:#0071E3;color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;
+}
+.input-row button:hover{background:#0077ED}
+.result{
+  margin-top:12px;background:#EEFFF2;border:1px solid #B7EBC8;border-radius:10px;
+  padding:14px;display:none;
+}
+.result .hash{
+  font-family:'SF Mono',Menlo,monospace;font-size:13px;color:#1D1D1F;
+  word-break:break-all;line-height:1.6;margin-bottom:0;
+}
+.result .copy-btn{
+  margin-top:10px;padding:6px 16px;background:#34C759;color:#fff;
+  border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;
+}
+.result .line{
+  margin-top:12px;padding:8px 12px;background:#1D1D1F;border-radius:8px;
+  font-family:'SF Mono',Menlo,monospace;font-size:12px;color:#34C759;
+  word-break:break-all;
+}
+.note{
+  font-size:12px;color:#AEAEB2;margin-top:24px;line-height:1.6;
+}
 </style>
 </head>
 <body>
 
-<!-- ===== Login Screen ===== -->
-<div id="loginScreen" class="container">
-  <div class="card">
-    <div style="font-size:40px;margin-bottom:12px">🔑</div>
-    <h1>管理员登录</h1>
-    <p>请输入管理员密钥以管理激活码</p>
-
-    <input type="password" id="loginKey" placeholder="管理员密钥 (ADMIN_KEY)" autocomplete="off">
-
-    <button class="btn" id="loginBtn" onclick="doLogin()">登录</button>
-
-    <div class="error" id="loginError">密钥错误，请重试</div>
-
-    <div class="hint">
-      忘记密钥？前往
-      <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 后台</a>
-      查看或重置 <code>ADMIN_KEY</code> 环境变量
-    </div>
+<!-- 密码门 -->
+<div class="card" id="password-gate">
+  <h1>🔐 蓝宝书Max · 管理员入口</h1>
+  <p class="subtitle">请输入管理密码以访问访问码管理功能</p>
+  <div class="input-row" style="margin-top:24px">
+    <input type="password" id="adminPassword" placeholder="请输入管理密码" maxlength="32"
+           onkeydown="if(event.key==='Enter')checkPassword()">
+    <button onclick="checkPassword()">验证</button>
   </div>
+  <div id="pwd-error" style="color:#FF3B30;font-size:12px;margin-top:10px;display:none">密码错误，请重试</div>
+  <p class="note">默认密码：首次使用请修改 codes.js 中的 ADMIN_PASSWORD_HASH</p>
 </div>
 
-<!-- ===== Admin Screen ===== -->
-<div id="adminScreen" class="container">
-  <div class="card" style="padding:20px 24px">
-    <div class="header-bar">
-      <h1 style="margin:0;font-size:20px">🔑 蓝宝书Max · 激活码管理</h1>
-      <div>
-        <span class="user" id="adminBadge"></span>
-        <a class="logout" onclick="doLogout()">退出</a>
-      </div>
-    </div>
+<!-- 主内容（初始隐藏） -->
+<div class="card" id="main-content" style="display:none">
+  <h1>🔐 蓝宝书Max · 访问码管理</h1>
+  <p class="subtitle">添加新访问码 → 复制哈希值 → 更新 codes.js → 部署</p>
 
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
-      <button class="btn btn-primary" onclick="loadCodes()">📋 加载列表</button>
-      <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
-    </div>
-
-    <div id="generateCard" style="display:none;background:#f5f5f7;border-radius:8px;padding:16px;margin-bottom:16px">
-      <div class="row">
-        <span>生成</span>
-        <input type="number" id="newCount" value="5" min="1" max="50" style="width:70px;flex:none">
-        <span>个，有效期</span>
-        <input type="number" id="newDays" value="365" min="1" max="3650" style="width:70px;flex:none">
-        <span>天</span>
-        <button class="btn btn-primary btn-sm" onclick="generateCodes()">✅ 确认</button>
-        <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
-      </div>
-      <div class="row" style="margin-top:8px;color:#86868b;font-size:12px">
-        <span>💡 新激活码格式：随机8位数字</span>
-      </div>
-      <div id="codesOutput" class="codes-output"></div>
-    </div>
-
-    <div id="msg" style="display:none"></div>
-
-    <div id="loading" style="text-align:center;padding:40px;color:#86868b;display:none">⏳ 加载中...</div>
-    <div id="tableWrap" style="display:none">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()">
-        <span style="color:#6e6e73;font-size:13px;white-space:nowrap">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
-      </div>
-      <div style="overflow-x:auto">
-        <table>
-          <thead>
-            <tr>
-              <th onclick="sortBy('code')" id="th-code">激活码 <span class="sort-icon">↕</span></th>
-              <th onclick="sortBy('status')" id="th-status">状态 <span class="sort-icon">↕</span></th>
-              <th onclick="sortBy('devices')" id="th-devices">设备 <span class="sort-icon">↕</span></th>
-              <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
-              <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="codeTable"></tbody>
-        </table>
-      </div>
+  <div class="step">
+    <h3><span class="step-num">1</span>输入新访问码</h3>
+    <div class="input-row">
+      <input type="text" id="codeInput" placeholder="例如：BLUEBOOK-2026-Q3" maxlength="64">
+      <button onclick="generateHash()">生成哈希</button>
     </div>
   </div>
+
+  <div class="step">
+    <h3><span class="step-num">2</span>复制下面这行，粘贴到 codes.js</h3>
+    <div class="result" id="result">
+      <div class="hash" id="hashDisplay"></div>
+      <div class="line" id="lineDisplay"></div>
+      <button class="copy-btn" onclick="copyLine()">📋 复制到剪贴板</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">3</span>部署到 GitHub</h3>
+    <p style="font-size:13px;color:#64748B;line-height:1.6">
+      在知识星球群发布新码 → 运行 <code style="background:#F5F5F7;padding:2px 6px;border-radius:4px">python3 push_to_github.py</code> 完成部署。<br>
+      旧码保留 7 天过渡，之后删除即可。
+    </p>
+  </div>
+
+  <p class="note">
+    ⚠️ 此页面纯本地运行，不会上传任何数据。SHA-256 哈希在浏览器中计算。<br>
+    管理密码哈希存储在 codes.js 的 ADMIN_PASSWORD_HASH 中。
+  </p>
 </div>
 
+<script src="codes.js"></script>
 <script>
-const WORKER = 'https://bluebook-auth.bluebookmax.workers.dev';
-const KEY_KEY = 'bbm_admin_key';
+// ===== 密码验证 =====
+// 默认密码 "bluebook2026" 的 SHA-256 哈希
+const DEFAULT_HASH = "f8a8e7e3a2c0c6b5d4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1";
 
-// ---- Data State ----
-let allCodes = [];
-let filteredCodes = [];
-let sortField = null;
-let sortAsc = true;
-let searchQuery = '';
+async function checkPassword() {
+  const pwd = document.getElementById('adminPassword').value.trim();
+  if (!pwd) return;
 
-// ---- Auth ----
-function getStoredKey() {
-  return localStorage.getItem(KEY_KEY) || '';
-}
+  const encoder = new TextEncoder();
+  const data = encoder.encode(pwd);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
 
-function doLogin() {
-  const key = document.getElementById('loginKey').value.trim();
-  if (!key) return;
-  document.getElementById('loginBtn').disabled = true;
-  document.getElementById('loginBtn').textContent = '验证中...';
-  document.getElementById('loginError').style.display = 'none';
+  const expectedHash = (typeof ADMIN_PASSWORD_HASH !== 'undefined')
+    ? ADMIN_PASSWORD_HASH : DEFAULT_HASH;
 
-  fetch(WORKER + '/list', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ admin_key: key })
-  })
-  .then(r => r.json())
-  .then(data => {
-    if (data.ok) {
-      localStorage.setItem(KEY_KEY, key);
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminScreen').style.display = 'block';
-      document.getElementById('adminBadge').textContent = '已登录';
-      loadCodes();
-    } else {
-      document.getElementById('loginError').textContent = data.error || '密钥错误';
-      document.getElementById('loginError').style.display = 'block';
-      document.getElementById('loginBtn').disabled = false;
-      document.getElementById('loginBtn').textContent = '登录';
-    }
-  })
-  .catch(e => {
-    document.getElementById('loginError').textContent = '网络错误: ' + e.message;
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginBtn').disabled = false;
-    document.getElementById('loginBtn').textContent = '登录';
-  });
-}
-
-function doLogout() {
-  localStorage.removeItem(KEY_KEY);
-  document.getElementById('adminScreen').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'block';
-  document.getElementById('loginKey').value = '';
-  document.getElementById('loginBtn').disabled = false;
-  document.getElementById('loginBtn').textContent = '登录';
-}
-
-const savedKey = getStoredKey();
-if (savedKey) {
-  document.getElementById('loginKey').value = savedKey;
-  doLogin();
-}
-
-document.getElementById('loginKey').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
-
-// ---- Admin Functions ----
-function msg(text, type) {
-  const el = document.getElementById('msg');
-  el.textContent = text;
-  el.className = 'msg msg-' + type;
-  el.style.display = 'block';
-}
-
-function clearMsg() {
-  const el = document.getElementById('msg');
-  el.style.display = 'none';
-  el.className = 'msg';
-}
-
-function api(endpoint, body) {
-  const key = getStoredKey();
-  return fetch(WORKER + endpoint, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ ...body, admin_key: key })
-  }).then(r => r.json());
-}
-
-function showGenerate() {
-  document.getElementById('generateCard').style.display = 'block';
-  document.getElementById('codesOutput').style.display = 'none';
-}
-function hideGenerate() {
-  document.getElementById('generateCard').style.display = 'none';
-}
-
-// ---- Sort & Filter ----
-function sortBy(field) {
-  if (sortField === field) {
-    sortAsc = !sortAsc;
+  if (hash === expectedHash) {
+    document.getElementById('password-gate').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
   } else {
-    sortField = field;
-    sortAsc = true;
-  }
-
-  // Update header indicators
-  document.querySelectorAll('th').forEach(th => th.classList.remove('active'));
-  const thMap = { code:'th-code', status:'th-status', devices:'th-devices', expiresAt:'th-expires', createdAt:'th-created' };
-  const activeTh = document.getElementById(thMap[field]);
-  if (activeTh) {
-    activeTh.classList.add('active');
-    activeTh.querySelector('.sort-icon').textContent = sortAsc ? '↑' : '↓';
-  }
-
-  renderTable();
-}
-
-function filterCodes() {
-  searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
-  renderTable();
-}
-
-// ---- Render ----
-function renderTable() {
-  // Apply search filter
-  filteredCodes = allCodes;
-  if (searchQuery) {
-    filteredCodes = allCodes.filter(c =>
-      c.code.toLowerCase().includes(searchQuery)
-    );
-  }
-
-  // Apply sort
-  if (sortField) {
-    filteredCodes = [...filteredCodes].sort((a, b) => {
-      let va, vb;
-      switch (sortField) {
-        case 'code':
-          va = a.code; vb = b.code;
-          break;
-        case 'status':
-          va = getStatusOrder(a); vb = getStatusOrder(b);
-          break;
-        case 'devices':
-          va = a.devices; vb = b.devices;
-          break;
-        case 'expiresAt':
-          va = a.expiresAt || ''; vb = b.expiresAt || '';
-          break;
-        case 'createdAt':
-          va = a.createdAt || ''; vb = b.createdAt || '';
-          break;
-        default:
-          va = a.code; vb = b.code;
-      }
-      if (va < vb) return sortAsc ? -1 : 1;
-      if (va > vb) return sortAsc ? 1 : -1;
-      return 0;
-    });
-  }
-
-  document.getElementById('shownCount').textContent = filteredCodes.length;
-
-  const tbody = document.getElementById('codeTable');
-  const now = new Date();
-  tbody.innerHTML = filteredCodes.map(c => {
-    const used = c.devices > 0;
-    const expires = new Date(c.expiresAt);
-    const expired = expires < now;
-    const status = expired ? '<span class="badge badge-red">已过期</span>' :
-                   used ? '<span class="badge badge-green">已使用</span>' :
-                          '<span class="badge badge-gray">未使用</span>';
-    const hasDevices = c.devices > 0;
-    return '<tr>' +
-      '<td class="key-input" style="font-weight:500">' + escHtml(c.code) + '</td>' +
-      '<td>' + status + '</td>' +
-      '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
-      '<td>' + formatDate(c.expiresAt) + '</td>' +
-      '<td style="color:#86868b;font-size:12px">' + formatDate(c.createdAt) + '</td>' +
-      '<td>' +
-        '<div class="action-btns">' +
-        (hasDevices
-          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')" title="解绑设备">🔓 解绑</button>'
-          : '<span style="color:#ccc;font-size:11px">-</span>') +
-        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')" title="删除此激活码">🗑️ 删除</button>' +
-        '</div>' +
-      '</td>' +
-      '</tr>';
-  }).join('');
-}
-
-function escHtml(s) {
-  const div = document.createElement('div');
-  div.textContent = s;
-  return div.innerHTML;
-}
-
-function escJsStr(s) {
-  return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
-function getStatusOrder(c) {
-  const now = new Date();
-  if (new Date(c.expiresAt) < now) return 2; // expired
-  if (c.devices > 0) return 1; // used
-  return 0; // unused
-}
-
-function formatDate(d) {
-  if (!d) return '-';
-  return new Date(d).toISOString().slice(0, 10);
-}
-
-// ---- Load ----
-async function loadCodes() {
-  clearMsg();
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('tableWrap').style.display = 'none';
-
-  const data = await api('/list', {});
-  document.getElementById('loading').style.display = 'none';
-
-  if (!data.ok) {
-    msg('❌ ' + (data.error || '加载失败'), 'error');
-    return;
-  }
-
-  allCodes = data.codes || [];
-  document.getElementById('totalCount').textContent = allCodes.length;
-
-  // Reset sort state
-  sortField = null;
-  sortAsc = true;
-  document.querySelectorAll('th').forEach(th => {
-    th.classList.remove('active');
-    const icon = th.querySelector('.sort-icon');
-    if (icon) icon.textContent = '↕';
-  });
-
-  document.getElementById('tableWrap').style.display = 'block';
-  renderTable();
-}
-
-// ---- Operations ----
-async function unbindAll(code) {
-  if (!confirm('确定解绑 ' + code + ' 的所有设备？\n解绑后该码将恢复为"未使用"状态。')) return;
-  const data = await api('/unbind', { code });
-  if (data.ok) {
-    msg('✅ 解绑成功！剩余设备位: ' + data.devicesLeft, 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '解绑失败'), 'error');
+    document.getElementById('pwd-error').style.display = 'block';
   }
 }
 
-async function deleteCode(code) {
-  if (!confirm('⚠️ 确定要永久删除激活码 ' + code + ' 吗？\n此操作不可撤销！')) return;
-  const data = await api('/codes/delete', { code });
-  if (data.ok) {
-    msg('✅ ' + (data.message || '删除成功'), 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '删除失败'), 'error');
-  }
+// ===== 访问码生成 =====
+async function generateHash() {
+  const code = document.getElementById('codeInput').value.trim();
+  if (!code) return alert('请输入访问码');
+
+  const encoder = new TextEncoder();
+  const data = encoder.encode(code);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+
+  document.getElementById('hashDisplay').textContent = 'SHA-256: ' + hash;
+  document.getElementById('lineDisplay').textContent = '"' + hash + '", // ' + code;
+  document.getElementById('result').style.display = 'block';
 }
 
-async function generateCodes() {
-  const count = parseInt(document.getElementById('newCount').value) || 5;
-  const days = parseInt(document.getElementById('newDays').value) || 365;
-
-  const codes = [];
-  const seen = new Set();
-  while (codes.length < count) {
-    // 生成随机8位数字
-    let num;
-    do {
-      num = String(Math.floor(10000000 + Math.random() * 90000000));
-    } while (seen.has(num));
-    seen.add(num);
-    codes.push(num);
-  }
-
-  const data = await api('/codes/create', { codes, days });
-  if (data.ok) {
-    const expires = new Date(data.expiresAt).toISOString().slice(0, 10);
-    const output = document.getElementById('codesOutput');
-    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total - data.created) + ' 个重复）<br>有效期至: ' + expires + '<br><br>' +
-      codes.map((c, i) => '  ' + (i + 1) + '.  <strong>' + c + '</strong>').join('<br>');
-    output.style.display = 'block';
-    msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '生成失败'), 'error');
-  }
+async function copyLine() {
+  const line = document.getElementById('lineDisplay').textContent;
+  await navigator.clipboard.writeText(line);
+  const btn = event.target;
+  btn.textContent = '✓ 已复制';
+  setTimeout(() => btn.textContent = '📋 复制到剪贴板', 2000);
 }
 </script>
 </body>
