@@ -86,7 +86,7 @@ async function handleVerify(body) {
   return found ? json({ ok: true, code: found }) : json({ ok: false, error: '未找到匹配的激活码' });
 }
 
-async async function handleUnbind(body) {
+async function handleUnbind(body) {
   if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
   var code = (body.code || '').toUpperCase().trim();
   if (!code) return json({ ok: false, error: '缺少激活码' });
