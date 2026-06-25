@@ -34,6 +34,7 @@ async function handleActivate(body, request) {
       lastAccess: Date.now(),
       ...(sub.createdAt ? { createdAt: sub.createdAt } : {}),
       ...(sub.expiresAt ? { expiresAt: sub.expiresAt } : {}),
+      ...(sub.remark ? { remark: sub.remark } : {}),
     };
     await AUTH_CODES.put(code, JSON.stringify(sub));
     var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + (Date.now() + 86400000 * 30);
@@ -108,7 +109,7 @@ async function handleList(body) {
           boundAt: d.boundAt ? new Date(d.boundAt).toISOString() : null,
           lastAccess: d.lastAccess ? new Date(d.lastAccess).toISOString() : null,
           expiresAt: d.expiresAt ? new Date(d.expiresAt).toISOString() : null,
-          createdAt: d.createdAt ? new Date(d.createdAt).toISOString() : null,
+          remark: d.remark || '', createdAt: d.createdAt ? new Date(d.createdAt).toISOString() : null,
         });
       }
       cursor = result.cursor;
@@ -128,7 +129,7 @@ async function handleCodesCreate(body) {
     try {
       var existing = JSON.parse(await AUTH_CODES.get(codes[i]) || '{}');
       if (existing.fingerprint) continue;
-      await AUTH_CODES.put(codes[i], JSON.stringify({ fingerprint: null, devices: [], createdAt: Date.now(), expiresAt: expiresAt }));
+      await AUTH_CODES.put(codes[i], JSON.stringify({ fingerprint: null, devices: [], remark: '', createdAt: Date.now(), expiresAt: expiresAt }));
       created.push(codes[i]);
     } catch (e) {}
   }
@@ -143,7 +144,19 @@ async function handleCodesDelete(body) {
   return json({ ok: true, message: '已删除' });
 }
 
-addEventListener('fetch', function (event) {
+async function handleCodesRemark(body) {
+      if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
+      var code = (body.code || '').toUpperCase().trim();
+      if (!code) return json({ ok: false, error: '缺少激活码' });
+      var remark = (body.remark || '').trim();
+      var sub;
+      try { sub = JSON.parse(await AUTH_CODES.get(code) || '{}'); } catch (e) { sub = {}; }
+      sub.remark = remark;
+      await AUTH_CODES.put(code, JSON.stringify(sub));
+      return json({ ok: true, message: '备注已更新' });
+    }
+
+    addEventListener('fetch', function (event) {
   event.respondWith(handleRequest(event.request));
 });
 
@@ -161,6 +174,7 @@ async function handleRequest(request) {
       case '/list': return handleList(body);
       case '/codes/create': return handleCodesCreate(body);
       case '/codes/delete': return handleCodesDelete(body);
+      case '/codes/remark': return handleCodesRemark(body);
       default: return json({ error: 'Not found' }, 404);
     }
   } catch (e) { return json({ error: e.message || 'Internal error' }, 500); }
