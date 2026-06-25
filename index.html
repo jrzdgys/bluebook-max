@@ -127,10 +127,10 @@ body{
 .r-badge{
   padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.3px;
 }
-.r-badge.am{background:rgba(255,149,0,.1);color:#FF9500}
-.r-badge.md{background:rgba(232,135,10,.1);color:#E8870A}
-.r-badge.pm{background:rgba(94,92,230,.1);color:#5E5CE6}
-.r-badge.global{background:rgba(0,113,227,.1);color:#0071E3}
+.r-badge.gv{background:rgba(48,180,110,.1);color:#30B46E}
+.r-badge.mc{background:rgba(255,149,0,.1);color:#FF9500}
+.r-badge.pm{background:rgba(0,113,227,.1);color:#0071E3}
+.r-badge.ev{background:rgba(175,82,222,.1);color:#AF52DE}
 .r-date{font-size:20px;font-weight:700;letter-spacing:-.3px}
 .r-title{
   font-size:13px;color:#86868B;line-height:1.5;
@@ -433,11 +433,17 @@ setInterval(updateClock, 30000);
 })();
 
 function showLoginPaywall() {
-  Paywall.renderPaywall('paywall-container-dynamic', '蓝宝书Max');
+  if (Paywall.isAuthenticated()) {
+    Paywall.logout();
+    window.location.reload();
+    return;
+  }
+  Paywall.showActivationModal(function() { window.location.reload(); });
 }
 
 function renderCard(r, isFirst, isAuth, editionLabels) {
   var ed = r.edition || 'am';
+  var cssEd = ({am:'mc', md:'pm', global:'gv'})[ed] || ed;
   var label = editionLabels[ed] || '';
   var dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
   var displayDate = dateParts ? dateParts[2] + '/' + dateParts[3] : (r.date || '');
@@ -446,7 +452,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   var freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费</span>' : '';
   var lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费</span>' : '';
   var authTag = isAuth ? '<span class="r-auth">✓ 已解锁</span>' : '';
-  return '<a href="' + (canView ? (r.file || '#') : '#') + '" class="report-card ' + ed + '" ' +
+  return '<a href="' + (canView ? (r.file || '#') : '#') + '" class="report-card ' + cssEd + '" ' +
     onclick + ' style="' + (!canView ? 'cursor:default;opacity:.65' : '') + '">' +
     '<div class="report-card-header">' +
     '<span class="r-badge ' + ed + '">' + label + '</span>' +
@@ -568,14 +574,7 @@ function toggleHistory() {
   }
 }
 
-setTimeout(function() {
-  var hist = document.getElementById('history-reports');
-  if (hist && hist.querySelector('.date-group')) {
-    document.getElementById('history-content').classList.add('show');
-    document.getElementById('history-btn').classList.add('open');
-    document.getElementById('history-btn').innerHTML = '收起历史报告 <span class="arrow">▾</span>';
-  }
-}, 500);
+
 </script>
 </body>
 </html>
