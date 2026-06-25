@@ -84,16 +84,18 @@ body{
   display:inline-flex;align-items:center;gap:8px;
   padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;
   cursor:pointer;text-decoration:none;transition:all .25s;border:none;font-family:inherit;
+  min-height:45px;box-sizing:border-box;
 }
 .btn-primary{background:#0071E3;color:#fff}
 .btn-primary:hover{background:#0077ED;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,113,227,.25)}
-.btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F;display:inline-flex;align-items:center;gap:8px;line-height:1;padding:15px 28px}
+.btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F;display:inline-flex;align-items:center;gap:8px;line-height:1;padding:14px 28px;font-size:16px}
 .btn-outline:hover{background:rgba(0,0,0,.08)}
 .btn-zsxq{
   background:linear-gradient(135deg,#07C160,#06AD56);color:#fff;font-size:16px;padding:14px 28px;
   display:inline-flex;align-items:center;gap:8px;margin:0 auto;line-height:1;
 }
 .btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(7,193,96,.3)}
+.hero-cta .btn{min-height:45px;box-sizing:border-box}
 
 /* ===== Container ===== */
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
@@ -259,7 +261,7 @@ body{
   .hero-stat .num{font-size:28px}
   .hero-stat .label{font-size:11px}
   .hero-cta{flex-direction:column;align-items:center}
-  .hero-cta .btn{width:100%;max-width:320px;justify-content:center}
+  .hero-cta .btn{width:100%;max-width:320px;justify-content:center;min-height:45px;box-sizing:border-box}
   .features-grid{grid-template-columns:repeat(2,1fr)}
   .reports-grid{grid-template-columns:1fr}
   .section{padding:24px 0}
@@ -323,7 +325,7 @@ body{
     </div>
     <div class="hero-stat">
       <div class="num" id="stat-stocks">—</div>
-      <div class="label">覆盖标的</div>
+      <div class="label">今日标的</div>
     </div>
   </div>
 
@@ -442,13 +444,13 @@ body{
 <script src="paywall.js?v=5"></script>
 <script>
 function updateClock() {
-  var now = new Date();
-  var days = ['周日','周一','周二','周三','周四','周五','周六'];
-  var str = String(now.getHours()).padStart(2,'0') + ':' +
-    String(now.getMinutes()).padStart(2,'0') + ' · ' +
-    now.getFullYear() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' +
-    String(now.getDate()).padStart(2,'0') + ' ' + days[now.getDay()];
-  document.getElementById('nav-time').textContent = str;
+  var cst=new Date(new Date().getTime()+480*60000);
+  var days=['周日','周一','周二','周三','周四','周五','周六'];
+  var str=String(cst.getHours()).padStart(2,'0')+':'+
+    String(cst.getMinutes()).padStart(2,'0')+' · '+
+    cst.getFullYear()+'/'+String(cst.getMonth()+1).padStart(2,'0')+'/'+
+    String(cst.getDate()).padStart(2,'0')+' '+days[cst.getDay()];
+  document.getElementById('nav-time').textContent=str;
 }
 updateClock();
 setInterval(updateClock, 30000);
@@ -517,7 +519,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     var rps=(mf.reports||[]).filter(function(r){return r.date!=='test';})
       .sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
     document.getElementById('stat-reports').textContent=rps.length||'\u2014';
-    var ts=0;rps.forEach(function(r){ts+=(r.stock_count||10);});
+    var ts=tR.reduce(function(s,it){return s+(it.r.stock_count||0);},0);
     document.getElementById('stat-stocks').textContent=ts>0?ts:'\u2014';
     var isAuth=Paywall.isAuthenticated();
     if(isAuth){
@@ -532,7 +534,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     }
     var edLbl={am:'\u6668\u4f1a\u7248',mc:'\u6668\u4f1a\u7248',md:'\u5348\u95f4\u7248',pm:'\u5348\u95f4\u7248',ev:'\u665a\u95f4\u7248',global:'\u5168\u7403\u7248',gv:'\u5168\u7403\u7248'};
     var edOrd={gv:0,mc:1,pm:2,ev:3};
-    var today=new Date().toISOString().slice(0,10).replace(/-/g,'');
+    function getTodayCST(){var n=new Date(),o=480*60000,c=new Date(n.getTime()+o);return c.toISOString().slice(0,10).replace(/-/g,"")}var today=getTodayCST();
     var tR=[],wM={};
     rps.forEach(function(r,i){
       if(r.date===today)tR.push({r:r,idx:i});
