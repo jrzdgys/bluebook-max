@@ -1,12 +1,12 @@
 {
   "name": "蓝宝书Max",
   "description": "Alpha派蓝宝书热点自动抓取与分析报告",
-  "last_updated": "2026-06-25 07:05",
-  "updated": "2026-06-25T07:05:00",
+  "last_updated": "2026-06-25 08:25",
+  "updated": "2026-06-25T08:25:00",
   "total_reports": 11,
   "reports": [
     {
-      "file": "pm-20260621.html",
+      "file": "reports/pm-20260621.html",
       "edition": "pm",
       "label": "午间版",
       "date": "20260621",
@@ -15,7 +15,7 @@
       "stock_count": 0
     },
     {
-      "file": "ev-20260622.html",
+      "file": "reports/ev-20260622.html",
       "edition": "ev",
       "label": "晚间版",
       "date": "20260622",
@@ -24,7 +24,7 @@
       "stock_count": 0
     },
     {
-      "file": "gv-20260623-v2.html",
+      "file": "reports/gv-20260623-v2.html",
       "edition": "gv",
       "label": "全球版",
       "date": "20260623",
@@ -33,7 +33,7 @@
       "stock_count": 0
     },
     {
-      "file": "mc-20260623-v2.html",
+      "file": "reports/mc-20260623-v2.html",
       "edition": "mc",
       "label": "晨会版",
       "date": "20260623",
@@ -42,7 +42,7 @@
       "stock_count": 0
     },
     {
-      "file": "pm-20260623-v2.html",
+      "file": "reports/pm-20260623-v2.html",
       "edition": "pm",
       "label": "午间版",
       "date": "20260623",
@@ -51,7 +51,7 @@
       "stock_count": 0
     },
     {
-      "file": "ev-20260623-v2.html",
+      "file": "reports/ev-20260623-v2.html",
       "edition": "ev",
       "label": "晚间版",
       "date": "20260623",
@@ -60,7 +60,7 @@
       "stock_count": 0
     },
     {
-      "file": "gv-20260624.html",
+      "file": "reports/gv-20260624.html",
       "edition": "gv",
       "label": "全球版",
       "date": "20260624",
@@ -69,7 +69,7 @@
       "stock_count": 0
     },
     {
-      "file": "mc-20260624.html",
+      "file": "reports/mc-20260624.html",
       "edition": "mc",
       "label": "晨会版",
       "date": "20260624",
@@ -78,7 +78,7 @@
       "stock_count": 0
     },
     {
-      "file": "pm-20260624.html",
+      "file": "reports/pm-20260624.html",
       "edition": "pm",
       "label": "午间版",
       "date": "20260624",
@@ -87,7 +87,7 @@
       "stock_count": 0
     },
     {
-      "file": "ev-20260624.html",
+      "file": "reports/ev-20260624.html",
       "edition": "ev",
       "label": "晚间版",
       "date": "20260624",
@@ -96,7 +96,7 @@
       "stock_count": 118
     },
     {
-      "file": "mc-20260625.html",
+      "file": "reports/mc-20260625.html",
       "edition": "mc",
       "label": "晨会版",
       "date": "20260625",

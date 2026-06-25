@@ -66,28 +66,46 @@ async function collectFingerprint() {
 
 // Canvas 指纹（简化，兼容 iOS 隐私模式）
 function getCanvasHash() {
-  try {
-    const c = document.createElement('canvas');
-    c.width = 200; c.height = 50;
-    const ctx = c.getContext('2d');
-    if (!ctx) return 'no-canvas';
+  // iOS Safari 隐私模式下 canvas.toDataURL() 可能卡死
+  // 使用 Promise.race 加 3 秒超时防护
+  return new Promise(function(resolve) {
+    var timedOut = false;
+    var timer = setTimeout(function() {
+      timedOut = true;
+      resolve('canvas-timeout');
+    }, 3000);
 
-    // 写固定文字
-    ctx.textBaseline = 'alphabetic';
-    ctx.font = '16px "Arial",sans-serif';
-    ctx.fillStyle = '#1D1D1F';
-    ctx.fillText('蓝宝书Max', 10, 30);
-    ctx.fillStyle = '#0071E3';
-    ctx.fillRect(10, 10, 40, 20);
+    try {
+      var c = document.createElement('canvas');
+      c.width = 200; c.height = 50;
+      var ctx = c.getContext('2d');
+      if (!ctx) { clearTimeout(timer); resolve('no-canvas'); return; }
 
-    // iOS Safari 隐私模式可能返回空，捕获这种情况
-    const data = c.toDataURL();
-    if (data.length < 100) return 'canvas-blocked';
-    return data.substring(50, 250); // 取中间段作为指纹
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = '16px "Arial",sans-serif';
+      ctx.fillStyle = '#1D1D1F';
+      ctx.fillText('蓝宝书Max', 10, 30);
+      ctx.fillStyle = '#0071E3';
+      ctx.fillRect(10, 10, 40, 20);
 
-  } catch(e) {
-    return 'canvas-error';
-  }
+      // 使用 requestAnimationFrame 来避免阻塞主线程
+      requestAnimationFrame(function() {
+        if (timedOut) return;
+        try {
+          var data = c.toDataURL();
+          clearTimeout(timer);
+          if (data.length < 100) resolve('canvas-blocked');
+          else resolve(data.substring(50, 250));
+        } catch(e) {
+          clearTimeout(timer);
+          resolve('canvas-error');
+        }
+      });
+    } catch(e) {
+      clearTimeout(timer);
+      resolve('canvas-error');
+    }
+  });
 }
 
 // SHA-256 hash
@@ -314,7 +332,7 @@ const Paywall = {
       }
     };
 
-    btn.addEventListener('click', doActivate);btn.addEventListener('click', doActivate);
+    btn.addEventListener('click', doActivate);
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter') doActivate();
     });

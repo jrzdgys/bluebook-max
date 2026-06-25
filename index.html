@@ -494,7 +494,7 @@ function showLoginPaywall() {
 function renderCard(r, isFirst, isAuth, editionLabels) {
   var ed = r.edition || 'am';
   var label = editionLabels[ed] || '';
-  var dateParts = (r.date || '').match(/(\\d{4})(\\d{2})(\\d{2})/);
+  var dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
   var displayDate = dateParts ? dateParts[2] + '/' + dateParts[3] : (r.date || '');
   var canView = isAuth || isFirst;
   var onclick = canView ? '' : 'onclick="showLoginPaywall();return false"';
