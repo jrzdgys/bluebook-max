@@ -444,7 +444,7 @@ body{
 <script src="paywall.js?v=7"></script>
 <script>
 function updateClock() {
-  var cst=new Date(new Date().getTime()+480*60000);
+  var cst=new Date();
   var days=['周日','周一','周二','周三','周四','周五','周六'];
   var str=String(cst.getHours()).padStart(2,'0')+':'+
     String(cst.getMinutes()).padStart(2,'0')+' · '+
