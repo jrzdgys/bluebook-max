@@ -6,144 +6,192 @@
 <title>蓝宝书Max · 激活码管理</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f5f7; color: #1d1d1f; min-height: 100vh; }
 .card { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,.08); width: 100%; }
-.container { width: 100%; max-width: 960px; margin: 20px; }
+.container { width: 100%; max-width: 1100px; margin: 20px auto; padding: 0 16px; }
 
-/* Login screen */
-#loginScreen { max-width: 400px; margin: 0 auto; }
-#loginScreen .card { text-align: center; }
-#loginScreen h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
-#loginScreen p { color: #86868b; font-size: 14px; margin-bottom: 24px; }
-#loginScreen input { width: 100%; height: 44px; border: 1px solid #d2d2d7; border-radius: 10px; padding: 0 14px; font-size: 15px; font-family: 'SF Mono', monospace; margin-bottom: 12px; }
+/* Login - left aligned, refined */
+#loginScreen { max-width: 420px; margin: 60px auto; }
+#loginScreen .card { padding: 40px 36px; }
+#loginScreen .login-icon { font-size: 36px; margin-bottom: 20px; }
+#loginScreen h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; text-align: left; }
+#loginScreen p { color: #86868b; font-size: 13px; margin-bottom: 24px; text-align: left; }
+#loginScreen label { display: block; font-size: 13px; font-weight: 500; color: #555; margin-bottom: 6px; text-align: left; }
+#loginScreen input { width: 100%; height: 44px; border: 1px solid #d2d2d7; border-radius: 10px; padding: 0 14px; font-size: 15px; margin-bottom: 16px; }
 #loginScreen input:focus { outline: none; border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
-#loginScreen .btn { width: 100%; height: 44px; border: none; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; background: #0071e3; color: #fff; }
-#loginScreen .btn:hover { background: #0066d6; }
-#loginScreen .btn:disabled { opacity: .5; cursor: not-allowed; }
-#loginScreen .error { color: #ff3b30; font-size: 13px; margin-top: 8px; display: none; }
-#loginScreen .hint { color: #86868b; font-size: 12px; margin-top: 16px; }
+#loginScreen .btn { width: 100%; height: 44px; border: none; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; background: #0071e3; color: #fff; transition: opacity .2s; }
+#loginScreen .btn:hover { opacity: .85; }
+#loginScreen .btn:disabled { opacity: .4; cursor: not-allowed; }
+#loginScreen .error { color: #ff3b30; font-size: 13px; margin-top: 8px; display: none; text-align: left; }
+#loginScreen .hint { color: #86868b; font-size: 12px; margin-top: 20px; text-align: left; }
 #loginScreen .hint a { color: #0071e3; text-decoration: none; }
 
-/* Admin screen */
 #adminScreen { display: none; }
-h1 { font-size: 24px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-input, select { height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 14px; outline: none; }
-input:focus, select:focus { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0,113,227,.15); }
-.btn { display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 16px; border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 8px; }
+.header-bar h1 { font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.header-bar .user { font-size: 13px; color: #6e6e73; }
+.header-bar .logout { font-size: 13px; color: #0071e3; cursor: pointer; text-decoration: none; margin-left: 12px; }
+.header-bar .logout:hover { text-decoration: underline; }
+
+#statsBar { display: none; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.stat-card { flex: 1; min-width: 100px; background: #f5f5f7; border-radius: 12px; padding: 14px 16px; text-align: center; }
+.stat-card .num { font-size: 26px; font-weight: 700; }
+.stat-card .label { font-size: 11px; color: #86868b; margin-top: 2px; }
+.stat-card.used { background: #e8f5e9; }
+.stat-card.used .num { color: #2e7d32; }
+.stat-card.unused { background: #e3f2fd; }
+.stat-card.unused .num { color: #1565c0; }
+.stat-card.expired { background: #fce4ec; }
+.stat-card.expired .num { color: #c62828; }
+
+.toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.toolbar input, .toolbar select { height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 13px; outline: none; }
+.toolbar input:focus, .toolbar select:focus { border-color: #0071e3; }
+
+.btn { border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: 4px; }
 .btn-primary { background: #0071e3; color: #fff; }
 .btn-primary:hover { background: #0066d6; }
-.btn-outline { background: transparent; color: #0071e3; border: 1px solid #d2d2d7; }
-.btn-outline:hover { background: #f5f5f7; }
-.btn-danger { background: #ff3b30; color: #fff; }
-.btn-danger:hover { background: #d32f2f; }
-.btn-sm { height: 28px; padding: 0 10px; font-size: 12px; border-radius: 6px; }
-.btn-xs { height: 24px; padding: 0 8px; font-size: 11px; border-radius: 4px; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #e8e8ed; font-weight: 600; color: #6e6e73; font-size: 12px; text-transform: uppercase; cursor: pointer; user-select: none; white-space: nowrap; }
-th:hover { color: #1d1d1f; }
-th .sort-icon { display: inline-block; margin-left: 4px; opacity: 0.3; font-size: 10px; }
-th.active .sort-icon { opacity: 1; color: #0071e3; }
-td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle; }
+.btn-outline { background: transparent; border: 1px solid #d2d2d7; color: #1d1d1f; }
+.btn-outline:hover { background: #f5f5f7; border-color: #bbb; }
+.btn-sm { padding: 4px 10px; font-size: 12px; border-radius: 6px; }
+.btn-xs { padding: 2px 8px; font-size: 11px; border-radius: 5px; height: 24px; }
+.btn-icon { width: 28px; height: 28px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-size: 14px; }
+
+#generateCard { display: none; background: #f5f5f7; border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+#generateCard .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+#generateCard input[type="number"] { width: 70px; }
+#generateCard .hint { color: #86868b; font-size: 12px; margin-top: 8px; }
+
+.search-box { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.search-box input { flex: 1; min-width: 160px; height: 36px; border: 1px solid #d2d2d7; border-radius: 8px; padding: 0 12px; font-size: 13px; outline: none; }
+.search-box input:focus { border-color: #0071e3; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+thead th { background: #f5f5f7; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; color: #555; cursor: pointer; user-select: none; white-space: nowrap; position: sticky; top: 0; z-index: 1; }
+thead th:hover { background: #e8e8ed; }
+thead th .sort-icon { color: #bbb; margin-left: 3px; font-size: 11px; }
+thead th.active { color: #0071e3; }
+thead th.active .sort-icon { color: #0071e3; }
+tbody tr { border-bottom: 1px solid #eee; }
+tbody tr:hover { background: #fafafa; }
+tbody td { padding: 10px 12px; vertical-align: middle; }
+
 .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
 .badge-green { background: #e8f5e9; color: #2e7d32; }
 .badge-gray { background: #f0f0f0; color: #666; }
 .badge-red { background: #fce4ec; color: #c62828; }
-.key-input { font-family: 'SF Mono', monospace; font-size: 13px; }
-.msg { padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 8px; white-space: pre-wrap; }
-.msg-success { background: #e8f5e9; color: #2e7d32; display: block; }
-.msg-error { background: #fce4ec; color: #c62828; display: block; }
-.codes-output { background: #f5f5f7; border-radius: 8px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.8; margin-top: 8px; display: none; max-height: 300px; overflow-y: auto; }
-.header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.header-bar .user { font-size: 13px; color: #86868b; }
-.header-bar .logout { font-size: 13px; color: #0071e3; cursor: pointer; text-decoration: none; }
-.header-bar .logout:hover { text-decoration: underline; }
-.search-box { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
-.search-box input { flex: 1; height: 36px; padding-left: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 10px center; }
-.action-btns { display: flex; gap: 4px; flex-wrap: nowrap; }
+
+.code-cell { font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace; font-size: 12px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+.code-cell .code-text { font-weight: 500; }
+.copy-btn { cursor: pointer; color: #8e8e93; font-size: 14px; transition: color .15s; background: none; border: none; padding: 2px 4px; border-radius: 4px; }
+.copy-btn:hover { color: #0071e3; background: #e8f0fe; }
+.copy-btn.copied { color: #34c759; }
+
+.action-btns { display: flex; gap: 6px; align-items: center; }
+.btn-danger { color: #ff3b30; background: transparent; border: none; }
+.btn-danger:hover { background: #fff0ef; }
+.btn-unbind { color: #555; background: transparent; border: 1px solid #d2d2d7; }
+.btn-unbind:hover { background: #f5f5f7; border-color: #bbb; }
+
+.pagination { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 16px; padding: 8px 0; }
+.page-btn { min-width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; font-size: 13px; cursor: pointer; border: 1px solid transparent; color: #555; background: transparent; }
+.page-btn:hover { background: #f0f0f0; }
+.page-btn.active { background: #0071e3; color: #fff; font-weight: 600; }
+.page-btn.disabled { opacity: .3; cursor: default; pointer-events: none; }
+.page-info { font-size: 12px; color: #86868b; margin: 0 8px; }
+
+#msg { padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 12px; display: none; }
+#msg.success { display: block; background: #e8f5e9; color: #2e7d32; }
+#msg.error { display: block; background: #fce4ec; color: #c62828; }
+#loading { text-align: center; padding: 40px; color: #86868b; font-size: 14px; }
+.codes-output { display: none; background: #fff; border: 1px solid #d2d2d7; border-radius: 8px; padding: 12px; margin-top: 10px; font-size: 12px; line-height: 1.8; }
+
+@media (max-width: 768px) {
+  .container { margin: 10px auto; }
+  .card { padding: 16px; }
+  #loginScreen { margin: 30px auto; }
+  #loginScreen .card { padding: 24px 20px; }
+  .stat-card { min-width: calc(50% - 6px); }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .search-box { flex-direction: column; }
+  .search-box input { min-width: auto; }
+  thead th, tbody td { padding: 8px 6px; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .stat-card .num { font-size: 20px; }
+  table { font-size: 11px; }
+  thead th, tbody td { padding: 6px 4px; }
+  .code-cell { font-size: 10px; letter-spacing: 0; }
+}
 </style>
 </head>
 <body>
 
-<!-- ===== Login Screen ===== -->
 <div id="loginScreen" class="container">
   <div class="card">
-    <div style="font-size:40px;margin-bottom:12px">🔑</div>
+    <div class="login-icon">🔑</div>
     <h1>管理员登录</h1>
-    <p>请输入管理员密钥以管理激活码</p>
-
-    <input type="password" id="loginKey" placeholder="管理员密钥 (ADMIN_KEY)" autocomplete="off">
-
+    <p>请使用管理员密钥登录以管理激活码</p>
+    <label for="loginKey">管理员密钥</label>
+    <input type="password" id="loginKey" placeholder="输入管理员密钥" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="btn" id="loginBtn" onclick="doLogin()">登录</button>
-
-    <div class="error" id="loginError">密钥错误，请重试</div>
-
-    <div class="hint">
-      🌐 密钥在 <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 环境变量</a>
-    </div>
+    <div class="error" id="loginError"></div>
+    <div class="hint">🌐 密钥在 <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 环境变量</a></div>
   </div>
 </div>
 
-<!-- ===== Admin Screen ===== -->
 <div id="adminScreen" class="container">
   <div class="card" style="padding:20px 24px">
     <div class="header-bar">
-      <h1 style="margin:0;font-size:20px">🔑 蓝宝书Max · 激活码管理</h1>
+      <h1>🔑 蓝宝书Max · 激活码管理</h1>
       <div>
         <span class="user" id="adminBadge"></span>
         <a class="logout" onclick="doLogout()">退出</a>
       </div>
     </div>
 
-    <div id="statsBar" style="display:none;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-      <div style="flex:1;min-width:70px;background:#f5f5f7;border-radius:10px;padding:10px;text-align:center">
-        <div style="font-size:22px;font-weight:700" id="stat-total">-</div>
-        <div style="font-size:11px;color:#86868b;margin-top:2px">总计</div>
-      </div>
-      <div style="flex:1;min-width:70px;background:#e8f5e9;border-radius:10px;padding:10px;text-align:center">
-        <div style="font-size:22px;font-weight:700;color:#2e7d32" id="stat-used">-</div>
-        <div style="font-size:11px;color:#86868b;margin-top:2px">已使用</div>
-      </div>
-      <div style="flex:1;min-width:70px;background:#f0f0f0;border-radius:10px;padding:10px;text-align:center">
-        <div style="font-size:22px;font-weight:700;color:#666" id="stat-unused">-</div>
-        <div style="font-size:11px;color:#86868b;margin-top:2px">未使用</div>
-      </div>
-      <div style="flex:1;min-width:70px;background:#fce4ec;border-radius:10px;padding:10px;text-align:center">
-        <div style="font-size:22px;font-weight:700;color:#c62828" id="stat-expired">-</div>
-        <div style="font-size:11px;color:#86868b;margin-top:2px">已过期</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
-      
-      <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
+    <div id="statsBar">
+      <div class="stat-card"><div class="num" id="stat-total">-</div><div class="label">总计</div></div>
+      <div class="stat-card used"><div class="num" id="stat-used">-</div><div class="label">已使用</div></div>
+      <div class="stat-card unused"><div class="num" id="stat-unused">-</div><div class="label">未使用</div></div>
+      <div class="stat-card expired"><div class="num" id="stat-expired">-</div><div class="label">已过期</div></div>
     </div>
 
-    <div id="generateCard" style="display:none;background:#f5f5f7;border-radius:8px;padding:16px;margin-bottom:16px">
+    <div class="toolbar">
+      <button class="btn btn-primary btn-sm" onclick="showGenerate()">➕ 生成新码</button>
+      <button class="btn btn-outline btn-sm" onclick="exportUnused()">📋 导出未使用</button>
+    </div>
+
+    <div id="generateCard">
       <div class="row">
         <span>生成</span>
-        <input type="number" id="newCount" value="5" min="1" max="50" style="width:70px;flex:none">
+        <input type="number" id="newCount" value="5" min="1" max="50">
         <span>个，有效期</span>
-        <input type="number" id="newDays" value="365" min="1" max="3650" style="width:70px;flex:none">
+        <input type="number" id="newDays" value="365" min="1" max="3650">
         <span>天</span>
-        <button class="btn btn-primary btn-sm" onclick="generateCodes()">✅ 确认</button>
+        <button class="btn btn-primary btn-sm" onclick="generateCodes()">确认</button>
         <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
       </div>
-      <div class="row" style="margin-top:8px;color:#86868b;font-size:12px">
-        <span>💡 新格式：BBM-8位字母数字（例：BBM-A3X7K9P2）</span>
-      </div>
+      <div class="hint">💡 新格式：BBM-8位字母数字（例：BBM-A3X7K9P2）</div>
       <div id="codesOutput" class="codes-output"></div>
     </div>
 
-    <div id="msg" style="display:none"></div>
+    <div id="msg"></div>
+    <div id="loading">⏳ 加载中...</div>
 
-    <div id="loading" style="text-align:center;padding:40px;color:#86868b;display:none">⏳ 加载中...</div>
-    <div id="tableWrap" style="display:none">
+    <div id="tableWrap">
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()" style="flex:2;min-width:120px">
-        <select id="statusFilter" onchange="filterCodes()" style="flex:none;height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:13px;outline:none"><option value="all">全部状态</option><option value="unused">未使用</option><option value="used">已使用</option><option value="expired">已过期</option></select><button class="btn btn-outline btn-sm" onclick="exportUnused()" style="white-space:nowrap">📋 导出未使用</button>
-        <span style="color:#6e6e73;font-size:13px;white-space:nowrap">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
+        <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()">
+        <select id="statusFilter" onchange="filterCodes()">
+          <option value="all">全部状态</option>
+          <option value="unused">未使用</option>
+          <option value="used">已使用</option>
+          <option value="expired">已过期</option>
+        </select>
+        <span class="page-info">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
       </div>
-      <div style="overflow-x:auto">
+      <div class="table-wrap">
         <table>
           <thead>
             <tr>
@@ -153,65 +201,53 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
               <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('lastAccess')" id="th-last">最近活跃 <span class="sort-icon">↕</span></th>
-              <th>操作</th>
+              <th style="cursor:default">操作</th>
             </tr>
           </thead>
           <tbody id="codeTable"></tbody>
         </table>
       </div>
+      <div class="pagination" id="pagination"></div>
     </div>
   </div>
 </div>
 
 <script>
-const WORKER = 'https://bluebook-auth.bluebookmax.workers.dev';
-const KEY_KEY = 'bbm_admin_key';
+var WORKER = 'https://bluebook-auth.bluebookmax.workers.dev';
+var KEY_KEY = 'bbm_admin_key';
+var PAGE_SIZE = 20;
+var allCodes = [], filteredCodes = [], sortField = null, sortAsc = true, searchQuery = '', currentPage = 1;
 
-// ---- Data State ----
-let allCodes = [];
-let filteredCodes = [];
-let sortField = null;
-let sortAsc = true;
-let searchQuery = '';
-
-// ---- Auth ----
-function getStoredKey() {
-  return localStorage.getItem(KEY_KEY) || '';
+function api(ep, body) {
+  var key = localStorage.getItem(KEY_KEY) || '';
+  return fetch(WORKER + ep, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(Object.assign({}, body, {admin_key:key})) }).then(function(r){return r.json();});
 }
 
 function doLogin() {
-  const key = document.getElementById('loginKey').value.trim();
+  var key = document.getElementById('loginKey').value.trim();
   if (!key) return;
-  document.getElementById('loginBtn').disabled = true;
-  document.getElementById('loginBtn').textContent = '验证中...';
+  var btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = '验证中...';
   document.getElementById('loginError').style.display = 'none';
-
-  fetch(WORKER + '/list', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ admin_key: key })
-  })
-  .then(r => r.json())
-  .then(data => {
+  fetch(WORKER + '/list', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({admin_key:key}) })
+  .then(function(r){return r.json();})
+  .then(function(data){
     if (data.ok) {
       localStorage.setItem(KEY_KEY, key);
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminScreen').style.display = 'block';
       document.getElementById('adminBadge').textContent = '已登录';
       loadCodes();
-    } else {
-      document.getElementById('loginError').textContent = data.error || '密钥错误';
-      document.getElementById('loginError').style.display = 'block';
-      document.getElementById('loginBtn').disabled = false;
-      document.getElementById('loginBtn').textContent = '登录';
-    }
+    } else { showLoginError(data.error || '密钥错误'); }
   })
-  .catch(e => {
-    document.getElementById('loginError').textContent = '网络错误: ' + e.message;
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginBtn').disabled = false;
-    document.getElementById('loginBtn').textContent = '登录';
-  });
+  .catch(function(e){ showLoginError('网络错误: ' + e.message); });
+}
+
+function showLoginError(m) {
+  var el = document.getElementById('loginError');
+  el.textContent = '❌ ' + m; el.style.display = 'block';
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('loginBtn').textContent = '登录';
 }
 
 function doLogout() {
@@ -223,330 +259,245 @@ function doLogout() {
   document.getElementById('loginBtn').textContent = '登录';
 }
 
-const savedKey = getStoredKey();
-if (savedKey) {
-  document.getElementById('loginKey').value = savedKey;
-  doLogin();
-}
-
-document.getElementById('loginKey').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
-
-// ---- Admin Functions ----
-function msg(text, type) {
-  const el = document.getElementById('msg');
-  el.textContent = text;
-  el.className = 'msg msg-' + type;
-  el.style.display = 'block';
-}
-
-function clearMsg() {
-  const el = document.getElementById('msg');
-  el.style.display = 'none';
-  el.className = 'msg';
-}
-
-function api(endpoint, body) {
-  const key = getStoredKey();
-  return fetch(WORKER + endpoint, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ ...body, admin_key: key })
-  }).then(r => r.json());
-}
-
-function showGenerate() {
-  document.getElementById('generateCard').style.display = 'block';
-  document.getElementById('codesOutput').style.display = 'none';
-}
-function hideGenerate() {
-  document.getElementById('generateCard').style.display = 'none';
-}
-
-// ---- Sort & Filter ----
-function sortBy(field) {
-  if (sortField === field) {
-    sortAsc = !sortAsc;
-  } else {
-    sortField = field;
-    sortAsc = true;
-  }
-
-  // Update header indicators
-  document.querySelectorAll('th').forEach(th => th.classList.remove('active'));
-  const thMap = { code:'th-code', status:'th-status', devices:'th-devices', expiresAt:'th-expires', createdAt:'th-created' };
-  const activeTh = document.getElementById(thMap[field]);
-  if (activeTh) {
-    activeTh.classList.add('active');
-    activeTh.querySelector('.sort-icon').textContent = sortAsc ? '↑' : '↓';
-  }
-
-  renderTable();
-}
-
-function filterCodes() {
-  searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
-  renderTable();
-}
-
-// ---- Render ----
-function renderTable() {
-  // Apply search filter + status filter
-  var statusVal = document.getElementById('statusFilter').value;
-  var now3 = new Date();
-  filteredCodes = allCodes.filter(function(c) {
-    if (searchQuery && !c.code.toLowerCase().includes(searchQuery)) return false;
-    if (statusVal !== 'all') {
-      var isExpired = new Date(c.expiresAt) < now3;
-      var isUsed = c.devices > 0;
-      if (statusVal === 'unused' && (isUsed || isExpired)) return false;
-      if (statusVal === 'used' && !isUsed) return false;
-      if (statusVal === 'expired' && !isExpired) return false;
-    }
-    return true;
-  });
-
-  // Apply sort
-  if (sortField) {
-    filteredCodes = [...filteredCodes].sort((a, b) => {
-      let va, vb;
-      switch (sortField) {
-        case 'code':
-          va = a.code; vb = b.code;
-          break;
-        case 'status':
-          va = getStatusOrder(a); vb = getStatusOrder(b);
-          break;
-        case 'devices':
-          va = a.devices; vb = b.devices;
-          break;
-        case 'expiresAt':
-          va = a.expiresAt || ''; vb = b.expiresAt || '';
-          break;
-        case 'createdAt':
-          va = a.createdAt || ''; vb = b.createdAt || '';
-          break;
-        case 'lastAccess':
-          va = a.lastAccess || 0; vb = b.lastAccess || 0;
-          break;
-        default:
-          va = a.code; vb = b.code;
-      }
-      if (va < vb) return sortAsc ? -1 : 1;
-      if (va > vb) return sortAsc ? 1 : -1;
-      return 0;
-    });
-  }
-
-  document.getElementById('shownCount').textContent = filteredCodes.length;
-
-  const tbody = document.getElementById('codeTable');
-  const now = new Date();
-  tbody.innerHTML = filteredCodes.map(c => {
-    const used = c.devices > 0;
-    const expires = new Date(c.expiresAt);
-    const expired = expires < now;
-    const status = expired ? '<span class="badge badge-red">已过期</span>' :
-                   used ? '<span class="badge badge-green">已使用</span>' :
-                          '<span class="badge badge-gray">未使用</span>';
-    const hasDevices = c.devices > 0;
-    return '<tr>' +
-      '<td class="key-input" data-revealed="false">' +
-        '<span class="code-masked" style="font-weight:500;font-family:\'SF Mono\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
-        '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(c.code) + '\')" title="显示/隐藏">👁</button>' +
-      '</td>' +
-      '<td>' + status + '</td>' +
-      '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
-      '<td>' + formatDate(c.expiresAt) + '</td>' +
-      '<td style="color:#86868b;font-size:12px">' + formatDate(c.createdAt) + '</td>' +
-      '<td style="color:#86868b;font-size:12px">' + timeAgo(c.lastAccess || c.boundAt) + '</td>' +
-      '<td>' +
-        '<div class="action-btns">' +
-        (hasDevices
-          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')" title="解绑设备">🔓 解绑</button>'
-          : '<span style="color:#ccc;font-size:11px">-</span>') +
-        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')" title="删除此激活码">🗑️ 删除</button>' +
-        '</div>' +
-      '</td>' +
-      '</tr>';
-  }).join('');
-}
-
-function escHtml(s) {
-  const div = document.createElement('div');
-  div.textContent = s;
-  return div.innerHTML;
-}
-
-function escJsStr(s) {
-  return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
-function getStatusOrder(c) {
-  const now = new Date();
-  if (new Date(c.expiresAt) < now) return 2; // expired
-  if (c.devices > 0) return 1; // used
-  return 0; // unused
-}
-
-function formatDate(d) {
-  if (!d) return '-';
-  return new Date(d).toISOString().slice(0, 10);
-}
-
-// ---- Load ----
 async function loadCodes() {
   clearMsg();
   document.getElementById('loading').style.display = 'block';
   document.getElementById('tableWrap').style.display = 'none';
-
-  const data = await api('/list', {});
+  var data = await api('/list', {});
   document.getElementById('loading').style.display = 'none';
-
-  if (!data.ok) {
-    msg('❌ ' + (data.error || '加载失败'), 'error');
-    return;
-  }
-
+  if (!data.ok) { msg('❌ ' + (data.error||'加载失败'), 'error'); return; }
   allCodes = data.codes || [];
   document.getElementById('totalCount').textContent = allCodes.length;
-
-  var now2 = new Date();
-  var used = allCodes.filter(function(c){return c.devices > 0;}).length;
-  var expired = allCodes.filter(function(c){return new Date(c.expiresAt) < now2;}).length;
-  var unused = allCodes.length - used - expired;
+  var now = new Date(), used = 0, expired = 0;
+  allCodes.forEach(function(c){
+    if (c.expiresAt && new Date(c.expiresAt) < now) expired++;
+    else if (c.devices > 0) used++;
+  });
   document.getElementById('stat-total').textContent = allCodes.length;
   document.getElementById('stat-used').textContent = used;
-  document.getElementById('stat-unused').textContent = unused;
+  document.getElementById('stat-unused').textContent = allCodes.length - used - expired;
   document.getElementById('stat-expired').textContent = expired;
-  var sb = document.getElementById('statsBar');
-  if (sb) sb.style.display = 'flex';
-
-  // Reset sort state
-  sortField = null;
-  sortAsc = true;
-  document.querySelectorAll('th').forEach(th => {
+  document.getElementById('statsBar').style.display = 'flex';
+  sortField = null; sortAsc = true; currentPage = 1;
+  document.querySelectorAll('th').forEach(function(th){
     th.classList.remove('active');
-    const icon = th.querySelector('.sort-icon');
-    if (icon) icon.textContent = '↕';
+    var ic = th.querySelector('.sort-icon');
+    if (ic) ic.textContent = '\u2195';
   });
-
   document.getElementById('tableWrap').style.display = 'block';
   renderTable();
 }
 
-// ---- Operations ----
-async function unbindAll(code) {
-  if (!confirm('确定解绑 ' + code + ' 的所有设备？\n解绑后该码将恢复为"未使用"状态。')) return;
-  const data = await api('/unbind', { code });
-  if (data.ok) {
-    msg('✅ 解绑成功！剩余设备位: ' + data.devicesLeft, 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '解绑失败'), 'error');
+function sortBy(field) {
+  if (sortField === field) {
+    if (sortAsc === true) sortAsc = false;
+    else { sortField = null; sortAsc = true; }
+  } else { sortField = field; sortAsc = true; }
+  document.querySelectorAll('th').forEach(function(t){t.classList.remove('active');});
+  var m = {code:'th-code',status:'th-status',devices:'th-devices',expiresAt:'th-expires',createdAt:'th-created',lastAccess:'th-last'};
+  var at = document.getElementById(m[field]);
+  if (at) {
+    if (sortField === null) {
+      at.classList.remove('active');
+      var ic = at.querySelector('.sort-icon');
+      if (ic) ic.textContent = '\u2195';
+    } else {
+      at.classList.add('active');
+      var ic2 = at.querySelector('.sort-icon');
+      if (ic2) ic2.textContent = sortAsc ? '\u2191' : '\u2193';
+    }
   }
+  currentPage = 1; renderTable();
+}
+
+function filterCodes() {
+  searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+  currentPage = 1; renderTable();
+}
+
+function renderTable() {
+  var sv = document.getElementById('statusFilter').value;
+  var now = new Date();
+  filteredCodes = allCodes.filter(function(c){
+    if (searchQuery && c.code.toLowerCase().indexOf(searchQuery) === -1) return false;
+    if (sv !== 'all') {
+      var ex = c.expiresAt && new Date(c.expiresAt) < now;
+      var us = !ex && c.devices > 0;
+      if (sv==='unused' && (us||ex)) return false;
+      if (sv==='used' && !us) return false;
+      if (sv==='expired' && !ex) return false;
+    }
+    return true;
+  });
+  if (sortField) {
+    filteredCodes = filteredCodes.slice().sort(function(a,b){
+      var va,vb;
+      switch(sortField){
+        case 'code': va=a.code; vb=b.code; break;
+        case 'status': va=getStatusOrder(a); vb=getStatusOrder(b); break;
+        case 'devices': va=a.devices; vb=b.devices; break;
+        case 'expiresAt': va=a.expiresAt||''; vb=b.expiresAt||''; break;
+        case 'createdAt': va=a.createdAt||''; vb=b.createdAt||''; break;
+        case 'lastAccess': va=a.lastAccess||0; vb=b.lastAccess||0; break;
+        default: va=a.code; vb=b.code;
+      }
+      if(va<vb) return sortAsc?-1:1;
+      if(va>vb) return sortAsc?1:-1;
+      return 0;
+    });
+  }
+  document.getElementById('shownCount').textContent = filteredCodes.length;
+  var tp = Math.max(1, Math.ceil(filteredCodes.length / PAGE_SIZE));
+  if (currentPage > tp) currentPage = tp;
+  var st = (currentPage - 1) * PAGE_SIZE;
+  var pc = filteredCodes.slice(st, st + PAGE_SIZE);
+  var tb = document.getElementById('codeTable');
+  tb.innerHTML = pc.map(function(c){
+    var ex = c.expiresAt && new Date(c.expiresAt) < now;
+    var us = !ex && c.devices > 0;
+    var sts = ex ? '<span class="badge badge-red">已过期</span>' : us ? '<span class="badge badge-green">已使用</span>' : '<span class="badge badge-gray">未使用</span>';
+    var dt = c.devices > 0 ? '已绑定 ' + c.devices + ' 台' : '-';
+    return '<tr><td><div class="code-cell"><span class="code-text">' + escHtml(c.code) + '</span><button class="copy-btn" onclick="copyCode(' + "'" + escJsStr(c.code) + "'" + ',this)" title="复制">📋</button></div></td><td>' + sts + '</td><td>' + dt + '</td><td>' + formatDate(c.expiresAt) + '</td><td>' + formatDate(c.createdAt) + '</td><td>' + timeAgo(c.lastAccess||c.boundAt) + '</td><td><div class="action-btns">' + (c.devices>0?'<button class="btn btn-unbind btn-xs" onclick="unbindAll(' + "'" + escJsStr(c.code) + "'" + ')" title="解绑所有设备">🔓</button>':'<span style="color:#ccc">-</span>') + '<button class="btn btn-danger btn-icon" onclick="deleteCode(' + "'" + escJsStr(c.code) + "'" + ')" title="删除此激活码">✕</button></div></td></tr>';
+  }).join('');
+  renderPagination(tp);
+}
+
+function renderPagination(tp) {
+  var el = document.getElementById('pagination');
+  if (tp <= 1) { el.innerHTML = ''; return; }
+  var h = '<button class="page-btn' + (currentPage<=1?' disabled':'') + '" onclick="goToPage('+(currentPage-1)+')"' + (currentPage<=1?' disabled':'') + '>‹</button>';
+  var sp = Math.max(1, currentPage-2), ep = Math.min(tp, currentPage+2);
+  if (sp>1) h += '<button class="page-btn" onclick="goToPage(1)">1</button>';
+  if (sp>2) h += '<span class="page-info">…</span>';
+  for (var i=sp; i<=ep; i++) h += '<button class="page-btn' + (i===currentPage?' active':'') + '" onclick="goToPage('+i+')">'+i+'</button>';
+  if (ep<tp-1) h += '<span class="page-info">…</span>';
+  if (ep<tp) h += '<button class="page-btn" onclick="goToPage('+tp+')">'+tp+'</button>';
+  h += '<button class="page-btn' + (currentPage>=tp?' disabled':'') + '" onclick="goToPage('+(currentPage+1)+')"' + (currentPage>=tp?' disabled':'') + '>›</button>';
+  h += '<span class="page-info">第 ' + currentPage + '/' + tp + ' 页</span>';
+  el.innerHTML = h;
+}
+
+function goToPage(n) {
+  var tp = Math.max(1, Math.ceil(filteredCodes.length / PAGE_SIZE));
+  if (n<1||n>tp) return;
+  currentPage = n; renderTable();
+}
+
+function escHtml(s) { var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function escJsStr(s) { return s.replace(/\\\\/g,'\\\\\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+function getStatusOrder(c) { var n=new Date(); if(c.expiresAt&&new Date(c.expiresAt)<n) return 2; if(c.devices>0) return 1; return 0; }
+function formatDate(d) { if(!d) return '-'; try{return new Date(d).toISOString().slice(0,10);}catch(e){return '-';} }
+
+function timeAgo(ts) {
+  if (!ts) return '-';
+  try {
+    var t = new Date(ts).getTime();
+    if (isNaN(t)) return '-';
+    var diff = Date.now() - t;
+    if (diff < 0) return '刚刚';
+    var mins = Math.floor(diff/60000);
+    if (mins < 1) return '刚刚';
+    if (mins < 60) return mins + '分钟前';
+    var hrs = Math.floor(mins/60);
+    if (hrs < 24) return hrs + '小时前';
+    var days = Math.floor(hrs/24);
+    if (days < 7) return days + '天前';
+    var dt = new Date(t);
+    var mm = (dt.getMonth()+1).toString().padStart(2,'0');
+    var dd = dt.getDate().toString().padStart(2,'0');
+    var hh = dt.getHours().toString().padStart(2,'0');
+    var mn = dt.getMinutes().toString().padStart(2,'0');
+    return mm+'/'+dd+' '+hh+':'+mn;
+  } catch(e){return '-';}
+}
+
+async function unbindAll(code) {
+  if (!confirm('确定解绑 ' + code + ' 的所有设备？\\n解绑后该码将恢复为"未使用"状态。')) return;
+  var data = await api('/unbind', {code:code});
+  if (data.ok) { msg('✅ 解绑成功！剩余设备位: '+data.devicesLeft, 'success'); loadCodes(); }
+  else { msg('❌ '+(data.error||'解绑失败'), 'error'); }
 }
 
 async function deleteCode(code) {
-  if (!confirm('⚠️ 确定要永久删除激活码 ' + code + ' 吗？\n此操作不可撤销！')) return;
-  const data = await api('/codes/delete', { code });
-  if (data.ok) {
-    msg('✅ ' + (data.message || '删除成功'), 'success');
-    loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '删除失败'), 'error');
-  }
+  if (!confirm('⚠️ 确定要永久删除激活码 ' + code + ' 吗？\\n此操作不可撤销！')) return;
+  var data = await api('/codes/delete', {code:code});
+  if (data.ok) { msg('✅ '+(data.message||'删除成功'), 'success'); loadCodes(); }
+  else { msg('❌ '+(data.error||'删除失败'), 'error'); }
 }
 
 async function generateCodes() {
-  const count = parseInt(document.getElementById('newCount').value) || 5;
-  const days = parseInt(document.getElementById('newDays').value) || 365;
-
-  const codes = [];
-  const seen = new Set();
+  var count = parseInt(document.getElementById('newCount').value)||5;
+  var days = parseInt(document.getElementById('newDays').value)||365;
+  var codes = [], seen = {};
   while (codes.length < count) {
-    // 生成随机8位数字
-    let code;
-    do {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      code = 'BBM-' + Array.from({length:8}, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
-    } while (seen.has(code));
-    seen.add(code);
-    codes.push(code);
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var code = 'BBM-';
+    for (var j=0;j<8;j++) code += chars.charAt(Math.floor(Math.random()*chars.length));
+    if (seen[code]) continue;
+    seen[code] = true; codes.push(code);
   }
-
-  const data = await api('/codes/create', { codes, days });
+  var data = await api('/codes/create', {codes:codes, days:days});
   if (data.ok) {
-    const expires = new Date(data.expiresAt).toISOString().slice(0, 10);
-    const output = document.getElementById('codesOutput');
-    output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total - data.created) + ' 个重复）<br>有效期至: ' + expires + '<br><br>' +
-      codes.map((c, i) => '  ' + (i + 1) + '.  <strong>' + c + '</strong>').join('<br>');
-    output.style.display = 'block';
-    msg('✅ 已生成 ' + data.created + ' 个激活码！', 'success');
+    var es = data.expiresAt ? new Date(data.expiresAt).toISOString().slice(0,10) : '-';
+    var html = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total-data.created) + ' 个重复）<br>有效期至: ' + es + '<br><br>';
+    for (var i=0;i<codes.length;i++) html += '  '+(i+1)+'. <strong>'+codes[i]+'</strong><br>';
+    document.getElementById('codesOutput').innerHTML = html;
+    document.getElementById('codesOutput').style.display = 'block';
+    msg('✅ 已生成 '+data.created+' 个激活码！', 'success');
     loadCodes();
-  } else {
-    msg('❌ ' + (data.error || '生成失败'), 'error');
-  }
+  } else { msg('❌ '+(data.error||'生成失败'), 'error'); }
 }
 
+function showGenerate() { document.getElementById('generateCard').style.display='block'; document.getElementById('codesOutput').style.display='none'; }
+function hideGenerate() { document.getElementById('generateCard').style.display='none'; }
 
-// Code visibility toggle
-function toggleCode(btn) {
-  var td = btn.closest('td');
-  var code = btn.getAttribute('data-code');
-  var maskedSpan = td.querySelector('.code-masked');
-  var visibleSpan = td.querySelector('.code-visible');
-  if (!maskedSpan || !visibleSpan) return;
-  if (maskedSpan.style.display === 'none') {
-    maskedSpan.style.display = 'inline';
-    visibleSpan.style.display = 'none';
-    btn.textContent = '👁';
-  } else {
-    maskedSpan.style.display = 'none';
-    visibleSpan.style.display = 'inline';
-    btn.textContent = '🙈';
-  }
-}
-
-function timeAgo(ts) {
-  if (!ts) return '从未';
-  var diff = Date.now() - parseInt(ts, 10);
-  if (diff < 0) return '刚刚';
-  var mins = Math.floor(diff / 60000);
-  if (mins < 1) return '刚刚';
-  if (mins < 60) return mins + '分钟前';
-  var hrs = Math.floor(mins / 60);
-  if (hrs < 24) return hrs + '小时前';
-  var days = Math.floor(hrs / 24);
-  if (days < 30) return days + '天前';
-  return Math.floor(days/30) + '个月前';
-}
-// Export unused codes
 function exportUnused() {
-  var codes = [];
-  for (var i = 0; i < allCodes.length; i++) {
-    var c = allCodes[i];
-    if (new Date(c.expiresAt) >= new Date() && c.devices === 0) codes.push(c.code);
-  }
-  if (codes.length === 0) { msg('没有未使用的激活码', 'error'); return; }
-  copyText(codes.join('\n'), '✅ 已复制 ' + codes.length + ' 个未使用激活码到剪贴板');
+  var codes = [], now = new Date();
+  allCodes.forEach(function(c){
+    var ex = c.expiresAt && new Date(c.expiresAt) < now;
+    if (!ex && c.devices === 0) codes.push(c.code);
+  });
+  if (codes.length===0) { msg('没有未使用的激活码', 'error'); return; }
+  copyText(codes.join('\\n'), '✅ 已复制 '+codes.length+' 个未使用激活码到剪贴板');
 }
+
+function copyCode(code, btn) {
+  copyText(code, '✅ 已复制：'+code);
+  btn.textContent = '✅'; btn.classList.add('copied');
+  setTimeout(function(){btn.textContent='📋';btn.classList.remove('copied');},2000);
+}
+
 function copyText(text, successMsg) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() { msg(successMsg, 'success'); }).catch(function() { fallbackCopy(text, successMsg); });
-  } else { fallbackCopy(text, successMsg); }
+    navigator.clipboard.writeText(text).then(function(){msg(successMsg,'success');}).catch(function(){fallbackCopy(text,successMsg);});
+  } else { fallbackCopy(text,successMsg); }
 }
+
 function fallbackCopy(text, successMsg) {
   var ta = document.createElement('textarea');
-  ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); msg(successMsg, 'success'); } catch(e) { prompt('复制以下内容：', text); }
+  try { document.execCommand('copy'); msg(successMsg,'success'); } catch(e) { prompt('复制以下内容：',text); }
   document.body.removeChild(ta);
 }
-// Mobile responsive
-(function(){var s=document.createElement('style');s.textContent='@media(max-width:480px){#loginScreen .card{padding:24px 20px;margin:10px}#loginScreen h1{font-size:20px}#loginScreen input{height:40px;font-size:14px}#loginScreen .btn{height:40px;font-size:14px}#statsBar>div{min-width:calc(50% - 10px);margin-bottom:6px}}';document.head.appendChild(s);})();
 
+function msg(text, type) {
+  var el = document.getElementById('msg');
+  el.textContent = text; el.className = type||'';
+  el.style.display='block'; clearTimeout(el._timer);
+  el._timer=setTimeout(function(){el.style.display='none';},4000);
+}
+function clearMsg() { var el=document.getElementById('msg'); el.style.display='none'; el.textContent=''; }
+
+(function(){
+  var key = localStorage.getItem(KEY_KEY)||'';
+  if (key) {
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminScreen').style.display='block';
+    document.getElementById('adminBadge').textContent='已登录';
+    loadCodes();
+  }
+})();
 </script>
 </body>
 </html>
