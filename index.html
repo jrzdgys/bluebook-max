@@ -156,6 +156,21 @@ body{
 .history-content.show{max-height:6000px}
 .history-content .date-group{margin-top:24px}
 
+/* ===== Week Group ===== */
+.week-group{margin-bottom:12px;border:1px solid rgba(0,0,0,.06);border-radius:12px;background:rgba(255,255,255,.5);overflow:hidden}
+.week-header{
+  display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;
+  font-size:15px;font-weight:600;color:#1D1D1F;user-select:none;
+  transition:background .2s;
+}
+.week-header:hover{background:rgba(0,0,0,.03)}
+.week-header .week-arrow{font-size:12px;color:#AEAEB2;flex-shrink:0}
+.week-header .count{font-size:12px;font-weight:400;color:#AEAEB2;margin-left:auto}
+.week-cards{overflow:hidden;max-height:6000px;transition:max-height .35s ease}
+.week-cards .date-group{margin:0 18px 16px}
+.week-cards .date-group:first-child{margin-top:4px}
+
+
 /* ===== Features ===== */
 .features-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
@@ -355,18 +370,11 @@ body{
   </div>
 </section>
 
-<!-- ===== 历史报告 ===== -->
+<!-- ===== 历史报告（按周分组） ===== -->
 <section class="section" style="padding-top:0">
   <div class="container">
-    <div class="history-section">
-      <button class="history-toggle" id="history-btn" onclick="toggleHistory()">
-        查看历史报告 <span class="arrow">▾</span>
-      </button>
-      <div class="history-content" id="history-content">
-        <div id="history-reports">
-          <div class="empty-state"><div class="icon">📂</div>暂无历史报告</div>
-        </div>
-      </div>
+    <div id="history-sections">
+      <div class="empty-state" id="history-loading"><div class="icon">📂</div>加载中...</div>
     </div>
     <div id="free-hint" style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:16px;padding:12px 18px;background:rgba(255,149,0,.05);border-radius:14px">
       🎁 新用户可免费试看 1 份完整报告
@@ -461,119 +469,101 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     '</div><div class="r-title">' + (r.title || '蓝宝书Max报告') + '</div></a>';
 }
 
+
 (function loadReports() {
-  fetch('manifest.json?' + Date.now()).then(function(resp) {
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    return resp.json();
-  }).then(function(manifest) {
-    var reports = (manifest.reports || []).filter(function(r) { return r.date !== 'test'; })
-      .sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-
-    document.getElementById('stat-reports').textContent = reports.length || '—';
-    var totalStocks = 0;
-    reports.forEach(function(r) { totalStocks += (r.stock_count || 10); });
-    document.getElementById('stat-stocks').textContent = totalStocks > 0 ? totalStocks : '—';
-
-    var isAuth = Paywall.isAuthenticated();
-    if (isAuth) {
-      document.getElementById('auth-badge').innerHTML =
-        '<span style="font-size:11px;color:#34C759;background:rgba(52,199,89,.1);padding:3px 10px;border-radius:100px">✓ 已订阅</span>';
-      document.getElementById('nav-status').style.display = 'flex';
-      document.getElementById('btn-nav-login').textContent = '已登录';
-      document.getElementById('btn-nav-login').style.color = '#34C759';
-      document.getElementById('btn-nav-login').style.background = 'rgba(52,199,89,.08)';
+  function getWeekInfo(dateStr) {
+    var y=parseInt(dateStr.slice(0,4),10),m=parseInt(dateStr.slice(4,6),10)-1,d=parseInt(dateStr.slice(6,8),10);
+    var dt=new Date(y,m,d);
+    var dn=(dt.getDay()+6)%7;dt.setDate(dt.getDate()-dn+3);
+    var j4=new Date(dt.getFullYear(),0,4);
+    var wn=1+Math.round(((dt-j4)/86400000-3+(j4.getDay()+6)%7)/7);
+    return {key:'W'+String(wn).padStart(2,'0'),week:wn,year:dt.getFullYear()};
+  }
+  function fmtRange(keys) {
+    if(!keys||!keys.length)return'';
+    var f=keys[0],l=keys[keys.length-1];
+    return f.slice(4,6)+'/'+f.slice(6,8)+'-'+l.slice(4,6)+'/'+l.slice(6,8);
+  }
+  function wkLabel(wk,info) {
+    var n=new Date();
+    var ts=n.getFullYear()+String(n.getMonth()+1).padStart(2,'0')+String(n.getDate()).padStart(2,'0');
+    var cw=getWeekInfo(ts);
+    if(wk===cw.key)return('\u672c\u5468\uff08'+fmtRange(Object.keys(info.dates).sort())+'\uff09');
+    var lw='W'+String(cw.week-1<=0?52:cw.week-1).padStart(2,'0');
+    if(wk===lw)return('\u4e0a\u5468');
+    return info.year+'\u5e74\u7b2c'+wk.slice(1)+'\u5468';
+  }
+  fetch('manifest.json?'+Date.now()).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();})
+  .then(function(mf){
+    var rps=(mf.reports||[]).filter(function(r){return r.date!=='test';})
+      .sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
+    document.getElementById('stat-reports').textContent=rps.length||'\u2014';
+    var ts=0;rps.forEach(function(r){ts+=(r.stock_count||10);});
+    document.getElementById('stat-stocks').textContent=ts>0?ts:'\u2014';
+    var isAuth=Paywall.isAuthenticated();
+    if(isAuth){
+      document.getElementById('auth-badge').innerHTML=Paywall.unlockBadge();
+      document.getElementById('nav-status').style.display='flex';
+      document.getElementById('btn-nav-login').textContent='\u5df2\u8ba2\u9605';
+      document.getElementById('btn-nav-login').style.color='#34C759';
+      document.getElementById('btn-nav-login').style.background='rgba(52,199,89,.08)';
     }
-
-    if (reports.length === 0) {
-      document.getElementById('today-reports').innerHTML =
-        '<div class="empty-state"><div class="icon">📡</div>暂无报告</div>';
-      return;
+    if(!rps.length){
+      document.getElementById('today-reports').innerHTML='<div class="empty-state"><div class="icon">\U0001f4e1</div>\u6682\u65e0\u62a5\u544a</div>';return;
     }
-
-    var editionLabels = { am: '晨会版', mc: '晨会版', md: '午间版', pm: '午间版', ev: '晚间版', global: '全球版', gv: '全球版' };
-    var today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-
-    var todayReports = [];
-    var historyMap = {};
-
-    reports.forEach(function(r, i) {
-      if (r.date === today) {
-        todayReports.push({ r: r, originalIndex: i });
-      } else {
-        var key = r.date || 'unknown';
-        if (!historyMap[key]) historyMap[key] = [];
-        historyMap[key].push({ r: r, originalIndex: i });
+    var edLbl={am:'\u6668\u4f1a\u7248',mc:'\u6668\u4f1a\u7248',md:'\u5348\u95f4\u7248',pm:'\u5348\u95f4\u7248',ev:'\u665a\u95f4\u7248',global:'\u5168\u7403\u7248',gv:'\u5168\u7403\u7248'};
+    var edOrd={gv:0,mc:1,pm:2,ev:3};
+    var today=new Date().toISOString().slice(0,10).replace(/-/g,'');
+    var tR=[],wM={};
+    rps.forEach(function(r,i){
+      if(r.date===today)tR.push({r:r,idx:i});
+      else{
+        var wk=getWeekInfo(r.date);
+        if(!wM[wk.key])wM[wk.key]={year:wk.year,week:wk.week,dates:{},items:[]};
+        wM[wk.key].items.push({r:r,idx:i});
+        wM[wk.key].dates[r.date]=true;
       }
     });
-
-    var todayGrid = document.getElementById('today-reports');
-    var todayCount = 0;
-    if (todayReports.length > 0) {
-      todayCount = todayReports.length;
-      todayGrid.innerHTML = '<div class="date-group">' +
-        '<div class="date-label"><span class="dot today-dot"></span>今天<span class="count">' + todayCount + '份</span></div>' +
-        '<div class="reports-grid">' +
-        todayReports.map(function(item) {
-          return renderCard(item.r, item.originalIndex === 0, isAuth, editionLabels);
-        }).join('') +
-        '</div></div>';
-    } else if (reports.length > 0) {
-      var latest = reports[0];
-      todayGrid.innerHTML = '<div class="date-group">' +
-        '<div class="date-label"><span class="dot"></span>最新<span class="count">1份</span></div>' +
-        '<div class="reports-grid">' +
-        renderCard(latest, true, isAuth, editionLabels) +
-        '</div></div>';
+    var tg=document.getElementById('today-reports');
+    if(tR.length){
+      tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot today-dot"></span>\u4eca\u5929<span class="count">'+tR.length+'\u4efd</span></div><div class="reports-grid">'+
+        tR.sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
+        .map(function(it){return renderCard(it.r,it.idx===0,isAuth,edLbl);}).join('')+'</div></div>';
+    }else if(rps.length){
+      tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot"></span>\u6700\u65b0<span class="count">1\u4efd</span></div><div class="reports-grid">'+
+        renderCard(rps[0],true,isAuth,edLbl)+'</div></div>';
     }
-
-    document.getElementById('report-count').textContent = '共 ' + reports.length + ' 份';
-
-    var historyDates = Object.keys(historyMap).sort().reverse();
-    if (historyDates.length > 0) {
-      var historyHTML = '';
-      historyDates.forEach(function(dateKey) {
-        var items = historyMap[dateKey];
-        var dateParts = (dateKey || '').match(/(\d{4})(\d{2})(\d{2})/);
-        var displayDate = dateParts
-          ? dateParts[1] + '年' + dateParts[2] + '月' + dateParts[3] + '日'
-          : dateKey;
-        historyHTML += '<div class="date-group">' +
-          '<div class="date-label"><span class="dot" style="background:#AEAEB2"></span>' + displayDate +
-          '<span class="count">' + items.length + '份</span></div>' +
-          '<div class="reports-grid">' +
-          items.map(function(item) { return renderCard(item.r, false, isAuth, editionLabels); }).join('') +
-          '</div></div>';
+    document.getElementById('report-count').textContent='\u5171 '+rps.length+' \u4efd';
+    var wkKeys=Object.keys(wM).sort(function(a,b){return(wM[b].year*100+wM[b].week)-(wM[a].year*100+wM[a].week);});
+    var cw=getWeekInfo(today);
+    var sec=document.getElementById('history-sections');
+    if(wkKeys.length){
+      var h='';
+      wkKeys.forEach(function(wk){
+        var inf=wM[wk],dk=Object.keys(inf.dates).sort(),isCW=(wk===cw.key),col=!isCW;
+        h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">'+(col?'\u25b8':'\u25be')+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
+          '<div class="week-cards" style="max-height:'+(col?'0px':'6000px')+'">';
+        var dg={};
+        inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
+        Object.keys(dg).sort().reverse().forEach(function(dk){
+          var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
+          var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5':dk;
+          h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+dg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
+            dg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
+            .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
+        });
+        h+='</div></div>';
       });
-      document.getElementById('history-reports').innerHTML = historyHTML;
-    } else {
-      document.getElementById('history-reports').innerHTML =
-        '<div class="empty-state"><div class="icon">📂</div>更多历史报告将陆续归档</div>';
+      sec.innerHTML=h;
+    }else{
+      sec.innerHTML='<div class="empty-state"><div class="icon">\U0001f4c2</div>\u66f4\u591a\u5386\u53f2\u62a5\u544a\u5c06\u9646\u7eed\u5f52\u6863</div>';
     }
-
-    if (isAuth) {
-      document.getElementById('free-hint').innerHTML =
-        '<span style="color:#34C759">✓ 已订阅 · 所有报告可无限查看</span>';
-    }
-
-  }).catch(function(e) {
+    if(isAuth)document.getElementById('free-hint').innerHTML=Paywall.unlockBadge();
+  }).catch(function(e){
     console.error(e);
-    document.getElementById('today-reports').innerHTML =
-      '<div class="empty-state"><div class="icon">⚠️</div>加载失败，请刷新</div>';
+    document.getElementById('today-reports').innerHTML='<div class="empty-state"><div class="icon">\u26a0\ufe0f</div>\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u5237\u65b0</div>';
   });
 })();
-
-function toggleHistory() {
-  var content = document.getElementById('history-content');
-  var btn = document.getElementById('history-btn');
-  content.classList.toggle('show');
-  btn.classList.toggle('open');
-  if (content.classList.contains('show')) {
-    btn.innerHTML = '收起历史报告 <span class="arrow">▾</span>';
-  } else {
-    btn.innerHTML = '查看历史报告 <span class="arrow">▾</span>';
-  }
-}
-
 
 </script>
 </body>
