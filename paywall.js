@@ -171,32 +171,48 @@ var Paywall = {
   getToken: function() { return localStorage.getItem(AUTH_KEY); },
   activate: function(code) {
     return collectFingerprint().then(function(fpData) {
+      // 双通道并行：Worker + 本地验证，谁先返回用谁
       var controller = new AbortController();
-      var timeout = setTimeout(function() { controller.abort(); }, 20000);
-      return fetch(WORKER_URL + '/activate', {
+      var timeout = setTimeout(function() { controller.abort(); }, 10000);
+      var workerPromise = fetch(WORKER_URL + '/activate', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code: code.toUpperCase(), fp: fpData.hash, canvas: fpData.canvas, stable: fpData.stable, ua: fpData.ua }),
         signal: controller.signal,
-      }).then(function(res) {
+      }).then(function(res) { return res.json(); }).then(function(data) {
         clearTimeout(timeout);
-        return res.json();
-      }).then(function(data) {
         if (data.ok && data.token) {
-          try {
-            localStorage.setItem(AUTH_KEY, data.token);
-            localStorage.setItem(FP_CACHE_KEY, JSON.stringify({ hash: fpData.hash, canvas: fpData.canvas, stable: fpData.stable }));
-            var exp = parseInt(data.token.split('.')[2], 10);
-            if (!isNaN(exp)) localStorage.setItem(EXPIRES_KEY, String(exp));
-          } catch(e) {}
+          storeToken(data.token, fpData);
         }
         return data;
       }).catch(function() {
         clearTimeout(timeout);
-        return verifyCodeLocal(code, fpData);
+        return { ok: false, error: '_worker_failed', _fpData: fpData, _code: code };
+      });
+      var localPromise = verifyCodeLocal(code, fpData).then(function(data) {
+        return data;
+      });
+      return Promise.race([workerPromise, localPromise]).then(function(result) {
+        // 如果 Worker 失败但返回了 fallback 数据
+        if (!result.ok && result.error === '_worker_failed') {
+          return verifyCodeLocal(result._code, result._fpData);
+        }
+        if (!result.ok && result.error === '_worker_failed') {
+          // 如果本地也已经返回过了再次尝试（罕见竞态）
+          return localPromise;
+        }
+        return result;
       });
     }).catch(function() {
       return { ok: false, error: '设备指纹采集失败' };
     });
+  },
+  _storeToken: function(token, fpData) {
+    try {
+      localStorage.setItem(AUTH_KEY, token);
+      localStorage.setItem(FP_CACHE_KEY, JSON.stringify({ hash: fpData.hash, canvas: fpData.canvas, stable: fpData.stable }));
+      var exp = parseInt(token.split('.')[2], 10);
+      if (!isNaN(exp)) localStorage.setItem(EXPIRES_KEY, String(exp));
+    } catch(e) {}
   },
   logout: function() { localStorage.removeItem(AUTH_KEY); localStorage.removeItem(FP_CACHE_KEY); localStorage.removeItem(EXPIRES_KEY); },
   showActivationModal: function(onSuccess) {
