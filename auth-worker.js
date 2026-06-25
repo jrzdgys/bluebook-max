@@ -86,7 +86,7 @@ async function handleVerify(body) {
   return found ? json({ ok: true, code: found }) : json({ ok: false, error: '未找到匹配的激活码' });
 }
 
-async function handleUnbind(body) {
+async async function handleUnbind(body) {
   if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
   var code = (body.code || '').toUpperCase().trim();
   if (!code) return json({ ok: false, error: '缺少激活码' });
@@ -94,8 +94,13 @@ async function handleUnbind(body) {
   try { sub = JSON.parse(await AUTH_CODES.get(code) || '{}'); } catch (e) { sub = {}; }
   if (!sub.fingerprint && (!sub.devices || sub.devices.length === 0))
     return json({ ok: true, message: '该码暂无绑定', devicesLeft: 0 });
-  await AUTH_CODES.delete(code);
-  return json({ ok: true, message: '已完全解绑' });
+  // 只清除设备绑定，不删除记录
+  sub.fingerprint = null;
+  sub.devices = [];
+  sub.boundAt = null;
+  sub.lastAccess = null;
+  await AUTH_CODES.put(code, JSON.stringify(sub));
+  return json({ ok: true, message: '已解绑所有设备', devicesLeft: 0 });
 }
 
 async function handleList(body) {
