@@ -88,11 +88,11 @@ body{
 }
 .btn-primary{background:#0071E3;color:#fff}
 .btn-primary:hover{background:#0077ED;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,113,227,.25)}
-.btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F;display:inline-flex;align-items:center;gap:8px}
+.btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F;display:inline-flex;align-items:center;gap:8px;line-height:1;padding:15px 28px}
 .btn-outline:hover{background:rgba(0,0,0,.08)}
 .btn-zsxq{
   background:linear-gradient(135deg,#07C160,#06AD56);color:#fff;font-size:16px;padding:14px 28px;
-  display:inline-flex;align-items:center;gap:8px;margin:0 auto;
+  display:inline-flex;align-items:center;gap:8px;margin:0 auto;line-height:1;
 }
 .btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(7,193,96,.3)}
 
@@ -227,8 +227,10 @@ body{
 .footer{
   text-align:center;padding:20px 24px;border-top:1px solid rgba(0,0,0,.06);margin-top:24px;
 }
-.footer .disclaimer{font-size:10px;color:#AEAEB2;line-height:1.5;max-width:480px;margin:0 auto 8px}
+.footer .disclaimer-title{font-size:14px;color:#1D1D1F;font-weight:600;margin-bottom:6px}
+.footer .disclaimer{font-size:12px;color:#AEAEB2;line-height:1.6;max-width:520px;margin:0 auto 8px}
 .footer .brand{font-size:11px;color:#86868B}
+.footer .brand-small{font-size:11px;color:#86868B}
 .footer .brand a{color:#0071E3;text-decoration:none}
 
 /* ===== Empty state ===== */
@@ -427,11 +429,12 @@ body{
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="container">
+    <p class="disclaimer-title">蓝宝书Max 为机构投研信息聚合工具</p>
     <p class="disclaimer">
-      蓝宝书Max 为机构投研信息聚合工具 · ⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益。
+      ⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益。
     </p>
     <p class="brand">
-      蓝宝书Max · 行情数据由<a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>提供 · 自动更新
+      <span class="brand-small">蓝宝书Max · 行情数据由<a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>提供 · 自动更新</span>
     </p>
   </div>
 </footer>
