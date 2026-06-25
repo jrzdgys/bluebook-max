@@ -38,7 +38,8 @@ async function handleActivate(body, request) {
       ...(sub.remark ? { remark: sub.remark } : {}),
     };
     await AUTH_CODES.put(code, JSON.stringify(sub));
-    var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + (Date.now() + 86400000 * 30);
+    var tokenExpiry = sub.expiresAt ? Math.min(sub.expiresAt, Date.now() + 86400000 * 30) : (Date.now() + 86400000 * 30);
+    var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + tokenExpiry;
     return json({ ok: true, reason: 'bound', token: token, message: '绑定成功！' });
   }
 
