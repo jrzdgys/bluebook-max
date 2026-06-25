@@ -41,7 +41,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
   <div class="card">
     <div class="row">
       <input type="password" id="adminKey" placeholder="管理员密钥 (ADMIN_KEY)" class="key-input" style="max-width:300px">
-      <button class="btn btn-primary" onclick="loadCodes()">📋 加载列表</button>
+      <button class="btn btn-primary" onclick="login()">🔑 登录并加载</button>
       <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
       <span id="statusText" style="color:#86868b;font-size:13px"></span>
     </div>
@@ -58,6 +58,37 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
       <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
     </div>
     <div id="codesOutput" class="codes-output"></div>
+  </div>
+
+  <div class="card" id="statsCard" style="display:none">
+    <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:80px;background:#f5f5f7;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700" id="stat-total">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:4px">总计</div>
+      </div>
+      <div style="flex:1;min-width:80px;background:#e8f5e9;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:#2e7d32" id="stat-used">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:4px">已使用</div>
+      </div>
+      <div style="flex:1;min-width:80px;background:#f0f0f0;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:#666" id="stat-unused">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:4px">未使用</div>
+      </div>
+      <div style="flex:1;min-width:80px;background:#fce4ec;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:#c62828" id="stat-expired">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:4px">已过期</div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:12px">
+      <input type="text" id="searchCode" placeholder="搜索激活码..." oninput="filterCodes()" style="flex:2;min-width:120px">
+      <select id="statusFilter" onchange="filterCodes()" style="flex:1;min-width:90px">
+        <option value="all">全部状态</option>
+        <option value="unused">未使用</option>
+        <option value="used">已使用</option>
+        <option value="expired">已过期</option>
+      </select>
+      <button class="btn btn-outline btn-sm" onclick="exportUnused()">📋 导出</button>
+    </div>
   </div>
 
   <div id="msg" class="msg"></div>
@@ -77,6 +108,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; }
               <th>设备</th>
               <th>有效期至</th>
               <th>创建于</th>
+              <th>最近活跃</th>
               <th>操作</th>
             </tr>
           </thead>
@@ -145,6 +177,17 @@ async function loadCodes() {
   document.getElementById('totalCount').textContent = codes.length;
   document.getElementById('tableWrap').style.display = 'block';
 
+  // Update stats
+  var total = codes.length;
+  var used = codes.filter(function(c){return c.devices>0;}).length;
+  var expired = codes.filter(function(c){return new Date(c.expiresAt)<new Date();}).length;
+  var unused = total - used - expired;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-used').textContent = used;
+  document.getElementById('stat-unused').textContent = unused;
+  document.getElementById('stat-expired').textContent = expired;
+  document.getElementById('statsCard').style.display = 'block';
+
   const tbody = document.getElementById('codeTable');
   const now = new Date();
   tbody.innerHTML = codes.map(c => {
@@ -160,6 +203,7 @@ async function loadCodes() {
       '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
       '<td>' + expires.toISOString().slice(0,10) + '</td>' +
       '<td style="color:#86868b;font-size:12px">' + (c.createdAt ? new Date(c.createdAt).toISOString().slice(0,10) : '-') + '</td>' +
+      '<td style="color:#86868b;font-size:12px">' + timeAgo(c.lastAccess || c.boundAt) + '</td>' +
       '<td>' + (c.devices > 0 ? '<button class="btn btn-danger btn-sm" onclick="unbindAll(\'' + c.code + '\')">解绑</button>' : '-') + '</td>' +
       '</tr>';
   }).join('');
@@ -212,10 +256,71 @@ async function generateCodes() {
   }
 }
 
+// Login function
+function login() {
+  var key = document.getElementById('adminKey').value.trim();
+  if (!key) { msg('请输入管理密钥', 'error'); return; }
+  localStorage.setItem('bbm_admin_key', key);
+  document.getElementById('statsCard').style.display = 'block';
+  loadCodes();
+}
+// Enter key triggers login
+document.getElementById('adminKey').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') login();
+});
+// Relative time display
+function timeAgo(ts) {
+  if (!ts) return '从未';
+  var diff = Date.now() - parseInt(ts, 10);
+  if (diff < 0) return '刚刚';
+  var mins = Math.floor(diff / 60000);
+  if (mins < 1) return '刚刚';
+  if (mins < 60) return mins + '分钟前';
+  var hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + '小时前';
+  var days = Math.floor(hrs / 24);
+  if (days < 30) return days + '天前';
+  return Math.floor(days/30) + '个月前';
+}
+// Search + status filter
+function filterCodes() {
+  var q = document.getElementById('searchCode').value.toUpperCase();
+  var s = document.getElementById('statusFilter').value;
+  var rows = document.querySelectorAll('#codeTable tr');
+  rows.forEach(function(row) {
+    var code = row.cells[0].textContent;
+    var statusEl = row.cells[1];
+    var isUsed = !!statusEl.querySelector('.badge-green');
+    var isExpired = !!statusEl.querySelector('.badge-red');
+    var isUnused = !!statusEl.querySelector('.badge-gray');
+    var status = isExpired ? 'expired' : isUsed ? 'used' : 'unused';
+    var matchCode = !q || code.includes(q);
+    var matchStatus = s === 'all' || s === status;
+    row.style.display = matchCode && matchStatus ? '' : 'none';
+  });
+}
+// Export unused codes
+function exportUnused() {
+  var rows = document.querySelectorAll('#codeTable tr');
+  var codes = [];
+  rows.forEach(function(row) {
+    if (row.style.display === 'none') return;
+    if (row.cells[1] && row.cells[1].querySelector('.badge-gray')) {
+      codes.push(row.cells[0].textContent);
+    }
+  });
+  if (codes.length === 0) { msg('没有匹配的未使用码', 'error'); return; }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(codes.join('\n')).then(function() {
+      msg('✅ 已复制 ' + codes.length + ' 个激活码到剪贴板', 'success');
+    }).catch(function() { prompt('复制以下激活码：', codes.join('\n')); });
+  } else { prompt('复制以下激活码：', codes.join('\n')); }
+}
 // Auto-load if key saved
 const savedKey = localStorage.getItem('bbm_admin_key');
 if (savedKey) {
   document.getElementById('adminKey').value = savedKey;
+  document.getElementById('statsCard').style.display = 'block';
   loadCodes();
 }
 </script>
