@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="蓝宝书Max - 机构级A股投研情报，四版全时段覆盖，三层智能分级，盘中实时行情。知识星球付费订阅 ¥888/年。">
-<title>蓝宝书Max · 机构级投研情报</title>
-<!-- 微信 / 社交分享 -->
-<meta property="og:title" content="蓝宝书Max · 机构级投研情报">
+<meta name="description" content="èå®ä¹¦Max - æºæçº§Aè¡æç ææ¥ï¼åçå¨æ¶æ®µè¦çï¼ä¸å±æºè½åçº§ï¼çä¸­å®æ¶è¡æãç¥è¯æçä»è´¹è®¢é Â¥888/å¹´ã">
+<title>èå®ä¹¦Max Â· æºæçº§æç ææ¥</title>
+<!-- å¾®ä¿¡ / ç¤¾äº¤åäº« -->
+<meta property="og:title" content="èå®ä¹¦Max Â· æºæçº§æç ææ¥">
 <meta property="og:image" content="https://jrzdgys.github.io/bluebook-max/logo.png">
 <meta property="og:url" content="https://jrzdgys.github.io/bluebook-max/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="蓝宝书Max">
+<meta property="og:site_name" content="èå®ä¹¦Max">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- iOS 主屏图标 -->
+<!-- iOS ä¸»å±å¾æ  -->
 <link rel="apple-touch-icon" href="https://jrzdgys.github.io/bluebook-max/logo.png">
 <link rel="icon" type="image/png" href="https://jrzdgys.github.io/bluebook-max/logo.png">
 
@@ -213,7 +213,7 @@ body{
   list-style:none;padding:6px 0;font-size:14px;color:#1D1D1F;
   display:flex;align-items:center;gap:10px;
 }
-.pricing-features li::before{content:'✓';color:#34C759;font-weight:700;font-size:15px}
+.pricing-features li::before{content:'â';color:#34C759;font-weight:700;font-size:15px}
 
 /* ===== Toast ===== */
 .toast{
@@ -295,133 +295,133 @@ body{
 <!-- ===== Glass Navbar ===== -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand">蓝宝书<span>Max</span></div>
+    <div class="nav-brand">èå®ä¹¦<span>Max</span></div>
     <div class="nav-actions">
       <span class="nav-status" id="nav-status" style="display:none">
-        <span class="dot"></span><span class="text">已订阅</span>
+        <span class="dot"></span><span class="text">å·²è®¢é</span>
       </span>
       <span class="nav-time" id="nav-time">--</span>
-      <button class="nav-login" id="btn-nav-login" onclick="showLoginPaywall()">登录</button>
+      <button class="nav-login" id="btn-nav-login" onclick="showLoginPaywall()">ç»å½</button>
     </div>
   </div>
 </nav>
 
 <!-- ===== Hero ===== -->
 <header class="hero">
-  <h1>蓝宝书<span class="accent">Max</span></h1>
+  <h1>èå®ä¹¦<span class="accent">Max</span></h1>
   <p class="subtitle">
-    机构级A股投研情报<br>
-    四版全时段覆盖 · 三层智能分级 · 盘中实时行情
+    æºæçº§Aè¡æç ææ¥<br>
+    åçå¨æ¶æ®µè¦ç Â· ä¸å±æºè½åçº§ Â· çä¸­å®æ¶è¡æ
   </p>
 
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="num" id="stat-reports">—</div>
-      <div class="label">累计报告</div>
+      <div class="num" id="stat-reports">â</div>
+      <div class="label">ç´¯è®¡æ¥å</div>
     </div>
     <div class="hero-stat">
       <div class="num">4</div>
-      <div class="label">每日版次</div>
+      <div class="label">æ¯æ¥çæ¬¡</div>
     </div>
     <div class="hero-stat">
-      <div class="num" id="stat-stocks">—</div>
-      <div class="label">今日标的</div>
+      <div class="num" id="stat-stocks">â</div>
+      <div class="label">ä»æ¥æ ç</div>
     </div>
   </div>
 
   <div class="hero-cta">
     <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
-      🪐 加入蓝宝书Max · ¥888/年
+      ðª å å¥èå®ä¹¦Max Â· Â¥888/å¹´
     </a>
     <button class="btn btn-outline" onclick="showLoginPaywall()">
-      🔑 已有访问码
+      ð å·²æè®¿é®ç 
     </button>
   </div>
 </header>
 
-<!-- ===== 功能亮点 ===== -->
+<!-- ===== åè½äº®ç¹ ===== -->
 <section class="section" style="padding-top:4px">
   <div class="container">
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3>三层智能分级</h3>
-        <p>龙头首选 / 弹性机会 / 相关标的，决策树自动分类</p>
+        <div class="feature-icon">ð¯</div>
+        <h3>ä¸å±æºè½åçº§</h3>
+        <p>é¾å¤´é¦é / å¼¹æ§æºä¼ / ç¸å³æ çï¼å³ç­æ èªå¨åç±»</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>四版全时段</h3>
-        <p>晨会 7:05 · 午间 11:35 · 晚间 20:05 · 全球 8:05</p>
+        <div class="feature-icon">â¡</div>
+        <h3>åçå¨æ¶æ®µ</h3>
+        <p>æ¨ä¼ 7:05 Â· åé´ 11:35 Â· æé´ 20:05 Â· å¨ç 8:05</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>盘中实时行情</h3>
-        <p>东财 API · 10 秒轮询 · 交易时段绿点脉冲 · 红涨绿跌</p>
+        <div class="feature-icon">ð</div>
+        <h3>çä¸­å®æ¶è¡æ</h3>
+        <p>ä¸è´¢ API Â· 10 ç§è½®è¯¢ Â· äº¤ææ¶æ®µç»¿ç¹èå² Â· çº¢æ¶¨ç»¿è·</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔥</div>
-        <h3>三层独立评分</h3>
-        <p>机构关注度(60) + 市场信号(25) + 催化强度(15)</p>
+        <div class="feature-icon">ð¥</div>
+        <h3>ä¸å±ç¬ç«è¯å</h3>
+        <p>æºæå³æ³¨åº¦(60) + å¸åºä¿¡å·(25) + å¬åå¼ºåº¦(15)</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">✂️</div>
-        <h3>智能摘要提炼</h3>
-        <p>事件摘要 + 核心引用，全自动生成</p>
+        <div class="feature-icon">âï¸</div>
+        <h3>æºè½æè¦æç¼</h3>
+        <p>äºä»¶æè¦ + æ ¸å¿å¼ç¨ï¼å¨èªå¨çæ</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>标的推荐理由</h3>
-        <p>直接引用机构原文，不编造不修改</p>
+        <div class="feature-icon">ð</div>
+        <h3>æ çæ¨èçç±</h3>
+        <p>ç´æ¥å¼ç¨æºæåæï¼ä¸ç¼é ä¸ä¿®æ¹</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 最新报告 ===== -->
+<!-- ===== ææ°æ¥å ===== -->
 <section class="section" style="border-top:1px solid rgba(0,0,0,.06);padding-top:40px">
   <div class="container">
     <div class="section-title">
-      📋 最新报告 <span class="count" id="report-count"></span>
+      ð ææ°æ¥å <span class="count" id="report-count"></span>
       <span id="auth-badge"></span>
     </div>
     <div id="today-reports">
-      <div class="empty-state"><div class="icon">📡</div>加载中...</div>
+      <div class="empty-state"><div class="icon">ð¡</div>å è½½ä¸­...</div>
     </div>
   </div>
 </section>
 
-<!-- ===== 历史报告（按周分组） ===== -->
+<!-- ===== åå²æ¥åï¼æå¨åç»ï¼ ===== -->
 <section class="section" style="padding-top:0;padding-bottom:24px">
   <div class="container">
-    <div class="section-title" style="margin-top:12px">📁 历史报告 <span class="count" id="history-count"></span></div>
+    <div class="section-title" style="margin-top:12px">ð åå²æ¥å <span class="count" id="history-count"></span></div>
       <div id="history-sections">
-      <div class="empty-state" id="history-loading"><div class="icon">📂</div>加载中...</div>
+      <div class="empty-state" id="history-loading"><div class="icon">ð</div>å è½½ä¸­...</div>
     </div>
     <div id="free-hint" style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:16px;padding:12px 18px;background:rgba(255,149,0,.05);border-radius:14px">
-      🎁 新用户可免费试看 1 份完整报告
+      ð æ°ç¨æ·å¯åè´¹è¯ç 1 ä»½å®æ´æ¥å
     </div>
   </div>
 </section>
 
-<!-- ===== 定价 ===== -->
+<!-- ===== å®ä»· ===== -->
 <section class="section">
   <div class="container">
     <div class="pricing">
-      <h2>加入蓝宝书Max</h2>
-      <div class="price"><small>¥</small>888<small>/年</small></div>
-      <p class="price-desc">每天不到 2.5 元，获取机构级投研情报</p>
+      <h2>å å¥èå®ä¹¦Max</h2>
+      <div class="price"><small>Â¥</small>888<small>/å¹´</small></div>
+      <p class="price-desc">æ¯å¤©ä¸å° 2.5 åï¼è·åæºæçº§æç ææ¥</p>
 
       <ul class="pricing-features">
-        <li>每日晨会版 + 午间版 + 晚间版 + 全球版</li>
-        <li>三层智能分级，龙头 / 弹性 / 相关一目了然</li>
-        <li>盘中实时行情，10 秒轮询，红涨绿跌</li>
-        <li>三层独立评分，机构关注度 + 市场信号 + 催化强度</li>
-        <li>智能摘要提炼，事件摘要 + 核心引用</li>
-        <li>一个访问码可绑定2台设备</li>
+        <li>æ¯æ¥æ¨ä¼ç + åé´ç + æé´ç + å¨çç</li>
+        <li>ä¸å±æºè½åçº§ï¼é¾å¤´ / å¼¹æ§ / ç¸å³ä¸ç®äºç¶</li>
+        <li>çä¸­å®æ¶è¡æï¼10 ç§è½®è¯¢ï¼çº¢æ¶¨ç»¿è·</li>
+        <li>ä¸å±ç¬ç«è¯åï¼æºæå³æ³¨åº¦ + å¸åºä¿¡å· + å¬åå¼ºåº¦</li>
+        <li>æºè½æè¦æç¼ï¼äºä»¶æè¦ + æ ¸å¿å¼ç¨</li>
+        <li>ä¸ä¸ªè®¿é®ç å¯ç»å®2å°è®¾å¤</li>
       </ul>
 
       <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="btn btn-zsxq">
-        🪐 立即加入 · ¥888/年
+        ðª ç«å³å å¥ Â· Â¥888/å¹´
       </a>
     </div>
   </div>
@@ -430,24 +430,24 @@ body{
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="container">
-    <p class="disclaimer-title">蓝宝书Max—机构投研信息聚合工具</p>
+    <p class="disclaimer-title">èå®ä¹¦Maxâæºææç ä¿¡æ¯èåå·¥å·</p>
     <p class="disclaimer">
-      ⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益。
+      â ï¸ææåå®¹ä»ä¾åèï¼ä¸æææèµå»ºè®® Â· âï¸è¡å¸æé£é©ï¼æèµéè°¨æãè¿å¾è¡¨ç°ä¸é¢ç¤ºæªæ¥æ¶çã
     </p>
     <p class="brand">
-      <span class="brand-small">行情数据由<a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>提供 · 自动更新</span>
+      <span class="brand-small">è¡ææ°æ®ç±<a href="https://www.eastmoney.com" target="_blank" rel="noopener">ä¸æ¹è´¢å¯</a>æä¾ Â· èªå¨æ´æ°</span>
     </p>
   </div>
 </footer>
 
 <script src="codes.js"></script>
-<script src="paywall.js?v=6"></script>
+<script src="paywall.js?v=7"></script>
 <script>
 function updateClock() {
   var cst=new Date(new Date().getTime()+480*60000);
-  var days=['周日','周一','周二','周三','周四','周五','周六'];
+  var days=['å¨æ¥','å¨ä¸','å¨äº','å¨ä¸','å¨å','å¨äº','å¨å­'];
   var str=String(cst.getHours()).padStart(2,'0')+':'+
-    String(cst.getMinutes()).padStart(2,'0')+' · '+
+    String(cst.getMinutes()).padStart(2,'0')+' Â· '+
     cst.getFullYear()+'/'+String(cst.getMonth()+1).padStart(2,'0')+'/'+
     String(cst.getDate()).padStart(2,'0')+' '+days[cst.getDay()];
   document.getElementById('nav-time').textContent=str;
@@ -478,16 +478,16 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   var displayDate = dateParts ? dateParts[2] + '/' + dateParts[3] : (r.date || '');
   var canView = isAuth || isFirst;
   var onclick = canView ? '' : 'onclick="showLoginPaywall();return false"';
-  var freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费</span>' : '';
-  var lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费</span>' : '';
-  var authTag = isAuth ? '<span class="r-auth">✓ 已解锁</span>' : '';
+  var freeBadge = (!isAuth && isFirst) ? '<span class="r-free">ð åè´¹</span>' : '';
+  var lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">ð ä»è´¹</span>' : '';
+  var authTag = isAuth ? '<span class="r-auth">â å·²è§£é</span>' : '';
   return '<a href="' + (canView ? (r.file || '#') : '#') + '" class="report-card ' + cssEd + '" ' +
     onclick + ' style="' + (!canView ? 'cursor:default;opacity:.65' : '') + '">' +
     '<div class="report-card-header">' +
     '<span class="r-badge ' + ed + '">' + label + '</span>' +
     '<span class="r-date">' + displayDate + '</span>' +
     freeBadge + lockInfo + authTag +
-    '</div><div class="r-title">' + (r.title || '蓝宝书Max报告') + '</div></a>';
+    '</div><div class="r-title">' + (r.title || 'èå®ä¹¦Maxæ¥å') + '</div></a>';
 }
 
 
