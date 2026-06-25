@@ -6,7 +6,7 @@
     "total_reports": 14,
     "reports": [
         {
-            "file": "reports/pm-20260621.html",
+            "file": "pm-20260621.html",
             "edition": "pm",
             "label": "午间版",
             "date": "20260621",
@@ -15,7 +15,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/ev-20260622.html",
+            "file": "ev-20260622.html",
             "edition": "ev",
             "label": "晚间版",
             "date": "20260622",
@@ -24,7 +24,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/gv-20260623-v2.html",
+            "file": "gv-20260623-v2.html",
             "edition": "gv",
             "label": "全球版",
             "date": "20260623",
@@ -33,7 +33,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/mc-20260623-v2.html",
+            "file": "mc-20260623-v2.html",
             "edition": "mc",
             "label": "晨会版",
             "date": "20260623",
@@ -42,7 +42,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/pm-20260623-v2.html",
+            "file": "pm-20260623-v2.html",
             "edition": "pm",
             "label": "午间版",
             "date": "20260623",
@@ -51,7 +51,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/ev-20260623-v2.html",
+            "file": "ev-20260623-v2.html",
             "edition": "ev",
             "label": "晚间版",
             "date": "20260623",
@@ -60,7 +60,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/gv-20260624.html",
+            "file": "gv-20260624.html",
             "edition": "gv",
             "label": "全球版",
             "date": "20260624",
@@ -69,7 +69,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/mc-20260624.html",
+            "file": "mc-20260624.html",
             "edition": "mc",
             "label": "晨会版",
             "date": "20260624",
@@ -78,7 +78,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/pm-20260624.html",
+            "file": "pm-20260624.html",
             "edition": "pm",
             "label": "午间版",
             "date": "20260624",
@@ -87,7 +87,7 @@
             "stock_count": 0
         },
         {
-            "file": "reports/ev-20260624.html",
+            "file": "ev-20260624.html",
             "edition": "ev",
             "label": "晚间版",
             "date": "20260624",
@@ -105,7 +105,7 @@
             "stock_count": 47
         },
         {
-            "file": "reports/mc-20260625.html",
+            "file": "mc-20260625.html",
             "edition": "mc",
             "label": "晨会版",
             "date": "20260625",
@@ -114,7 +114,7 @@
             "stock_count": 132
         },
         {
-            "file": "reports/pm-20260625.html",
+            "file": "pm-20260625.html",
             "edition": "pm",
             "label": "午间版",
             "date": "20260625",

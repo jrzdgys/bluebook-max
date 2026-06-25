@@ -264,6 +264,10 @@ body{
   .hero-stats{gap:16px}
   .hero-stat{min-width:70px}
 }
+
+.unlock-badge{font-size:12px;font-weight:500;color:#34C759;background:rgba(52,199,89,.06);padding:4px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.unlock-badge::before{content:'';width:5px;height:5px;background:#34C759;border-radius:50%;display:inline-block}
+.nav-actions{font-size:13px}
 </style>
 </head>
 <body>
@@ -372,7 +376,8 @@ body{
 <!-- ===== 历史报告（按周分组） ===== -->
 <section class="section" style="padding-top:0">
   <div class="container">
-    <div id="history-sections">
+    <div class="section-title" style="margin-top:32px">📁 历史报告 <span class="count" id="history-count"></span></div>
+      <div id="history-sections">
       <div class="empty-state" id="history-loading"><div class="icon">📂</div>加载中...</div>
     </div>
     <div id="free-hint" style="text-align:center;font-size:12px;color:#AEAEB2;margin-top:16px;padding:12px 18px;background:rgba(255,149,0,.05);border-radius:14px">
@@ -504,7 +509,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     if(isAuth){
       document.getElementById('auth-badge').innerHTML=Paywall.unlockBadge();
       document.getElementById('nav-status').style.display='flex';
-      document.getElementById('btn-nav-login').textContent='\u5df2\u8ba2\u9605';
+      document.getElementById('btn-nav-login').textContent='\u9000\u51fa';
       document.getElementById('btn-nav-login').style.color='#34C759';
       document.getElementById('btn-nav-login').style.background='rgba(52,199,89,.08)';
     }
