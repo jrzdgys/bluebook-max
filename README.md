@@ -1,278 +1,190 @@
-# 蓝宝书Max
+# 蓝宝书Max 系统规则与维护文档
 
-> 基于 Alpha派 蓝宝书的机构级投研情报工具。全链路自动化：数据提取 → 分类评分 → AI摘要分析 → HTML生成 → GitHub Pages部署。
+    > 基于2026年6月25日修复汇总，所有开发维护前请先阅读本文。
 
----
+    ## 一、报告版本体系
 
-## 一、数据架构（v3 最终版）
+    四版全时段覆盖，版本代码、颜色、排序全部统一：
 
-```
-                    Alpha派 API (各版本独立)
-                           │
-                           ▼
-              ┌─────────────────────────┐
-              │  数据处理管道 (Python)   │
-              │  · 分类引擎 v2.1        │
-              │  · 评分引擎 v2          │
-              │  · AI摘要分析生成（无...截断）│
-              │  · 标的理由照抄          │
-              └───────────┬─────────────┘
-                          │
-                          ▼
-                   ED JSON 数据块
-                          │
-                          ▼
-              ┌─────────────────────────┐
-              │    HTML 模板 ()      │
-              │  · CSS: 5791 chars      │
-              │  · JS:  5892 chars      │
-              │  · 纯客户端渲染          │
-              └───────────┬─────────────┘
-                          │
-                          ▼
-                 GitHub Pages 部署
-```
+    | 版本 | 代码 | 文件名 | 图标 | 标签色 | CSS类 | 排序 | 时段 |
+    |------|------|--------|------|--------|-------|------|------|
+    | 全球版 | gv | gv-YYYYMMDD.html | 🌍 | #30B46E | `.gv` | 0 | 每日 8:03 |
+    | 晨会版 | mc | mc-YYYYMMDD.html | 🌅 | #FF9500 | `.mc` | 1 | 交易日 7:05 |
+    | 午间版 | pm | pm-YYYYMMDD.html | ☀️ | #0071E3 | `.pm` | 2 | 交易日 11:35 |
+    | 晚间版 | ev | ev-YYYYMMDD.html | 🌙 | #AF52DE | `.ev` | 3 | 每日 20:00 |
 
-**核心原则：模板（CSS/JS）为基线标准，版本更新以 ED JSON 数据替换为主，JS/CSS 的修复和改进需同步记录于本文档。**
+    ### 两套模板
 
----
+    | 模板 | 适用版本 | 特点 |
+    |------|----------|------|
+    | TC模板 | mc/pm/ev | 主题卡片、评分体系、阶段标签、标的分组（龙头/弹性/相关）、实时行情轮询 |
+    | BB卡片模板 | gv | 简化新闻卡片、无评分、无阶段、无实时行情、纯信息展示 |
 
-## 二、HTML 模板架构
+    ---
 
-### 2.1 CSS 核心规范
+    ## 二、导航页 index.html 关键规则
 
-| 组件 | 类名 | 说明 |
-|------|------|------|
-| 页面容器 | `.w` | max-width:900px, 居中 |
-| 头部 | `.sh` | 深蓝渐变背景，圆角顶部 |
-| 内容区 | `.ct` | 米白背景，圆角底部 |
-| 市场摘要 | `.ms` | 灰色底，13px |
-| 主题卡片 | `.tc` | 白底圆角卡片，hover蓝色边框 |
-| 阶段标签 | `.tc-stage` | 小圆角标签，颜色由JS动态设置 |
-| 热度指数 | `.tc-heat` | 20px 加粗，可点击弹出评分详情 |
-| 评分弹窗 | `.hp` | position:fixed，深色背景，智能边缘检测 |
-| 股票行 | `.sr` | flex布局：名称→代码→价格→涨跌幅→理由 |
-| 价格 | `.sp` | 12px desktop, 11px mobile |
-| 涨跌幅 | `.spp` | 与价格并列 |
-| 分组标签 | `.gl.l1/.l2/.l3` | 龙头首选(橙)/弹性机会(蓝紫)/相关标的(灰) |
+    ### 2.1 版本标签颜色
 
-### 2.2 移动端适配
+    导航页中 `.r-badge` 和 `.report-card` 的 CSS 类名映射必须正确：
 
-```css
-@media (max-width: 640px) {
-  .sr2 { flex-basis: 100%; white-space: normal; overflow: visible; }
-  body { padding: 12px; }
-  .sh { padding: 16px 18px 14px; }
-  .ct { padding: 14px 16px 20px; }
-}
-```
+    ```css
+    .r-badge.gv, .report-card.gv { background: #30B46E15; color: #30B46E; border-color: #30B46E; }
+    .r-badge.mc, .report-card.mc { background: #FF950015; color: #FF9500; border-color: #FF9500; }
+    .r-badge.pm, .report-card.pm { background: #0071E315; color: #0071E3; border-color: #0071E3; }
+    .r-badge.ev, .report-card.ev { background: #AF52DE15; color: #AF52DE; border-color: #AF52DE; }
+    ```
 
----
+    **⚠️ 注意**：旧版用 `am`/`md`/`pm`/`global` 命名，已全量迁移至 `gv`/`mc`/`pm`/`ev`。如遇不显示颜色，检查 CSS 类名是否匹配。
 
-## 三、报告版本体系
+    ### 2.2 JS 正则双转义
 
-### 3.1 四版结构
+    在 `renderCard` 和历史渲染逻辑中，从日期字符串提取版本代码时，**正则表达式中的 `\d` 必须写成 `\\d`**（JSON 字符串中双反斜杠）：
 
-| 类型 | 文件名 | 图标 | 标签色 | Alpha派来源 | 更新时段 |
-|------|--------|------|--------|-------------|----------|
-| mc | mc-YYYYMMDD.html | 🌅 | #FF9500 暖橙 | 国内晨会版 | 交易日 7:05 |
-| pm | pm-YYYYMMDD.html | ☀️ | #0071E3 天空蓝 | 国内午间版 | 交易日 11:35 |
-| ev | ev-YYYYMMDD.html | 🌙 | #AF52DE 夜紫 | 国内晚间版 | 每日 20:00 |
-| gv | gv-YYYYMMDD.html | 🌍 | #30B46E 全球绿 | 全球版 | 每日 8:03 |
+    ```js
+    // ✅ 正确
+    var vm = (a.r.edition || '').match(/[a-z]+/)?.[0] || 'mc';
+    var vd = (a.file || '').match(/(\d{8})/)?.[1] || '';
 
-### 3.2 版本差异
+    // ❌ 错误（单反斜杠会被 JS 解析为转义）
+    var vd = (a.file || '').match(/(\d{8})/)?.[1] || '';
+    ```
 
-| 特性 | 国内三版 (mc/pm/ev) | 全球版 (gv) |
-|------|---------------------|-------------|
-| 数据结构 | ED JSON（主题+评分+标的分组） | 简化卡片（无评分） |
-| 模板 | 完整TC模板 | 简化BB卡片模板 |
-| 实时行情 | ✅ EastMoney轮询 | 无行情 |
-| A股代码 | ✅ secidMap | 无 |
-| 分类标签 | ✅ 龙头/弹性/相关 | 无 |
+    ### 2.3 导航页排序
 
----
+    ```js
+    var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
 
-## 四、导航页（index.html）
+    // ⚠️ JS 中 0 是 falsy，必须用 != null 判断
+    // ✅ 正确: (editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99)
+    // ❌ 错误: (editionOrder[a.r.edition] || 99) → gv的0变成99，排到最后
+    ```
 
-### 4.1 报告排序
+    ### 2.4 历史记录显示
+    - 默认仅显示最近 2 天的历史报告
+    - 通过「显示更多历史报告」按钮手动展开
+    - 新版 `setTimeout` 移除自动展开行为（auto-expand 已禁用）
+    - 同日期同版本有 `-v2` 的，优先保留 `-v2`，移除原版
 
-```js
-var editionOrder = { gv: 0, mc: 1, pm: 2, ev: 3 };
+    ---
 
-// ⚠️ 关键陷阱：JS 中 0 是 falsy！
-// ❌ 错误写法: (editionOrder[a.r.edition] || 99)
-//    → gv的0变成99，全球版排到最后！
-// ✅ 正确写法: (editionOrder[a.r.edition] != null ? editionOrder[a.r.edition] : 99)
-```
+    ## 三、付费墙 paywall.js 关键规则
 
-排序结果：**全球版🟢 → 晨会版🟠 → 午间版🔵 → 晚间版🟣**
+    ### 3.1 调用方式
+    ```js
+    // ✅ 正确
+    showLoginPaywall = function() { Paywall.showActivationModal(); };
 
-排序应用于两处：today分组 + history分组。
+    // ❌ 错误（不存在的函数）
+    showLoginPaywall = function() { renderPaywall(); };
+    ```
 
-### 4.2 版本标签CSS类名
-
-| CSS类 | 底色 | 字色 | 用途 |
-|-------|------|------|------|
-| `.r-badge.gv` `.report-card.gv` | rgba(48,180,110,.1) | #30B46E | 全球版 |
-| `.r-badge.mc` `.report-card.mc` | rgba(255,149,0,.1) | #FF9500 | 晨会版 |
-| `.r-badge.pm` `.report-card.pm` | rgba(0,113,227,.1) | #0071E3 | 午间版 |
-| `.r-badge.ev` `.report-card.ev` | rgba(175,82,222,.1) | #AF52DE | 晚间版 |
-
-**严禁使用 `am/md/global` 等旧代码。仅使用 `gv/mc/pm/ev` 四个标准代码。**
-
-### 4.3 editionLabels 映射
-
-```js
-var editionLabels = { gv: '全球版', mc: '晨会版', pm: '午间版', ev: '晚间版' };
-```
-
-### 4.4 manifest.json 规范
-
-```json
-{
-  "name": "蓝宝书Max",
-  "last_updated": "2026-06-24 17:53:00",
-  "total_reports": 9,
-  "reports": [
-    {
-      "file": "mc-20260624.html",
-      "edition": "mc",
-      "label": "晨会版",
-      "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月24日",
-      "stock_count": 155
+    ### 3.2 Canvas 指纹兼容
+    ```js
+    // ✅ iOS Safari 私密模式下 getCanvasHash 必须用 Promise + 超时兜底
+    function getCanvasHash() {
+      return new Promise(function(resolve) {
+        try { /* canvas 指纹计算 */ resolve(hash); } catch(e) { resolve('fallback-' + Date.now()); }
+        setTimeout(function() { resolve('fallback-timeout'); }, 3000);
+      });
     }
-  ]
-}
-```
+    ```
 
-规则：
-- `file` 使用根目录文件名（**非** `reports/` 子目录前缀）
-- `edition` 仅用 `gv/mc/pm/ev` 四个标准代码
-- 同一日期同一版本如有 `-v2` 版本，优先保留 `-v2`，移除原始版本
-- index.html 自动按 date 分组为"今天"和"历史"
+    ### 3.3 样式注入
+    付费墙样式必须通过 JS 动态注入，不能依赖外部 CSS 文件。
 
----
+    ### 3.4 缓存破坏
+    每次更新 `paywall.js` 后，在 `index.html` 中增加版本号强制刷新：`<script src="paywall.js?v=3"></script>`
 
-## 五、数据源
+    ---
 
-| 数据 | 来源 | 用途 |
-|------|------|------|
-| 主题/标的/理由/摘要 | Alpha派蓝宝书 | 全量数据输入 |
-| 收盘价 | 腾讯 qt.gtimg.cn | 历史行情快照 |
-| 实时行情 | 东方财富 push2.eastmoney.com | 盘中15s轮询 |
+    ## 四、报告 NaN 修复（行情数据显示）
 
----
+    ### 4.1 行情 API 字段
+    必须请求 **f18**（昨收盘价）字段：`fields=f2,f3,f12,f14,f18`
 
-## 六、部署
+    ### 4.2 价格解析（盘前/停牌保护）
+    ```js
+    var p = parseFloat(d.price);
+    if (!isNaN(p) && p !== 0) {
+      spEl.textContent = p.toFixed(2);
+    } else if (d.close) {
+      spEl.textContent = parseFloat(d.close).toFixed(2);
+    }
+    ```
 
-- **仓库**: `jrzdgys/bluebook-max` (main分支)
-- **Pages URL**: `https://jrzdgys.github.io/bluebook-max/`
-- **CDN缓存**: 约2-5分钟
-- **验证方法**: 先检查 `raw.githubusercontent.com/...` 确认push生效，再等CDN刷新
+    ### 4.3 涨跌幅解析
+    ```js
+    if (d.pct != null) {
+      var v = parseFloat(d.pct);
+      if (!isNaN(v)) { /* 更新涨跌幅显示 */ }
+    }
+    ```
 
----
+    ---
 
-## 七、交互特性
+    ## 五、交易时段与轮询逻辑
 
-| 特性 | 实现 |
-|------|------|
-| 评分弹窗 | 仅点击热度数字触发，弹窗显示三维度明细（机构关注度/市场确认度/催化强度） |
-| 弹窗关闭 | 点击页面空白 / 滚动 / resize |
-| 实时行情 | 盘中15s轮询，切换.up/.dn class更新颜色 |
-| 交易时段标记 | Header绿点脉冲（盘中）或橙色静态（盘后） |
-| 移动端 | 股票理由全宽换行，评分弹窗适配小屏 |
-| 表头统计 | 全部主题 / 平均热度 / 推荐标的 三栏 |
-| 市场摘要 | 多行 bullet 列表 |
-| 主题排序 | 标题注明"按综合热度降序" |
+    ### 5.1 时段判断（CST/北京时间）
+    ```
+    9:15 前         → 盘前，显示昨收价，不轮询
+    9:15 - 9:30     → 集合竞价阶段（t >= 555 && t < 570）
+    9:30 - 15:00    → 盘中交易（t >= 570 && t < 900）
+    15:00 后/周末   → 盘后，停止轮询
+    ```
 
----
+    ### 5.2 轮询策略
+    - 交易日加载时：`if(isMarketDay()){ fq(); }` — 获取一次收盘价
+    - 每 30s 检查是否进入交易时段
+    - 交易时段：每 10s 轮询一次实时行情
+    - 非交易时段：停止轮询
 
-## 八、颜色系统
+    ### 5.3 动态时间
+    每秒更新显示时间和行情状态。
 
-### 8.1 功能颜色
+    ---
 
-| 元素 | 色值 | 说明 |
-|------|------|------|
-| 上涨/主升 | #C4433A | 红涨 |
-| 下跌 | #34C759 | 绿跌 |
-| 强化阶段 | #E67E22 | 橙色 |
-| 持续阶段 | #2E86C1 | 蓝色 |
-| 孵化阶段 | #7D8B8F | 灰色 |
-| 龙头标签 | #FFF0E6底 #E8870A字 | 暖橙 |
-| 弹性标签 | #EEF0FF底 #5E5CE6字 | 蓝紫 |
-| 相关标签 | #F2F2F7底 #86868B字 | 灰色 |
-| 头部渐变 | #1a1a2e -> #16213e -> #0f3460 | 深蓝 |
+    ## 六、管理后台 admin.html
 
-### 8.2 版本标签颜色
+    ### 6.1 API 端点
+    | 端点 | 方法 | 用途 |
+    |------|------|------|
+    | `/list` | GET | 列出所有激活码 |
+    | `/unbind` | POST | 解绑设备 |
+    | `/codes/create` | POST | 批量生成激活码 |
+    | `/codes/delete` | POST | 删除激活码 |
 
-| 版本 | 图标 | 底色 | 字色 |
-|------|------|------|------|
-| 全球版 | 🌍 | rgba(48,180,110,.15) | #30B46E |
-| 晨会版 | 🌅 | rgba(255,149,0,.15) | #FF9500 |
-| 午间版 | ☀️ | rgba(0,113,227,.15) | #0071E3 |
-| 晚间版 | 🌙 | rgba(175,82,222,.15) | #AF52DE |
+    ### 6.2 Worker URL
+    `https://bluebook-auth.bluebookmax.workers.dev`
 
----
+    ### 6.3 Admin Key
+    `ADMIN_KEY = "bbmax-admin-2026"`（生产环境必须修改！）
 
-## 九、已知陷阱 ⚠️
+    ### 6.4 部署方式
+    修改 `auth-worker.js` 后，需手动部署到 Cloudflare Workers。
 
-### 9.1 JS falsy `0 || 99` 排序bug
-`editionOrder['gv'] = 0`，而 `0 || 99` 返回 `99`（0是falsy）。必须用 `!= null` 判断。
+    ---
 
-### 9.2 CSS类名一致性
-始终使用 `gv/mc/pm/ev` 四个标准代码。严禁使用 `am/md/global` 等旧代码。index.html的CSS选择器和JS映射必须一致。
+    ## 七、manifest.json 规范
+    - `file`：统一使用 `reports/` 前缀
+    - `edition`：仅用 `gv/mc/pm/ev`
+    - 同日期同版本有 `-v2` 的，优先保留 `-v2`，移除原版
+    - `total_reports` 必须与实际数量一致
 
-### 9.3 template.html HTML编码
-模板中JS使用 `&#39;` 替代单引号，进行字符串替换时必须匹配正确编码。
+    ---
 
-### 9.4 manifest.json路径
-file字段使用根目录文件名（如 `mc-20260624.html`），**不使用** `reports/` 前缀子目录。
+    ## 八、午间版特殊规则
+    - 仅包含 10 个市场热点（非 22 个主题）
+    - 使用独立分区标题「市场热点」
+    - 使用独立模板
 
-### 9.5 manifest去重
-同一日期同一版本如有 `-v2` 版本优先保留，移除原始版本。仅保留标准四版（mc/pm/ev/gv）。
+    ---
 
-### 9.6 CDN延迟
-推送后需等2-5分钟，通过 `raw.githubusercontent.com` 确认push已生效。
-
-### 9.7 外部覆盖风险
-其他AI模型可能通过commit覆盖已有修复。定期检查 index.html 和 manifest.json 的edition相关代码。
-
----
-
-## 十、执行检查清单
-
-每次生成报告后必须验证：
-
-- [ ] 各版本数据完整提取（滚动到底，确认无遗漏）
-- [ ] ED JSON生成（含AI摘要/引用，无...截断）
-- [ ] 行情数据写入（腾讯API收盘价 + secidMap）
-- [ ] HTML文件生成（使用模板，仅替换ED JSON）
-- [ ] manifest.json更新（去重、根路径、正确edition代码）
-- [ ] index.html验证（排序使用!=null、颜色正确、editionLabels正确）
-- [ ] Git push + raw.githubusercontent.com验证
-- [ ] GitHub Pages验证（等待2-5分钟CDN）
-
----
-
-## 十一、自动化蓝图
-
-### 当前状态
-通过 Ally 的 `bluebook-daily-tracker` 服务实现半自动化：用户触发 → Ally 提取数据 → AI分析 → 生成HTML → 部署GitHub Pages。
-
-### 理想状态
-1. 用户登录Alpha派一次
-2. Ally 一次性提取所有可用版本数据
-3. 自动生成全部版本HTML + manifest + 验证
-4. 一键推送部署
-
-### 约束
-- Ally 不支持定时调度（未来功能）
-- Alpha派需要浏览器登录态
-- 各版本发布时间不同（7:05/11:35/20:00/8:03），无法一次性获取全版
-
-### 建议
-- 每天分两次运行：收盘后运行国内三版，次日早晨运行全球版
-- 每次运行前确认Alpha派登录状态有效
-- 使用 `ally://services/bluebook-daily-tracker/runbook.md` 作为完整操作手册
+    ## 九、GitHub Pages 部署检查清单
+    - [ ] 代码已 push 到 `main` 分支
+    - [ ] `manifest.json` 已更新
+    - [ ] `index.html` 导航页已更新
+    - [ ] Cloudflare Worker 已重新部署
+    - [ ] CDN 缓存已等待 2-5 分钟
+    - [ ] 通过 `raw.githubusercontent.com` 验证文件存在
+    
