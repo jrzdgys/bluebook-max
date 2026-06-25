@@ -31,9 +31,11 @@ jobs:
         run: pip install requests
 
       - name: 生成所有报告
+        continue-on-error: true
         run: python3 generate_all_reports.py
 
       - name: 更新导航清单
+        continue-on-error: true
         run: python3 update_manifest.py
 
       - name: 配置 Pages
