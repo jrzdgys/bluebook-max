@@ -133,6 +133,64 @@ async function sha256(str) {
       }
     }
 
+
+// ===== 动态注入认证弹窗CSS（确保独立于index.html样式） =====
+function _injectAuthCSS() {
+  if (document.getElementById('bbm-auth-styles')) return;
+  var style = document.createElement('style');
+  style.id = 'bbm-auth-styles';
+  style.textContent =
+    '.auth-overlay{' +
+    'position:fixed;inset:0;z-index:9999;' +
+    'background:rgba(0,0,0,.5);' +
+    'backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);' +
+    'display:flex;align-items:center;justify-content:center;' +
+    'animation:pwFade .3s ease' +
+    '}' +
+    '.auth-modal{' +
+    'background:rgba(255,255,255,.95);' +
+    'backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);' +
+    'border-radius:20px;padding:40px 32px;' +
+    'max-width:380px;width:90%;' +
+    'box-shadow:0 20px 60px rgba(0,0,0,.2);' +
+    'text-align:center;position:relative' +
+    '}' +
+    '.auth-icon{font-size:48px;margin-bottom:12px}' +
+    '.auth-modal h2{font-size:22px;font-weight:700;margin-bottom:6px}' +
+    '.auth-desc{font-size:14px;color:#86868B;margin-bottom:24px}' +
+    '.auth-input{' +
+    'width:100%;padding:14px 18px;' +
+    'border:2px solid #E5E5EA;border-radius:14px;' +
+    'font-size:18px;text-align:center;letter-spacing:2px;' +
+    'font-family:"SF Mono",Menlo,monospace;' +
+    'outline:none;transition:border-color .2s;' +
+    'box-sizing:border-box' +
+    '}' +
+    '.auth-input:focus{border-color:#0071E3}' +
+    '.auth-btn{' +
+    'width:100%;padding:14px;margin-top:14px;' +
+    'background:#0071E3;color:#fff;border:none;' +
+    'border-radius:14px;font-size:16px;font-weight:600;' +
+    'cursor:pointer;transition:all .2s;font-family:inherit' +
+    '}' +
+    '.auth-btn:hover{background:#0060C0}' +
+    '.auth-btn:disabled{opacity:.4;cursor:not-allowed}' +
+    '.auth-error{color:#C4433A;font-size:13px;margin-top:12px;min-height:20px}' +
+    '.auth-recover{font-size:12px;color:#AEAEB2;margin-top:16px;line-height:1.5}' +
+    '.auth-footer{font-size:11px;color:#AEAEB2;margin-top:24px;line-height:1.4}' +
+    '.auth-close{' +
+    'position:absolute;top:12px;right:14px;' +
+    'background:none;border:none;font-size:22px;' +
+    'color:#AEAEB2;cursor:pointer;padding:4px 12px;' +
+    'border-radius:8px;line-height:1;' +
+    'transition:all .15s;font-family:inherit' +
+    '}' +
+    '.auth-close:hover{background:rgba(0,0,0,.05);color:#1D1D1F}' +
+    '@keyframes pwFade{from{opacity:0}to{opacity:1}}';
+  document.head.appendChild(style);
+}
+
+
 // ===== Paywall 对象（与 index.html 的调用点兼容） =====
 const Paywall = {
 
@@ -264,6 +322,8 @@ const Paywall = {
   },
 
   _createModal(onSuccess) {
+    // 注入弹窗样式
+    _injectAuthCSS();
     // 移除旧的（如果存在）
     const old = document.getElementById('auth-overlay');
     if (old) old.remove();
@@ -274,14 +334,14 @@ const Paywall = {
     overlay.innerHTML =
       '<div class="auth-modal">' +
       '  <button class="auth-close" id="auth-close-btn" onclick="closeAuthModal()">×</button>' +
-      '  <div class="auth-icon">📘</div>' +
-      '  <h2>蓝宝书Max</h2>' +
-      '  <p class="auth-desc">请输入您的访问码激活账号</p>' +
-      '  <input class="auth-input" id="auth-code" placeholder="BBM-XXXXXXXX" maxlength="14" autocomplete="off" autocorrect="off" spellcheck="false">' +
-      '  <button class="auth-btn" id="auth-btn">激活</button>' +
+      '  <div class="auth-icon">🔑</div>' +
+      '  <h2>访问码激活</h2>' +
+      '  <p class="auth-desc">请输入您在知识星球获取的访问码，激活后即可查看全部报告</p>' +
+      '  <input class="auth-input" id="auth-code" placeholder="输入访问码" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">' +
+      '  <button class="auth-btn" id="auth-btn">激活账号</button>' +
       '  <div class="auth-error" id="auth-error"></div>' +
-      '  <div class="auth-recover">已有账号？输入激活码后系统会自动识别设备，重新激活。</div>' +
-      '  <div class="auth-footer">激活即表示同意服务条款 · 每账号限绑定 2 台设备</div>' +
+      '  <div class="auth-recover">已购买？每个访问码可绑定 2 台设备，多设备输入同码即可</div>' +
+      '  <div class="auth-footer">尚未加入？前往 <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" style="color:#0071E3;text-decoration:none;font-weight:600">知识星球 · 蓝宝书Max</a> 订阅</div>' +
       '</div>';
 
     document.body.appendChild(overlay);
