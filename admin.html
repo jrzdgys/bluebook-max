@@ -121,6 +121,9 @@ tbody td { padding: 10px 12px; vertical-align: middle; }
 .badge-gray { background: #f0f0f0; color: #666; }
 .badge-red { background: #fce4ec; color: #c62828; }
 
+.remark-input{width:100px;height:28px;border:1px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:11px;outline:none;transition:border-color .15s}
+.remark-input:focus{border-color:#0071e3}
+.remark-input::placeholder{color:#aeaeb2}
 .code-cell { font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace; font-size: 12px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
 .code-cell .code-text { font-weight: 500; }
 .copy-btn { cursor: pointer; color: #8e8e93; font-size: 14px; transition: color .15s; background: none; border: none; padding: 2px 4px; border-radius: 4px; }
@@ -240,6 +243,7 @@ tbody td { padding: 10px 12px; vertical-align: middle; }
               <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('lastAccess')" id="th-last">最近活跃 <span class="sort-icon">↕</span></th>
+              <th onclick="sortBy('remark')" id="th-remark">备注 <span class="sort-icon">↕</span></th>
               <th style="cursor:default">操作</th>
             </tr>
           </thead>
@@ -336,7 +340,7 @@ function sortBy(field) {
     else { sortField = null; sortAsc = true; }
   } else { sortField = field; sortAsc = true; }
   document.querySelectorAll('th').forEach(function(t){t.classList.remove('active');});
-  var m = {code:'th-code',status:'th-status',devices:'th-devices',expiresAt:'th-expires',createdAt:'th-created',lastAccess:'th-last'};
+  var m = {code:'th-code',status:'th-status',devices:'th-devices',expiresAt:'th-expires',createdAt:'th-created',lastAccess:'th-last',remark:'th-remark'};
   var at = document.getElementById(m[field]);
   if (at) {
     if (sortField === null) {
@@ -381,6 +385,7 @@ function renderTable() {
         case 'expiresAt': va=a.expiresAt||''; vb=b.expiresAt||''; break;
         case 'createdAt': va=a.createdAt||''; vb=b.createdAt||''; break;
         case 'lastAccess': va=a.lastAccess||0; vb=b.lastAccess||0; break;
+        case 'remark': va=(a.remark||'').toLowerCase(); vb=(b.remark||'').toLowerCase(); break;
         default: va=a.code; vb=b.code;
       }
       if(va<vb) return sortAsc?-1:1;
@@ -399,7 +404,7 @@ function renderTable() {
     var us = !ex && c.devices > 0;
     var sts = ex ? '<span class="badge badge-red">已过期</span>' : us ? '<span class="badge badge-green">已使用</span>' : '<span class="badge badge-gray">未使用</span>';
     var dt = c.devices > 0 ? '已绑定 ' + c.devices + ' 台' : '-';
-    return '<tr><td><div class="code-cell"><span class="code-text">' + escHtml(c.code) + '</span><button class="copy-btn" onclick="copyCode(' + "'" + escJsStr(c.code) + "'" + ',this)" title="复制">📋</button></div></td><td>' + sts + '</td><td>' + dt + '</td><td>' + formatDate(c.expiresAt) + '</td><td>' + formatDate(c.createdAt) + '</td><td>' + timeAgo(c.lastAccess||c.boundAt) + '</td><td><div class="action-btns">' + (c.devices>0?'<button class="btn btn-unbind btn-xs" onclick="unbindAll(' + "'" + escJsStr(c.code) + "'" + ')">🔓 解绑</button>':'<span style="color:#ccc">-</span>') + '<button class="btn btn-danger btn-xs" onclick="deleteCode(' + "'" + escJsStr(c.code) + "'" + ')">🗑️ 删除</button></div></td></tr>';
+    return '<tr><td><div class="code-cell"><span class="code-text">' + escHtml(c.code) + '</span><button class="copy-btn" onclick="copyCode(' + "'" + escJsStr(c.code) + "'" + ',this)" title="复制">📋</button></div></td><td>' + sts + '</td><td>' + dt + '</td><td>' + formatDate(c.expiresAt) + '</td><td>' + formatDate(c.createdAt) + '</td><td>' + timeAgo(c.lastAccess||c.boundAt) + '</td><td><input class="remark-input" type="text" value="' + escHtml(c.remark||'') + '" placeholder="备注用户信息" onchange="saveRemark(''' + "'" + "' + escJsStr(c.code) + ''" + "'" + ''',this.value)" maxlength="100"></td><td><div class="action-btns">' + (c.devices>0?'<button class="btn btn-unbind btn-xs" onclick="unbindAll(' + "'" + escJsStr(c.code) + "'" + ')">🔓 解绑</button>':'<span style="color:#ccc">-</span>') + '<button class="btn btn-danger btn-xs" onclick="deleteCode(' + "'" + escJsStr(c.code) + "'" + ')">🗑️ 删除</button></div></td></tr>';
   }).join('');
   renderPagination(tp);
 }
@@ -543,7 +548,13 @@ function msg(text, type) {
   el.style.display='block'; clearTimeout(el._timer);
   el._timer=setTimeout(function(){el.style.display='none';},4000);
 }
-function clearMsg() { var el=document.getElementById('msg'); el.style.display='none'; el.textContent=''; }
+async function saveRemark(code, remark) {
+      var data = await api('/codes/remark', {code:code, remark:remark});
+      if (data.ok) { msg('✅ 备注已保存', 'success'); }
+      else { msg('❌ '+(data.error||'保存失败'), 'error'); }
+    }
+
+    function clearMsg() { var el=document.getElementById('msg'); el.style.display='none'; el.textContent=''; }
 
 (function(){
   var key = localStorage.getItem(KEY_KEY)||'';
