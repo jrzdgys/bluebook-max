@@ -7,7 +7,8 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Max-Age': '86400',
 };
-const ADMIN_KEY = 'bbm-admin-2y0jPFwxk2MZQTfR';
+// ADMIN_KEY: first try env var ADMIN_PASSWORD, then fallback to hardcoded
+const ADMIN_KEY = (typeof ADMIN_PASSWORD !== 'undefined') ? ADMIN_PASSWORD : 'bbm-admin-2y0jPFwxk2MZQTfR';
 const MAX_DEVICES = 2;
 
 function json(data, status) {
