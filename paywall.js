@@ -1,4 +1,4 @@
-/** èå®ä¹¦Max Â· è®¾å¤ç»å®é´æç³»ç» v5ï¼åéé-Workerï¼ */
+/** 蓝宝书Max · 设备绑定鉴权系统 v5（单通道-Worker） */
     var WORKER_URL = 'https://bluebook-auth.bluebookmax.workers.dev';
     var AUTH_KEY = 'bbm_auth_token';
     var FP_CACHE_KEY = 'bbm_fp_cache';
@@ -103,13 +103,13 @@
       var html = '';
       html += '<button class="auth-close" id="auth-close-btn">&times;</button>';
       html += '<div class="auth-icon">&#x1F511;</div>';
-      html += '<h2>' + 'è®¿é®ç æ¿æ´»' + '</h2>';
-      html += '<p class="auth-desc">è¯·è¾å¥æ¨å¨ç¥è¯æçè·åçè®¿é®ç </p>';
-      html += '<input class="auth-input" id="auth-code" placeholder="è¾å¥è®¿é®ç " maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">';
-      html += '<button class="auth-btn" id="auth-btn">æ¿æ´»è´¦å·</button>';
+      html += '<h2>' + '访问码激活' + '</h2>';
+      html += '<p class="auth-desc">请输入您在知识星球获取的访问码</p>';
+      html += '<input class="auth-input" id="auth-code" placeholder="输入访问码" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">';
+      html += '<button class="auth-btn" id="auth-btn">激活账号</button>';
       html += '<div class="auth-error" id="auth-error"></div>';
-      html += '<div class="auth-recover">æ¯ä¸ªè®¿é®ç å¯ç»å®å¤å°è®¾å¤</div>';
-      html += '<div class="auth-footer">å°æªå å¥ï¼åå¾ <a href="https://t.zsxq.com/6iVvp" target="_blank" style="color:#0071E3;text-decoration:none;font-weight:600">ç¥è¯æç Â· èå®ä¹¦Max</a></div>';
+      html += '<div class="auth-recover">每个访问码可绑定多台设备</div>';
+      html += '<div class="auth-footer">尚未加入？前往 <a href="https://t.zsxq.com/6iVvp" target="_blank" style="color:#0071E3;text-decoration:none;font-weight:600">知识星球 · 蓝宝书Max</a></div>';
       div.innerHTML = html;
       return div;
     }
@@ -168,11 +168,11 @@
           }).catch(function(e) {
             clearTimeout(timeout);
             console.error('[BBM] Fetch error:', e.name, e.message);
-            return { ok: false, error: 'ç½ç»è¯·æ±å¤±è´¥ï¼è¯·æ£æ¥ç½ç»è¿æ¥ï¼å¦ä½¿ç¨ç§»å¨æ°æ®å¯å°è¯åæ¢WiFiï¼ï¼è¥æç»­å¤±è´¥è¯·èç³»ç®¡çå' };
+            return { ok: false, error: '网络请求失败，请检查网络连接（如使用移动数据可尝试切换WiFi），若持续失败请联系管理员' };
           });
         }).catch(function(e) {
           console.error('[BBM] Fingerprint error:', e);
-          return { ok: false, error: 'è®¾å¤æçº¹ééå¤±è´¥' };
+          return { ok: false, error: '设备指纹采集失败' };
         });
       },
       logout: function() { localStorage.removeItem(AUTH_KEY); localStorage.removeItem(FP_CACHE_KEY); localStorage.removeItem(EXPIRES_KEY); },
@@ -191,18 +191,18 @@
         var input = document.getElementById('auth-code');
         var btn = document.getElementById('auth-btn');
         var doActivate = function() {
-          var code = input.value.trim(); if (!code) { showError('è¯·è¾å¥æ¿æ´»ç '); return; }
+          var code = input.value.trim(); if (!code) { showError('请输入激活码'); return; }
           console.log('[BBM] Activating code:', code);
-          btn.disabled = true; btn.textContent = 'éªè¯ä¸­...'; clearError();
+          btn.disabled = true; btn.textContent = '验证中...'; clearError();
           var safetyTimer = setTimeout(function() {
-            btn.disabled = false; btn.textContent = 'éæ°éªè¯';
-            showError('è¯·æ±è¶æ¶ï¼è¯·æ£æ¥ç½ç»åéè¯');
+            btn.disabled = false; btn.textContent = '重新验证';
+            showError('请求超时，请检查网络后重试');
           }, 35000);
           Paywall.activate(code).then(function(result) {
             clearTimeout(safetyTimer);
             if (result.ok) { hideModal(); if (onSuccess) onSuccess(); else window.location.reload(); }
-            else { showError(result.error || 'æ¿æ´»å¤±è´¥ï¼è¯·æ£æ¥æ¿æ´»ç '); btn.disabled = false; btn.textContent = 'æ¿æ´»è´¦å·'; if (input) input.focus(); }
-          }).catch(function() { clearTimeout(safetyTimer); showError('ç³»ç»éè¯¯ï¼è¯·ç¨åéè¯'); btn.disabled = false; btn.textContent = 'æ¿æ´»è´¦å·'; });
+            else { showError(result.error || '激活失败，请检查激活码'); btn.disabled = false; btn.textContent = '激活账号'; if (input) input.focus(); }
+          }).catch(function() { clearTimeout(safetyTimer); showError('系统错误，请稍后重试'); btn.disabled = false; btn.textContent = '激活账号'; });
         };
         btn.addEventListener('click', doActivate);
         input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doActivate(); });
@@ -225,7 +225,7 @@
       },
       unlockBadge: function() {
         var expiry = Paywall.formatExpiry();
-        var text = expiry ? 'å·²è®¢é Â· æææè³ ' + expiry : 'å·²è®¢é';
+        var text = expiry ? '已订阅 · 有效期至 ' + expiry : '已订阅';
         return '<span class="unlock-badge">' + text + '</span>';
       },
     };
@@ -244,11 +244,11 @@
             if (daysLeft <= 1) {
               banner.style.background = 'rgba(255,59,48,.92)';
               banner.style.color = '#fff';
-              banner.textContent = daysLeft === 0 ? 'â ï¸ è®¢éå°äºä»å¤©å°æï¼è¯·åæ¶ç»­è´¹' : 'â ï¸ è®¢éå°äºæå¤©å°æï¼è¯·åæ¶ç»­è´¹';
+              banner.textContent = daysLeft === 0 ? '⚠️ 订阅将于今天到期，请及时续费' : '⚠️ 订阅将于明天到期，请及时续费';
             } else {
               banner.style.background = 'rgba(255,149,0,.92)';
               banner.style.color = '#fff';
-              banner.textContent = 'â ï¸ è®¢éå°äº ' + daysLeft + ' å¤©åå°æï¼ç»­è´¹è¯·è®¿é®ç¥è¯æç â';
+              banner.textContent = '⚠️ 订阅将于 ' + daysLeft + ' 天后到期，续费请访问知识星球 →';
             }
             banner.onclick = function() { banner.style.opacity = '0'; setTimeout(function(){if(banner.parentNode)banner.parentNode.removeChild(banner);},500); };
             document.body.appendChild(banner);
@@ -265,6 +265,6 @@
       var badge = document.getElementById('auth-badge');
       if (badge) badge.innerHTML = isAuth ? Paywall.unlockBadge() : '';
       var btn = document.getElementById('btn-nav-login');
-      if (btn) { btn.textContent = isAuth ? 'å·²è®¢é' : 'è®¢é'; btn.style.background = isAuth ? 'rgba(52,199,89,.1)' : 'rgba(0,113,227,.08)'; btn.style.color = isAuth ? '#34C759' : '#0071E3'; }
+      if (btn) { btn.textContent = isAuth ? '已订阅' : '订阅'; btn.style.background = isAuth ? 'rgba(52,199,89,.1)' : 'rgba(0,113,227,.08)'; btn.style.color = isAuth ? '#34C759' : '#0071E3'; }
     };
     
