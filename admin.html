@@ -97,8 +97,25 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
       </div>
     </div>
 
+    <div id="statsBar" style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:70px;background:#f5f5f7;border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:22px;font-weight:700" id="stat-total">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:2px">总计</div>
+      </div>
+      <div style="flex:1;min-width:70px;background:#e8f5e9;border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#2e7d32" id="stat-used">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:2px">已使用</div>
+      </div>
+      <div style="flex:1;min-width:70px;background:#f0f0f0;border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#666" id="stat-unused">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:2px">未使用</div>
+      </div>
+      <div style="flex:1;min-width:70px;background:#fce4ec;border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:22px;font-weight:700;color:#c62828" id="stat-expired">-</div>
+        <div style="font-size:11px;color:#86868b;margin-top:2px">已过期</div>
+      </div>
+    </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
-      <button class="btn btn-primary" onclick="loadCodes()">📋 加载列表</button>
       <button class="btn btn-outline" onclick="showGenerate()">➕ 生成新码</button>
     </div>
 
@@ -113,7 +130,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
         <button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button>
       </div>
       <div class="row" style="margin-top:8px;color:#86868b;font-size:12px">
-        <span>💡 新激活码格式：随机8位数字</span>
+        <span>💡 新格式：BBM-8位字母数字组合（例：BBM-A3X7K9P2）</span>
       </div>
       <div id="codesOutput" class="codes-output"></div>
     </div>
@@ -123,7 +140,14 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
     <div id="loading" style="text-align:center;padding:40px;color:#86868b;display:none">⏳ 加载中...</div>
     <div id="tableWrap" style="display:none">
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()">
+        <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()" style="flex:2;min-width:120px">
+        <select id="statusFilter" onchange="filterCodes()" style="flex:1;min-width:90px;height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 10px;font-size:13px;outline:none">
+          <option value="all">全部状态</option>
+          <option value="unused">未使用</option>
+          <option value="used">已使用</option>
+          <option value="expired">已过期</option>
+        </select>
+        <button class="btn btn-outline btn-sm" onclick="exportUnused()" style="white-space:nowrap">📋 导出未使用</button>
         <span style="color:#6e6e73;font-size:13px;white-space:nowrap">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
       </div>
       <div style="overflow-x:auto">
@@ -135,6 +159,7 @@ td { padding: 10px 8px; border-bottom: 1px solid #e8e8ed; vertical-align: middle
               <th onclick="sortBy('devices')" id="th-devices">设备 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
               <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
+              <th onclick="sortBy('lastAccess')" id="th-last">最近活跃 <span class="sort-icon">↕</span></th>
               <th>操作</th>
             </tr>
           </thead>
@@ -274,13 +299,22 @@ function filterCodes() {
 
 // ---- Render ----
 function renderTable() {
-  // Apply search filter
-  filteredCodes = allCodes;
-  if (searchQuery) {
-    filteredCodes = allCodes.filter(c =>
-      c.code.toLowerCase().includes(searchQuery)
-    );
-  }
+  // Apply search filter + status filter
+  var statusVal = document.getElementById('statusFilter').value;
+  var now3 = new Date();
+  filteredCodes = allCodes.filter(function(c) {
+    // Text search
+    if (searchQuery && !c.code.toLowerCase().includes(searchQuery)) return false;
+    // Status filter
+    if (statusVal !== 'all') {
+      var isExpired = new Date(c.expiresAt) < now3;
+      var isUsed = c.devices > 0;
+      if (statusVal === 'unused' && (isUsed || isExpired)) return false;
+      if (statusVal === 'used' && !isUsed) return false;
+      if (statusVal === 'expired' && !isExpired) return false;
+    }
+    return true;
+  });
 
   // Apply sort
   if (sortField) {
@@ -301,6 +335,9 @@ function renderTable() {
           break;
         case 'createdAt':
           va = a.createdAt || ''; vb = b.createdAt || '';
+          break;
+        case 'lastAccess':
+          va = a.lastAccess || 0; vb = b.lastAccess || 0;
           break;
         default:
           va = a.code; vb = b.code;
@@ -323,18 +360,22 @@ function renderTable() {
                    used ? '<span class="badge badge-green">已使用</span>' :
                           '<span class="badge badge-gray">未使用</span>';
     const hasDevices = c.devices > 0;
-    return '<tr>' +
-      '<td class="key-input" style="font-weight:500">' + escHtml(c.code) + '</td>' +
+        return '<tr>' +
+      '<td class="key-input" data-revealed="false">' +
+        '<span class="code-masked" style="font-weight:500;font-family:\'SF Mono\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
+        '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(c.code) + '\')\" title="显示/隐藏">👁</button>' +
+      '</td>' +
       '<td>' + status + '</td>' +
       '<td>' + c.devices + '/' + c.maxDevices + '</td>' +
       '<td>' + formatDate(c.expiresAt) + '</td>' +
       '<td style="color:#86868b;font-size:12px">' + formatDate(c.createdAt) + '</td>' +
+      '<td style="color:#86868b;font-size:12px">' + timeAgo(c.lastAccess || c.boundAt) + '</td>' +
       '<td>' +
         '<div class="action-btns">' +
         (hasDevices
-          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')" title="解绑设备">🔓 解绑</button>'
+          ? '<button class="btn btn-outline btn-xs" onclick="unbindAll(\'' + escJsStr(c.code) + '\')\" title="解绑设备">🔓 解绑</button>'
           : '<span style="color:#ccc;font-size:11px">-</span>') +
-        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')" title="删除此激活码">🗑️ 删除</button>' +
+        '<button class="btn btn-danger btn-xs" onclick="deleteCode(\'' + escJsStr(c.code) + '\')\" title="删除此激活码">🗑️ 删除</button>' +
         '</div>' +
       '</td>' +
       '</tr>';
@@ -380,6 +421,17 @@ async function loadCodes() {
   allCodes = data.codes || [];
   document.getElementById('totalCount').textContent = allCodes.length;
 
+  // Update stats bar
+  var total = allCodes.length;
+  var now2 = new Date();
+  var used = allCodes.filter(function(c){return c.devices > 0;}).length;
+  var expired = allCodes.filter(function(c){return new Date(c.expiresAt) < now2;}).length;
+  var unused = total - used - expired;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-used').textContent = used;
+  document.getElementById('stat-unused').textContent = unused;
+  document.getElementById('stat-expired').textContent = expired;
+
   // Reset sort state
   sortField = null;
   sortAsc = true;
@@ -423,18 +475,70 @@ async function generateCodes() {
   const codes = [];
   const seen = new Set();
   while (codes.length < count) {
-    // 生成随机8位数字
-    let num;
+    // 生成随机8位字母数字组合
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code;
     do {
-      num = String(Math.floor(10000000 + Math.random() * 90000000));
-    } while (seen.has(num));
-    seen.add(num);
-    codes.push(num);
+      code = 'BBM-' + Array.from({length:8}, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+    } while (seen.has(code));
+    seen.add(code);
+    codes.push(code);
   }
 
   const data = await api('/codes/create', { codes, days });
   if (data.ok) {
-    const expires = new Date(data.expiresAt).toISOString().slice(0, 10);
+    const expires = new Date(data.expiresAt).toISOString().slice(0, 1
+// Code visibility toggle
+function toggleCode(btn, code) {
+  var td = btn.closest('td');
+  var revealed = td.getAttribute('data-revealed') === 'true';
+  if (revealed) {
+    td.innerHTML = '<span class="code-masked" style="font-weight:500;font-family:\'SF Mono\',monospace;color:#86868b;letter-spacing:2px">****-****-****</span>' +
+      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(code) + '\')\" title="显示/隐藏">👁</button>';
+    td.setAttribute('data-revealed', 'false');
+  } else {
+    td.innerHTML = '<span style="font-weight:500;font-family:\'SF Mono\',monospace">' + escHtml(code) + '</span>' +
+      '<button class="btn btn-xs btn-outline" style="margin-left:6px;padding:0 6px;height:22px;font-size:11px" onclick="toggleCode(this,\'' + escJsStr(code) + '\')\" title="显示/隐藏">🙈</button>';
+    td.setAttribute('data-revealed', 'true');
+  }
+}
+// Relative time display
+function timeAgo(ts) {
+  if (!ts) return '从未';
+  var diff = Date.now() - parseInt(ts, 10);
+  if (diff < 0) return '刚刚';
+  var mins = Math.floor(diff / 60000);
+  if (mins < 1) return '刚刚';
+  if (mins < 60) return mins + '分钟前';
+  var hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + '小时前';
+  var days = Math.floor(hrs / 24);
+  if (days < 30) return days + '天前';
+  return Math.floor(days/30) + '个月前';
+}
+// Export unused codes to clipboard
+function exportUnused() {
+  var codes = allCodes.filter(function(c) {
+    var now = new Date();
+    return new Date(c.expiresAt) >= now && c.devices === 0;
+  }).map(function(c) { return c.code; });
+  if (codes.length === 0) { msg('\u6ca1\u6709\u672a\u4f7f\u7528\u7684\u6fc0\u6d3b\u7801', 'error'); return; }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(codes.join('\n')).then(function() {
+      msg('\u2705 \u5df2\u590d\u5236 ' + codes.length + ' \u4e2a\u672a\u4f7f\u7528\u6fc0\u6d3b\u7801\u5230\u526a\u8d34\u677f', 'success');
+    }).catch(function() { fallbackCopy(codes); });
+  } else { fallbackCopy(codes); }
+}
+function fallbackCopy(codes) {
+  var ta = document.createElement('textarea');
+  ta.value = codes.join('\n');
+  ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); msg('\u2705 \u5df2\u590d\u5236 ' + codes.length + ' \u4e2a\u6fc0\u6d3b\u7801', 'success'); }
+  catch(e) { prompt('\u590d\u5236\u4ee5\u4e0b\u6fc0\u6d3b\u7801\uff1a', codes.join('\n')); }
+  document.body.removeChild(ta);
+}
+0);
     const output = document.getElementById('codesOutput');
     output.innerHTML = '✅ 成功生成 ' + data.created + ' 个激活码（跳过 ' + (data.total - data.created) + ' 个重复）<br>有效期至: ' + expires + '<br><br>' +
       codes.map((c, i) => '  ' + (i + 1) + '.  <strong>' + c + '</strong>').join('<br>');
