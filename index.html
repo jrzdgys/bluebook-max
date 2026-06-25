@@ -519,8 +519,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     var rps=(mf.reports||[]).filter(function(r){return r.date!=='test';})
       .sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
     document.getElementById('stat-reports').textContent=rps.length||'\u2014';
-    var ts=tR.reduce(function(s,it){return s+(it.r.stock_count||0);},0);
-    document.getElementById('stat-stocks').textContent=ts>0?ts:'\u2014';
+    // stock count will be calculated after tR population
     var isAuth=Paywall.isAuthenticated();
     if(isAuth){
       document.getElementById('auth-badge').innerHTML=Paywall.unlockBadge();
@@ -545,6 +544,8 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
         wM[wk.key].dates[r.date]=true;
       }
     });
+    var ts=tR.reduce(function(s,it){return s+(it.r.stock_count||0);},0);
+    document.getElementById('stat-stocks').textContent=ts>0?ts:'\u2014';
     var tg=document.getElementById('today-reports');
     if(tR.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot today-dot"></span>\u4eca\u5929<span class="count">'+tR.length+'\u4efd</span></div><div class="reports-grid">'+
