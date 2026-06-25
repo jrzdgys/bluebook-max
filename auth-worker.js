@@ -142,6 +142,89 @@ export default {
         return Response.json({ ok: true, reason: "unbound", message: "已解绑，此码可重新分配。" }, { headers: corsHeaders });
       }
 
+      // ===== POST /list — admin 列出所有码 =====
+      if (path === "/list" && request.method === "POST") {
+        if (admin_key !== ADMIN_KEY) {
+          return Response.json({ ok: false, reason: "unauthorized" }, { headers: corsHeaders, status: 403 });
+        }
+
+        const list = [];
+        let cursor = undefined;
+        do {
+          const result = await env.SUBS.list({ cursor });
+          for (const key of result.keys) {
+            const data = JSON.parse(await env.SUBS.get(key.name) || "{}");
+            const expiresAt = data.expiresAt || null;
+            list.push({
+              code: key.name,
+              fingerprint: data.fingerprint || null,
+              boundAt: data.boundAt || null,
+              lastAccess: data.lastAccess || null,
+              expiresAt: expiresAt,
+              devices: data.fingerprint ? 1 : 0,
+              createdAt: data.createdAt || data.boundAt || null,
+            });
+          }
+          cursor = result.cursor;
+        } while (cursor);
+
+        // 排序：未绑定的排前面
+        list.sort((a, b) => {
+          if (a.fingerprint && !b.fingerprint) return 1;
+          if (!a.fingerprint && b.fingerprint) return -1;
+          return 0;
+        });
+
+        return Response.json({ ok: true, codes: list }, { headers: corsHeaders });
+      }
+
+      // ===== POST /codes/create — admin 批量生成码 =====
+      if (path === "/codes/create" && request.method === "POST") {
+        if (admin_key !== ADMIN_KEY) {
+          return Response.json({ ok: false, reason: "unauthorized" }, { headers: corsHeaders, status: 403 });
+        }
+
+        const { codes, days } = body;
+        if (!codes || !Array.isArray(codes) || codes.length === 0) {
+          return Response.json({ ok: false, reason: "missing_codes" }, { headers: corsHeaders });
+        }
+
+        const now = new Date().toISOString();
+        const expiryDate = days ? new Date(Date.now() + days * 86400000).toISOString() : null;
+        const created = [];
+
+        for (const code of codes) {
+          const existing = await getSub(code, env);
+          if (existing.fingerprint) continue; // 已绑定的码跳过
+          const data = {
+            createdAt: now,
+            expiresAt: expiryDate,
+            fingerprint: null,
+            boundAt: null,
+            lastAccess: null,
+          };
+          await setSub(code, data, env);
+          created.push(code);
+        }
+
+        return Response.json({ ok: true, created, count: created.length }, { headers: corsHeaders });
+      }
+
+      // ===== POST /codes/delete — admin 删除码 =====
+      if (path === "/codes/delete" && request.method === "POST") {
+        if (admin_key !== ADMIN_KEY) {
+          return Response.json({ ok: false, reason: "unauthorized" }, { headers: corsHeaders, status: 403 });
+        }
+
+        const codeToDelete = body.code;
+        if (!codeToDelete) {
+          return Response.json({ ok: false, reason: "missing_code" }, { headers: corsHeaders });
+        }
+
+        await env.SUBS.delete(codeToDelete);
+        return Response.json({ ok: true, reason: "deleted" }, { headers: corsHeaders });
+      }
+
       return Response.json({ ok: false, reason: "not_found" }, { headers: corsHeaders, status: 404 });
 
     } catch (e) {
