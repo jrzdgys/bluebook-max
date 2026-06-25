@@ -91,7 +91,7 @@
     <div class="sh">
     <div class="sh-top">
     <span class="sh-date" id="header-date">2026年6月23日</span>
-    <span class="sh-edition" id="header-edition"></span>
+    <span class="sh-edition" id="header-edition">☀️ 午间版</span>
     </div>
     <h1>机构观点快照<span class="badge">国内版 🧡</span></h1>
     <div class="live-row">
@@ -123,7 +123,7 @@
     function ts(){var n=new Date();return n.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
     document.title='蓝宝书Max · '+ED.edition.dateDisplay+' '+ED.edition.label;
     document.getElementById('header-date').textContent=ED.edition.dateDisplay;
-    var ec=ED.edition.type;var ebg=ec==='mc'?'rgba(255,149,0,.15)':ec==='pm'?'rgba(0,113,227,.15)':ec==='ev'?'rgba(175,82,222,.15)':'rgba(48,180,110,.15)';var ecr=ec==='mc'?'#FF9500':ec==='pm'?'#0071E3':ec==='ev'?'#AF52DE':'#30B46E';var ei=ec==='mc'?'🌅':ec==='pm'?'☀️':ec==='ev'?'🌙':'🌍';var hde=document.getElementById('header-edition');hde.textContent=ei+' '+ED.edition.label;hde.style.background=ebg;hde.style.color=ecr;
+    document.getElementById('header-edition').textContent='☀️ '+ED.edition.label;
     document.getElementById('stat-topics').textContent=ED.stats.topics;
     document.getElementById('stat-opp').textContent=ED.stats.opportunities;
     document.getElementById('stat-stocks').textContent=ED.stats.stocks;

@@ -7,22 +7,21 @@
  * Canvas 指纹 + 容差匹配（兼容 iOS Safari）。
  * 清缓存恢复机制：同码+同IP+30天内自动识别。
  *
- * 部署前配置：
- *   1. 部署 Cloudflare Worker (见 auth-worker.js)
- *   2. 将 WORKER_URL 改为实际 Worker 地址
+ * 手机端修复 (v5.1):
+ *   - Canvas 采集加 3s 超时，超时自动降级到无Canvas模式
+ *   - 激活总超时从 10s → 25s
+ *   - Worker 验证超时从 10s → 15s
  */
 
 // ===== 配置 =====
 const WORKER_URL    = "https://bluebook-auth.bluebookmax.workers.dev";
 const AUTH_KEY      = "bbm_auth_token";
 const FP_CACHE_KEY  = "bbm_fp_cache";
-const EXPIRES_KEY    = "bbm_expires_at";
+const EXPIRES_KEY   = "bbm_expires_at";
 
 // ===== 设备指纹采集 =====
-// 主指纹：navigator + screen + timezone（稳定）
-// 辅助指纹：Canvas（iOS Safari 可能变化，用于容差匹配）
 async function collectFingerprint() {
-  const nav = {
+  var nav = {
     ua: navigator.userAgent,
     platform: navigator.platform,
     lang: navigator.language,
@@ -31,226 +30,192 @@ async function collectFingerprint() {
     pdf: navigator.pdfViewerEnabled || false,
     vendor: navigator.vendor || '',
   };
-
-  const scr = {
+  var scr = {
     w: screen.width,
     h: screen.height,
     dpr: window.devicePixelRatio || 1,
     cd: screen.colorDepth || 24,
   };
+  var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // Canvas 指纹，带 3s 超时（iOS Safari 可能卡住）
+  var canvasHash = await getCanvasWithTimeout(3000);
 
-  // Canvas 指纹（兼容 iOS）
-  const canvasHash = await getCanvasHash();
+  var stableParts = [nav.ua, nav.platform, nav.lang, scr.w, scr.h, scr.dpr, tz].join('|||');
+  var fp = await sha256(stableParts + '|||' + canvasHash);
 
-  // 组合主关键串（用于精确匹配）
-  const stableParts = [
-    nav.ua,
-    nav.platform,
-    nav.lang,
-    scr.w, scr.h,
-    scr.dpr,
-    tz,
-  ].join('|||');
-
-  // 完整指纹 hash
-  const fp = await sha256(stableParts + '|||' + canvasHash);
-
-  return {
-    hash: fp,
-    canvas: canvasHash,      // 单独存，用于容差匹配
-    stable: stableParts,      // 存用于恢复时的快速匹配
-  };
+  return { hash: fp, canvas: canvasHash, stable: stableParts };
 }
 
-// Canvas 指纹（简化，兼容 iOS 隐私模式）
+// 带超时的 Canvas 采集
+function getCanvasWithTimeout(ms) {
+  return new Promise(function(resolve) {
+    var done = false;
+    var timer = setTimeout(function() {
+      if (!done) { done = true; resolve('canvas-timeout'); }
+    }, ms);
+    try {
+      var result = getCanvasHash();
+      if (!done) { done = true; clearTimeout(timer); resolve(result); }
+    } catch(e) {
+      if (!done) { done = true; clearTimeout(timer); resolve('canvas-error'); }
+    }
+  });
+}
+
 function getCanvasHash() {
   try {
-    const c = document.createElement('canvas');
+    var c = document.createElement('canvas');
     c.width = 200; c.height = 50;
-    const ctx = c.getContext('2d');
+    var ctx = c.getContext('2d');
     if (!ctx) return 'no-canvas';
-
-    // 写固定文字
     ctx.textBaseline = 'alphabetic';
     ctx.font = '16px "Arial",sans-serif';
     ctx.fillStyle = '#1D1D1F';
     ctx.fillText('蓝宝书Max', 10, 30);
     ctx.fillStyle = '#0071E3';
     ctx.fillRect(10, 10, 40, 20);
-
-    // iOS Safari 隐私模式可能返回空，捕获这种情况
-    const data = c.toDataURL();
+    var data = c.toDataURL();
     if (data.length < 100) return 'canvas-blocked';
-    return data.substring(50, 250); // 取中间段作为指纹
-
+    return data.substring(50, 250);
   } catch(e) {
     return 'canvas-error';
   }
 }
 
-// SHA-256 hash
+// SHA-256 hash (with fallback for non-HTTPS)
 async function sha256(str) {
-      if (!crypto || !crypto.subtle || !crypto.subtle.digest) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-          hash = ((hash << 5) - hash) + str.charCodeAt(i);
-          hash |= 0;
-        }
-        return 'fp_' + Math.abs(hash).toString(16);
-      }
-      try {
-        const buf = await crypto.subtle.digest('SHA-256',
-          new TextEncoder().encode(str));
-        return Array.from(new Uint8Array(buf))
-          .map(b => b.toString(16).padStart(2, '0')).join('');
-      } catch(e) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-          hash = ((hash << 5) - hash) + str.charCodeAt(i);
-          hash |= 0;
-        }
-        return 'fp_' + Math.abs(hash).toString(16);
-      }
-    }
+  if (!crypto || !crypto.subtle || !crypto.subtle.digest) {
+    var h = 0;
+    for (var i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+    return 'fp_' + Math.abs(h).toString(16);
+  }
+  try {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+  } catch(e) {
+    var h = 0;
+    for (var i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+    return 'fp_' + Math.abs(h).toString(16);
+  }
+}
 
-// ===== Paywall 对象（与 index.html 的调用点兼容） =====
-const Paywall = {
+// ===== Paywall 对象 =====
+var Paywall = {
 
-  // ---------- 鉴权 ----------
-
-  isAuthenticated() {
-    const t = localStorage.getItem(AUTH_KEY);
+  isAuthenticated: function() {
+    var t = localStorage.getItem(AUTH_KEY);
     if (!t) return false;
-    // 简单格式检查
-    const parts = t.split('.');
+    var parts = t.split('.');
     return parts.length === 3 && parts[1].length > 0;
   },
 
-  getToken() {
+  getToken: function() {
     return localStorage.getItem(AUTH_KEY);
   },
 
-  // ---------- 验证 token（自包含，不请求 Worker） ----------
-  // 前端只做基础格式校验，真正的签名验证由 Worker 完成
-  // 这里返回 token 中的过期时间用于本地缓存判断
-  getTokenExpiry() {
+  getTokenExpiry: function() {
     try {
-      const t = this.getToken();
+      var t = this.getToken();
       if (!t) return 0;
-      const expires = parseInt(t.split('.')[2], 10);
+      var expires = parseInt(t.split('.')[2], 10);
       return isNaN(expires) ? 0 : expires;
-    } catch { return 0; }
+    } catch(e) { return 0; }
   },
 
-  isTokenExpired() {
+  isTokenExpired: function() {
     return Date.now() > this.getTokenExpiry();
   },
 
-  // ---------- 远程验证（调用 Worker /verify） ----------
+  verifyWithWorker: async function() {
+    var token = this.getToken();
+    if (!token) return { ok: false, error: 'no_token' };
 
-  async verifyWithWorker() {
-        const token = this.getToken();
-        if (!token) return { ok: false, error: 'no_token' };
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 15000);
 
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      var res = await fetch(WORKER_URL + '/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+      return await res.json();
+    } catch(e) {
+      clearTimeout(timeout);
+      if (e.name === 'AbortError') {
+        return { ok: false, error: '请求超时，请检查网络后重试' };
+      }
+      return { ok: false, error: '网络错误，请检查网络后重试' };
+    }
+  },
 
+  activate: async function(code) {
+    var fpData;
+    try {
+      fpData = await collectFingerprint();
+    } catch(e) {
+      return { ok: false, error: '设备指纹采集失败，请确保使用安全连接(HTTPS)访问' };
+    }
+
+    var timeout = setTimeout(function() {
+      var btn = document.getElementById('auth-btn');
+      if (btn) { btn.disabled = false; btn.textContent = '激活'; }
+    }, 25000);
+
+    try {
+      var res = await fetch(WORKER_URL + '/activate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: code.toUpperCase(),
+          fp: fpData.hash,
+          canvas: fpData.canvas,
+          stable: fpData.stable,
+        }),
+      });
+      clearTimeout(timeout);
+      var data = await res.json();
+
+      if (data.ok && data.token) {
+        try { localStorage.setItem(AUTH_KEY, data.token); } catch(e) {}
         try {
-          const res = await fetch(WORKER_URL + '/verify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token }),
-            signal: controller.signal,
-          });
-          clearTimeout(timeout);
-          const data = await res.json();
-          return data;
-        } catch(e) {
-          clearTimeout(timeout);
-          if (e.name === 'AbortError') {
-            return { ok: false, error: '请求超时，请检查网络后重试' };
-          }
-          return { ok: false, error: '网络错误，请检查网络后重试' };
-        }
-      },
+          localStorage.setItem(FP_CACHE_KEY, JSON.stringify({
+            hash: fpData.hash, canvas: fpData.canvas, stable: fpData.stable,
+          }));
+        } catch(e) {}
+      }
 
-  // ---------- 激活（调用 Worker /activate） ----------
+      return data;
+    } catch(e) {
+      clearTimeout(timeout);
+      return { ok: false, error: '网络错误，请检查网络后重试' };
+    }
+  },
 
-  async activate(code) {
-        let fpData;
-        try {
-          fpData = await collectFingerprint();
-        } catch(e) {
-          return { ok: false, error: '\u8bbe\u5907\u6307\u7eb9\u91c7\u96c6\u5931\u8d25\uff0c\u8bf7\u786e\u4fdd\u4f7f\u7528\u5b89\u5168\u8fde\u63a5(HTTPS)\u8bbf\u95ee' };
-        }
-
-        const timeout = setTimeout(() => {
-          const btn = document.getElementById('auth-btn');
-          if (btn) { btn.disabled = false; btn.textContent = '\u6fc0\u6d3b'; }
-        }, 15000);
-
-        try {
-          const res = await fetch(WORKER_URL + '/activate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              code: code.toUpperCase(),
-              fp: fpData.hash,
-              canvas: fpData.canvas,
-              stable: fpData.stable,
-            }),
-          });
-          clearTimeout(timeout);
-          const data = await res.json();
-
-          if (data.ok && data.token) {
-            try { localStorage.setItem(AUTH_KEY, data.token); } catch {}
-            try {
-              localStorage.setItem(FP_CACHE_KEY, JSON.stringify({
-                hash: fpData.hash,
-                canvas: fpData.canvas,
-                stable: fpData.stable,
-              }));
-            } catch {}
-          }
-
-          return data;
-        } catch(e) {
-          clearTimeout(timeout);
-          return { ok: false, error: '\u7f51\u7edc\u9519\u8bef\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u540e\u91cd\u8bd5' };
-        }
-      },
-
-  // ---------- 清除认证 ----------
-
-  logout() {
+  logout: function() {
     localStorage.removeItem(AUTH_KEY);
     localStorage.removeItem(FP_CACHE_KEY);
   },
 
-  // ---------- 激活弹窗 ----------
-
-  showActivationModal(onSuccess) {
-    const overlay = document.getElementById('auth-overlay');
+  showActivationModal: function(onSuccess) {
+    var overlay = document.getElementById('auth-overlay');
     if (overlay) {
       overlay.style.display = 'flex';
-      const input = document.getElementById('auth-code');
-      if (input) setTimeout(() => input.focus(), 200);
+      var input = document.getElementById('auth-code');
+      if (input) setTimeout(function() { input.focus(); }, 200);
       return;
     }
-
-    // 弹窗还不存在 → 创建
     this._createModal(onSuccess);
   },
 
-  _createModal(onSuccess) {
-    // 移除旧的（如果存在）
-    const old = document.getElementById('auth-overlay');
+  _createModal: function(onSuccess) {
+    var old = document.getElementById('auth-overlay');
     if (old) old.remove();
 
-    const overlay = document.createElement('div');
+    var overlay = document.createElement('div');
     overlay.id = 'auth-overlay';
     overlay.className = 'auth-overlay';
     overlay.innerHTML =
@@ -268,31 +233,30 @@ const Paywall = {
 
     document.body.appendChild(overlay);
 
-    // 事件绑定
-    const input = document.getElementById('auth-code');
-    const btn = document.getElementById('auth-btn');
+    var input = document.getElementById('auth-code');
+    var btn = document.getElementById('auth-btn');
 
-    const doActivate = async () => {
+    var doActivate = async function() {
       try {
-        const code = input.value.trim();
+        var code = input.value.trim();
         if (!code) { showError('请输入激活码'); return; }
         btn.disabled = true;
         btn.textContent = '验证中...';
         clearError();
 
-        const safetyTimer = setTimeout(() => {
+        var safetyTimer = setTimeout(function() {
           btn.disabled = false;
           btn.textContent = '激活';
           showError('请求超时，请检查网络后重试');
-        }, 10000);
+        }, 25000);
 
-        const result = await Paywall.activate(code);
+        var result = await Paywall.activate(code);
         clearTimeout(safetyTimer);
-        
+
         if (result.ok) {
           hideModal();
-          const expiry = Paywall.formatExpiry();
-          const expiryMsg = expiry ? '有效期至 ' + expiry : '';
+          var expiry = Paywall.formatExpiry();
+          var expiryMsg = expiry ? '有效期至 ' + expiry : '';
           if (onSuccess) {
             if (expiryMsg) console.log('蓝宝书Max ' + expiryMsg);
             onSuccess();
@@ -314,106 +278,90 @@ const Paywall = {
       }
     };
 
-    btn.addEventListener('click', doActivate);btn.addEventListener('click', doActivate);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') doActivate();
-    });
-    input.addEventListener('input', () => clearError());
-    setTimeout(() => input.focus(), 200);
+    btn.addEventListener('click', doActivate);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') doActivate(); });
+    input.addEventListener('input', function() { clearError(); });
+    setTimeout(function() { input.focus(); }, 200);
 
     function showError(msg) {
-      const el = document.getElementById('auth-error');
+      var el = document.getElementById('auth-error');
       if (el) el.textContent = msg;
     }
     function clearError() {
-      const el = document.getElementById('auth-error');
+      var el = document.getElementById('auth-error');
       if (el) el.textContent = '';
     }
     function hideModal() {
-      const o = document.getElementById('auth-overlay');
+      var o = document.getElementById('auth-overlay');
       if (o) o.style.display = 'none';
     }
-    // Close button handler
     document.getElementById('auth-close-btn').addEventListener('click', hideModal);
   },
-  closeAuthModal() {
-    const o = document.getElementById('auth-overlay');
+
+  closeAuthModal: function() {
+    var o = document.getElementById('auth-overlay');
     if (o) o.style.display = 'none';
   },
 
-  // ---------- 登录按钮回调（index.html 调用） ----------
-  showLogin() {
+  showLogin: function() {
     this.showActivationModal(null);
   },
 
-  // ---------- 获取到期日 ----------
-  getExpiryDate() {
-    const expiresAt = localStorage.getItem(EXPIRES_KEY);
+  getExpiryDate: function() {
+    var expiresAt = localStorage.getItem(EXPIRES_KEY);
     if (!expiresAt) return null;
-    const date = new Date(expiresAt);
+    var date = new Date(expiresAt);
     return isNaN(date.getTime()) ? null : date;
   },
 
-  // ---------- 到期日格式化 ----------
-  formatExpiry() {
-    const date = this.getExpiryDate();
+  formatExpiry: function() {
+    var date = this.getExpiryDate();
     if (!date) return '';
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
+    var y = date.getFullYear();
+    var m = String(date.getMonth() + 1).padStart(2, '0');
+    var d = String(date.getDate()).padStart(2, '0');
     return y + '/' + m + '/' + d;
   },
 
-  // ---------- 报告页 lock icon 装饰 ----------
-  lockIcon() {
+  lockIcon: function() {
     return '<span class="lock-icon">🔒</span>';
   },
 
-  unlockBadge() {
-    const expiry = this.formatExpiry();
-    const text = expiry ? '✓ 已订阅 · 有效期至 ' + expiry : '✓ 已订阅';
+  unlockBadge: function() {
+    var expiry = this.formatExpiry();
+    var text = expiry ? '✓ 已订阅 · 有效期至 ' + expiry : '✓ 已订阅';
     return '<span class="unlock-badge">' + text + '</span>';
   },
 };
 
-// ===== 全局关闭函数（供onclick调用） =====
 function closeAuthModal() {
   Paywall.closeAuthModal();
 }
 
-// ===== 页面初始化检测（自动执行） =====
-
-// 报告页 <html data-paywall="true"> 时启用付费墙
-document.addEventListener('DOMContentLoaded', async () => {
-  const needsAuth = document.documentElement.getAttribute('data-paywall') === 'true';
+document.addEventListener('DOMContentLoaded', async function() {
+  var needsAuth = document.documentElement.getAttribute('data-paywall') === 'true';
   if (!needsAuth) return;
 
-  // 已认证 → 直接放行
   if (Paywall.isAuthenticated()) {
     document.documentElement.classList.add('bb-authenticated');
     return;
   }
 
-  // 未认证 → 弹激活窗
-  const title = document.title || '';
-  Paywall.showActivationModal(() => {
+  Paywall.showActivationModal(function() {
     window.location.reload();
   });
 });
 
-// ===== 导航页认证状态更新（index.html 在事件中调用） =====
 window.__bbmRefreshAuth = function() {
-  const isAuth = Paywall.isAuthenticated();
-  const badge = document.getElementById('auth-badge');
+  var isAuth = Paywall.isAuthenticated();
+  var badge = document.getElementById('auth-badge');
   if (badge) {
     badge.innerHTML = isAuth ? Paywall.unlockBadge() : '';
   }
-  const btn = document.getElementById('btn-nav-login');
+  var btn = document.getElementById('btn-nav-login');
   if (btn) {
     btn.textContent = isAuth ? '已订阅' : '订阅';
-    btn.style.background = isAuth
-      ? 'rgba(52,199,89,.1)'
-      : 'rgba(0,113,227,.08)';
+    btn.style.background = isAuth ? 'rgba(52,199,89,.1)' : 'rgba(0,113,227,.08)';
     btn.style.color = isAuth ? '#34C759' : '#0071E3';
   }
 };
