@@ -147,7 +147,7 @@
           }).catch(function(e) {
             clearTimeout(timeout);
             console.error('[BBM] Fetch error:', e.name, e.message);
-            return { ok: false, error: '网络请求失败，请检查网络连接后重试' };
+            return { ok: false, error: '网络请求失败，请检查网络连接（如使用移动数据可尝试切换WiFi），若持续失败请联系管理员' };
           });
         }).catch(function(e) {
           console.error('[BBM] Fingerprint error:', e);
@@ -174,7 +174,7 @@
           console.log('[BBM] Activating code:', code);
           btn.disabled = true; btn.textContent = '验证中...'; clearError();
           var safetyTimer = setTimeout(function() {
-            btn.disabled = false; btn.textContent = '激活账号';
+            btn.disabled = false; btn.textContent = '重新验证';
             showError('请求超时，请检查网络后重试');
           }, 35000);
           Paywall.activate(code).then(function(result) {
