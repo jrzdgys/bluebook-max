@@ -1,5 +1,5 @@
-// 蓝宝书Max · 设备绑定鉴权 Worker (v6)
-// 改动：handleCodesCreate 存储 expiresAt；handleList 返回 expiresAt/createdAt；handleActivate 保留这两字段
+// 蓝宝书Max · 设备绑定鉴权 Worker (v7)
+// v7: 修复 AUTH_CODES 作用域（模块级变量）；handleList 返回错误信息；新增 /codes/extend 和 /codes/batch
 // KV binding 名称: AUTH_CODES
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -10,6 +10,7 @@ const CORS_HEADERS = {
 // ADMIN_KEY: first try env var ADMIN_PASSWORD, then fallback to hardcoded
 const ADMIN_KEY = 'bbm-admin-2y0jPFwxk2MZQTfR';
 const MAX_DEVICES = 2;
+let AUTH_CODES;  // set in handleRequest from env
 
 function json(data, status) {
   if (!status) status = 200;
@@ -126,7 +127,8 @@ async function handleList(body) {
       }
       cursor = result.cursor;
     } while (cursor);
-  } catch (e) {}
+  } catch (e) { return json({ ok: false, error: 'KV读取失败: ' + (e.message || e) }); }
+  list.sort(function(a,b){ return (b.createdAt||'').localeCompare(a.createdAt||''); });
   return json({ ok: true, codes: list });
 }
 
@@ -190,10 +192,7 @@ async function handleCodesRemark(body) {
       }
       await AUTH_CODES.put(code, JSON.stringify(sub));
       return json({ ok: true, code: code, oldExpiresAt: oldExpiresAt, newExpiresAt: new Date(sub.expiresAt).toISOString() });
-    }
-    
-    
-
+}
 
 async function handleCodesBatch(body) {
   if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
@@ -227,7 +226,7 @@ async function handleCodesBatch(body) {
 
 async function handleRequest(request, env) {
   // Set up bindings from ES module env
-  var AUTH_CODES = env.AUTH_CODES;
+  AUTH_CODES = env.AUTH_CODES;
   var ADMIN_PASSWORD = env.ADMIN_PASSWORD;
   var ADMIN_KEY = ADMIN_PASSWORD || 'bbm-admin-2y0jPFwxk2MZQTfR';
 

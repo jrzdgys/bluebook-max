@@ -3,5 +3,5 @@ main = "auth-worker.js"
 compatibility_date = "2025-01-01"
 
 [[kv_namespaces]]
-binding = "SUBS"
-id = "PLACEHOLDER_KV_ID"
+binding = "AUTH_CODES"
+id = "e10fae5c8642470f8fa57cfae7124ed8"
