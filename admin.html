@@ -99,7 +99,7 @@
     </style>
     </head>
     <body>
-    <div id="loginScreen" class="container" style="display:none">
+    <div id="loginScreen" class="container">
       <div class="card">
         <div class="login-icon">🔑</div>
         <h1>管理员登录</h1>
@@ -111,7 +111,7 @@
         <div class="hint">🌐 密钥在 <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 环境变量</a></div>
       </div>
     </div>
-    <div id="adminScreen" class="container" style="display:block">
+    <div id="adminScreen" class="container" style="display:none">
       <div class="card" style="padding:20px 24px">
         <div class="header-bar">
           <h1>🔑 蓝宝书Max · 激活码管理</h1>
@@ -279,7 +279,7 @@
     async function saveRemark(code,remark){var data=await api('/codes/remark',{code:code,remark:remark});if(data.ok){msg('✅ 备注已保存');allCodes.forEach(function(c){if(c.code===code)c.remark=remark;});}else{msg('❌ '+(data.error||'保存失败'),'error');}}
     function clearMsg(){var el=document.getElementById('msg');el.style.display='none';el.textContent='';}
 
-    (function(){var key=localStorage.getItem(KEY_KEY)||'';if(key){showAdmin();loadCodes();}})();
+    (function(){var key=localStorage.getItem(KEY_KEY)||'';if(key){showAdmin();loadCodes();}else{document.getElementById('loginScreen').style.display='block';}})();
     </script>
     </body>
     </html>
