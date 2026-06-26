@@ -194,6 +194,37 @@ async function handleCodesRemark(body) {
     
     
 
+
+async function handleCodesBatch(body) {
+  if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
+  var codes = body.codes;
+  var action = body.action;
+  if (!codes || !Array.isArray(codes) || !codes.length) return json({ ok: false, error: '缺少激活码列表' });
+  if (action !== 'unbind' && action !== 'delete') return json({ ok: false, error: '无效操作' });
+  var results = [];
+  for (var i = 0; i < codes.length; i++) {
+    var code = codes[i].toUpperCase().trim();
+    try {
+      if (action === 'unbind') {
+        var sub = JSON.parse(await AUTH_CODES.get(code) || '{}');
+        sub.fingerprint = null;
+        sub.devices = [];
+        sub.boundAt = null;
+        sub.lastAccess = null;
+        await AUTH_CODES.put(code, JSON.stringify(sub));
+        results.push({ code: code, ok: true, message: '已解绑' });
+      } else {
+        await AUTH_CODES.delete(code);
+        results.push({ code: code, ok: true, message: '已删除' });
+      }
+    } catch (e) {
+      results.push({ code: code, ok: false, message: e.message });
+    }
+  }
+  return json({ ok: true, results: results });
+}
+
+
 async function handleRequest(request, env) {
   // Set up bindings from ES module env
   var AUTH_CODES = env.AUTH_CODES;
@@ -214,6 +245,8 @@ async function handleRequest(request, env) {
       case '/codes/create': return handleCodesCreate(body);
       case '/codes/delete': return handleCodesDelete(body);
       case '/codes/remark': return handleCodesRemark(body);
+      case '/codes/extend': return handleCodesExtend(body);
+      case '/codes/batch': return handleCodesBatch(body);
       default: return json({ error: 'Not found' }, 404);
     }
   } catch (e) { return json({ error: e.message || 'Internal error' }, 500); }
