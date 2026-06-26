@@ -108,7 +108,7 @@
       html += '<input class="auth-input" id="auth-code" placeholder="输入访问码" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">';
       html += '<button class="auth-btn" id="auth-btn">激活账号</button>';
       html += '<div class="auth-error" id="auth-error"></div>';
-      html += '<div class="auth-recover">每个访问码可绑定多台设备</div>';
+      html += '<div class="auth-recover">每个访问码可绑定 2 台设备</div>';
       html += '<div class="auth-footer">尚未加入？前往 <a href="https://t.zsxq.com/6iVvp" target="_blank" style="color:#0071E3;text-decoration:none;font-weight:600">知识星球 · 蓝宝书Max</a></div>';
       div.innerHTML = html;
       return div;

@@ -49,7 +49,7 @@
     .btn-outline{background:transparent;border:1px solid #d2d2d7;color:#1d1d1f}
     .btn-outline:hover{background:#f5f5f7}
     .btn-sm{padding:4px 10px;font-size:12px;border-radius:6px}
-    .btn-xs{padding:2px 8px;font-size:11px;border-radius:5px;height:24px}
+    .btn-xs{padding:4px 12px;font-size:12px;border-radius:6px;height:28px;min-width:60px;white-space:nowrap}
     #generateCard{display:none;background:#f5f5f7;border-radius:12px;padding:18px;margin-bottom:16px}
     #generateCard .row{display:flex;gap:10px;flex-wrap:wrap}
     #generateCard input[type="number"]{width:70px}
@@ -477,7 +477,7 @@ async function doExtend(days){
   if(!extendCode)return;
   var d=days||parseInt(document.getElementById('extDays').value)||0;
   if(d<=0)return;
-  var data=await api('/extend',{code:extendCode,days:d});
+  var data=await api('/codes/extend',{code:extendCode,days:d});
   if(data.ok){
     closeExtend();
     loadCodes();
