@@ -8,7 +8,7 @@ const CORS_HEADERS = {
   'Access-Control-Max-Age': '86400',
 };
 // ADMIN_KEY: first try env var ADMIN_PASSWORD, then fallback to hardcoded
-const ADMIN_KEY = (typeof ADMIN_PASSWORD !== 'undefined') ? ADMIN_PASSWORD : 'bbm-admin-2y0jPFwxk2MZQTfR';
+const ADMIN_KEY = 'bbm-admin-2y0jPFwxk2MZQTfR';
 const MAX_DEVICES = 2;
 
 function json(data, status) {
@@ -192,11 +192,14 @@ async function handleCodesRemark(body) {
       return json({ ok: true, code: code, oldExpiresAt: oldExpiresAt, newExpiresAt: new Date(sub.expiresAt).toISOString() });
     }
     
-    addEventListener('fetch', function (event) {
-  event.respondWith(handleRequest(event.request));
-});
+    
 
-async function handleRequest(request) {
+async function handleRequest(request, env) {
+  // Set up bindings from ES module env
+  var AUTH_CODES = env.AUTH_CODES;
+  var ADMIN_PASSWORD = env.ADMIN_PASSWORD;
+  var ADMIN_KEY = ADMIN_PASSWORD || 'bbm-admin-2y0jPFwxk2MZQTfR';
+
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS_HEADERS });
   if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
   var url = new URL(request.url);
@@ -215,3 +218,6 @@ async function handleRequest(request) {
     }
   } catch (e) { return json({ error: e.message || 'Internal error' }, 500); }
 }
+
+
+export default { async fetch(request, env, ctx) { return handleRequest(request, env); } };
