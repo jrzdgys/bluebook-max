@@ -96,7 +96,11 @@
       .toolbar,.search-box{flex-direction:column}
       thead th,tbody td{padding:8px 6px;font-size:11px}
     }
-    </style>
+    
+.dev-status{font-size:13px;font-weight:500}
+.dev-zero{color:#86868B}
+.no-action{color:#86868B;font-size:12px}
+</style>
     </head>
     <body>
     <div id="loginScreen" class="container">
@@ -236,7 +240,7 @@
         var sts=ex?'<span class="badge badge-red">已过期</span>':us?'<span class="badge badge-green">已使用</span>':'<span class="badge badge-gray">未使用</span>';
         var cs=c.code.replace(/'/g,"\\'").replace(/"/g,'&quot;');
         var rv=(c.remark||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-        return '<tr><td><div class="code-cell"><span class="code-text">'+c.code+'</span><button class="copy-btn" onclick="copyCode(\''+cs+'\',this)" title="复制">📋</button></div></td><td>'+sts+'</td><td>'+(c.devices>0?'已绑定 '+c.devices+' 台':'-')+'</td><td>'+formatDate(c.expiresAt)+'</td><td>'+formatDate(c.createdAt)+'</td><td>'+timeAgo(c.lastAccess||c.boundAt)+'</td><td><div class="remark-wrapper"><input class="remark-input" id="r-'+cs+'" type="text" value="'+rv+'" placeholder="备注用户信息" readonly onkeydown="if(event.key===\'Enter\'){this.blur();saveRemark(\''+cs+'\',this.value)}"><button class="remark-edit-btn" id="e-'+cs+'" onclick="toggleRemarkEdit(\''+cs+'\')" title="编辑备注">✏️</button></div></td><td><div class="action-btns">'+(c.devices>0?'<button class="btn btn-unbind btn-xs" onclick="unbindAll(\''+cs+'\')">🔓 解绑</button>':'<span style="color:#ccc">-</span>')+'<button class="btn btn-danger btn-xs" onclick="deleteCode(\''+cs+'\')">🗑️ 删除</button></div></td></tr>';
+        return '<tr><td><div class="code-cell"><span class="code-text">'+c.code+'</span><button class="copy-btn" onclick="copyCode(\''+cs+'\',this)" title="复制">📋</button></div></td><td>'+sts+'</td><td>'+(c.devices>0?'<span class=\"dev-status\">已绑定 · '+c.devices+'/2</span>':'<span class=\"dev-status dev-zero\">未绑定 · 0/2</span>')+'</td><td>'+formatDate(c.expiresAt)+'</td><td>'+formatDate(c.createdAt)+'</td><td>'+timeAgo(c.lastAccess||c.boundAt)+'</td><td><div class="remark-wrapper"><input class="remark-input" id="r-'+cs+'" type="text" value="'+rv+'" placeholder="备注用户信息" readonly onkeydown="if(event.key===\'Enter\'){this.blur();saveRemark(\''+cs+'\',this.value)}"><button class="remark-edit-btn" id="e-'+cs+'" onclick="toggleRemarkEdit(\''+cs+'\')" title="编辑备注">✏️</button></div></td><td><div class="action-btns">'+(c.devices>0?'<button class="btn btn-unbind btn-xs" onclick="unbindAll(\''+cs+'\')">🔓 解绑</button>':'<span style="color:#86868B;font-size:12px">未绑定</span>')+'<button class="btn btn-danger btn-xs" onclick="deleteCode(\''+cs+'\')">🗑️ 删除</button></div></td></tr>';
       }).join('');
       renderPagination(tp);
     }
@@ -264,7 +268,7 @@
     function escHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
     function getStatusOrder(c){var n=new Date();if(c.expiresAt&&new Date(c.expiresAt)<n)return 2;if(c.devices>0)return 1;return 0;}
     function formatDate(d){if(!d)return'-';try{return new Date(d).toISOString().slice(0,10);}catch(e){return'-';}}
-    function timeAgo(ts){if(!ts)return'-';try{var t=new Date(ts).getTime();if(isNaN(t))return'-';var diff=Date.now()-t;if(diff<0)return'刚刚';var mins=Math.floor(diff/60000);if(mins<1)return'刚刚';if(mins<60)return mins+'分钟前';var hrs=Math.floor(mins/60);if(hrs<24)return hrs+'小时前';var days=Math.floor(hrs/24);if(days<7)return days+'天前';return new Date(t).toISOString().slice(0,10);}catch(e){return'-';}}
+    function timeAgo(ts){if(!ts)return'从未';try{var t=new Date(ts).getTime();if(isNaN(t))return'-';var diff=Date.now()-t;if(diff<0)return'刚刚';var mins=Math.floor(diff/60000);if(mins<1)return'刚刚';if(mins<60)return mins+'分钟前';var hrs=Math.floor(mins/60);if(hrs<24)return hrs+'小时前';var days=Math.floor(hrs/24);if(days<7)return days+'天前';return new Date(t).toISOString().slice(0,10);}catch(e){return'-';}}
 
     async function unbindAll(code){if(!confirm('确定解绑 '+code+' 的所有设备？'))return;var data=await api('/unbind',{code:code});if(data.ok){msg('✅ 解绑成功');allCodes.forEach(function(c){if(c.code===code){c.devices=0;}});updateStats();renderTable();}else{msg('❌ '+(data.error||'解绑失败'),'error');}}
     async function deleteCode(code){if(!confirm('⚠️ 确定要永久删除 '+code+' 吗？'))return;var data=await api('/codes/delete',{code:code});if(data.ok){msg('✅ 已删除');allCodes=allCodes.filter(function(c){return c.code!==code;});updateStats();renderTable();}else{msg('❌ '+(data.error||'删除失败'),'error');}}
