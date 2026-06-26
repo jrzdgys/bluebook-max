@@ -168,6 +168,30 @@ async function handleCodesRemark(body) {
       return json({ ok: true, message: '备注已更新' });
     }
 
+    
+    async function handleCodesExtend(body) {
+      if (body.admin_key !== ADMIN_KEY) return json({ ok: false, error: '未授权' }, 403);
+      var code = (body.code || '').toUpperCase().trim();
+      if (!code) return json({ ok: false, error: '缺少激活码' });
+      var sub;
+      try { sub = JSON.parse(await AUTH_CODES.get(code) || '{}'); } catch (e) { sub = {}; }
+      if (!sub.fingerprint && (!sub.devices || sub.devices.length === 0) && !sub.createdAt)
+        return json({ ok: false, error: '激活码不存在' });
+      var oldExpiresAt = sub.expiresAt ? new Date(sub.expiresAt).toISOString() : null;
+      var days = parseInt(body.days, 10);
+      var newExpiresAtStr = body.newExpiresAt;
+      if (days && days > 0) {
+        var base = sub.expiresAt || sub.createdAt || Date.now();
+        sub.expiresAt = new Date(base).getTime() + days * 86400000;
+      } else if (newExpiresAtStr) {
+        sub.expiresAt = new Date(newExpiresAtStr).getTime();
+      } else {
+        return json({ ok: false, error: '请提供天数或新到期日' });
+      }
+      await AUTH_CODES.put(code, JSON.stringify(sub));
+      return json({ ok: true, code: code, oldExpiresAt: oldExpiresAt, newExpiresAt: new Date(sub.expiresAt).toISOString() });
+    }
+    
     addEventListener('fetch', function (event) {
   event.respondWith(handleRequest(event.request));
 });
