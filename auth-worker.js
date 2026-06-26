@@ -1,4 +1,4 @@
-// 蓝宝书Max · 设备绑定鉴权 Worker (v4)
+// 蓝宝书Max · 设备绑定鉴权 Worker (v6)
 // 改动：handleCodesCreate 存储 expiresAt；handleList 返回 expiresAt/createdAt；handleActivate 保留这两字段
 // KV binding 名称: AUTH_CODES
 const CORS_HEADERS = {
