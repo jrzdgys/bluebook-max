@@ -3,7 +3,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蓝宝书Max · 激活码管理</title>
+    <title>蓝宝书Max · 访问码管理</title>
     <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f2f2f7;color:#1d1d1f;min-height:100vh;display:flex;align-items:center;justify-content:center}
@@ -107,7 +107,7 @@
       <div class="card">
         <div class="login-icon">🔑</div>
         <h1>管理员登录</h1>
-        <p>请使用管理员密钥登录以管理激活码</p>
+        <p>请使用管理员密钥登录以管理访问码</p>
         <label for="loginKey">管理员密钥</label>
         <input type="password" id="loginKey" placeholder="输入管理员密钥" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
         <button class="btn" id="loginBtn" onclick="doLogin()">登录</button>
@@ -118,7 +118,7 @@
     <div id="adminScreen" class="container" style="display:none">
       <div class="card" style="padding:20px 24px">
         <div class="header-bar">
-          <h1>🔑 蓝宝书Max · 激活码管理</h1>
+          <h1>🔑 蓝宝书Max · 访问码管理</h1>
           <div><span class="user" id="adminBadge">已登录</span><a class="logout" onclick="doLogout()">退出</a></div>
         </div>
         <div id="statsBar" style="display:flex">
@@ -152,7 +152,7 @@
           <div class="table-wrap">
             <table>
               <thead><tr>
-                <th onclick="sortBy('code')" id="th-code">激活码 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('code')" id="th-code">访问码 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('status')" id="th-status">状态 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('devices')" id="th-devices">设备 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
