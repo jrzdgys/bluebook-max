@@ -1,162 +1,168 @@
 {
-  "name": "蓝宝书Max",
-  "description": "Alpha派蓝宝书热点自动抓取与分析报告",
+  "name": "èå®ä¹¦Max",
+  "description": "Alphaæ´¾èå®ä¹¦ç­ç¹èªå¨æåä¸åææ¥å",
   "last_updated": "2026-06-26 13:30:00",
-  "updated": "2026-06-25T11:35:00",
+  "updated": "2026-06-26T12:22:59.131Z",
   "total_reports": 16,
   "reports": [
     {
       "file": "pm-20260626.html",
       "edition": "pm",
-      "label": "午间版",
+      "label": "åé´ç",
       "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 午间版 - 2026年06月26日",
+      "date_display": "2026å¹´06æ26æ¥",
+      "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ26æ¥",
       "stock_count": 20
     },
     {
       "file": "mc-20260626.html",
       "edition": "mc",
-      "label": "晨会版",
+      "label": "æ¨ä¼ç",
       "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月26日",
+      "date_display": "2026å¹´06æ26æ¥",
+      "title": "èå®ä¹¦Max æ¨ä¼ç - 2026å¹´06æ26æ¥",
       "stock_count": 103
     },
     {
       "file": "gv-20260626.html",
       "edition": "gv",
-      "label": "全球版",
+      "label": "å¨çç",
       "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 全球版 - 2026年06月26日",
+      "date_display": "2026å¹´06æ26æ¥",
+      "title": "èå®ä¹¦Max å¨çç - 2026å¹´06æ26æ¥",
       "stock_count": 29
     },
     {
       "file": "ev-20260625.html",
       "edition": "ev",
-      "label": "晚间版",
+      "label": "æé´ç",
       "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月25日",
+      "date_display": "2026å¹´06æ25æ¥",
+      "title": "èå®ä¹¦Max æé´ç - 2026å¹´06æ25æ¥",
       "stock_count": 139
     },
     {
       "file": "pm-20260625.html",
       "edition": "pm",
-      "label": "午间版",
+      "label": "åé´ç",
       "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 午间版 - 2026年06月25日",
+      "date_display": "2026å¹´06æ25æ¥",
+      "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ25æ¥",
       "stock_count": 66
     },
     {
       "file": "mc-20260625.html",
       "edition": "mc",
-      "label": "晨会版",
+      "label": "æ¨ä¼ç",
       "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月25日",
+      "date_display": "2026å¹´06æ25æ¥",
+      "title": "èå®ä¹¦Max æ¨ä¼ç - 2026å¹´06æ25æ¥",
       "stock_count": 132
     },
     {
       "file": "gv-20260625.html",
       "edition": "gv",
-      "label": "全球版",
+      "label": "å¨çç",
       "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 全球版 - 2026年06月25日",
+      "date_display": "2026å¹´06æ25æ¥",
+      "title": "èå®ä¹¦Max å¨çç - 2026å¹´06æ25æ¥",
       "stock_count": 47
     },
     {
       "file": "ev-20260624.html",
       "edition": "ev",
-      "label": "晚间版",
+      "label": "æé´ç",
       "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月24日",
+      "date_display": "2026å¹´06æ24æ¥",
+      "title": "èå®ä¹¦Max æé´ç - 2026å¹´06æ24æ¥",
       "stock_count": 118
     },
     {
       "file": "pm-20260624.html",
       "edition": "pm",
-      "label": "午间版",
+      "label": "åé´ç",
       "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 午间版 - 2026年06月24日",
+      "date_display": "2026å¹´06æ24æ¥",
+      "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ24æ¥",
       "stock_count": 0
     },
     {
       "file": "mc-20260624.html",
       "edition": "mc",
-      "label": "晨会版",
+      "label": "æ¨ä¼ç",
       "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月24日",
+      "date_display": "2026å¹´06æ24æ¥",
+      "title": "èå®ä¹¦Max æ¨ä¼ç - 2026å¹´06æ24æ¥",
       "stock_count": 0
     },
     {
       "file": "gv-20260624.html",
       "edition": "gv",
-      "label": "全球版",
+      "label": "å¨çç",
       "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 全球版 - 2026年06月24日",
+      "date_display": "2026å¹´06æ24æ¥",
+      "title": "èå®ä¹¦Max å¨çç - 2026å¹´06æ24æ¥",
       "stock_count": 0
     },
     {
       "file": "ev-20260623-v2.html",
       "edition": "ev",
-      "label": "晚间版",
+      "label": "æé´ç",
       "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月23日",
+      "date_display": "2026å¹´06æ23æ¥",
+      "title": "èå®ä¹¦Max æé´ç - 2026å¹´06æ23æ¥",
       "stock_count": 0
     },
     {
       "file": "pm-20260623-v2.html",
       "edition": "pm",
-      "label": "午间版",
+      "label": "åé´ç",
       "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 午间版 - 2026年06月23日",
+      "date_display": "2026å¹´06æ23æ¥",
+      "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ23æ¥",
       "stock_count": 0
     },
     {
       "file": "mc-20260623-v2.html",
       "edition": "mc",
-      "label": "晨会版",
+      "label": "æ¨ä¼ç",
       "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月23日",
+      "date_display": "2026å¹´06æ23æ¥",
+      "title": "èå®ä¹¦Max æ¨ä¼ç - 2026å¹´06æ23æ¥",
       "stock_count": 0
     },
     {
       "file": "gv-20260623-v2.html",
       "edition": "gv",
-      "label": "全球版",
+      "label": "å¨çç",
       "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 全球版 - 2026年06月23日",
+      "date_display": "2026å¹´06æ23æ¥",
+      "title": "èå®ä¹¦Max å¨çç - 2026å¹´06æ23æ¥",
       "stock_count": 0
     },
     {
       "file": "ev-20260622.html",
       "edition": "ev",
-      "label": "晚间版",
+      "label": "æé´ç",
       "date": "20260622",
-      "date_display": "2026年06月22日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月22日",
+      "date_display": "2026å¹´06æ22æ¥",
+      "title": "èå®ä¹¦Max æé´ç - 2026å¹´06æ22æ¥",
       "stock_count": 0
     },
     {
       "file": "pm-20260621.html",
       "edition": "pm",
-      "label": "午间版",
+      "label": "åé´ç",
       "date": "20260621",
-      "date_display": "2026年06月21日",
-      "title": "蓝宝书Max 午间版 - 2026年06月21日",
+      "date_display": "2026å¹´06æ21æ¥",
+      "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ21æ¥",
       "stock_count": 0
+    },
+    {
+      "file": "ev-20260626.html",
+      "edition": "ev",
+      "date": "2026-06-26",
+      "title": "蓝宝书Max 晚间版 - 2026年06月26日"
     }
   ]
 }
