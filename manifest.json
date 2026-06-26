@@ -1,9 +1,9 @@
 {
   "name": "èå®ä¹¦Max",
   "description": "Alphaæ´¾èå®ä¹¦ç­ç¹èªå¨æåä¸åææ¥å",
-  "last_updated": "2026-06-26 13:30:00",
-  "updated": "2026-06-26T12:22:59.131Z",
-  "total_reports": 16,
+  "last_updated": "2026-06-26 20:30:00",
+  "updated": "2026-06-26T12:30:00.000Z",
+  "total_reports": 18,
   "reports": [
     {
       "file": "pm-20260626.html",
@@ -31,6 +31,15 @@
       "date_display": "2026å¹´06æ26æ¥",
       "title": "èå®ä¹¦Max å¨çç - 2026å¹´06æ26æ¥",
       "stock_count": 29
+    },
+    {
+      "file": "ev-20260626.html",
+      "edition": "ev",
+      "label": "晚间版",
+      "date": "20260626",
+      "date_display": "2026年06月26日",
+      "title": "蓝宝书Max 晚间版 - 2026年06月26日",
+      "stock_count": 118
     },
     {
       "file": "ev-20260625.html",
@@ -157,12 +166,6 @@
       "date_display": "2026å¹´06æ21æ¥",
       "title": "èå®ä¹¦Max åé´ç - 2026å¹´06æ21æ¥",
       "stock_count": 0
-    },
-    {
-      "file": "ev-20260626.html",
-      "edition": "ev",
-      "date": "2026-06-26",
-      "title": "蓝宝书Max 晚间版 - 2026年06月26日"
     }
   ]
 }
