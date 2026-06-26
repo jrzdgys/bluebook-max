@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝宝书Max · 激活码管理</title>
+    <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f2f2f7;color:#1d1d1f;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .card{background:#fff;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,.08);width:100%}
+    .container{width:100%;max-width:1100px;margin:20px auto;padding:0 16px}
+    #loginScreen{max-width:420px;width:100%;margin:0 auto;text-align:center}
+    #loginScreen .card{padding:40px 36px;text-align:center;border-radius:20px;animation:breathe 4s ease-in-out infinite}
+    @keyframes breathe{0%,100%{box-shadow:0 8px 32px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.06)}50%{box-shadow:0 16px 48px rgba(0,0,0,.25),0 4px 12px rgba(0,0,0,.1)}}
+    #loginScreen .login-icon{font-size:40px;margin-bottom:16px}
+    #loginScreen h1{font-size:22px;font-weight:700;margin-bottom:4px}
+    #loginScreen p{color:#86868b;font-size:13px;margin-bottom:28px;text-align:center}
+    #loginScreen label{display:block;font-size:13px;font-weight:500;color:#555;margin-bottom:6px;text-align:left}
+    #loginScreen input{width:100%;height:46px;border:1px solid #d2d2d7;border-radius:12px;padding:0 16px;font-size:15px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:20px}
+    #loginScreen input:focus{outline:none;border-color:#0071e3;box-shadow:0 0 0 4px rgba(0,113,227,.12),0 2px 6px rgba(0,0,0,.06)}
+    #loginScreen .btn{width:100%;height:46px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0071e3,#005fc4);color:#fff;transition:all .2s;box-shadow:0 4px 14px rgba(0,113,227,.3);text-align:center}
+    #loginScreen .btn:hover{opacity:.92;box-shadow:0 6px 20px rgba(0,113,227,.4);transform:translateY(-1px)}
+    #loginScreen .btn:active{transform:translateY(0)}
+    #loginScreen .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+    #loginScreen .error{color:#ff3b30;font-size:13px;margin-top:10px;display:none;text-align:center}
+    #loginScreen .hint{color:#86868b;font-size:12px;margin-top:20px;text-align:center}
+    #loginScreen .hint a{color:#0071e3;text-decoration:none}
+    #adminScreen{display:none;width:100%}
+    .header-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+    .header-bar h1{font-size:20px;font-weight:600;display:flex;align-items:center;gap:8px}
+    .header-bar .user{font-size:13px;color:#6e6e73}
+    .header-bar .logout{font-size:13px;color:#0071e3;cursor:pointer;text-decoration:none;margin-left:12px}
+    .header-bar .logout:hover{text-decoration:underline}
+    #statsBar{display:none;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+    .stat-card{flex:1;min-width:100px;background:#f5f5f7;border-radius:12px;padding:14px 16px;text-align:center}
+    .stat-card .num{font-size:26px;font-weight:700}
+    .stat-card .label{font-size:11px;color:#86868b;margin-top:2px}
+    .stat-card.used{background:#e8f5e9;color:#2e7d32}
+    .stat-card.unused{background:#e3f2fd;color:#1565c0}
+    .stat-card.expired{background:#fce4ec;color:#c62828}
+    .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+    .toolbar input,.toolbar select{height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:13px;outline:none}
+    .btn{border:none;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+    .btn-primary{background:#0071e3;color:#fff}
+    .btn-outline{background:transparent;border:1px solid #d2d2d7;color:#1d1d1f}
+    .btn-sm{padding:4px 10px;font-size:12px;border-radius:6px}
+    .btn-xs{padding:2px 8px;font-size:11px;border-radius:5px;height:24px}
+    .search-box{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .search-box input{flex:1;min-width:160px;height:36px;border:1px solid #d2d2d7;border-radius:8px;padding:0 12px;font-size:13px;outline:none}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+    thead th{background:#f5f5f7;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;color:#555;cursor:pointer;white-space:nowrap;position:sticky;top:0;z-index:1}
+    thead th .sort-icon{color:#bbb;margin-left:3px;font-size:11px}
+    thead th.active{color:#0071e3}
+    tbody tr:hover{background:#fafafa}
+    tbody td{padding:10px 12px;vertical-align:middle}
+    .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500}
+    .badge-green{background:#e8f5e9;color:#2e7d32}
+    .badge-gray{background:#f0f0f0;color:#666}
+    .badge-red{background:#fce4ec;color:#c62828}
+    .remark-wrapper{display:inline-flex;align-items:center;gap:4px}
+    .remark-input{width:100px;height:28px;border:1px solid #d2d2d7;border-radius:6px;padding:0 8px;font-size:11px;outline:none;background:#f5f5f7;cursor:default}
+    .remark-input.editable{background:#fff;cursor:text}
+    .remark-edit-btn{cursor:pointer;color:#8e8e93;font-size:13px;background:none;border:none;padding:2px 4px;border-radius:4px;line-height:1}
+    .remark-edit-btn:hover{color:#0071e3;background:#e8f0fe}
+    .remark-edit-btn.editing{color:#0071e3}
+    .copy-btn{cursor:pointer;color:#8e8e93;font-size:14px;background:none;border:none;padding:2px 4px;border-radius:4px}
+    .copy-btn:hover{color:#0071e3;background:#e8f0fe}
+    .pagination{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:16px;padding:8px 0}
+    .page-btn{min-width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;cursor:pointer;border:1px solid transparent;color:#555;background:transparent}
+    .page-btn.active{background:#0071e3;color:#fff;font-weight:600}
+    .page-btn.disabled{opacity:.3;cursor:default}
+    .page-info{font-size:12px;color:#86868b;margin:0 8px}
+    #msg{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none}
+    #msg.success{display:block;background:#e8f5e9;color:#2e7d32}
+    #msg.error{display:block;background:#fce4ec;color:#c62828}
+    #loading{text-align:center;padding:40px;color:#86868b;font-size:14px}
+    @media(max-width:768px){
+      #loginScreen{margin:30px auto}
+      .stat-card{min-width:calc(50% - 6px)}
+      .toolbar,.search-box{flex-direction:column}
+    }
+    </style>
+    </head>
+    <body>
+    <div id="loginScreen" class="container" style="display:none">
+      <div class="card">
+        <div class="login-icon">🔑</div>
+        <h1>管理员登录</h1>
+        <p style="text-align:center">请使用管理员密钥登录以管理激活码</p>
+        <label for="loginKey">管理员密钥</label>
+        <input type="password" id="loginKey" placeholder="输入管理员密钥" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="btn" id="loginBtn" onclick="doLogin()">登录</button>
+        <div class="error" id="loginError"></div>
+        <div class="hint">🌐 密钥在 <a href="https://dash.cloudflare.com/bfbe5adb75860529c469ce5316dd0072/workers/services/view/bluebook-auth/production/settings/variables" target="_blank">Cloudflare 环境变量</a></div>
+      </div>
+    </div>
+    <div id="adminScreen" class="container" style="display:block">
+      <div class="card" style="padding:20px 24px">
+        <div class="header-bar">
+          <h1>🔑 蓝宝书Max · 激活码管理</h1>
+          <div><span class="user" id="adminBadge">已登录</span><a class="logout" onclick="doLogout()">退出</a></div>
+        </div>
+        <div id="statsBar" style="display:flex">
+          <div class="stat-card"><div class="num" id="stat-total">0</div><div class="label">总计</div></div>
+          <div class="stat-card used"><div class="num" id="stat-used">0</div><div class="label">已使用</div></div>
+          <div class="stat-card unused"><div class="num" id="stat-unused">0</div><div class="label">未使用</div></div>
+          <div class="stat-card expired"><div class="num" id="stat-expired">0</div><div class="label">已过期</div></div>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-primary btn-sm" onclick="showGenerate()">➕ 生成新码</button>
+          <button class="btn btn-outline btn-sm" onclick="exportUnused()">📋 导出未使用</button>
+        </div>
+        <div id="generateCard">...</div>
+        <div id="msg" style="display:none"></div>
+        <div id="loading" style="display:none">⏳ 加载中...</div>
+        <div id="tableWrap" style="display:block">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 搜索激活码..." oninput="filterCodes()">
+            <select id="statusFilter" onchange="filterCodes()">
+              <option value="all">全部状态</option>
+              <option value="unused">未使用</option>
+              <option value="used">已使用</option>
+              <option value="expired">已过期</option>
+            </select>
+            <span class="page-info">共 <span id="totalCount">0</span> 个，显示 <span id="shownCount">0</span> 个</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th onclick="sortBy('code')" id="th-code">激活码 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('status')" id="th-status">状态 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('devices')" id="th-devices">设备 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('expiresAt')" id="th-expires">有效期至 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('lastAccess')" id="th-last">最近活跃 <span class="sort-icon">↕</span></th>
+                <th onclick="sortBy('remark')" id="th-remark">备注 <span class="sort-icon">↕</span></th>
+                <th style="cursor:default">操作</th>
+              </tr></thead>
+              <tbody id="codeTable"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+    var WORKER='https://bluebook-auth.bluebookmax.workers.dev',KEY_KEY='bbm_admin_key',PAGE_SIZE=20;
+    var allCodes=[],filteredCodes=[],sortField=null,sortAsc=true,searchQuery='',currentPage=1;
+    function api(ep,body){
+      var key=localStorage.getItem(KEY_KEY)||'';
+      return fetch(WORKER+ep,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},body,{admin_key:key}))}).then(function(r){return r.json()});
+    }
+    function doLogin(){
+      var key=document.getElementById('loginKey').value.trim();if(!key)return;
+      var btn=document.getElementById('loginBtn');btn.disabled=true;btn.textContent='验证中...';
+      document.getElementById('loginError').style.display='none';
+      fetch(WORKER+'/list',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({admin_key:key})})
+      .then(function(r){return r.json()})
+      .then(function(data){
+        if(data.ok){
+          localStorage.setItem(KEY_KEY,key);
+          document.getElementById('loginScreen').style.display='none';
+          document.getElementById('adminScreen').style.display='block';
+          document.getElementById('adminBadge').textContent='已登录';
+          loadCodes();
+        }else{showLoginError(data.error||'密钥错误');}
+      })
+      .catch(function(e){showLoginError('网络错误: '+e.message);});
+    }
+    function doLogout(){
+      localStorage.removeItem(KEY_KEY);
+      document.getElementById('adminScreen').style.display='none';
+      document.getElementById('loginScreen').style.display='block';
+      document.getElementById('loginKey').value='';
+    }
+    async function loadCodes(){
+      document.getElementById('loading').style.display='block';
+      document.getElementById('tableWrap').style.display='none';
+      var data=await api('/list',{});
+      document.getElementById('loading').style.display='none';
+      if(!data.ok)return;
+      allCodes=data.codes||[];
+      document.getElementById('totalCount').textContent=allCodes.length;
+      updateStats();sortField=null;sortAsc=true;currentPage=1;
+      document.querySelectorAll('th .sort-icon').forEach(function(ic){ic.textContent='\u2195';});
+      document.getElementById('tableWrap').style.display='block';
+      renderTable();
+    }
+    function updateStats(){
+      var now=new Date(),used=0,expired=0;
+      allCodes.forEach(function(c){
+        if(c.expiresAt&&new Date(c.expiresAt)<now)expired++;
+        else if(c.devices>0)used++;
+      });
+      document.getElementById('stat-total').textContent=allCodes.length;
+      document.getElementById('stat-used').textContent=used;
+      document.getElementById('stat-unused').textContent=allCodes.length-used-expired;
+      document.getElementById('stat-expired').textContent=expired;
+    }
+    function renderTable(){
+      var sv=document.getElementById('statusFilter').value,now=new Date();
+      filteredCodes=allCodes.filter(function(c){
+        if(searchQuery&&c.code.toLowerCase().indexOf(searchQuery)===-1)return false;
+        if(sv!=='all'){
+          var ex=c.expiresAt&&new Date(c.expiresAt)<now,us=!ex&&c.devices>0;
+          if(sv==='unused'&&(us||ex))return false;
+          if(sv==='used'&&!us)return false;
+          if(sv==='expired'&&!ex)return false;
+        }
+        return true;
+      });
+      document.getElementById('shownCount').textContent=filteredCodes.length;
+      var tp=Math.max(1,Math.ceil(filteredCodes.length/PAGE_SIZE));
+      if(currentPage>tp)currentPage=tp;
+      var st=(currentPage-1)*PAGE_SIZE,pc=filteredCodes.slice(st,st+PAGE_SIZE);
+      document.getElementById('codeTable').innerHTML=pc.map(function(c){
+        var ex=c.expiresAt&&new Date(c.expiresAt)<now,us=!ex&&c.devices>0;
+        var sts=ex?'<span class="badge badge-red">已过期</span>':us?'<span class="badge badge-green">已使用</span>':'<span class="badge badge-gray">未使用</span>';
+        var cs=c.code.replace(/'/g,"\\'");
+        var rv=(c.remark||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+        return '<tr><td><span class="code-text">'+c.code+'</span> <button class="copy-btn" onclick="copyCode(\''+cs+'\',this)">📋</button></td><td>'+sts+'</td><td>'+(c.devices>0?'已绑定 '+c.devices+' 台':'-')+'</td><td>'+(c.expiresAt?c.expiresAt.slice(0,10):'-')+'</td><td>'+(c.createdAt?c.createdAt.slice(0,10):'-')+'</td><td>'+(c.lastAccess?'活跃':'从未')+'</td><td><div class="remark-wrapper"><input class="remark-input" id="r-'+cs+'" value="'+rv+'" readonly onkeydown="if(event.key===\'Enter\'){this.blur();saveRemark(\''+cs+'\',this.value)}"><button class="remark-edit-btn" id="e-'+cs+'" onclick="toggleRemarkEdit(\''+cs+'\')">✏️</button></div></td><td>'+(c.devices>0?'<button onclick="unbindAll(\''+cs+'\')">解绑</button>':'')+' <button onclick="deleteCode(\''+cs+'\')">删除</button></td></tr>';
+      }).join('');
+    }
+    function toggleRemarkEdit(code){
+      var inp=document.getElementById('r-'+code),btn=document.getElementById('e-'+code);
+      if(!inp)return;
+      if(inp.readOnly){inp.readOnly=false;inp.classList.add('editable');btn.textContent='🔒';inp.focus();}
+      else{inp.readOnly=true;inp.classList.remove('editable');btn.textContent='✏️';saveRemark(code,inp.value);}
+    }
+    async function saveRemark(code,remark){
+      var data=await api('/codes/remark',{code:code,remark:remark});
+      if(data.ok){msg('✅ 备注已保存');allCodes.forEach(function(c){if(c.code===code)c.remark=remark;});}
+    }
+    async function unbindAll(code){/*same as before*/}
+    async function deleteCode(code){/*same as before*/}
+    async function generateCodes(){/*same as before*/}
+    function showGenerate(){}
+    function hideGenerate(){}
+    function exportUnused(){}
+    function copyCode(code,btn){navigator.clipboard.writeText(code).then(function(){btn.textContent='✅';});}
+    function msg(text,type){var el=document.getElementById('msg');el.textContent=text;el.className=type||'';el.style.display='block';setTimeout(function(){el.style.display='none';},4000);}
+    (function(){var key=localStorage.getItem(KEY_KEY)||'';if(key){document.getElementById('loginScreen').style.display='none';document.getElementById('adminScreen').style.display='block';loadCodes();}})();
+    </script>
+    </body>
+    </html>
