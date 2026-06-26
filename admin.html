@@ -18,7 +18,7 @@
     #loginScreen label{display:block;font-size:13px;font-weight:500;color:#555;margin-bottom:6px;text-align:left}
     #loginScreen input{width:100%;height:46px;border:1px solid #d2d2d7;border-radius:12px;padding:0 16px;font-size:15px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:20px}
     #loginScreen input:focus{outline:none;border-color:#0071e3;box-shadow:0 0 0 4px rgba(0,113,227,.12),0 2px 6px rgba(0,0,0,.06)}
-    #loginScreen .btn{width:100%;height:46px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0071e3,#005fc4);color:#fff;transition:all .2s;box-shadow:0 4px 14px rgba(0,113,227,.3);text-align:center}
+    #loginScreen .btn{width:100%;height:46px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0071e3,#005fc4);color:#fff;transition:all .2s;box-shadow:0 4px 14px rgba(0,113,227,.3);display:flex;align-items:center;justify-content:center}
     #loginScreen .btn:hover{opacity:.92;box-shadow:0 6px 20px rgba(0,113,227,.4);transform:translateY(-1px)}
     #loginScreen .btn:active{transform:translateY(0)}
     #loginScreen .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
@@ -106,6 +106,54 @@
 .ext-trigger{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border:1px solid #d2d2d7;border-radius:6px;background:#fff;color:#86868B;font-size:12px;cursor:pointer;transition:all .15s;padding:0;vertical-align:middle}
 .ext-trigger:hover{border-color:#0071e3;color:#0071e3;background:#f0f7ff}
 
+
+    /* ====== Extend Popover ====== */
+    .extend-popover{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.35);z-index:1000;display:none;align-items:center;justify-content:center}
+    .extend-popover.show{display:flex}
+    .extend-card{background:#fff;border-radius:16px;padding:28px;width:380px;max-width:90vw;box-shadow:0 8px 40px rgba(0,0,0,.18);position:relative}
+    .ext-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:#86868b;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px}
+    .ext-close:hover{background:#f5f5f7;color:#1d1d1f}
+    .extend-card h3{font-size:18px;font-weight:600;margin-bottom:16px}
+    .ext-code{font-family:'SF Mono','Menlo','Monaco','Consolas',monospace;font-size:14px;margin:8px 0;padding:10px 14px;background:#f5f5f7;border-radius:10px;letter-spacing:.5px}
+    .ext-current{color:#86868b;font-size:13px;margin-bottom:18px}
+    .ext-label{font-size:13px;font-weight:600;color:#555;margin-bottom:8px}
+    .ext-quick{display:flex;gap:8px;margin-bottom:16px}
+    .ext-quick button{flex:1;padding:8px 0;border:1px solid #d2d2d7;border-radius:10px;background:#fff;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s}
+    .ext-quick button:hover{background:#f0f7ff;border-color:#0071e3;color:#0071e3}
+    .ext-custom{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+    .ext-custom input{width:70px;height:38px;border:1px solid #d2d2d7;border-radius:10px;padding:0 10px;font-size:14px;text-align:center;outline:none}
+    .ext-custom input:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+    .btn-ext-apply{padding:8px 16px;border:none;border-radius:10px;background:#0071e3;color:#fff;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+    .btn-ext-apply:hover{background:#0066d6}
+    .ext-preview{font-size:13px;color:#0071e3;margin-top:8px;padding:6px 0}
+
+    /* ====== Confirm Overlay ====== */
+    .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.35);z-index:1001;display:none;align-items:center;justify-content:center}
+    .confirm-overlay.show{display:flex}
+    .confirm-card{background:#fff;border-radius:16px;padding:28px;width:420px;max-width:90vw;box-shadow:0 8px 40px rgba(0,0,0,.18)}
+    .confirm-card h3{font-size:18px;font-weight:600;margin-bottom:4px}
+    .confirm-msg{font-size:14px;color:#555;margin-bottom:12px;line-height:1.5}
+    .confirm-codes{font-family:'SF Mono','Menlo','Monaco','Consolas',monospace;font-size:12px;padding:10px 14px;background:#f5f5f7;border-radius:10px;max-height:150px;overflow-y:auto;white-space:pre-line;line-height:1.8;color:#86868b}
+    .confirm-input{margin:12px 0}
+    .confirm-input input{width:100%;height:40px;border:1px solid #d2d2d7;border-radius:10px;padding:0 14px;font-size:14px;outline:none}
+    .confirm-input input:focus{border-color:#c62828;box-shadow:0 0 0 3px rgba(198,40,40,.1)}
+    .confirm-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+    /* ====== Batch Bar ====== */
+    .batch-bar{display:none;align-items:center;gap:10px;padding:10px 16px;background:#f5f5f7;border-radius:12px;margin-bottom:14px;font-size:13px}
+    .batch-bar.show{display:flex}
+    .selected-count{font-weight:600;color:#1d1d1f}
+    .btn-batch{padding:6px 14px;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+    .btn-batch-unbind{background:#fff;color:#555;border:1px solid #d2d2d7}
+    .btn-batch-unbind:hover{background:#f0f0f5}
+    .btn-batch-delete{background:#c62828;color:#fff}
+    .btn-batch-delete:hover{background:#b71c1c}
+    .btn-batch-clear{background:transparent;color:#86868b;border:none;font-size:12px;cursor:pointer}
+    .btn-batch-clear:hover{color:#555}
+
+    /* ====== Checkbox Column ====== */
+    .cb-col{width:40px;text-align:center}
+    .cb-col input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:#0071e3}
 </style>
     </head>
     <body>
@@ -166,6 +214,7 @@
           <div class="table-wrap">
             <table>
               <thead><tr>
+                <th class="cb-col"><input type="checkbox" id="selectAll" onchange="toggleAll()"></th>
                 <th onclick="sortBy('code')" id="th-code">访问码 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('status')" id="th-status">状态 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('devices')" id="th-devices">设备 <span class="sort-icon">↕</span></th>
@@ -173,7 +222,7 @@
                 <th onclick="sortBy('createdAt')" id="th-created">创建于 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('lastAccess')" id="th-last">最近活跃 <span class="sort-icon">↕</span></th>
                 <th onclick="sortBy('remark')" id="th-remark">备注 <span class="sort-icon">↕</span></th>
-                <th style="cursor:default">操作</th>
+                <th style="cursor:default;width:60px">绑定管理</th><th style="cursor:default;width:40px">删除</th>
               </tr></thead>
               <tbody id="codeTable"></tbody>
             </table>
