@@ -3,8 +3,9 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>蓝宝书Max · 2026年6月25日 午间版</title>
+    <title>蓝宝书Max · 2026年6月24日 午间版</title>
     <style>
+    
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px}
     .w{max-width:900px;margin:0 auto}
@@ -14,11 +15,7 @@
     .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
     .sh h1{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:14px}
     .sh h1 .badge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;background:#EDE4DC;color:#7B5B3A}
-    .live-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.55)}
-    .live-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
-    .live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6)}
-    .live-dot.closed{background:#86868B}
-    .stats-row{display:flex;gap:20px;flex-wrap:wrap}
+            .stats-row{display:flex;gap:20px;flex-wrap:wrap}
     .stats-row .st{text-align:center;min-width:70px;background:rgba(255,255,255,.06);padding:10px 14px;border-radius:10px}
     .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
     .stats-row .st span{font-size:10px;color:rgba(255,255,255,.45)}
@@ -37,6 +34,7 @@
     .tc-info:hover{color:#0071E3}
     .hp{display:none;position:fixed;background:#1D1D1F;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;z-index:9999;white-space:nowrap;box-shadow:0 12px 40px rgba(0,0,0,.35);max-width:320px}
     .hp::before{content:'';position:absolute;top:-6px;right:20px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #1D1D1F}
+    
     .hp-title{font-weight:600;margin-bottom:4px;color:rgba(255,255,255,.6);font-size:10px}
     .hp-scores{line-height:1.8}
     .hp-line{display:flex;justify-content:space-between;gap:16px}
@@ -82,6 +80,7 @@
       .tc-name{font-size:13px;flex:1 1 100%}
       .hp{max-width:calc(100vw - 30px);font-size:11px;white-space:normal;line-height:1.5}
     }
+    
     </style>
     </head>
     <body>
@@ -563,7 +562,44 @@
   }
 }
     </script>
-    <script type="application/json" id="secid-map-data">
+    <script>
+    
+    
+    var ED=JSON.parse(document.getElementById('edition-data').textContent);
+    function ht(h){if(h>=85)return'#C4433A';if(h>=65)return'#E67E22';if(h>=50)return'#2E86C1';return'#7D8B8F'}
+    function sb(h){if(h>=85)return'#C4433A15';if(h>=65)return'#E67E2215';if(h>=50)return'#2E86C115';return'#7D8B8F15'}
+    function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<900)}
+    function ts(){var n=new Date();return n.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+    document.title='蓝宝书Max · '+ED.edition.dateDisplay+' '+ED.edition.label;
+    document.getElementById('header-date').textContent=ED.edition.dateDisplay;
+    var ec=ED.edition.type;var ebg=ec==='mc'?'rgba(255,149,0,.15)':ec==='pm'?'rgba(0,113,227,.15)':ec==='ev'?'rgba(175,82,222,.15)':'rgba(48,180,110,.15)';var ecr=ec==='mc'?'#FF9500':ec==='pm'?'#0071E3':ec==='ev'?'#AF52DE':'#30B46E';var ei=ec==='mc'?'🌅':ec==='pm'?'☀️':ec==='ev'?'🌙':'🌍';var hde=document.getElementById('header-edition');hde.textContent=ei+' '+ED.edition.label;hde.style.background=ebg;hde.style.color=ecr;
+    document.getElementById('stat-topics').textContent=ED.stats.topics;
+    document.getElementById('stat-avgheat').textContent=ED.stats.avgHeat;
+    document.getElementById('stat-stocks').textContent=ED.stats.stocks;
+    document.getElementById('market-summary').textContent='📌 '+ED.marketSummary;
+    document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）· 按综合热度降序';
+    var _ut=ED.edition.updateTime||'';var _tp=_ut.split(' ');document.getElementById('update-time').textContent='更新于 '+ED.edition.dateDisplay+' '+(_tp[1]||'');
+    var C=document.getElementById('topics-container'),OP=null,LC={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};
+    ED.topics.forEach(function(t,i){var r=i+1,c=ht(t.heat),b=sb(t.heat);var sc=t.scores||{};var gh='';
+    t.groups.forEach(function(g){if(!g.items||!g.items.length)return;var lc=LC[g.label]||'l3';
+    var rows=g.items.map(function(s){var cd=ED.secidMap[s.name]||'';var cn=cd.replace(/^[01]\./,'');var pd=(s.price!=null)?s.price.toFixed(2):'--';var pctD=(s.pct!=null)?((s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'):'';var pctC=(s.pct!=null)?(s.pct>=0?' up':' dn'):'';
+    return'<div class="sr" data-stock="'+s.name+'" data-secid="'+cd+'"><span class="sn">'+s.name+'</span><span class="sc">'+cn+'</span><span class="sp'+pctC+'">'+pd+'</span><span class="spp'+pctC+'">'+pctD+'</span><span class="sr2" title="'+(s.reason||g.label)+'">'+(s.reason||g.label)+'</span></div>'}).join('');
+    gh+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
+    var card=document.createElement('div');card.className='tc';card.innerHTML='<div class="tc-header"><span class="tc-rank">TOP'+r+'</span><span class="tc-name">'+t.topic+'</span><span class="tc-stage" style="background:'+b+';color:'+c+'">'+t.stage+'</span><div class="tc-heat-wrap"><span class="tc-heat" style="color:'+c+'" data-idx="'+i+'">'+t.heat+'</span><span class="tc-info" data-idx="'+i+'">ⓘ</span></div></div><div class="tc-desc">'+t.summary+'</div>'+(t.quote?'<div class="tc-quote">📘 '+t.quote+'</div>':'')+gh;C.appendChild(card)});
+    var PE=document.createElement('div');PE.className='hp';PE.id='spu';document.body.appendChild(PE);
+    function sp(idx,ae){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{};var ins=sc.inst||Math.round(t.heat*0.55);var mk=sc.market||Math.round(t.heat*0.25);var ct=sc.catalyst||Math.round(t.heat*0.20);PE.innerHTML='<div class="hp-title">'+t.topic+' · 热度构成</div><div class="hp-scores"><div class="hp-line"><span class="hl">机构关注度</span><span class="hv">'+ins+'/60</span></div><div class="hp-line"><span class="hl">市场确认度</span><span class="hv">'+mk+'/25</span></div><div class="hp-line"><span class="hl">催化强度</span><span class="hv">'+ct+'/15</span></div><div class="hp-line" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,.15)"><span class="hl">综合热度</span><span class="hv" style="color:'+ht(t.heat)+'">'+t.heat+'/100</span></div></div>';var card=ae.closest('.tc');if(card){card.style.position='relative';card.style.overflow='visible';card.appendChild(PE)};var re=ae.getBoundingClientRect();var cr=card.getBoundingClientRect();var pw=Math.min(280,card.offsetWidth-20);PE.style.position='absolute';PE.style.width=pw+'px';PE.style.maxWidth='none';PE.style.top=(re.bottom-cr.top+6)+'px';PE.style.left='auto';PE.style.right=(cr.right-re.right)+'px';PE.style.boxShadow='0 6px 20px rgba(0,0,0,.18)';PE.style.zIndex='100';PE.style.borderRadius='10px';PE.style.whiteSpace='normal';PE.style.margin='0';PE.style.display='block';OP=idx}
+    function hp(){PE.style.display='none';OP=null;if(PE.parentNode!=document.body)document.body.appendChild(PE)}
+    document.querySelectorAll('.tc-info').forEach(function(el){el.addEventListener('click',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);if(OP===idx){hp()}else{sp(idx,this)}})});
+    document.addEventListener('click',function(e){if(!PE.contains(e.target))hp()});
+    window.addEventListener('scroll',function(){if(OP!=null)hp()},{passive:true});
+    window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
+    var TD=isTH(),RI=TD?15000:60000;
+    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTH()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
+    fq();setInterval(fq,RI);
+    
+    
+    </script>
+    </body></html>
 {
   "生益科技": "1.600183",
   "深南电路": "0.002916",
@@ -592,10 +628,574 @@
   "铜冠铜箔": "0.00301217",
   "金安国纪": "0.003636"
 }
+<!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>蓝宝书Max · 2026年6月24日 午间版</title>
+    <style>
+    
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased;padding:24px}
+    .w{max-width:900px;margin:0 auto}
+    .sh{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+    .sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+    .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
+    .sh h1{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+    .sh h1 .badge{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;background:#EDE4DC;color:#7B5B3A}
+            .stats-row{display:flex;gap:20px;flex-wrap:wrap}
+    .stats-row .st{text-align:center;min-width:70px;background:rgba(255,255,255,.06);padding:10px 14px;border-radius:10px}
+    .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+    .stats-row .st span{font-size:10px;color:rgba(255,255,255,.45)}
+    .ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
+    .ms{font-size:13px;color:#515154;background:#F5F5F7;padding:14px 18px;border-radius:10px;margin-bottom:20px;line-height:1.7;white-space:pre-line}
+    .section-title{font-size:14px;font-weight:700;margin-bottom:12px;color:#1D1D1F;display:flex;align-items:center;gap:6px}
+    .tc{background:#fff;border:1px solid #E5E5EA;border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:all .15s}
+    .tc:hover{border-color:#0071E3;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .tc-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    .tc-rank{font-size:11px;font-weight:700;color:#86868B;min-width:36px}
+    .tc-name{font-size:14px;font-weight:700;flex:1}
+    .tc-stage{font-size:10px;padding:2px 10px;border-radius:20px;font-weight:600;white-space:nowrap}
+    .tc-heat-wrap{display:flex;align-items:center;gap:4px;position:relative}
+    .tc-heat{font-size:20px;font-weight:800;cursor:pointer}
+    .tc-info{font-size:10px;color:#86868B;cursor:pointer;position:relative}
+    .tc-info:hover{color:#0071E3}
+    .hp{display:none;position:fixed;background:#1D1D1F;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;z-index:9999;white-space:nowrap;box-shadow:0 12px 40px rgba(0,0,0,.35);max-width:320px}
+    .hp::before{content:'';position:absolute;top:-6px;right:20px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #1D1D1F}
+    
+    .hp-title{font-weight:600;margin-bottom:4px;color:rgba(255,255,255,.6);font-size:10px}
+    .hp-scores{line-height:1.8}
+    .hp-line{display:flex;justify-content:space-between;gap:16px}
+    .hp-line .hl{color:rgba(255,255,255,.6)}
+    .hp-line .hv{font-weight:600;font-variant-numeric:tabular-nums}
+    .tc-desc{font-size:12px;color:#515154;line-height:1.6;margin-bottom:8px}
+    .tc-quote{font-size:11px;color:#86868B;font-style:italic;padding:6px 0 6px 12px;border-left:3px solid #E5E5EA;margin-bottom:10px}
+    .sg{margin-bottom:8px}
+    .gl{font-size:10px;font-weight:700;margin-bottom:4px;padding:2px 10px;border-radius:6px;display:inline-block}
+    .gl.l1{background:#FFF0E6;color:#E8870A}
+    .gl.l2{background:#EEF0FF;color:#5E5CE6}
+    .gl.l3{background:#F2F2F7;color:#86868B}
+    .sr{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;font-size:13px;transition:background .1s}
+    .sr:hover{background:#F5F5F7}
+    .sr .sn{font-weight:600;min-width:58px;font-size:13px}
+    .sr .sc{font-size:10px;color:#AEAEB2;min-width:40px}
+    .sr .sp{font-size:12px;font-weight:600;min-width:50px;text-align:right;font-variant-numeric:tabular-nums}
+    .sr .sp.up{color:#C4433A}
+    .sr .sp.dn{color:#34C759}
+    .sr .spp{font-size:12px;font-weight:600;min-width:52px;text-align:right;font-variant-numeric:tabular-nums}
+    .sr .spp.up{color:#C4433A}
+    .sr .spp.dn{color:#34C759}
+    .sr .sr2{font-size:10px;color:#AEAEB2;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .fo{text-align:center;padding:20px;font-size:11px;color:#C7C7CC}
+    .fo a{color:#86868B;text-decoration:none}
+    @media(max-width:640px){
+      body{padding:6px}
+      .sh{padding:18px 14px 14px}
+      .sh-date{font-size:16px}
+      .sh h1{font-size:18px}
+      .ct{padding:12px 14px 20px}
+      .tc{padding:12px 14px}
+      .stats-row{gap:8px}
+      .stats-row .st{min-width:60px;padding:8px 10px}
+      .stats-row .st strong{font-size:20px}
+      .sr{flex-wrap:wrap;gap:2px 4px;padding:6px 4px}
+      .sr .sn{min-width:auto;font-size:12px}
+      .sr .sc{font-size:9px;min-width:auto}
+      .sr .sp{font-size:11px;min-width:auto}
+      .sr .spp{font-size:11px;min-width:auto}
+      .sr .sr2{font-size:11px;flex-basis:100%;text-align:left;white-space:normal;overflow:visible;text-overflow:clip;max-width:none;color:#86868B;line-height:1.5;padding-top:2px;border-top:1px dotted #E5E5EA;margin-top:2px}
+      .tc-header{gap:4px}
+      .tc-name{font-size:13px;flex:1 1 100%}
+      .hp{max-width:calc(100vw - 30px);font-size:11px;white-space:normal;line-height:1.5}
+    }
+    
+    </style>
+    </head>
+    <body>
+    <div class="w">
+    <div class="sh">
+      <div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span></div>
+      <h1>机构观点快照<span class="badge">国内版 🧡</span></h1>
+      <div class="live-row">
+        <span class="live-dot closed" id="live-dot"></span>
+        <span id="live-text">盘中实时 · 加载中</span>
+        <span id="update-time">更新 ...</span>
+      </div>
+      <div class="stats-row">
+        <div class="st"><strong id="stat-topics">—</strong><span>全部主题</span></div>
+        <div class="st"><strong id="stat-avgheat">—</strong><span>平均热度</span></div>
+        <div class="st"><strong id="stat-stocks">—</strong><span>推荐标的</span></div>
+      </div>
+    </div>
+    <div class="ct">
+      <div class="ms" id="market-summary"></div>
+      <div class="section-title" id="topics-header"></div>
+      <div id="topics-container"></div>
+      <div class="fo">蓝宝书Max · 数据来源 · 行情数据由东方财富提供 · 更新时间 <span id="footer-time">--</span></div>
+    </div>
+    </div>
+    <script type="application/json" id="edition-data">
+{
+  "ED": {
+    "edition": {
+      "type": "pm",
+      "label": "午间版",
+      "date": "2026-06-26",
+      "dateDisplay": "2026年6月26日",
+      "updateTime": "2026-06-26 11:35"
+    },
+    "stats": {
+      "topics": 10,
+      "stocks": 20,
+      "avgHeat": 85,
+      "opportunities": 0
+    },
+    "topics": [
+      {
+        "title": "猎板科技发布PCB涨价函全产业链提价",
+        "heat": 95,
+        "stage": "🔥主升",
+        "stageColor": "#C4433A",
+        "scores": {
+          "inst": 57,
+          "market": 23,
+          "catalyst": 14,
+          "total": 94,
+          "avgPct": -5.74,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "6月26日早间信息显示，PCB全产业链涨价已从预期走向确认，不仅上游CCL厂商订单排满、交期拉长至2-3个月，更关键的边际变化是，PCB厂商已开始向下游非AI客户提价20-30%，并计划于7月对包括AI在内的所有客户普涨，缺货周期预期已延长至2027年下半年。这标志着投资逻辑正从单纯的上游材料通胀，扩散至中游PCB环节的利润扩张，厂商凭借库存升值和紧俏货源获得了强势定价权，不再只是被动传导成本。",
+        "summary": "PCB全产业链涨价从预期走向全面确认，下游非AI客户已提价20-30%，7月将普涨所有客户。缺货周期预期延长至2027年下半年，投资逻辑从上游材料通胀扩散至中游PCB环节利润扩张。",
+        "quote": "PCB厂商已开始向下游非AI客户提价20-30%，并计划于7月对包括AI在内的所有客户普涨，缺货周期预期已延长至2027年下半年。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "生益科技",
+                "reason": "相关标的",
+                "price": 173.65,
+                "pct": -7.24
+              }
+            ]
+          },
+          {
+            "label": "弹性机会",
+            "items": [
+              {
+                "name": "深南电路",
+                "reason": "相关标的",
+                "price": 426.33,
+                "pct": -6.3
+              },
+              {
+                "name": "方邦股份",
+                "reason": "相关标的",
+                "price": 222.94,
+                "pct": -3.68
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "美光科技业绩超预期并上调指引",
+        "heat": 91,
+        "stage": "🔥主升",
+        "stageColor": "#C4433A",
+        "scores": {
+          "inst": 54,
+          "market": 22,
+          "catalyst": 13,
+          "total": 89,
+          "avgPct": -3.97,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "美光科技于6月25日美股盘后公布的FY26Q3业绩，其营收、毛利和下季度指引不仅全面碾压市场预期，更关键的是揭示了AI需求正驱动从HBM到传统DRAM、NAND的全品类存储进入前所未有的景气共振。这一变化的投资含义在于，公司通过长期战略客户协议（SCA）和客户保证金锁定了未来数年的需求与价格下限，彻底改变了市场对存储行业传统周期性的认知，开启了从周期股向成长股的估值范式切换。",
+        "summary": "美光FY26Q3业绩全面超预期，AI需求驱动HBM到传统DRAM/NAND全品类存储景气共振。长期战略客户协议锁定需求与价格下限，存储行业正从周期股向成长股切换估值范式。",
+        "quote": "AI需求正驱动从HBM到传统DRAM、NAND的全品类存储进入前所未有的景气共振，公司通过长期战略客户协议锁定了未来数年的需求与价格下限。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "兆易创新",
+                "reason": "相关标的",
+                "price": 744.44,
+                "pct": -3.97
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "康宁发布玻璃桥技术推动CPO应用",
+        "heat": 89,
+        "stage": "🔥主升",
+        "stageColor": "#C4433A",
+        "scores": {
+          "inst": 53,
+          "market": 22,
+          "catalyst": 13,
+          "total": 88,
+          "avgPct": 0.8,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "在6月24日康宁于首尔发布GlassBridge技术后，过去24小时内市场对该事件的解读出现了关键的边际变化，即从最初认为其将替代传统FAU（光纤阵列单元）的恐慌，转变为普遍认知其是FAU向可拆卸、高附加值D-FAU方案的升级。这一认知修正意味着，投资逻辑从替代转向共容，GlassBridge通过解决CPO最核心的耦合良率与成本瓶颈，将加速整个CPO及上游玻璃基板产业链的商业化进程，此前被错杀的无源光器件环节迎来价值重估。",
+        "summary": "康宁GlassBridge技术认知修正：从替代FAU恐慌转向D-FAU升级共识。GlassBridge解决CPO耦合良率与成本瓶颈，加速CPO及玻璃基板产业链商业化，被错杀的无源光器件环节迎来价值重估。",
+        "quote": "GlassBridge通过解决CPO最核心的耦合良率与成本瓶颈，将加速整个CPO及上游玻璃基板产业链的商业化进程。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "京东方A",
+                "reason": "相关标的",
+                "price": 7.88,
+                "pct": 4.79
+              }
+            ]
+          },
+          {
+            "label": "弹性机会",
+            "items": [
+              {
+                "name": "帝尔激光",
+                "reason": "相关标的",
+                "price": 196.18,
+                "pct": 9.48
+              },
+              {
+                "name": "太辰光",
+                "reason": "相关标的",
+                "price": 227.62,
+                "pct": -11.88
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "日本RORZE上调EFEM晶圆传输模块报价",
+        "heat": 88,
+        "stage": "🔥主升",
+        "stageColor": "#C4433A",
+        "scores": {
+          "inst": 52,
+          "market": 22,
+          "catalyst": 13,
+          "total": 87,
+          "avgPct": -3.09,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "截至6月26日早间，市场对EFEM（晶圆传输模块）环节供给紧张的认知正在强化，日本龙头Rorze股价继25日大涨8%后持续走强，验证了其10-20%涨价策略被市场认可，然而其订单交期仍在延长，显示供需缺口正进一步恶化。鉴于Rorze产能扩张保守且优先保障海外大客户，其留下的供给真空和价格保护伞，为具备产能的国内供应商提供了明确的份额替代和业绩弹性空间。",
+        "summary": "日本Rorze确认10-20%涨价策略并被市场认可，交期仍在延长显示供需缺口恶化。其产能扩张保守且优先保供海外，为国内EFEM供应商提供明确的份额替代窗口和业绩弹性空间。",
+        "quote": "日本龙头Rorze股价继25日大涨8%后持续走强，验证了其10-20%涨价策略被市场认可，然而其订单交期仍在延长，显示供需缺口正进一步恶化。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "新松机器人",
+                "reason": "全球EFEM龙头Rorze产能紧张并优先保供海外，其涨价为国内厂商打开市场空间与价格弹性，公司作为本土供应商直接受益，产能已满且订单加速",
+                "price": 15.37,
+                "pct": -3.09
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "传闻东曹暂停对华供应齿科氧化锆粉体",
+        "heat": 86,
+        "stage": "🔥主升",
+        "stageColor": "#C4433A",
+        "scores": {
+          "inst": 51,
+          "market": 21,
+          "catalyst": 12,
+          "total": 84,
+          "avgPct": 0,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "在过去24小时内，随着下游龙头爱迪特于6月21日晚间正式确认收到日本东曹的断供通知，市场已将东曹暂停对华供应齿科氧化锆粉体的传闻彻底转为确定性事件。当前投资逻辑已从事件驱动的短期博弈，迅速深化为对全球齿科材料供应链重构的价值重估，核心在于国内厂商如何凭借碾压性的氧化钇原料成本优势，承接东曹腾出的全球近半高端市场份额，实现量价齐升的戴维斯双击。",
+        "summary": "东曹断供齿科氧化锆粉体由传闻转为确定性事件，全球齿科材料供应链面临重构。国内厂商凭借氧化钇成本优势有望承接东曹近半高端市场份额，实现量价齐升的戴维斯双击。",
+        "quote": "国内厂商如何凭借碾压性的氧化钇原料成本优势，承接东曹腾出的全球近半高端市场份额，实现量价齐升的戴维斯双击。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "爱迪特",
+                "reason": "相关标的",
+                "price": 0,
+                "pct": 0
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "两部委印发十五五新型能源体系规划",
+        "heat": 84,
+        "stage": "📈强化",
+        "stageColor": "#E67E22",
+        "scores": {
+          "inst": 50,
+          "market": 21,
+          "catalyst": 12,
+          "total": 83,
+          "avgPct": 0.28,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "6月25日两部委印发的十五五新型能源体系规划，通过设定25%非化石能源消费比重等约束性指标，将政策重心从十四五的规模扩张转向解决消纳与平稳发展。这一转变意味着投资逻辑从单纯追求装机增速，全面转向挖掘解决电网消纳与消费瓶颈的结构性机会，同时首次明确的3亿千瓦新型储能和200万吨绿氢等量化目标，为储能与氢能产业链提供了前所未有的增长确定性。",
+        "summary": "十五五新型能源体系规划设定25%非化石能源消费比重约束性指标，政策重心从规模扩张转向消纳与平稳发展。首次明确的3亿千瓦储能和200万吨绿氢量化目标为相关产业链提供增长确定性。",
+        "quote": "首次明确的3亿千瓦新型储能和200万吨绿氢等量化目标，为储能与氢能产业链提供了前所未有的增长确定性。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "阳光电源",
+                "reason": "相关标的",
+                "price": 151.7,
+                "pct": -0.63
+              }
+            ]
+          },
+          {
+            "label": "弹性机会",
+            "items": [
+              {
+                "name": "嘉泽新能",
+                "reason": "相关标的",
+                "price": 4.15,
+                "pct": -1.43
+              },
+              {
+                "name": "龙源电力",
+                "reason": "相关标的",
+                "price": 17.57,
+                "pct": 10.02
+              },
+              {
+                "name": "中国核电",
+                "reason": "相关标的",
+                "price": 9.01,
+                "pct": 0.33
+              }
+            ]
+          },
+          {
+            "label": "相关标的",
+            "items": [
+              {
+                "name": "思源电气",
+                "reason": "相关标的",
+                "price": 175.48,
+                "pct": -6.91
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "大族激光公告收购领纤科技布局空芯光纤",
+        "heat": 83,
+        "stage": "📈强化",
+        "stageColor": "#E67E22",
+        "scores": {
+          "inst": 49,
+          "market": 20,
+          "catalyst": 12,
+          "total": 81,
+          "avgPct": 0.99,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "6月25日晚间，大族激光公告通过外延并购加内生扩产组合拳切入光通信新赛道，拟以3.06亿元收购空芯光纤技术领先者领纤科技51%股权，并投资25.2亿元建设光纤及预制棒项目。此举被视为公司在AI硬件布局上的关键一跃，通过掌握下一代光通信核心技术和产能，构建从石英到光纤的垂直一体化能力以开辟全新增长曲线，其估值逻辑正从设备平台商向核心材料与部件的综合供应商演进。",
+        "summary": "大族激光以3.06亿元收购领纤科技51%股权并投资25.2亿元建设光纤项目，切入空芯光纤新赛道。此举构建从石英到光纤的垂直一体化能力，估值逻辑从设备平台商向核心材料供应商演进。",
+        "quote": "通过掌握下一代光通信核心技术和产能，构建从石英到光纤的垂直一体化能力以开辟全新增长曲线。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "大族激光",
+                "reason": "通过收购与大规模投建，卡位下一代光通信核心材料空芯光纤赛道，打造全新业绩增长极",
+                "price": 157.27,
+                "pct": 2.93
+              }
+            ]
+          },
+          {
+            "label": "弹性机会",
+            "items": [
+              {
+                "name": "中国移动",
+                "reason": "作为领纤科技空芯光纤首个试点项目的合作方，其应用验证了该技术路线的商业化潜力",
+                "price": 86.87,
+                "pct": -0.95
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "传闻冰轮环境6月新接液冷订单超60亿",
+        "heat": 82,
+        "stage": "📈强化",
+        "stageColor": "#E67E22",
+        "scores": {
+          "inst": 49,
+          "market": 20,
+          "catalyst": 12,
+          "total": 81,
+          "avgPct": -1.68,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "在过去24小时内，关于冰轮环境6月订单的传闻得到数据层面的强化，其子公司顿汉布什在北美AIDC液冷市场6月单月新签订单已超前五个月总和，全年订单预期因此从30亿大幅上修至50亿级别。这一边际变化验证了公司作为A股唯一深度绑定北美AIDC供应链一次侧标的的稀缺性与业绩兑现的确定性，市场正基于加速增长的订单和产能扩张重新定价其远期价值。",
+        "summary": "冰轮环境子公司顿汉布什在北美AIDC液冷市场6月新签订单超前五个月总和，全年预期从30亿上修至50亿。验证了公司作为A股唯一深度绑定北美AIDC一次侧供应链的稀缺性。",
+        "quote": "子公司顿汉布什在北美AIDC液冷市场6月单月新签订单已超前五个月总和，全年订单预期因此从30亿大幅上修至50亿级别。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "冰轮环境",
+                "reason": "北美AIDC一次侧液冷订单超预期放量，全年指引大幅上修",
+                "price": 52.62,
+                "pct": -1.68
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "苹果因存储成本上涨上调Mac及iPad价格",
+        "heat": 81,
+        "stage": "📈强化",
+        "stageColor": "#E67E22",
+        "scores": {
+          "inst": 48,
+          "market": 20,
+          "catalyst": 12,
+          "total": 80,
+          "avgPct": -3.97,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "隔夜6月26日市场对苹果涨价的解读发生质变，从最初确认存储上行周期转向担忧AI通胀反噬，苹果股价大跌印证了市场开始相信，即便是苹果也无法完全消化存储成本的暴涨，其覆盖全系产品15-20%的提价将实质性损伤终端需求。这一变化标志着存储涨价的负面效应已从挤压安卓产业链利润，扩散至对整个消费电子生态系统盈利能力和需求的系统性风险定价，存储正在吸干整个产业链利润的逻辑得到强化。",
+        "summary": "苹果因存储成本暴涨对全系产品提价15-20%，股价大跌反映市场担忧AI通胀反噬消费电子。存储涨价负面效应从安卓产业链扩散至整个消费电子生态系统，盈利挤压正在系统化呈现。",
+        "quote": "即便是苹果也无法完全消化存储成本的暴涨，其覆盖全系产品15-20%的提价将实质性损伤终端需求。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "兆易创新",
+                "reason": "相关标的",
+                "price": 744.44,
+                "pct": -3.97
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      },
+      {
+        "title": "软通动力与头部大模型厂商合作Token服务",
+        "heat": 80,
+        "stage": "📈强化",
+        "stageColor": "#E67E22",
+        "scores": {
+          "inst": 48,
+          "market": 20,
+          "catalyst": 12,
+          "total": 80,
+          "avgPct": -4.87,
+          "catalystLabel": "确定性"
+        },
+        "fullText": "软通动力于6月25日晚间落地了与国内头部大模型厂商的智算服务协议，这标志着其Token工厂模式首次获得了顶级客户的商业化验证，从概念走向了订单。此举意味着公司业务正从传统的算力租赁升级为与模型推理需求强绑定的Token计费服务，其盈利模式和估值逻辑有望从重资产的算力二房东向更具弹性的AI卖水人切换。",
+        "summary": "软通动力与头部大模型厂商落地智算服务协议，Token工厂模式获顶级客户商业化验证。业务从算力租赁升级为Token计费服务，盈利模式从重资产算力二房东向AI卖水人切换。",
+        "quote": "Token工厂模式首次获得了顶级客户的商业化验证，从概念走向了订单，业务正从算力租赁升级为Token计费服务。",
+        "groups": [
+          {
+            "label": "龙头首选",
+            "items": [
+              {
+                "name": "软通动力",
+                "reason": "Token工厂模式获头部客户验证，商业模式迎来拐点",
+                "price": 0,
+                "pct": 0
+              }
+            ]
+          },
+          {
+            "label": "弹性机会",
+            "items": [
+              {
+                "name": "宏景科技",
+                "reason": "相关标的",
+                "price": 0,
+                "pct": 0
+              },
+              {
+                "name": "海光信息",
+                "reason": "相关标的",
+                "price": 342.73,
+                "pct": -4.87
+              }
+            ]
+          }
+        ],
+        "isOpportunity": false
+      }
+    ],
+    "marketSummary": "存储景气共振、PCB全产业链提价、玻璃桥加速CPO",
+    "secidMap": {
+      "生益科技": "1.600183",
+      "深南电路": "0.002916",
+      "方邦股份": "1.688020",
+      "大族数控": "0.00300901",
+      "兆易创新": "1.603986",
+      "京东方A": "0.000725",
+      "帝尔激光": "0.300776",
+      "太辰光": "0.300570",
+      "长飞光纤": "1.601869",
+      "新松机器人": "0.300024",
+      "爱迪特": "0.00301580",
+      "阳光电源": "0.300274",
+      "嘉泽新能": "1.601619",
+      "龙源电力": "0.001289",
+      "中国核电": "1.601985",
+      "思源电气": "0.002028",
+      "大族激光": "0.002008",
+      "中国移动": "1.600941",
+      "冰轮环境": "0.000811",
+      "软通动力": "0.00301236",
+      "宏景科技": "0.00301296",
+      "海光信息": "1.688041",
+      "普冉股份": "1.688766",
+      "澜起科技": "1.688008",
+      "铜冠铜箔": "0.00301217",
+      "金安国纪": "0.003636"
+    }
+  }
+}
     </script>
     <script>
+    
+    
     var ED=JSON.parse(document.getElementById('edition-data').textContent);
-    var SECID_MAP=JSON.parse(document.getElementById('secid-map-data').textContent);
     function ht(h){if(h>=85)return'#C4433A';if(h>=65)return'#E67E22';if(h>=50)return'#2E86C1';return'#7D8B8F'}
     function sb(h){if(h>=85)return'#C4433A15';if(h>=65)return'#E67E2215';if(h>=50)return'#2E86C115';return'#7D8B8F15'}
     function isTH(){var n=new Date();var c=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Shanghai'}));var d=c.getDay();var h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(d===0||d===6)return false;return(t>=570&&t<900)}
@@ -607,12 +1207,12 @@
     document.getElementById('stat-avgheat').textContent=ED.stats.avgHeat;
     document.getElementById('stat-stocks').textContent=ED.stats.stocks;
     document.getElementById('market-summary').textContent='📌 '+ED.marketSummary;
-    document.getElementById('topics-header').textContent='🔥 市场热点（'+ED.stats.topics+'个）· 按综合热度降序';
+    document.getElementById('topics-header').textContent='🔥 全部主题（'+ED.stats.topics+'个）· 按综合热度降序';
     var _ut=ED.edition.updateTime||'';var _tp=_ut.split(' ');document.getElementById('update-time').textContent='更新于 '+ED.edition.dateDisplay+' '+(_tp[1]||'');
     var C=document.getElementById('topics-container'),OP=null,LC={'龙头首选':'l1','弹性机会':'l2','相关标的':'l3'};
     ED.topics.forEach(function(t,i){var r=i+1,c=ht(t.heat),b=sb(t.heat);var sc=t.scores||{};var gh='';
     t.groups.forEach(function(g){if(!g.items||!g.items.length)return;var lc=LC[g.label]||'l3';
-    var rows=g.items.map(function(s){var cd=SECID_MAP[s.name]||'';var cn=cd.replace(/^[01]\./,'');var pd=(s.price!=null)?s.price.toFixed(2):'--';var pctD=(s.pct!=null)?((s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'):'';var pctC=(s.pct!=null)?(s.pct>=0?' up':' dn'):'';
+    var rows=g.items.map(function(s){var cd=ED.secidMap[s.name]||'';var cn=cd.replace(/^[01]\./,'');var pd=(s.price!=null)?s.price.toFixed(2):'--';var pctD=(s.pct!=null)?((s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'):'';var pctC=(s.pct!=null)?(s.pct>=0?' up':' dn'):'';
     return'<div class="sr" data-stock="'+s.name+'" data-secid="'+cd+'"><span class="sn">'+s.name+'</span><span class="sc">'+cn+'</span><span class="sp'+pctC+'">'+pd+'</span><span class="spp'+pctC+'">'+pctD+'</span><span class="sr2" title="'+(s.reason||g.label)+'">'+(s.reason||g.label)+'</span></div>'}).join('');
     gh+='<div class="sg"><div class="gl '+lc+'">'+g.label+'</div>'+rows+'</div>'});
     var card=document.createElement('div');card.className='tc';card.innerHTML='<div class="tc-header"><span class="tc-rank">TOP'+r+'</span><span class="tc-name">'+t.topic+'</span><span class="tc-stage" style="background:'+b+';color:'+c+'">'+t.stage+'</span><div class="tc-heat-wrap"><span class="tc-heat" style="color:'+c+'" data-idx="'+i+'">'+t.heat+'</span><span class="tc-info" data-idx="'+i+'">ⓘ</span></div></div><div class="tc-desc">'+t.summary+'</div>'+(t.quote?'<div class="tc-quote">📘 '+t.quote+'</div>':'')+gh;C.appendChild(card)});
@@ -623,7 +1223,10 @@
     document.addEventListener('click',function(e){if(!PE.contains(e.target))hp()});
     window.addEventListener('scroll',function(){if(OP!=null)hp()},{passive:true});
     window.addEventListener('resize',function(){if(OP!=null)hp()},{passive:true});
-    async function fq(){var as=[],sn={};Object.values(SECID_MAP).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14,f18&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2,close:d.f18}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){var p=parseFloat(d.price);if(!isNaN(p)&&p!==0){spEl.textContent=p.toFixed(2)}else if(d.close){spEl.textContent=parseFloat(d.close).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);if(!isNaN(v)){var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTH()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
-    fq();setInterval(fq,15000);
+    var TD=isTH(),RI=TD?15000:60000;
+    async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u='https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14&secids='+as.join(',')+'&_='+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll('.sr[data-secid]').forEach(function(row){var si=row.dataset.secid;var sc=si.split('.')[1];var d=pm[sc]||pm[si];var spEl=row.querySelector('.sp');var sppEl=row.querySelector('.spp');if(d){if(d.price&&d.price!==0){spEl.textContent=parseFloat(d.price).toFixed(2)}if(d.pct!=null){var v=parseFloat(d.pct);var cls=v>=0?' up':' dn';spEl.className='sp'+cls;sppEl.className='spp'+cls;sppEl.textContent=(v>=0?'+':'')+v.toFixed(2)+'%'}}});document.getElementById('footer-time').textContent=ts();var d2=document.getElementById('live-dot');var t2=document.getElementById('live-text');if(d2&&t2){if(isTH()){d2.className='live-dot live';t2.textContent='盘中 · '+ts()}else{d2.className='live-dot closed';t2.textContent='盘后 · '+ts()}}}catch(e){}}
+    fq();setInterval(fq,RI);
+    
+    
     </script>
     </body></html>
