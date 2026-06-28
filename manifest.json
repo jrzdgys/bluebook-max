@@ -1,7 +1,7 @@
 {
   "name": "蓝宝书Max",
   "description": "Alpha派蓝宝书热点自动抓取与分析报告",
-  "last_updated": "2026-06-29T07:05:00+08:00",
+  "last_updated": "2026-06-29T07:50:00+08:00",
   "updated": "2026-06-28T16:45:00.000Z",
   "total_reports": 21,
   "reports": [
@@ -12,7 +12,7 @@
       "date": "20260629",
       "date_display": "2026年06月29日",
       "title": "蓝宝书Max 晨会版 - 2026年06月29日",
-      "stock_count": 69
+      "stock_count": 124
     },
     {
       "file": "ev-20260628.html",
