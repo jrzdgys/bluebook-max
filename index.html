@@ -436,8 +436,8 @@ body{
         <p class="brand">
           蓝宝书Max · 行情数据由<a href="https://www.eastmoney.com" target="_blank" rel="noopener">东方财富</a>提供 · 自动更新 · v3.0
         </p>
-        <p class="brand-links" style="font-size:12px;color:#AEAEB2;margin-top:4px">
-          <a href="mailto:bluebookmax@gmail.com" style="color:#0071E3;text-decoration:none;margin:0 8px">📧 bluebookmax@gmail.com</a>
+        <p class="brand-links" style="font-size:13px;color:#515154;margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06)">
+          <a href="mailto:bluebookmax@gmail.com" style="color:#0071E3;text-decoration:none;margin:0 8px">📧 bluebookmax@gmail.com</a> <span style="color:#C6C6C8">|</span>
           <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" style="color:#0071E3;text-decoration:none;margin:0 8px">📚 知识星球：蓝宝书Max</a>
         </p>
       </div>
@@ -478,7 +478,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   var cssEd = ({am:'mc', md:'pm', global:'gv'})[ed] || ed;
   var label = editionLabels[ed] || '';
   var dateParts = (r.date || '').match(/(\d{4})(\d{2})(\d{2})/);
-  var displayDate = dateParts ? dateParts[2] + '/' + dateParts[3] : (r.date || '');
+  var days=['周日','周一','周二','周三','周四','周五','周六'];var dtObj=dateParts?new Date(parseInt(dateParts[1]),parseInt(dateParts[2])-1,parseInt(dateParts[3])):null;var displayDate = dateParts ? dateParts[2] + '/' + dateParts[3] + ' ' + (dtObj?days[dtObj.getDay()]:'') : (r.date || '');
   var canView = isAuth || isFirst;
   var onclick = canView ? '' : 'onclick="showLoginPaywall();return false"';
   var freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费</span>' : '';
@@ -572,7 +572,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
         inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
         Object.keys(dg).sort().reverse().forEach(function(dk){
           var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
-          var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5':dk;
+          var dayNames=['周日','周一','周二','周三','周四','周五','周六'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
           h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+dg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
             dg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
             .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
