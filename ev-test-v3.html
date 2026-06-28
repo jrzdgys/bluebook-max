@@ -14,7 +14,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
 .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
 .sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
-.sh h1 .title-sm{font-size:16px;font-weight:700;color:#fff;letter-spacing:0.3px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}.sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}.sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
 .stats-row{display:flex;gap:14px;flex-wrap:wrap}
 .stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
 .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
@@ -112,7 +112,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .member-badge{font-size:10px;padding:3px 12px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap;letter-spacing:0.5px;border:1px solid rgba(255,255,255,.25)}
 .header-sub-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 18px;border-radius:20px;background:#007AFF;color:#fff!important;font-weight:700;font-size:12px;box-shadow:0 3px 12px rgba(0,122,255,.4);transition:all .2s;text-decoration:none;white-space:nowrap}
 .header-sub-btn:hover{background:#0066D6;transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,122,255,.5)}
-@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .title-sm{font-size:13px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.member-badge{font-size:9px;padding:2px 8px}.header-sub-btn{font-size:10px;padding:4px 10px}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px}.stats-row{gap:6px}.stats-row .st{min-width:auto;padding:6px 8px;border-radius:6px}.stats-row .st strong{font-size:17px}.stats-row .st span{font-size:9px}}
+@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .brand-slogan{font-size:11px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.member-badge{font-size:9px;padding:2px 8px}.header-sub-btn{font-size:10px;padding:4px 10px}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px}.stats-row{gap:6px}.stats-row .st{min-width:auto;padding:6px 8px;border-radius:6px}.stats-row .st strong{font-size:17px}.stats-row .st span{font-size:9px}}
 .export-wrap{position:relative;display:inline-block;margin-top:10px}
 .export-btn-st{cursor:pointer;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);padding:8px 14px;border-radius:10px;transition:background .15s;border:none;color:#fff;font-family:inherit}
 .export-btn-st:hover{background:rgba(255,255,255,.15)}
@@ -133,7 +133,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="w">
 <div class="sh">
 <div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span><a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="header-sub-btn">💡 立即订阅 →</a></div>
-<h1>蓝宝书Max<span class="title-sm">·机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
 <div class="live-row"><span class="live-dot closed" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新 ...</span></div>
 <div class="stats-row">
 <div class="st"><strong id="stat-topics">—</strong><span>全部主题</span></div>
@@ -165,7 +165,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 </div>
 <div class="fo">
 <div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益</div>
-<div class="fo-line2">蓝宝书Max · 行情数据由东方财富提供 · 自动更新 · v2.0</div>
+<div class="fo-line2">蓝宝书Max · 行情数据由东方财富提供 · 自动更新 · v3.0</div>
 <div class="fo-line3">
 <a href="mailto:bluebookmax@gmail.com" class="fo-email">📧 bluebookmax@gmail.com</a>
 <a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener">📚 知识星球：蓝宝书Max</a>
@@ -199,7 +199,7 @@ function iT(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"As
 function ts(){return new Date().toLocaleString("zh-CN",{timeZone:"Asia/Shanghai",hour:"2-digit",minute:"2-digit",second:"2-digit"})}
 document.title="蓝宝书Max · "+ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" "+ED.edition.label;
 document.getElementById("header-date").textContent=ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay());
-var ec=ED.edition.type,ebg=ec==="mc"?"rgba(255,149,0,.15)":ec==="pm"?"rgba(0,113,227,.15)":ec==="ev"?"rgba(175,82,222,.15)":"rgba(48,180,110,.15)",ecr=ec==="mc"?"#FF9500":ec==="pm"?"#0071E3":ec==="ev"?"#AF52DE":"#30B46E",ei=ec==="mc"?"🌅":ec==="pm"?"☀️":ec==="ev"?"🌙":"🌍";
+var ec=ED.edition.type,ebg=ec==="mc"?"rgba(255,149,0,.15)":ec==="pm"?"rgba(212,155,0,.15)":ec==="ev"?"rgba(175,82,222,.15)":"rgba(48,180,110,.15)",ecr=ec==="mc"?"#FF9500":ec==="pm"?"#D49B00":ec==="ev"?"#AF52DE":"#30B46E",ei=ec==="mc"?"🌅":ec==="pm"?"☀️":ec==="ev"?"🌙":"🌍";
 var hde=document.getElementById("header-edition");hde.textContent=ei+" "+ED.edition.label;hde.style.background=ebg;hde.style.color=ecr;
 var u=ED.edition.updateTime||"",tp=u.split(" ");document.getElementById("update-time").textContent="更新于 · "+ED.edition.dateDisplay+" "+(tp[1]||"");
 document.getElementById("stat-topics").textContent=ED.stats.topics;
@@ -238,7 +238,7 @@ setInterval(function(){var d2=document.getElementById("live-dot"),t2=document.ge
 // Export watchlist
 function toggleExport(){document.getElementById("export-modal").style.display="block";document.getElementById("export-overlay").style.display="block"}
 function closeExport(){document.getElementById("export-modal").style.display="none";document.getElementById("export-overlay").style.display="none"}
-function exportWatchlist(fmt){try{var cm={};Object.entries(ED.secidMap).forEach(function(e){var c=e[1].split(".")[1];if(!cm[c])cm[c]=[];cm[c].push(e[0])});var codes=Object.keys(cm).sort();var ct;if(fmt==="em"){ct=codes.join("\n")}else{ct=codes.map(function(c){return c+","+cm[c].join("·")}).join("\n")}var ds=ED.edition.date.replace(/-/g,"");var fn="蓝宝书Max_"+(fmt==="em"?"东方财富_":"同花顺_")+ds+".txt";var b=new Blob([ct],{type:"text/plain;charset=utf-8"});var u=URL.createObjectURL(b);var du="data:text/plain;charset=utf-8,"+encodeURIComponent(ct);var a=document.createElement("a");a.setAttribute("href",du);a.setAttribute("download",fn);a.style.position="fixed";a.style.left="-9999px";a.style.top="0";document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a)},2000);setTimeout(function(){try{var w=window.open(u,"_blank");if(w)w.focus()}catch(e2){}},600);setTimeout(function(){URL.revokeObjectURL(u)},10000)}catch(e){alert("导出失败，请使用下方📋复制代码按钮");console.error(e)}}
+function exportWatchlist(fmt){try{var cm={};Object.entries(ED.secidMap).forEach(function(e){var c=e[1].split(".")[1];if(!cm[c])cm[c]=[];cm[c].push(e[0])});var codes=Object.keys(cm).sort();var ct;if(fmt==="em"){ct=codes.join("\n")}else{ct=codes.map(function(c){return c+","+cm[c].join("·")}).join("\n")}var dt2=ED.edition.date,dp2=dt2.split("-"),y2=dp2[0],m2=dp2[1],d2=dp2[2],dw2=gwd(new Date(dt2+"T12:00:00+08:00").getDay()),vl2=ED.edition.label,fn="蓝宝书Max自选股_"+y2+"年"+m2+"月"+d2+"日_"+dw2+"_"+vl2+".txt";var du="data:text/plain;charset=utf-8,"+encodeURIComponent(ct);var a=document.createElement("a");a.setAttribute("href",du);a.setAttribute("download",fn);a.style.position="fixed";a.style.left="-9999px";a.style.top="0";document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a)},2000)}catch(e){alert("导出失败，请使用下方📋复制代码按钮");console.error(e)}}
 function copyWatchlist(){var cm={};Object.entries(ED.secidMap).forEach(function(e){var c=e[1].split(".")[1];if(!cm[c])cm[c]=[];cm[c].push(e[0])});var codes=Object.keys(cm).sort();var ct=codes.join("\n");navigator.clipboard.writeText(ct).then(function(){var b=document.querySelector(".em-btn-copy");if(b){var orig=b.innerHTML;b.innerHTML="<strong>✅ 已复制</strong><span>"+codes.length+"个代码已复制到剪贴板</span>";setTimeout(function(){b.innerHTML=orig},2000)}}).catch(function(){alert("复制失败，请手动选择文本框内容")})}
 document.getElementById("export-overlay").addEventListener("click",closeExport);
 </script>
