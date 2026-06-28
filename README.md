@@ -12,7 +12,7 @@
 |------|------|--------|------|--------|-------|------|------|
 | 全球版 | gv | gv-YYYYMMDD.html |  | #30B46E | .gv | 0 | 每日 8:03 |
 | 晨会版 | mc | mc-YYYYMMDD.html |  | #FF9500 | .mc | 1 | 交易日 7:05 |
-| 午间版 | pm | pm-YYYYMMDD.html |  | #0071E3 | .pm | 2 | 交易日 11:35 |
+| 午间版 | pm | pm-YYYYMMDD.html |  | #D49B00 | .pm | 2 | 交易日 11:35 |
 | 晚间版 | ev | ev-YYYYMMDD.html |  | #AF52DE | .ev | 3 | 每日 20:00 |
 
 ### 两套模板
@@ -33,7 +33,7 @@
 ```css
 .r-badge.gv, .report-card.gv { background: #30B46E15; color: #30B46E; border-color: #30B46E; }
 .r-badge.mc, .report-card.mc { background: #FF950015; color: #FF9500; border-color: #FF9500; }
-.r-badge.pm, .report-card.pm { background: #0071E315; color: #0071E3; border-color: #0071E3; }
+.r-badge.pm, .report-card.pm { background: rgba(212,155,0,.1); color: #D49B00; border-color: #D49B00; }
 .r-badge.ev, .report-card.ev { background: #AF52DE15; color: #AF52DE; border-color: #AF52DE; }
 ```
 
