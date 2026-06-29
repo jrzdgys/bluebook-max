@@ -536,7 +536,6 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     var edLbl={am:'\u6668\u4f1a\u7248',mc:'\u6668\u4f1a\u7248',md:'\u5348\u95f4\u7248',pm:'\u5348\u95f4\u7248',ev:'\u665a\u95f4\u7248',global:'\u5168\u7403\u7248',gv:'\u5168\u7403\u7248'};
     var edOrd={gv:0,mc:1,pm:2,ev:3};
     function getTodayCST(){var n=new Date(),o=480*60000,c=new Date(n.getTime()+o);return c.toISOString().slice(0,10).replace(/-/g,"")}var today=getTodayCST();;
-    function getPrevDate(d){var y=parseInt(d.slice(0,4),10),m=parseInt(d.slice(4,6),10)-1,dd=parseInt(d.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,"0")+String(dt.getDate()).padStart(2,"0")}var freeEvFile="ev-"+getPrevDate(today)+".html"
     // Compute free article = previous day's evening edition
     function getPrevDate(d){var y=parseInt(d.slice(0,4),10),m=parseInt(d.slice(4,6),10)-1,dd=parseInt(d.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,'0')+String(dt.getDate()).padStart(2,'0');}
     var freeEvFile='ev-'+getPrevDate(today)+'.html';
@@ -557,10 +556,10 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     if(tR.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot today-dot"></span>\u4eca\u5929<span class="count">'+tR.length+'\u4efd</span></div><div class="reports-grid">'+
         tR.sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
-        .map(function(it){return renderCard(it.r,it.r.file===freeEvFileisAuth,edLbl);}).join('')+'</div></div>';
+        .map(function(it){return renderCard(it.r,it.r.file===freeEvFile,isAuth,edLbl);}).join('')+'</div></div>';
     }else if(rps.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot"></span>\u6700\u65b0<span class="count">1\u4efd</span></div><div class="reports-grid">'+
-        renderCard(rps[0],rps[0].file===freeEvFile,isAuth,edLbl)iv></div>';
+        renderCard(rps[0],rps[0].file===freeEvFile,isAuth,edLbl)+'</div></div>';
     }
     document.getElementById('report-count').textContent='\u5171 '+rps.length+' \u4efd';
         var wkKeys=Object.keys(wM).sort(function(a,b){return(wM[b].year*100+wM[b].week)-(wM[a].year*100+wM[a].week);});
