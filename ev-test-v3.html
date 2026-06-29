@@ -170,6 +170,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <button class="export-btn-st" id="export-btn" onclick="toggleExport()"><strong>📥</strong><span>导出自选股 ▾</span></button>
 </div>
 </div>
+<div class="tn-wrap" id="tn-wrap" style="display:none">
+<div class="tn-bar" id="tn-bar" onclick="tnToggle()">
+  <span class="tn-icon">📋</span>
+  <span class="tn-label">目录</span>
+  <span class="tn-count" id="tn-count"></span>
+  <span class="tn-arrow" id="tn-arrow">▾</span>
+</div>
+<div class="tn-body" id="tn-body">
+<div class="tn-scroll" id="tn-scroll">
+  <button class="tn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部</button>
+</div>
+</div>
+
 <div class="ct">
 <div class="sc">
 <div class="sc-hd"><span class="sc-icon">📌</span><span class="sc-title">今日聚焦</span><span class="sc-sub">热度前5条主题</span></div>
@@ -186,18 +199,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="sc" id="opp-wrap" style="display:none">
 <div class="sc-hd"><span class="sc-icon">📌</span><span class="sc-title">机会前瞻</span></div>
 <div class="sc-body" id="opp-container"></div>
-</div>
-<div class="tn-wrap" id="tn-wrap" style="display:none">
-<div class="tn-bar" id="tn-bar" onclick="tnToggle()">
-  <span class="tn-icon">📋</span>
-  <span class="tn-label">目录</span>
-  <span class="tn-count" id="tn-count"></span>
-  <span class="tn-arrow" id="tn-arrow">▾</span>
-</div>
-<div class="tn-body" id="tn-body">
-<div class="tn-scroll" id="tn-scroll">
-  <button class="tn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部</button>
-</div>
 </div>
 </div>
 <div class="fo">
