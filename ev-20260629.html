@@ -193,7 +193,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   "edition": {
     "type": "ev",
     "label": "晚间版",
-    "date": "20260629",
+    "date": "2026-06-29",
     "dateDisplay": "2026年06月29日",
     "updateTime": "2026-06-29 20:06"
   },
@@ -1720,8 +1720,8 @@ function iH(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"As
 function iM(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"}));var d=c.getDay();if(d===0||d===6)return false;return !iH()}
 function iT(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"})),h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(!iM())return false;return t>=570&&t<900}
 function ts(){return new Date().toLocaleString("zh-CN",{timeZone:"Asia/Shanghai",hour:"2-digit",minute:"2-digit",second:"2-digit"})}
-document.title="蓝宝书Max · "+ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" "+ED.edition.label;
-document.getElementById("header-date").textContent=ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay());
+document.title="蓝宝书Max · "+ED.edition.dateDisplay+" "+gwd(new Date((ED.edition.date+"").replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")+"T12:00:00+08:00").getDay())+" "+ED.edition.label;
+document.getElementById("header-date").textContent=ED.edition.dateDisplay+" "+gwd(new Date((ED.edition.date+"").replace(/(\d{4})(\d{2})(\d{2})/,"$1-$2-$3")+"T12:00:00+08:00").getDay());
 var ec=ED.edition.type,ebg=ec==="mc"?"rgba(255,149,0,.15)":ec==="pm"?"rgba(212,155,0,.15)":ec==="ev"?"rgba(175,82,222,.15)":"rgba(48,180,110,.15)",ecr=ec==="mc"?"#FF9500":ec==="pm"?"#D49B00":ec==="ev"?"#AF52DE":"#30B46E",ei=ec==="mc"?"🌅":ec==="pm"?"☀️":ec==="ev"?"🌙":"🌍";
 var hde=document.getElementById("header-edition");hde.textContent=ei+" "+ED.edition.label;hde.style.background=ebg;hde.style.color=ecr;
 var u=ED.edition.updateTime||"",tp=u.split(" ");document.getElementById("update-time").textContent="更新于 · "+ED.edition.dateDisplay+" "+(tp[1]||"");
