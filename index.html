@@ -583,7 +583,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
             var dayNames=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
             h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+dg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
               dg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
-              .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
+              .map(function(it){return renderCard(it.r,it.r.file===freeEvFile,isAuth,edLbl);}).join('')+'</div></div>';
           });
           h+='</div></div>';
         }else{
@@ -603,7 +603,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
           var dayNames=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
           h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+edg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
             edg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
-            .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
+            .map(function(it){return renderCard(it.r,it.r.file===freeEvFile,isAuth,edLbl);}).join('')+'</div></div>';
         });
         h+='</div></div>';
       }

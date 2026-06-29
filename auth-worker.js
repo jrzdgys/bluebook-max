@@ -39,7 +39,8 @@ async function handleActivate(body, request) {
       ...(sub.remark ? { remark: sub.remark } : {}),
     };
     await AUTH_CODES.put(code, JSON.stringify(sub));
-    var tokenExpiry = sub.expiresAt ? sub.expiresAt : (Date.now() + 86400000 * 30);
+    var minExpiry = Date.now() + 86400000 * 30;
+    var tokenExpiry = sub.expiresAt ? Math.max(sub.expiresAt, minExpiry) : minExpiry;
     var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + tokenExpiry;
     return json({ ok: true, reason: 'bound', token: token, message: '绑定成功！' });
   }
@@ -47,7 +48,7 @@ async function handleActivate(body, request) {
   if (sub.fingerprint === fp || (sub.devices || []).some(function (d) { return d.fingerprint === fp; })) {
     sub.lastAccess = Date.now();
     await AUTH_CODES.put(code, JSON.stringify(sub));
-    var tokenExpiry2 = sub.expiresAt ? sub.expiresAt : (Date.now() + 86400000 * 30);
+    var tokenExpiry2 = sub.expiresAt ? Math.max(sub.expiresAt, minExpiry) : minExpiry;
     var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + tokenExpiry2;
     return json({ ok: true, reason: 'verified', token: token, message: '验证通过！' });
   }
@@ -58,7 +59,7 @@ async function handleActivate(body, request) {
   sub.devices.push({ fingerprint: fp, ip: ip, lastSeen: Date.now() });
   sub.lastAccess = Date.now();
   await AUTH_CODES.put(code, JSON.stringify(sub));
-  var tokenExpiry3 = sub.expiresAt ? sub.expiresAt : (Date.now() + 86400000 * 30);
+  var tokenExpiry3 = sub.expiresAt ? Math.max(sub.expiresAt, Date.now() + 86400000 * 30) : (Date.now() + 86400000 * 30);
   var token = btoa(fp + '|' + Date.now() + '|bbm2026') + '.' + fp + '.' + tokenExpiry3;
   return json({ ok: true, reason: 'bound_new_device', token: token, message: '新设备绑定成功！' });
 }
