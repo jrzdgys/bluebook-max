@@ -132,6 +132,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .export-modal .em-btn:hover{background:#F0F4FF;color:#0071E3}
 .export-modal .em-btn strong{display:block;font-size:14px;margin-bottom:2px}
 .export-modal .em-btn span{font-size:11px;color:#86868B}
+/* ===== Floating Topic Nav ===== */
+.tn-wrap{position:sticky;top:0;z-index:99;margin:0 -28px}
+.tn-bar{background:rgba(253,252,249,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06);padding:8px 28px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;user-select:none}
+.tn-bar:hover{background:rgba(253,252,249,.98)}
+.tn-icon{font-size:14px;flex-shrink:0}
+.tn-label{font-size:13px;font-weight:600;color:#1D1D1F}
+.tn-count{font-size:11px;color:#AEAEB2;font-weight:400}
+.tn-arrow{font-size:10px;color:#AEAEB2;margin-left:auto;transition:transform .3s}
+.tn-arrow.open{transform:rotate(180deg)}
+.tn-body{overflow:hidden;max-height:0;transition:max-height .4s ease;background:rgba(253,252,249,.95)}
+.tn-body.show{max-height:500px}
+.tn-scroll{display:flex;gap:6px;padding:10px 28px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tn-scroll::-webkit-scrollbar{display:none}
+.tn-item{font-size:12px;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;cursor:pointer;color:#86868B;background:rgba(0,0,0,.04);transition:all .2s;border:none;font-family:inherit}
+.tn-item:hover{background:rgba(0,113,227,.08);color:#0071E3}
+.tn-item.active{background:#0071E3;color:#fff;font-weight:600}
+.tn-top{font-size:11px;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;cursor:pointer;color:#86868B;background:rgba(0,0,0,.04);transition:all .2s;border:none;font-family:inherit}
+.tn-top:hover{background:rgba(0,113,227,.08);color:#0071E3}
+@media(max-width:640px){.tn-wrap{margin:0 -12px}.tn-bar{padding:6px 12px}.tn-scroll{padding:8px 12px 10px}.tn-item{font-size:11px;padding:4px 10px}.tn-icon{font-size:12px}.tn-label{font-size:12px}}
 </style>
 </head>
 <body>
@@ -167,6 +186,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="sc" id="opp-wrap" style="display:none">
 <div class="sc-hd"><span class="sc-icon">📌</span><span class="sc-title">机会前瞻</span></div>
 <div class="sc-body" id="opp-container"></div>
+</div>
+<div class="tn-wrap" id="tn-wrap" style="display:none">
+<div class="tn-bar" id="tn-bar" onclick="tnToggle()">
+  <span class="tn-icon">📋</span>
+  <span class="tn-label">目录</span>
+  <span class="tn-count" id="tn-count"></span>
+  <span class="tn-arrow" id="tn-arrow">▾</span>
+</div>
+<div class="tn-body" id="tn-body">
+<div class="tn-scroll" id="tn-scroll">
+  <button class="tn-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部</button>
+</div>
+</div>
 </div>
 <div class="fo">
 <div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。</div>
@@ -255,6 +287,55 @@ function sp(idx){var t=ED.topics[idx];if(!t)return;var sc=t.scores||{},ins=sc.in
 function hp(){PE.style.display="none";OV.style.display="none";OP=null}
 document.querySelectorAll(".tc-info").forEach(function(el){el.addEventListener("click",function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);if(OP===idx)hp();else sp(idx)})});
 document.getElementById("hp-overlay").addEventListener("click",hp);
+
+function tnToggle(){var b=document.getElementById("tn-body"),a=document.getElementById("tn-arrow");b.classList.toggle("show");a.classList.toggle("open")}
+function tnGo(idx){document.getElementById("topic-"+idx).scrollIntoView({behavior:"smooth",block:"start"});setTimeout(function(){tnToggle()},300)}
+
+// Populate topic nav after topics are rendered
+(function initTN(){
+  var cs=document.getElementById("topics-container");
+  if(!cs)return;
+  var tc=cs.querySelectorAll('.tc[name*="topic"]');
+  var topics=document.querySelectorAll('[id^="topic-"]');
+  var sc=document.getElementById("tn-scroll");
+  var cnt=0;
+  while(sc.children.length>1)sc.removeChild(sc.lastChild);
+  var names=cs.querySelectorAll('.tc-name');
+  names.forEach(function(n,i){
+    var btn=document.createElement("button");
+    btn.className="tn-item";
+    btn.textContent=(i+1)+". "+n.textContent.trim();
+    btn.setAttribute("data-idx",i);
+    btn.onclick=function(){tnGo(i)};
+    sc.appendChild(btn);
+    cnt++;
+  });
+  if(cnt>0){document.getElementById("tn-wrap").style.display="";document.getElementById("tn-count").textContent=cnt+"个主题"}
+  
+  // Scroll spy
+  var cards=cs.querySelectorAll('.tc');
+  if(!cards.length)return;
+  var obs=new IntersectionObserver(function(entries){
+    var vis=[];
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var idx=Array.from(cards).indexOf(e.target);
+        if(idx>=0)vis.push(idx);
+      }
+    });
+    if(!vis.length)return;
+    var best=vis[0];
+    var bestTop=cards[best].getBoundingClientRect().top;
+    vis.forEach(function(i){
+      var t=cards[i].getBoundingClientRect().top;
+      if(Math.abs(t)<Math.abs(bestTop)){best=i;bestTop=t}
+    });
+    document.querySelectorAll('.tn-item').forEach(function(b,i){
+      b.classList.toggle("active",i===best);
+    });
+  },{threshold:[0,0.25,0.5,0.75,1]});
+  cards.forEach(function(c){obs.observe(c)});
+})();
 
 // Live refresh
 async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u="https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14,f18&secids="+as.join(",")+"&_="+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll(".sr[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".sp"),spp=r.querySelector(".spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==0)sp.textContent=pr.toFixed(2);if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="sp"+cl;spp.className="spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});document.querySelectorAll(".rs-row[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".rs-sp"),spp=r.querySelector(".rs-spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==0)sp.textContent=pr.toFixed(2);if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="rs-sp"+cl;spp.className="rs-spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});var d2=document.getElementById("live-dot"),t2=document.getElementById("live-text");if(d2&&t2){if(iT()){d2.className="live-dot live";t2.textContent="盘中 · "+ts()}else if(iM()){d2.className="live-dot after-hours";t2.textContent="盘后 · "+ts()}else{d2.className="live-dot closed";t2.textContent="非交易日 · "+ts()}}}catch(e){}}
