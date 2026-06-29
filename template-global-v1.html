@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- 蓝宝书Max Template Global v1.0 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+    <title>蓝宝书Max</title>
+    <meta property="og:title" content="蓝宝书Max">
+    <meta property="og:description" content="机构级投研情报">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="蓝宝书Max">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
+.w{max-width:900px;margin:0 auto}
+.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+.sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+.sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
+.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}
+.sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}
+.sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
+.stats-row{display:flex;gap:14px;flex-wrap:wrap}
+.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
+.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+.live-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
+.live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6);animation:pulse 1.5s infinite}
+.live-dot.closed{background:#AEAEB2}
+.live-dot.after-hours{background:#FF9500}
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+#update-time{margin-left:auto;opacity:.7}
+.ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
+.sc{margin-bottom:16px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #E5E5EA}
+.sc-hd{background:#0071E3;padding:10px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sc-hd .sc-icon{font-size:16px}
+.sc-hd .sc-title{font-size:14px;font-weight:700;color:#fff}
+.sc-hd .sc-sub{font-size:10px;color:rgba(255,255,255,.65)}
+.sc-body{padding:14px 16px}
+.news-card{background:#F9F8F6;border-radius:12px;padding:16px 18px;margin-bottom:10px;transition:all .15s}
+.news-card:hover{border-color:#30B46E;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.news-num{font-size:11px;font-weight:700;color:#30B46E;margin-bottom:4px}
+.news-title{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.5;color:#1D1D1F}
+.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:10px}
+.stock-tags{display:flex;flex-wrap:wrap;gap:6px}
+.stock-tag{font-size:12px;font-weight:600;color:#1D1D1F;background:#EDECE9;padding:3px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+.stock-tag .note{font-weight:400;color:#86868B;font-size:11px}
+.fo{text-align:center;padding:20px 16px;font-size:11px;color:#C7C7CC;line-height:1.8}
+.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px}
+.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:10px}
+.fo .fo-line3{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-top:10px;border-top:1px solid #EFEFF4;font-size:11px;color:#AEAEB2}
+.fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
+.fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
+.fo .fo-email{color:#AEAEB2}
+.member-badge{font-size:10px;padding:3px 12px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap;letter-spacing:0.5px;border:1px solid rgba(255,255,255,.25)}
+.header-sub-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 18px;border-radius:20px;background:#007AFF;color:#fff!important;font-weight:700;font-size:12px;box-shadow:0 3px 12px rgba(0,122,255,.4);transition:all .2s;text-decoration:none;white-space:nowrap}
+.header-sub-btn:hover{background:#0066D6;transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,122,255,.5)}
+@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .brand-slogan{font-size:11px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.news-card{padding:12px 14px}.news-title{font-size:14px}.news-body{font-size:12px}.stock-tag{font-size:11px;padding:2px 8px}.stock-tag .note{font-size:10px}.fo{padding:14px 10px}.header-sub-btn{font-size:10px;padding:4px 10px}.stats-row{gap:6px}.stats-row .st{min-width:auto;padding:6px 8px;border-radius:6px}.stats-row .st strong{font-size:17px}.stats-row .st span{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="sh">
+<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span><a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="header-sub-btn">💡 立即订阅 →</a></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
+<div class="live-row"><span class="live-dot closed" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新 ...</span></div>
+<div class="stats-row">
+<div class="st"><strong id="stat-news">—</strong><span>全部新闻</span></div>
+<div class="st"><strong id="stat-stocks">—</strong><span>涉及标的</span></div>
+<div class="st"><strong id="stat-sections">—</strong><span>分类板块</span></div>
+</div>
+</div>
+<div class="ct" id="content-area">
+</div>
+<div class="fo">
+<div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益</div>
+<div class="fo-line2">蓝宝书Max · 全球财经资讯聚合 · 自动更新 · v1.0</div>
+<div class="fo-line3">
+<a href="mailto:bluebookmax@gmail.com" class="fo-email">📧 bluebookmax@gmail.com</a>
+<a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener">📚 知识星球：蓝宝书Max</a>
+</div>
+</div>
+</div>
+
+<script id="global-data">
+GD = null
+</script>
+<script>
+(function(){
+var g = GD;
+if(!g) return;
+
+// Edition
+var ei = "🌍", ec = "#30B46E", ebg = "rgba(48,180,110,.15)";
+document.getElementById("header-date").textContent = g.edition.dateDisplay + " " + g.edition.weekday;
+var he = document.getElementById("header-edition");
+he.textContent = ei + " " + g.edition.label;
+he.style.background = ebg;
+he.style.color = ec;
+
+document.getElementById("update-time").textContent = "更新于 · " + g.edition.updateTime;
+document.getElementById("stat-news").textContent = g.stats.newsCount;
+document.getElementById("stat-stocks").textContent = g.stats.stockCount;
+document.getElementById("stat-sections").textContent = g.stats.sectionCount;
+
+document.title = "蓝宝书Max · " + g.edition.dateDisplay + " " + g.edition.weekday + " " + g.edition.label;
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+
+var liveDot = document.getElementById("live-dot");
+var liveText = document.getElementById("live-text");
+liveDot.className = "live-dot after-hours";
+liveText.textContent = "已更新 · " + g.edition.updateTime.split(" ")[1];
+
+// Render sections
+var ca = document.getElementById("content-area");
+var html = "";
+g.sections.forEach(function(s, si){
+  html += '<div class="sc">';
+  html += '<div class="sc-hd"><span class="sc-icon">' + (s.icon || "") + '</span><span class="sc-title">' + s.name + '</span><span class="sc-sub">' + s.news.length + '条</span></div>';
+  html += '<div class="sc-body">';
+  s.news.forEach(function(n){
+    html += '<div class="news-card">';
+    html += '<div class="news-num">#' + n.id + '</div>';
+    html += '<div class="news-title">' + n.title + '</div>';
+    html += '<div class="news-body">' + n.body + '</div>';
+    if(n.stocks && n.stocks.length > 0){
+      html += '<div class="stock-tags">';
+      n.stocks.forEach(function(st){
+        html += '<span class="stock-tag">' + st.name + '<span class="note">' + st.note + '</span></span>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div></div>';
+});
+ca.innerHTML = html;
+
+// OG meta
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+})();
+</script>
+</body>
+</html>

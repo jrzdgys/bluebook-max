@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<!-- 蓝宝书Max Template Global v1.0 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+    <title>蓝宝书Max·2026年6月29日 周一 全球版</title>
+    <meta property="og:title" content="蓝宝书Max·2026年6月29日 周一 全球版">
+    <meta property="og:description" content="18条全球新闻·39只相关标的">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="蓝宝书Max">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
+.w{max-width:900px;margin:0 auto}
+.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+.sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+.sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
+.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}
+.sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}
+.sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
+.stats-row{display:flex;gap:14px;flex-wrap:wrap}
+.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
+.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+.live-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
+.live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6);animation:pulse 1.5s infinite}
+.live-dot.closed{background:#AEAEB2}
+.live-dot.after-hours{background:#FF9500}
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+#update-time{margin-left:auto;opacity:.7}
+.ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
+.sc{margin-bottom:16px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #E5E5EA}
+.sc-hd{background:#0071E3;padding:10px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sc-hd .sc-icon{font-size:16px}
+.sc-hd .sc-title{font-size:14px;font-weight:700;color:#fff}
+.sc-hd .sc-sub{font-size:10px;color:rgba(255,255,255,.65)}
+.sc-body{padding:14px 16px}
+.news-card{background:#F9F8F6;border-radius:12px;padding:16px 18px;margin-bottom:10px;transition:all .15s}
+.news-card:hover{border-color:#30B46E;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.news-num{font-size:11px;font-weight:700;color:#30B46E;margin-bottom:4px}
+.news-title{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.5;color:#1D1D1F}
+.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:10px}
+.stock-tags{display:flex;flex-wrap:wrap;gap:6px}
+.stock-tag{font-size:12px;font-weight:600;color:#1D1D1F;background:#EDECE9;padding:3px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+.stock-tag .note{font-weight:400;color:#86868B;font-size:11px}
+.fo{text-align:center;padding:20px 16px;font-size:11px;color:#C7C7CC;line-height:1.8}
+.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px}
+.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:10px}
+.fo .fo-line3{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-top:10px;border-top:1px solid #EFEFF4;font-size:11px;color:#AEAEB2}
+.fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
+.fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
+.fo .fo-email{color:#AEAEB2}
+.member-badge{font-size:10px;padding:3px 12px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap;letter-spacing:0.5px;border:1px solid rgba(255,255,255,.25)}
+.header-sub-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 18px;border-radius:20px;background:#007AFF;color:#fff!important;font-weight:700;font-size:12px;box-shadow:0 3px 12px rgba(0,122,255,.4);transition:all .2s;text-decoration:none;white-space:nowrap}
+.header-sub-btn:hover{background:#0066D6;transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,122,255,.5)}
+@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .brand-slogan{font-size:11px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.news-card{padding:12px 14px}.news-title{font-size:14px}.news-body{font-size:12px}.stock-tag{font-size:11px;padding:2px 8px}.stock-tag .note{font-size:10px}.fo{padding:14px 10px}.header-sub-btn{font-size:10px;padding:4px 10px}.stats-row{gap:6px}.stats-row .st{min-width:auto;padding:6px 8px;border-radius:6px}.stats-row .st strong{font-size:17px}.stats-row .st span{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="sh">
+<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span><a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="header-sub-btn">💡 立即订阅 →</a></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
+<div class="live-row"><span class="live-dot closed" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新 ...</span></div>
+<div class="stats-row">
+<div class="st"><strong id="stat-news">—</strong><span>全部新闻</span></div>
+<div class="st"><strong id="stat-stocks">—</strong><span>涉及标的</span></div>
+<div class="st"><strong id="stat-sections">—</strong><span>分类板块</span></div>
+</div>
+</div>
+<div class="ct" id="content-area">
+</div>
+<div class="fo">
+<div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益</div>
+<div class="fo-line2">蓝宝书Max · 全球财经资讯聚合 · 自动更新 · v1.0</div>
+<div class="fo-line3">
+<a href="mailto:bluebookmax@gmail.com" class="fo-email">📧 bluebookmax@gmail.com</a>
+<a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener">📚 知识星球：蓝宝书Max</a>
+</div>
+</div>
+</div>
+
+<script id="global-data">
+GD = {
+  "edition": {
+    "type": "gv",
+    "label": "全球版",
+    "date": "2026-06-29",
+    "dateDisplay": "2026年6月29日",
+    "weekday": "周一",
+    "updateTime": "2026-06-29 08:02"
+  },
+  "stats": {
+    "newsCount": 18,
+    "stockCount": 39,
+    "sectionCount": 2
+  },
+  "sections": [
+    {
+      "name": "隔夜美股复盘",
+      "icon": "🌍",
+      "news": [
+        {
+          "id": 1,
+          "title": "市场整体：资金轮动至价值与小盘板块",
+          "body": "隔夜美股市场出现显著的内部分化，大型科技股普遍回调，拖累纳斯达克100指数(-4.6%)和标普500指数(-2.4%)等权重指数下跌。然而，市场广度实则健康，资金明显从拥挤的巨头科技股轮动至价值、小盘及防御性板块，道琼斯指数、罗素2000指数及等权重标普500指数(RSP)均录得上涨。其中，房地产(REITs)板块表现尤为突出，整体大涨3.3%。市场观点认为，此次轮动是牛市中的健康调整，而非熊市的开端，部分原因与季末养老金再平衡和公司回购静默期等技术性因素有关。",
+          "stocks": [
+            {
+              "name": "RSP",
+              "note": "等权重标普500，轮动受益"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "半导体板块集体承压，Micron财报后下跌",
+          "body": "尽管Micron(MU)公布了营收近五倍增长的爆炸性财报及强劲指引，但其股价在盘后交易中仍下跌，引发市场对半导体板块的担忧。市场认为，AI组件供应链成本的上升可能传导为更广泛的通胀，同时担忧当前高达84%的毛利率水平难以持续。受此情绪影响，整个半导体板块承压，Nvidia(NVDA)股价也因回调而接近熊市区间。",
+          "stocks": [
+            {
+              "name": "MU",
+              "note": "存储龙头，营收五倍增长但盘后下跌"
+            },
+            {
+              "name": "NVDA",
+              "note": "AI芯片龙头，股价接近熊市区间"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Adobe逆市走强，AI产品ARR增长超200%",
+          "body": "Adobe(ADBE)公布了超预期的第二季度业绩，AI驱动的年度经常性收入(ARR)同比猛增超过200%至5亿美元以上。公司同时宣布了高达250亿美元的股票回购计划，相当于当前市值的约30%，强劲的业绩和对股东的回报承诺使其股价在科技股普遍回调的背景下获得支撑。",
+          "stocks": [
+            {
+              "name": "ADBE",
+              "note": "AI产品ARR猛增200%，宣布250亿美元回购"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "投机性板块降温，私人信贷与飞行汽车股下跌",
+          "body": "市场风险偏好下降，部分高估值和投机性板块遭遇抛售。顶级私人信贷公司如Blue Owl(OWL)、Apollo Global(APO)和Ares Management(ARES)股价大幅下挫。同时，飞行汽车概念股Joby Aviation(JOBY)和Archer Aviation(ACHR)也出现股价急跌，伴随着空头头寸的激增。",
+          "stocks": [
+            {
+              "name": "OWL",
+              "note": "私人信贷，市场抛售"
+            },
+            {
+              "name": "APO",
+              "note": "另类资管，风险偏好下降"
+            },
+            {
+              "name": "ARES",
+              "note": "私募信贷赎回压力"
+            },
+            {
+              "name": "JOBY",
+              "note": "飞行汽车概念急跌"
+            },
+            {
+              "name": "ACHR",
+              "note": "飞行汽车概念急跌"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Eli Lilly大涨7%，增长逻辑超越减肥药",
+          "body": "Eli Lilly(LLY)股价在最近一个交易日中大涨7%，创下自2月初以来的最大单日涨幅。股价上涨的驱动因素是公司在肿瘤学和神经科学领域的积极进展，显示出其增长潜力已超越市场熟知的减肥药领域，获得了投资者的重新评估。",
+          "stocks": [
+            {
+              "name": "LLY",
+              "note": "肿瘤学+神经科学进展，大涨7%"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "HP评级遭下调，面临存储成本上升压力",
+          "body": "分析师将HP(HPQ)的评级从\"买入\"下调至\"中性\"。尽管AI PC的销售带来了均价和利润率的提升，但市场担忧不断上涨的内存成本将在2026年下半年侵蚀其利润，同时其传统的打印业务也面临持续的长期下滑风险。",
+          "stocks": [
+            {
+              "name": "HPQ",
+              "note": "存储成本上升侵蚀利润，评级下调"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "全球重点事件梳理",
+      "icon": "🌐",
+      "news": [
+        {
+          "id": 7,
+          "title": "美伊停火协议脆弱，双方仍有零星军事交火",
+          "body": "美国与伊朗的停火协议依然脆弱，尽管使得霍尔木兹海峡的航运量恢复至战前约三分之一的水平并导致油价回落，但双方仍在继续对彼此的军事设施进行攻击。特朗普政府警告称，若伊朗违反协议，可能采取军事行动，这为能源市场和全球贸易带来了持续的不确定性，市场正密切关注协议的执行情况及对石油供应的实质影响。",
+          "stocks": [
+            {
+              "name": "RTX",
+              "note": "国防承包商，受益军事紧张"
+            },
+            {
+              "name": "LMT",
+              "note": "地缘政治风险增加国防开支预期"
+            },
+            {
+              "name": "XOM",
+              "note": "油价因地缘政治风险溢价波动"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "谷歌因算力瓶颈限制Meta使用其Gemini模型",
+          "body": "谷歌因无法满足Meta Platforms对其AI模型Gemini的巨大算力需求而实施了使用限制，迫使Meta加速转向自研模型。这一事件凸显了全球AI竞赛中无处不在的算力瓶颈，即使是科技巨头也面临基础设施不足的挑战，强化了市场对AI基础设施和算力供应商长期价值的看好。",
+          "stocks": [
+            {
+              "name": "NVDA",
+              "note": "AI芯片绝对领导者，算力稀缺利好"
+            },
+            {
+              "name": "AMD",
+              "note": "GPU市场主要竞争者"
+            },
+            {
+              "name": "VRT",
+              "note": "数据中心散热和电源管理提供商"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "国际清算银行(BIS)警告AI泡沫等三大全球风险",
+          "body": "国际清算银行(BIS)在其年度报告中警告，人工智能(AI)领域的投资泡沫破裂、持续的通货膨胀和高企的政府债务是全球经济面临的三大主要威胁。BIS特别指出，AI领域复杂的融资结构可能导致投资突然撤回，引发类似2008年金融危机的市场修正，为当前火热的AI投资敲响了警钟。",
+          "stocks": [
+            {
+              "name": "SCHD",
+              "note": "市场担忧泡沫时转向价值股"
+            },
+            {
+              "name": "BRK.B",
+              "note": "巨额现金储备，市场动荡避风港"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Firmus与英伟达合作在印尼建大型AI数据中心",
+          "body": "澳大利亚AI公司Firmus Technologies宣布将与英伟达合作，在印尼建设一个360兆瓦的AI工厂园区，预计2027年投入运营。这项为期八年的合作预计将产生高达300亿美元的承购协议，再次印证了全球范围内对AI算力基础设施的巨大投资需求和规模。",
+          "stocks": [
+            {
+              "name": "NVDA",
+              "note": "直接的设备和技术提供方"
+            },
+            {
+              "name": "CLS",
+              "note": "电子制造服务商，受益数据中心部署"
+            },
+            {
+              "name": "ETN",
+              "note": "数据中心电力管理解决方案"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "美国六月非农就业报告将提前至周四发布",
+          "body": "由于假期原因，本周关键的美国六月非农就业报告将提前一天至周四发布，成为影响市场走向的核心宏观事件。在美联储六月会议释放鹰派信号后，市场极度关注就业和薪资数据所反映的通胀压力，一份强劲的报告可能迫使美联储采取更紧缩的政策。",
+          "stocks": [
+            {
+              "name": "GLD",
+              "note": "就业疲软则降息预期升温利好黄金"
+            },
+            {
+              "name": "TLT",
+              "note": "就业数据影响利率路径预期"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Polestar汽车因国安原因2027年起将被禁止在美国销售",
+          "body": "由于其多数股权为中资所有引发的国家安全担忧，电动汽车制造商Polestar将从2027车型年开始被禁止在美国市场销售。尽管美国市场目前仅占其总收入不到6%，但此禁令标志着地缘政治因素对特定公司商业运营的直接干预，市场关注这是否会成为影响其他有相似背景公司的先例。",
+          "stocks": [
+            {
+              "name": "TSLA",
+              "note": "本土电动车巨头，竞争减少利好"
+            },
+            {
+              "name": "RIVN",
+              "note": "美国本土高端电动车品牌，潜在受益"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "美国最高法院将就美联储独立性等关键议题裁决",
+          "body": "美国最高法院本周将对两项重大议题作出裁决：一是前总统特朗普试图罢免美联储理事的权力，此案直接挑战了美联储的独立性；二是关于出生公民权的政策。这些裁决将对美国金融体系的稳定性和长期政策框架产生深远影响，市场高度关注其可能带来的不确定性。",
+          "stocks": [
+            {
+              "name": "XLF",
+              "note": "金融板块对利率政策高度敏感"
+            },
+            {
+              "name": "JPM",
+              "note": "系统重要性银行，受央行独立性影响"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "债券基金增持五年期美债以应对政策不确定性",
+          "body": "面对美联储潜在领导层变动带来的政策不确定性，包括PIMCO和Capital Group在内的顶级债券基金正在增持五年期美国国债。投资者认为，相较于短端和长端国债，五年期品种在收益率（约4.13%）和利率敏感性之间提供了更好的平衡点，是对冲未来政策和经济数据波动的\"甜蜜点\"。",
+          "stocks": [
+            {
+              "name": "IEI",
+              "note": "追踪中期国债表现"
+            },
+            {
+              "name": "MAWIX",
+              "note": "大型债券基金策略动向"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "大众汽车计划终止与博世的自动驾驶合作",
+          "body": "据报道，大众汽车计划终止与供应商博世在自动驾驶领域的合作，此举是其更广泛的成本削减和提升竞争力计划的一部分。这一变化反映了开发高级别自动驾驶技术的高昂成本和商业化挑战，即使是行业巨头也在重新评估其战略路径和合作伙伴关系。",
+          "stocks": [
+            {
+              "name": "MBLY",
+              "note": "ADAS技术供应商，可能获机会"
+            },
+            {
+              "name": "QCOM",
+              "note": "Snapdragon Ride平台备选方案"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "title": "奥地利提议欧盟引入AI公司Anthropic以求技术自主",
+          "body": "针对美国近期限制外国人使用其顶尖AI模型的政策，奥地利已正式向欧盟提议，应争取美国AI巨头Anthropic在欧盟境内设立业务。此举旨在增强欧盟在关键AI技术领域的战略自主权，并留住人才和资本，凸显了在AI全球竞争格局下，各国对技术主权的日益重视。",
+          "stocks": [
+            {
+              "name": "MSFT",
+              "note": "OpenAI投资者，关注竞争对手全球布局"
+            },
+            {
+              "name": "GOOGL",
+              "note": "Anthropic投资者之一"
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "title": "美联储官员巴尔金警告通胀仍过高",
+          "body": "里士满联储主席巴尔金(Tom Barkin)表示，尽管有迹象显示通胀压力在缓解，但整体通胀水平依然过高，难以确信能回到2%的目标。他认为维持限制性利率是合理的，其言论强化了市场对于美联储在降息问题上将保持谨慎和耐心的预期。",
+          "stocks": [
+            {
+              "name": "TBT",
+              "note": "利率长期走高预期受益"
+            },
+            {
+              "name": "GS",
+              "note": "银行业绩对利率环境高度敏感"
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "英国计划采购新型混合战舰以替代现有舰队",
+          "body": "英国政府宣布将采购至少六艘新型\"通用作战舰艇\"，以替代老化的45型驱逐舰，新舰艇预计2030年代初交付。该舰艇将作为指挥中心，统筹空中、水面及水下的无人系统，体现了英国海军向智能化、无人化作战转型的明确战略方向，并可能带动相关国防技术的需求。",
+          "stocks": [
+            {
+              "name": "BAESY",
+              "note": "英国主要国防承包商，极可能参与"
+            },
+            {
+              "name": "GD",
+              "note": "海军舰船和无人系统领域深厚积累"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script>
+(function(){
+var g = GD;
+if(!g) return;
+
+// Edition
+var ei = "🌍", ec = "#30B46E", ebg = "rgba(48,180,110,.15)";
+document.getElementById("header-date").textContent = g.edition.dateDisplay + " " + g.edition.weekday;
+var he = document.getElementById("header-edition");
+he.textContent = ei + " " + g.edition.label;
+he.style.background = ebg;
+he.style.color = ec;
+
+document.getElementById("update-time").textContent = "更新于 · " + g.edition.updateTime;
+document.getElementById("stat-news").textContent = g.stats.newsCount;
+document.getElementById("stat-stocks").textContent = g.stats.stockCount;
+document.getElementById("stat-sections").textContent = g.stats.sectionCount;
+
+document.title = "蓝宝书Max · " + g.edition.dateDisplay + " " + g.edition.weekday + " " + g.edition.label;
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+
+var liveDot = document.getElementById("live-dot");
+var liveText = document.getElementById("live-text");
+liveDot.className = "live-dot after-hours";
+liveText.textContent = "已更新 · " + g.edition.updateTime.split(" ")[1];
+
+// Render sections
+var ca = document.getElementById("content-area");
+var html = "";
+g.sections.forEach(function(s, si){
+  html += '<div class="sc">';
+  html += '<div class="sc-hd"><span class="sc-icon">' + (s.icon || "") + '</span><span class="sc-title">' + s.name + '</span><span class="sc-sub">' + s.news.length + '条</span></div>';
+  html += '<div class="sc-body">';
+  s.news.forEach(function(n){
+    html += '<div class="news-card">';
+    html += '<div class="news-num">#' + n.id + '</div>';
+    html += '<div class="news-title">' + n.title + '</div>';
+    html += '<div class="news-body">' + n.body + '</div>';
+    if(n.stocks && n.stocks.length > 0){
+      html += '<div class="stock-tags">';
+      n.stocks.forEach(function(st){
+        html += '<span class="stock-tag">' + st.name + '<span class="note">' + st.note + '</span></span>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div></div>';
+});
+ca.innerHTML = html;
+
+// OG meta
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+})();
+</script>
+</body>
+</html>
