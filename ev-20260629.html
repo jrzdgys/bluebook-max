@@ -1713,7 +1713,7 @@ if(!d)return;
 try{var e=JSON.parse(d.textContent);
 var gd=['周日','周一','周二','周三','周四','周五','周六'];
 var dt=e.edition.dateDisplay||'';
-var dw=gd[new Date((e.edition.date||'')+'T12:00:00+08:00').getDay()];
+var dw=gd[new Date((e.edition.date||'').replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')+'T12:00:00+08:00').getDay()];
 var lb=e.edition.label||'';
 var tl='\u84dd\u5b9d\u4e66Max\u00b7'+dt+' '+dw+' '+lb;
 var st=e.stats||{};
