@@ -22,7 +22,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','Microsoft YaHei',sans-serif;
-  background:#F2F2F7;color:#1D1D1F;line-height:1.5;-webkit-font-smoothing:antialiased;
+  background:linear-gradient(180deg,#F8F9FC 0%,#EEF1F8 100%);color:#1D1D1F;line-height:1.5;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;min-height:100vh;
 }
 
@@ -64,6 +64,7 @@ body{
 }
 .hero h1{
   font-size:clamp(40px,5vw,64px);font-weight:800;letter-spacing:-2px;margin-bottom:12px;line-height:1.05;
+  background:linear-gradient(90deg,#1D1D1F,#0071E3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
 .hero h1 .accent{color:#0071E3}
 .hero .subtitle{
@@ -91,10 +92,10 @@ body{
 .btn-outline{background:rgba(0,0,0,.04);color:#1D1D1F;display:inline-flex;align-items:center;gap:8px;line-height:1;padding:14px 28px;font-size:16px}
 .btn-outline:hover{background:rgba(0,0,0,.08)}
 .btn-zsxq{
-  background:linear-gradient(135deg,#07C160,#06AD56);color:#fff;font-size:16px;padding:14px 28px;
-  display:inline-flex;align-items:center;gap:8px;line-height:1;
+  background:linear-gradient(135deg,#0071E3,#00A0FF);color:#fff;font-size:16px;padding:14px 28px;
+  display:inline-flex;align-items:center;gap:8px;line-height:1;box-shadow:0 8px 28px rgba(0,113,227,.25);
 }
-.btn-zsxq:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(7,193,96,.3)}
+.btn-zsxq:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,113,227,.35)}
 .hero-cta .btn{min-height:45px;box-sizing:border-box}
 
 /* ===== Container ===== */
@@ -131,7 +132,7 @@ body{
   background:var(--accent);opacity:0;transition:opacity .3s;
 }
 .report-card:hover{
-  transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:rgba(0,0,0,.12);
+  transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,113,227,.1);border-color:rgba(0,113,227,.15);
 }
 .report-card:hover::before{opacity:1}
 
@@ -254,6 +255,8 @@ body{
   .nav-inner{padding:0 18px}
 }
 @media(max-width:640px){
+  .brand-links{flex-direction:column;gap:6px;align-items:center;font-size:12px}
+  .brand-links a{font-size:12px;margin:0!important}
   .hero{padding:40px 14px 28px}
   .hero h1{font-size:36px;letter-spacing:-1.5px}
   .hero .subtitle{font-size:16px;margin-bottom:24px}
