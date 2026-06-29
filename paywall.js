@@ -168,7 +168,14 @@
           }).catch(function(e) {
             clearTimeout(timeout);
             console.error('[BBM] Fetch error:', e.name, e.message);
-            return { ok: false, error: '网络请求失败，请检查网络连接（如使用移动数据可尝试切换WiFi），若持续失败请联系管理员' };
+            // Local fallback: try validating via local hash list
+            return _localVerify(code).then(function(localResult) {
+              if (localResult.ok) {
+                console.log('[BBM] Local fallback verification succeeded');
+                return localResult;
+              }
+              return { ok: false, error: '激活服务暂时不可用，请稍后重试或联系管理员' };
+            });
           });
         }).catch(function(e) {
           console.error('[BBM] Fingerprint error:', e);

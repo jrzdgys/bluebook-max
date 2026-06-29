@@ -535,7 +535,12 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     }
     var edLbl={am:'\u6668\u4f1a\u7248',mc:'\u6668\u4f1a\u7248',md:'\u5348\u95f4\u7248',pm:'\u5348\u95f4\u7248',ev:'\u665a\u95f4\u7248',global:'\u5168\u7403\u7248',gv:'\u5168\u7403\u7248'};
     var edOrd={gv:0,mc:1,pm:2,ev:3};
-    function getTodayCST(){var n=new Date(),o=480*60000,c=new Date(n.getTime()+o);return c.toISOString().slice(0,10).replace(/-/g,"")}var today=getTodayCST();
+    function getTodayCST(){var n=new Date(),o=480*60000,c=new Date(n.getTime()+o);return c.toISOString().slice(0,10).replace(/-/g,"")}var today=getTodayCST();;
+    function getPrevDate(d){var y=parseInt(d.slice(0,4),10),m=parseInt(d.slice(4,6),10)-1,dd=parseInt(d.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,"0")+String(dt.getDate()).padStart(2,"0")}var freeEvFile="ev-"+getPrevDate(today)+".html"
+    // Compute free article = previous day's evening edition
+    function getPrevDate(d){var y=parseInt(d.slice(0,4),10),m=parseInt(d.slice(4,6),10)-1,dd=parseInt(d.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,'0')+String(dt.getDate()).padStart(2,'0');}
+    var freeEvFile='ev-'+getPrevDate(today)+'.html';
+    var freeEvFound=false;
     var tR=[],wM={};
     rps.forEach(function(r,i){
       if(r.date===today)tR.push({r:r,idx:i});
@@ -552,34 +557,58 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     if(tR.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot today-dot"></span>\u4eca\u5929<span class="count">'+tR.length+'\u4efd</span></div><div class="reports-grid">'+
         tR.sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
-        .map(function(it){return renderCard(it.r,it.idx===0,isAuth,edLbl);}).join('')+'</div></div>';
+        .map(function(it){return renderCard(it.r,it.r.file===freeEvFileisAuth,edLbl);}).join('')+'</div></div>';
     }else if(rps.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot"></span>\u6700\u65b0<span class="count">1\u4efd</span></div><div class="reports-grid">'+
-        renderCard(rps[0],true,isAuth,edLbl)+'</div></div>';
+        renderCard(rps[0],rps[0].file===freeEvFile,isAuth,edLbl)iv></div>';
     }
     document.getElementById('report-count').textContent='\u5171 '+rps.length+' \u4efd';
-    var wkKeys=Object.keys(wM).sort(function(a,b){return(wM[b].year*100+wM[b].week)-(wM[a].year*100+wM[a].week);});
+        var wkKeys=Object.keys(wM).sort(function(a,b){return(wM[b].year*100+wM[b].week)-(wM[a].year*100+wM[a].week);});
     var cw=getWeekInfo(today);
+    var lw='W'+String(cw.week-1<=0?52:cw.week-1).padStart(2,'0');
     var sec=document.getElementById('history-sections');
     if(wkKeys.length){
       var h='';
+      // Collect "更早" (earlier) items
+      var earlierItems=[];
       wkKeys.forEach(function(wk){
-        var inf=wM[wk],dk=Object.keys(inf.dates).sort(),isCW=(wk===cw.key),col=!isCW;
-        h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">'+(col?'\u25b8':'\u25be')+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
-          '<div class="week-cards" style="max-height:'+(col?'0px':'6000px')+'">';
-        var dg={};
-        inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
-        Object.keys(dg).sort().reverse().forEach(function(dk){
+        var inf=wM[wk];
+        if(wk===cw.key||wk===lw){
+          var dk=Object.keys(inf.dates).sort(),isCW=(wk===cw.key),col=!isCW;
+          h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">'+(col?'\u25b8':'\u25be')+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
+            '<div class="week-cards" style="max-height:'+(col?'0px':'6000px')+'">';
+          var dg={};
+          inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
+          Object.keys(dg).sort().reverse().forEach(function(dk){
+            var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
+            var dayNames=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
+            h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+dg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
+              dg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
+              .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
+          });
+          h+='</div></div>';
+        }else{
+          // Merge into earlier group
+          inf.items.forEach(function(it){earlierItems.push(it);});
+        }
+      });
+      // Render "更早" group if there are earlier items
+      if(earlierItems.length){
+        h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">\u25b8</span><span class="week-label">\u66f4\u65e9</span><span class="count">'+earlierItems.length+'\u4efd</span></div>'+
+          '<div class="week-cards" style="max-height:0px">';
+        // Group earlier items by date
+        var edg={};
+        earlierItems.forEach(function(it){var d=it.r.date||'unknown';if(!edg[d])edg[d]=[];edg[d].push(it);});
+        Object.keys(edg).sort().reverse().forEach(function(dk){
           var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
-          var dayNames=['周日','周一','周二','周三','周四','周五','周六'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
-          h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+dg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
-            dg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
+          var dayNames=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
+          h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+edg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
+            edg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
             .map(function(it){return renderCard(it.r,false,isAuth,edLbl);}).join('')+'</div></div>';
         });
         h+='</div></div>';
-      });
-      sec.innerHTML=h;
-    }else{
+      }
+      sec.innerHTML=h;}else{
       sec.innerHTML='<div class="empty-state"><div class="icon">\U0001f4c2</div>\u66f4\u591a\u5386\u53f2\u62a5\u544a\u5c06\u9646\u7eed\u5f52\u6863</div>';
     }
     if(isAuth)document.getElementById('free-hint').innerHTML=Paywall.unlockBadge();
