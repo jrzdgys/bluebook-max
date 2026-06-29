@@ -188,7 +188,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <button class="em-btn" onclick="exportWatchlist('ths')"><strong>同花顺</strong><span>代码名称去重 · 直接导入自选</span></button>
 <button class="em-btn em-btn-copy" onclick="copyWatchlist()"><strong>📋 复制代码</strong><span>如未自动下载，点击复制到剪贴板</span></button>
 </div>
-{
+
+<script type="application/json" id="edition-data">{
   "edition": {
     "type": "ev",
     "label": "晚间版",
@@ -1687,7 +1688,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     "山西焦煤": "0.000983",
     "旭光电子": "1.600353"
   }
-}
+}</script>
 <script>
 (function(){
 var d=document.querySelector('#edition-data');
