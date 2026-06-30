@@ -31,6 +31,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .member-notice a{display:inline-block;padding:1px 10px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;font-size:12px;text-decoration:none;white-space:nowrap;vertical-align:middle;cursor:pointer}.member-notice a:hover{background:rgba(255,255,255,.25)}
 .info-row{display:flex;align-items:center;justify-content:space-between;padding:0 28px 14px;font-size:13px;color:rgba(255,255,255,.78)}
 .info-row .info-right{color:rgba(255,255,255,.78)}
+.info-row .info-left{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
+.biz-tags{display:inline-flex;align-items:center;gap:2px;font-size:13px;color:rgba(255,255,255,.82)}
+.biz-arrow{color:rgba(255,255,255,.5);font-size:12px}
+.biz-wx{cursor:pointer;color:#fff;font-weight:700;font-size:14px;padding:2px 10px;border-radius:14px;background:rgba(255,255,255,.13);transition:all .2s;user-select:none;display:inline-flex;align-items:center;gap:3px}
+.biz-wx:hover{background:rgba(255,255,255,.22)}
+.biz-copy-ok{font-size:11px;color:#34C759;opacity:0;transition:opacity .3s;display:inline-block;white-space:nowrap}
+.biz-copy-ok.show{opacity:1}
 
 .sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
 .sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}.sh h1 .brand-dot{font-size:20px;font-weight:300;opacity:.65;margin:0 2px}.sh h1 .brand-slogan{font-size:20px;font-weight:800;opacity:1;letter-spacing:1.5px}
@@ -128,7 +135,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
 .fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
 .fo .fo-email{color:#AEAEB2}
-@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 14px}.sh h1{font-size:22px;flex-wrap:nowrap;gap:6px}.sh h1 .brand-slogan{font-size:18px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.fo .fo-line1{font-size:10px}.fo .fo-line2{font-size:9px}.fo .fo-line3{gap:8px;flex-direction:column}.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px;flex-direction:row;flex-wrap:wrap}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}.stats-row .st strong{font-size:20px}.stats-row .st span{font-size:10px.float-bar{height:36px;padding:0 12px}.float-bar .fb-left{font-size:12px}.float-bar .fb-right{font-size:11px}.member-notice{padding:5px 14px;font-size:12px}.info-row{padding:0 14px 10px;flex-wrap:wrap;gap:4px;font-size:12px;color:rgba(255,255,255,.78)}}}
+@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 14px}.sh h1{font-size:22px;flex-wrap:nowrap;gap:6px}.sh h1 .brand-slogan{font-size:18px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.fo .fo-line1{font-size:10px}.fo .fo-line2{font-size:9px}.fo .fo-line3{gap:8px;flex-direction:column}.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px;flex-direction:row;flex-wrap:wrap}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}.stats-row .st strong{font-size:20px}.stats-row .st span{font-size:10px.float-bar{height:36px;padding:0 12px}.float-bar .fb-left{font-size:12px}.float-bar .fb-right{font-size:11px}.member-notice{padding:5px 14px;font-size:12px}.info-row{padding:0 14px 10px;flex-wrap:wrap;gap:2px;font-size:12px;color:rgba(255,255,255,.78)}.info-row .info-right{flex:0 0 100%;margin-left:0;text-align:left;font-size:10px;opacity:.6}}}
 .export-wrap{position:relative;display:inline-block;margin-top:10px}
 .export-btn-st{cursor:pointer;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);padding:8px 14px;border-radius:10px;transition:background .15s;border:none;color:#fff;font-family:inherit}
 .export-btn-st:hover{background:rgba(255,255,255,.15)}
@@ -158,7 +165,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="sh">
 <div class="member-notice">🔒 本报告仅供付费会员查阅  ·  新用户订阅 · <a href="https://t.zsxq.com/6iVvp" target="_blank">知识星球</a></div>
 <h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span></h1>
-<div class="info-row"><span class="info-left">商务合作 · 微信：bluebookmax</span><span class="info-right" id="update-time">更新 ...</span></div>
+<div class="info-row"><span class="info-left"><span class="biz-tags">📬 商务/订阅/反馈</span><span class="biz-arrow">➡️</span><span class="biz-wx" onclick="copyWx()" title="点击复制微信号">💬微信</span><span class="biz-copy-ok" id="biz-copy-ok">✓已复制</span></span><span class="info-right" id="update-time">更新 ...</span></div>
 <div class="stats-row">
 <div class="st"><strong id="stat-topics">—</strong><span>全部主题</span></div>
 <div class="st"><strong id="stat-opp">—</strong><span>机会前瞻</span></div>
@@ -287,6 +294,8 @@ document.getElementById("export-overlay").addEventListener("click",closeExport);
 
 // Floating header shadow
 (function(){var fb=document.getElementById("float-bar");if(fb){window.addEventListener("scroll",function(){if(window.scrollY>10){fb.style.boxShadow="0 2px 12px rgba(0,0,0,.15)"}else{fb.style.boxShadow="none"}})}})();
+
+function copyWx(){navigator.clipboard.writeText('bluebookmax').then(function(){var e=document.getElementById('biz-copy-ok');e.classList.add('show');setTimeout(function(){e.classList.remove('show')},2000)}).catch(function(){})}
 </script>
 </body>
 </html>
