@@ -185,7 +185,16 @@
           <button class="btn btn-primary btn-sm" onclick="showGenerate()">➕ 生成新码</button>
           <button class="btn btn-outline btn-sm" onclick="exportUnused()">📋 导出未使用</button>
         </div>
-        <div id="generateCard">
+        
+<div id="settingsCard" style="display:none;background:#f5f5f7;border-radius:12px;padding:18px;margin-bottom:16px;max-width:600px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><strong>⚙️ 设置</strong><button class="btn btn-outline btn-sm" onclick="hideSettings()">✕</button></div>
+<div style="margin-bottom:10px"><label style="display:block;font-size:12px;color:#86868B;margin-bottom:4px">GitHub Personal Access Token</label>
+<input type="password" id="ghTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px">
+<div style="font-size:11px;color:#AEAEB2;margin-top:4px">用于自动同步 codes.js。需要 repo 权限。输入后点击保存，Token 仅存储在本地浏览器。</div></div>
+<button class="btn btn-primary btn-sm" onclick="saveGithubToken()">保存</button>
+</div>
+
+<div id="generateCard">
           <div class="row"><span>生成</span><input type="number" id="newCount" value="5" min="1" max="50"><span>个，有效期</span><input type="number" id="newDays" value="365" min="1" max="3650"><span>天</span><button class="btn btn-primary btn-sm" onclick="generateCodes()">确认</button><button class="btn btn-outline btn-sm" onclick="hideGenerate()">取消</button></div>
           <div class="hint">💡 新格式：BBM-8位字母数字（例：BBM-A3X7K9P2）</div>
           <div id="codesOutput" class="codes-output"></div>
@@ -335,7 +344,7 @@
 
     async function unbindAll(code){if(!confirm('确定解绑 '+code+' 的所有设备？'))return;var data=await api('/unbind',{code:code});if(data.ok){msg('✅ 解绑成功');allCodes.forEach(function(c){if(c.code===code){c.devices=0;}});updateStats();renderTable();}else{msg('❌ '+(data.error||'解绑失败'),'error');}}
     async function deleteCode(code){if(!confirm('⚠️ 确定要永久删除 '+code+' 吗？'))return;var data=await api('/codes/delete',{code:code});if(data.ok){msg('✅ 已删除');allCodes=allCodes.filter(function(c){return c.code!==code;});updateStats();renderTable();}else{msg('❌ '+(data.error||'删除失败'),'error');}}
-    async function generateCodes(){var count=parseInt(document.getElementById('newCount').value)||5,days=parseInt(document.getElementById('newDays').value)||365;var codes=[],seen={};while(codes.length<count){var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',code='BBM-';for(var j=0;j<8;j++)code+=chars.charAt(Math.floor(Math.random()*chars.length));if(seen[code])continue;seen[code]=true;codes.push(code);}var data=await api('/codes/create',{codes:codes,days:days});if(data.ok){var es=data.expiresAt?new Date(data.expiresAt).toISOString().slice(0,10):'-';var html='✅ 成功生成 '+data.created+' 个激活码（跳过 '+(codes.length-data.created.length)+' 个重复）<br>有效期至: '+es+'<br><br>';for(var i=0;i<codes.length;i++)html+=' '+(i+1)+'. <strong>'+codes[i]+'</strong><br>';document.getElementById('codesOutput').innerHTML=html;document.getElementById('codesOutput').style.display='block';msg('✅ 已生成 '+data.created+' 个激活码！','success');loadCodes();}else{msg('❌ '+(data.error||'生成失败'),'error');}}
+    async function generateCodes(){var count=parseInt(document.getElementById('newCount').value)||5,days=parseInt(document.getElementById('newDays').value)||365;var codes=[],seen={};while(codes.length<count){var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',code='BBM-';for(var j=0;j<8;j++)code+=chars.charAt(Math.floor(Math.random()*chars.length));if(seen[code])continue;seen[code]=true;codes.push(code);}var data=await api('/codes/create',{codes:codes,days:days});if(data.ok){var es=data.expiresAt?new Date(data.expiresAt).toISOString().slice(0,10):'-';var html='✅ 成功生成 '+data.created+' 个激活码（跳过 '+(codes.length-data.created.length)+' 个重复）<br>有效期至: '+es+'<br><br>';for(var i=0;i<codes.length;i++)html+=' '+(i+1)+'. <strong>'+codes[i]+'</strong><br>';document.getElementById('codesOutput').innerHTML=html;document.getElementById('codesOutput').style.display='block';msg('✅ 已生成 '+data.created+' 个激活码！','success');loadCodes();syncCodesToGithub(data.created);}else{msg('❌ '+(data.error||'生成失败'),'error');}}
     function showGenerate(){document.getElementById('generateCard').style.display='block';document.getElementById('codesOutput').style.display='none';}
     function hideGenerate(){document.getElementById('generateCard').style.display='none';}
     function exportUnused(){var codes=[],now=new Date();allCodes.forEach(function(c){var ex=c.expiresAt&&new Date(c.expiresAt)<now;if(!ex&&c.devices===0)codes.push(c.code);});if(codes.length===0){msg('没有未使用的激活码','error');return;}copyText(codes.join('\n'),'✅ 已复制 '+codes.length+' 个未使用激活码到剪贴板');}
@@ -493,7 +502,89 @@ document.addEventListener('click',function(e){
   if(e.target.id==='confirmOverlay')closeConfirm();
 });
 
+
+// Auto-sync codes.js via GitHub API (token stored in localStorage as 'bbm_github_token')
+async function syncCodesToGithub(codes) {
+  var token = localStorage.getItem('bbm_github_token');
+  if (!token) { console.warn('[BBM] No GitHub token set. Go to 设置 → GitHub Token to configure.'); return false; }
+  var owner='jrzdgys',repo='bluebook-max',branch='main',path='codes.js';
+  try{
+    var g=await fetch('https://api.github.com/repos/'+owner+'/'+repo+'/contents/'+path+'?ref='+branch,{
+      headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github.v3+json'}
+    });
+    var gd=await g.json();
+    if(!gd.sha){console.warn('[BBM] Cannot get SHA');return false;}
+    var cc=atob(gd.content);
+    var nh='';
+    for(var i=0;i<codes.length;i++){
+      var enc=new TextEncoder(),d=enc.encode(codes[i]);
+      var buf=await crypto.subtle.digest('SHA-256',d);
+      var h=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+      nh+='  // '+codes[i]+'\n  "'+h+'",\n';
+    }
+    var lb=cc.lastIndexOf(']');
+    var up=cc.slice(0,lb)+'\n'+nh+cc.slice(lb);
+    var enc2=btoa(unescape(encodeURIComponent(up)));
+    var pr=await fetch('https://api.github.com/repos/'+owner+'/'+repo+'/contents/'+path,{
+      method:'PUT',
+      headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},
+      body:JSON.stringify({message:'auto: sync activation code hashes',content:enc2,sha:gd.sha,branch:branch})
+    });
+    var prd=await pr.json();
+    if(prd.content) console.log('[BBM] codes.js auto-synced!');
+    else console.warn('[BBM] Sync result:',prd);
+  }catch(e){console.error('[BBM] Sync error:',e);}
+}
+
+
+function showSettings(){document.getElementById('settingsCard').style.display='block';var t=localStorage.getItem('bbm_github_token')||'';document.getElementById('ghTokenInput').value=t;}
+function hideSettings(){document.getElementById('settingsCard').style.display='none';}
+function saveGithubToken(){var t=document.getElementById('ghTokenInput').value.trim();if(t){localStorage.setItem('bbm_github_token',t);msg('✅ Token已保存','success');hideSettings();}else{localStorage.removeItem('bbm_github_token');msg('✅ Token已清除','success');hideSettings();}}
+
 </script>
+    
+<div class="extend-popover" id="extendPopover">
+  <div class="extend-card" style="position:relative">
+    <button class="ext-close" onclick="closeExtend()">×</button>
+    <h3>⏱ 延期</h3>
+    <div class="ext-code" id="extCode">BBM-XXXXXXXX</div>
+    <div class="ext-current" id="extCurrent">当前到期：--</div>
+    <div class="ext-label">快捷延期</div>
+    <div class="ext-quick">
+      <button onclick="doExtend(30)">+30 天</button>
+      <button onclick="doExtend(90)">+90 天</button>
+      <button onclick="doExtend(365)">+365 天</button>
+    </div>
+    <div class="ext-label">自定义天数</div>
+    <div class="ext-custom">
+      <input type="number" id="extDays" value="30" min="1" max="3650" oninput="previewExtend()">
+      <span style="font-size:13px;color:#86868B">天</span>
+      <button class="btn-ext-apply" onclick="doExtend(null)">确认延期</button>
+    </div>
+    <div class="ext-preview" id="extPreview" style="display:none"></div>
+    <div id="extError" style="display:none;color:#C4433A;font-size:12px;margin-top:8px"></div>
+  </div>
+</div>
+
+
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-card">
+    <h3 id="confirmTitle">确认操作</h3>
+    <div class="confirm-msg" id="confirmMsg"></div>
+    <div class="confirm-codes" id="confirmCodes"></div>
+    <div class="confirm-input" id="confirmInputWrap" style="display:none">
+      <input type="text" id="confirmInput" placeholder="请输入「删除」确认" oninput="updateConfirmBtn()">
+    </div>
+    <div class="confirm-actions">
+      <button class="btn btn-xs" onclick="closeConfirm()" style="background:#f2f2f7;border:none;padding:8px 16px;border-radius:8px;cursor:pointer">取消</button>
+      <button class="btn btn-xs" id="confirmBtn" onclick="executeConfirm()" style="background:#C4433A;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;opacity:.5" disabled>确认</button>
+    </div>
+  </div>
+</div>
+
+</body>
+    </html>
+
     
 <div class="extend-popover" id="extendPopover">
   <div class="extend-card" style="position:relative">
