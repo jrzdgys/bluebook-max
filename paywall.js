@@ -142,7 +142,7 @@
         var parts = t.split('.');
         if (parts.length < 3) return false;
         var expires = parseInt(parts[2], 10);
-        if (isNaN(expires)) return false;
+        if (isNaN(expires)) { localStorage.removeItem(AUTH_KEY); localStorage.removeItem(FP_CACHE_KEY); localStorage.removeItem(EXPIRES_KEY); return false; }
         if (expires < Date.now() - 86400000 * 30) return false;
         if (expires < Date.now()) return false;
         return true;
