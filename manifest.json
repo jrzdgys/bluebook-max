@@ -1,6 +1,22 @@
 {
   "entries": [
     {
+      "file": "ev-20260630.html",
+      "edition": "ev",
+      "date": "2026-06-30",
+      "label": "晚间版",
+      "displayDate": "2026年6月30日",
+      "updateTime": "2026-06-30 20:06",
+      "stock_count": 160,
+      "stats": {
+        "topics": 22,
+        "opportunities": 2,
+        "avgHeat": 77,
+        "stocks": 160,
+        "crossCount": 10
+      }
+    },
+    {
       "date": "2026-06-30",
       "file": "pm-20260630.html",
       "edition": "pm",
