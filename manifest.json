@@ -2,6 +2,12 @@
   "entries": [
     {
       "date": "2026-06-30",
+      "file": "pm-20260630.html",
+      "edition": "pm",
+      "title": "蓝宝书Max·2026年6月30日 周二 午间版"
+    },
+    {
+      "date": "2026-06-30",
       "file": "gv-20260630.html",
       "edition": "gv",
       "title": "蓝宝书Max·2026年6月30日 周二 全球版"
@@ -385,6 +391,12 @@
   "last_updated": "2026-06-30T09:28:00+08:00",
   "total_reports": 25,
   "reports": [
+    {
+      "date": "2026-06-30",
+      "file": "pm-20260630.html",
+      "edition": "pm",
+      "title": "蓝宝书Max·2026年6月30日 周二 午间版"
+    },
     {
       "date": "2026-06-30",
       "file": "gv-20260630.html",
