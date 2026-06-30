@@ -149,9 +149,10 @@
       },
       getToken: function() { return localStorage.getItem(AUTH_KEY); },
       activate: function(code) {
-        return collectFingerprint().then(function(fpData) {
+        var fpPromise = window.__bbm_fp_cache ? Promise.resolve(window.__bbm_fp_cache) : collectFingerprint();
+        return fpPromise.then(function(fpData) {
           var controller = new AbortController();
-          var timeout = setTimeout(function() { controller.abort(); }, 30000);
+          var timeout = setTimeout(function() { controller.abort(); }, 8000);
           return fetch(WORKER_URL + '/activate', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: code.toUpperCase(), fp: fpData.hash, canvas: fpData.canvas, stable: fpData.stable, ua: fpData.ua }),
@@ -186,6 +187,8 @@
       showActivationModal: function(onSuccess) {
         var overlay = document.getElementById('auth-overlay');
         if (overlay) { overlay.style.display = 'flex'; var inp = document.getElementById('auth-code'); if (inp) setTimeout(function() { inp.focus(); }, 200); return; }
+        // Warm fingerprint cache
+        if (!window.__bbm_fp_warmed) { window.__bbm_fp_warmed = true; collectFingerprint().then(function(fp) { window.__bbm_fp_cache = fp; }); }
         this._createModal(onSuccess);
       },
       _createModal: function(onSuccess) {
