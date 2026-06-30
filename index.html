@@ -183,6 +183,14 @@ body{
 .week-cards{overflow:hidden;max-height:6000px;transition:max-height .35s ease}
 .week-cards .date-group{margin:0 18px 16px}
 .week-cards .date-group:first-child{margin-top:4px}
+.week-subgroup{margin:0 0 2px 0;border-radius:0;border:none;background:rgba(0,0,0,.02)}
+.week-sub-header{display:flex;align-items:center;gap:6px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:500;color:#86868B;user-select:none;transition:background .15s;border-radius:8px;margin:0 4px}
+.week-sub-header:hover{background:rgba(0,0,0,.04)}
+.week-sub-header .wsa{font-size:10px;color:#AEAEB2;flex-shrink:0}
+.week-sub-header .count{font-size:11px;font-weight:400;color:#AEAEB2;margin-left:auto}
+.week-sub-cards{overflow:hidden;transition:max-height .25s ease}
+.week-sub-cards .date-group{margin:0 18px 10px}
+.week-sub-cards .date-group:first-child{margin-top:2px}
 
 
 /* ===== Features ===== */
@@ -497,7 +505,8 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
 
 (function loadReports() {
   function getWeekInfo(dateStr) {
-    var y=parseInt(dateStr.slice(0,4),10),m=parseInt(dateStr.slice(4,6),10)-1,d=parseInt(dateStr.slice(6,8),10);
+    var s=dateStr.replace(/-/g,"");
+    var y=parseInt(s.slice(0,4),10),m=parseInt(s.slice(4,6),10)-1,d=parseInt(s.slice(6,8),10);
     var dt=new Date(y,m,d);
     var dn=(dt.getDay()+6)%7;dt.setDate(dt.getDate()-dn+3);
     var j4=new Date(dt.getFullYear(),0,4);
@@ -506,7 +515,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   }
   function fmtRange(keys) {
     if(!keys||!keys.length)return'';
-    var f=keys[0],l=keys[keys.length-1];
+    var f=keys[0].replace(/-/g,''),l=keys[keys.length-1].replace(/-/g,'');
     return f.slice(4,6)+'/'+f.slice(6,8)+'-'+l.slice(4,6)+'/'+l.slice(6,8);
   }
   function wkLabel(wk,info) {
@@ -520,8 +529,9 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   }
   fetch('manifest.json?'+Date.now()).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();})
   .then(function(mf){
-    var rps=(mf.entries||mf.reports||[]).filter(function(r){return r.date!=='test';})
-      .sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
+    var rps=(mf.entries||mf.reports||[]).filter(function(r){return r.date!=='test';}).map(function(r){
+      if(r.date)r.date=r.date.replace(/-/g,'');return r;
+    }).sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
     document.getElementById('stat-reports').textContent=rps.length||'\u2014';
     // stock count will be calculated after tR population
     var isAuth=Paywall.isAuthenticated();
@@ -539,7 +549,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
     var edOrd={gv:0,mc:1,pm:2,ev:3};
     function getTodayCST(){var n=new Date(),o=480*60000,c=new Date(n.getTime()+o);return c.toISOString().slice(0,10).replace(/-/g,"")}var today=getTodayCST();;
     // Compute free article = previous day's evening edition
-    function getPrevDate(d){var y=parseInt(d.slice(0,4),10),m=parseInt(d.slice(4,6),10)-1,dd=parseInt(d.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,'0')+String(dt.getDate()).padStart(2,'0');}
+    function getPrevDate(d){var s=d.replace(/-/g,'');var y=parseInt(s.slice(0,4),10),m=parseInt(s.slice(4,6),10)-1,dd=parseInt(s.slice(6,8),10);var dt=new Date(y,m,dd);dt.setDate(dt.getDate()-1);return dt.getFullYear()+String(dt.getMonth()+1).padStart(2,'0')+String(dt.getDate()).padStart(2,'0');}
     var freeEvFile='ev-'+getPrevDate(today)+'.html';
     var freeEvFound=false;
     var tR=[],wM={};
@@ -575,10 +585,9 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       wkKeys.forEach(function(wk){
         var inf=wM[wk];
         if(wk===cw.key||wk===lw){
-          var dk=Object.keys(inf.dates).sort(),isCW=(wk===cw.key),col=!isCW;
-          h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">'+(col?'\u25b8':'\u25be')+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
-            '<div class="week-cards" style="max-height:'+(col?'0px':'6000px')+'">';
           var dg={};
+          h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">\u25be</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
+            '<div class="week-cards" style="max-height:6000px">';
           inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
           Object.keys(dg).sort().reverse().forEach(function(dk){
             var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
@@ -593,19 +602,37 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
           inf.items.forEach(function(it){earlierItems.push(it);});
         }
       });
-      // Render "更早" group if there are earlier items
+      // Render "更早" group if there are earlier items - with week sub-groups
       if(earlierItems.length){
-        h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">\u25b8</span><span class="week-label">\u66f4\u65e9</span><span class="count">'+earlierItems.length+'\u4efd</span></div>'+
+        var totalEarlier=earlierItems.length;
+        h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">\u25b8</span><span class="week-label">\u66f4\u65e9</span><span class="count">'+totalEarlier+'\u4efd</span></div>'+
           '<div class="week-cards" style="max-height:0px">';
-        // Group earlier items by date
-        var edg={};
-        earlierItems.forEach(function(it){var d=it.r.date||'unknown';if(!edg[d])edg[d]=[];edg[d].push(it);});
-        Object.keys(edg).sort().reverse().forEach(function(dk){
-          var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
-          var dayNames=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];var dtObjH=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;var dd=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames[(dtObjH?dtObjH.getDay():0)]:dk;
-          h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd+'<span class="count">'+edg[dk].length+'\u4efd</span></div><div class="reports-grid">'+
-            edg[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
-            .map(function(it){return renderCard(it.r,it.r.file===freeEvFile,isAuth,edLbl);}).join('')+'</div></div>';
+        // Group earlier items by week, then by date
+        var ewM={};
+        earlierItems.forEach(function(it){
+          var wk2=getWeekInfo(it.r.date);
+          if(!ewM[wk2.key])ewM[wk2.key]={items:[],key:wk2.key,year:wk2.year,week:wk2.week};
+          ewM[wk2.key].items.push(it);
+        });
+        var ewKeys=Object.keys(ewM).sort(function(a,b){return(ewM[b].year*100+ewM[b].week)-(ewM[a].year*100+ewM[a].week);});
+        ewKeys.forEach(function(wk2){
+          var inf2=ewM[wk2];
+          var label2=inf2.year+'\u5e74\u7b2c'+wk2.slice(1)+'\u5468';
+          h+='<div class="week-subgroup"><div class="week-sub-header" onclick="void(function(el){var b=el.nextElementSibling;if(!b.style.maxHeight||b.style.maxHeight===\'0px\'||b.style.maxHeight===\'0\'){b.style.maxHeight=b.scrollHeight+\'px\';el.querySelector(\'.wsa\').textContent=\'\u25be\'}else{b.style.maxHeight=\'0\';el.querySelector(\'.wsa\').textContent=\'\u25b8\'}}(this))">'+
+            '<span class="wsa">\u25b8</span><span class="week-label">'+label2+'</span><span class="count">'+inf2.items.length+'\u4efd</span></div>'+
+            '<div class="week-sub-cards" style="max-height:0px;overflow:hidden">';
+          var sdg2={};
+          inf2.items.forEach(function(it){var d=it.r.date||'unknown';if(!sdg2[d])sdg2[d]=[];sdg2[d].push(it);});
+          Object.keys(sdg2).sort().reverse().forEach(function(dk){
+            var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
+            var dayNames2=['\u5468\u65e5','\u5468\u4e00','\u5468\u4e8c','\u5468\u4e09','\u5468\u56db','\u5468\u4e94','\u5468\u516d'];
+            var dtObj2=dp?new Date(parseInt(dp[1]),parseInt(dp[2])-1,parseInt(dp[3])):null;
+            var dd2=dp?dp[1]+'\u5e74'+dp[2]+'\u6708'+dp[3]+'\u65e5 '+dayNames2[(dtObj2?dtObj2.getDay():0)]:dk;
+            h+='<div class="date-group"><div class="date-label"><span class="dot" style="background:#AEAEB2"></span>'+dd2+'<span class="count">'+sdg2[dk].length+'\u4efd</span></div><div class="reports-grid">'+
+              sdg2[dk].sort(function(a,b){return(edOrd[a.r.edition]!=null?edOrd[a.r.edition]:99)-(edOrd[b.r.edition]!=null?edOrd[b.r.edition]:99);})
+              .map(function(it){return renderCard(it.r,it.r.file===freeEvFile,isAuth,edLbl);}).join('')+'</div></div>';
+          });
+          h+='</div></div>';
         });
         h+='</div></div>';
       }
