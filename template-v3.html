@@ -16,12 +16,20 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
 .w{max-width:900px;margin:0 auto}
-.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+.sh{background:#0071E3;color:#fff;padding:28px 28px 20px;border-radius:0}
 .sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
 .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
-.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
-.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}.sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}.sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
+.float-bar{position:sticky;top:0;z-index:101;height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#0071E3;border-bottom:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;transition:box-shadow .2s}
+.float-bar .fb-left{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.float-bar .fb-right{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.85);white-space:nowrap}
+.member-notice{padding:6px 28px;font-size:12px;color:rgba(255,255,255,.75);background:rgba(255,255,255,.06);text-align:center;letter-spacing:0.3px}
+.member-notice a{display:inline-block;padding:1px 10px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;font-size:12px;text-decoration:none;white-space:nowrap;vertical-align:middle;cursor:pointer}.member-notice a:hover{background:rgba(255,255,255,.25)}
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:0 28px 14px;font-size:13px;color:rgba(255,255,255,.78)}
+.info-row .info-right{color:rgba(255,255,255,.78)}
+
+.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}.sh h1 .brand-dot{font-size:20px;font-weight:300;opacity:.65;margin:0 2px}.sh h1 .brand-slogan{font-size:20px;font-weight:800;opacity:1;letter-spacing:1.5px}
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
 .stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
@@ -116,10 +124,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
 .fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
 .fo .fo-email{color:#AEAEB2}
-.member-badge{font-size:10px;padding:3px 12px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap;letter-spacing:0.5px;border:1px solid rgba(255,255,255,.25)}
-.header-sub-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 18px;border-radius:20px;background:#007AFF;color:#fff!important;font-weight:700;font-size:12px;box-shadow:0 3px 12px rgba(0,122,255,.4);transition:all .2s;text-decoration:none;white-space:nowrap}
-.header-sub-btn:hover{background:#0066D6;transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,122,255,.5)}
-@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .brand-slogan{font-size:11px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.fo .fo-line1{font-size:10px}.fo .fo-line2{font-size:9px}.fo .fo-line3{gap:8px;flex-direction:column}.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}.member-badge{font-size:9px;padding:2px 8px}.header-sub-btn{font-size:10px;padding:4px 10px}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}.stats-row .st strong{font-size:20px}.stats-row .st span{font-size:10px}}
+@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 14px}.sh h1{font-size:22px;flex-wrap:nowrap;gap:6px}.sh h1 .brand-slogan{font-size:18px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.tc{padding:14px 12px}.tc-name{font-size:13px}.tc-quote{font-size:11px;padding:8px 10px}.sr{flex-wrap:wrap;padding:5px 4px;gap:4px}.sr .sn{min-width:auto;font-size:12px}.sr .sc{font-size:9px}.sr .sp{font-size:11px;min-width:auto}.sr .spp{font-size:11px;min-width:auto}.sr .sr2{flex:0 0 100%;width:100%;text-align:left;margin-top:2px;font-size:10px;white-space:normal;word-break:break-all;overflow-wrap:break-word}.sc-body{padding:10px 12px}.hp{max-width:300px;padding:14px 16px;width:88vw}.fo{padding:14px 10px}.fo .fo-line1{font-size:10px}.fo .fo-line2{font-size:9px}.fo .fo-line3{gap:8px;flex-direction:column}.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}.rs-row{flex-wrap:wrap;gap:4px}.rs-row .rs-sn{min-width:auto;font-size:12px}.rs-row .rs-sc{font-size:9px}.rs-row .rs-sp{font-size:11px;min-width:auto}.rs-row .rs-spp{font-size:11px;min-width:auto}.rs-row .rs-occs{min-width:auto;width:100%;margin-top:2px}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}.stats-row .st strong{font-size:20px}.stats-row .st span{font-size:10px.float-bar{height:36px;padding:0 12px}.float-bar .fb-left{font-size:12px}.float-bar .fb-right{font-size:11px}.member-notice{padding:5px 14px;font-size:12px}.info-row{padding:0 14px 10px;flex-wrap:wrap;gap:4px;font-size:12px;color:rgba(255,255,255,.78)}}}
 .export-wrap{position:relative;display:inline-block;margin-top:10px}
 .export-btn-st{cursor:pointer;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);padding:8px 14px;border-radius:10px;transition:background .15s;border:none;color:#fff;font-family:inherit}
 .export-btn-st:hover{background:rgba(255,255,255,.15)}
@@ -138,10 +143,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 </head>
 <body>
 <div class="w">
+<div class="float-bar" id="float-bar">
+<span class="fb-left">
+<span class="fb-brand">蓝宝书Max</span><span class="fb-sep"> · </span><span class="fb-info" id="fb-info"></span>
+</span>
+<span class="fb-right">
+<span class="live-dot" id="live-dot"></span><span id="live-text">加载中</span>
+</span>
+</div>
 <div class="sh">
-<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span><a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="header-sub-btn">💡 立即订阅 →</a></div>
-<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
-<div class="live-row"><span class="live-dot closed" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新 ...</span></div>
+<div class="member-notice">🔒 本报告仅供付费会员查阅  ·  新用户订阅 · <a href="https://t.zsxq.com/6iVvp" target="_blank">知识星球</a></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span></h1>
+<div class="info-row"><span class="info-left">商务合作 · 微信：bluebookmax</span><span class="info-right" id="update-time">更新 ...</span></div>
 <div class="stats-row">
 <div class="st"><strong id="stat-topics">—</strong><span>全部主题</span></div>
 <div class="st"><strong id="stat-opp">—</strong><span>机会前瞻</span></div>
@@ -225,10 +238,9 @@ function iM(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"As
 function iT(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"})),h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(!iM())return false;return t>=570&&t<900}
 function ts(){return new Date().toLocaleString("zh-CN",{timeZone:"Asia/Shanghai",hour:"2-digit",minute:"2-digit",second:"2-digit"})}
 document.title="蓝宝书Max · "+ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" "+ED.edition.label;
-document.getElementById("header-date").textContent=ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay());
+document.getElementById("fb-info").textContent=ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" · "+ED.edition.label;
 var ec=ED.edition.type,ebg=ec==="mc"?"rgba(255,149,0,.15)":ec==="pm"?"rgba(212,155,0,.15)":ec==="ev"?"rgba(175,82,222,.15)":"rgba(48,180,110,.15)",ecr=ec==="mc"?"#FF9500":ec==="pm"?"#D49B00":ec==="ev"?"#AF52DE":"#30B46E",ei=ec==="mc"?"🌅":ec==="pm"?"☀️":ec==="ev"?"🌙":"🌍";
-var hde=document.getElementById("header-edition");hde.textContent=ei+" "+ED.edition.label;hde.style.background=ebg;hde.style.color=ecr;
-var u=ED.edition.updateTime||"",tp=u.split(" ");document.getElementById("update-time").textContent="更新于 · "+ED.edition.dateDisplay+" "+(tp[1]||"");
+var u=ED.edition.updateTime||"",tp=u.split(" ");document.getElementById("update-time").textContent="更新于 "+(tp[1]||"");
 document.getElementById("stat-topics").textContent=ED.stats.topics;
 document.getElementById("stat-avgheat").textContent=ED.stats.avgHeat;
 document.getElementById("stat-stocks").textContent=ED.stats.stocks;
@@ -259,15 +271,18 @@ document.querySelectorAll(".tc-info").forEach(function(el){el.addEventListener("
 document.getElementById("hp-overlay").addEventListener("click",hp);
 
 // Live refresh
-async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u="https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14,f18&secids="+as.join(",")+"&_="+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll(".sr[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".sp"),spp=r.querySelector(".spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==null&&pr!==0)sp.textContent=pr.toFixed(2);else if(sp&&sp.textContent&&sp.textContent.includes("NaN"))sp.textContent="--";if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="sp"+cl;spp.className="spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});document.querySelectorAll(".rs-row[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".rs-sp"),spp=r.querySelector(".rs-spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==null&&pr!==0)sp.textContent=pr.toFixed(2);else if(sp&&sp.textContent&&sp.textContent.includes("NaN"))sp.textContent="--";if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="rs-sp"+cl;spp.className="rs-spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});var d2=document.getElementById("live-dot"),t2=document.getElementById("live-text");if(d2&&t2){if(iT()){d2.className="live-dot live";t2.textContent="盘中 · "+ts()}else if(iM()){d2.className="live-dot after-hours";t2.textContent="盘后 · "+ts()}else{d2.className="live-dot closed";t2.textContent="非交易日 · "+ts()}}}catch(e){}}
+async function fq(){var as=[],sn={};Object.values(ED.secidMap).forEach(function(s){if(!sn[s]){sn[s]=1;as.push(s)}});if(!as.length)return;try{var u="https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f12,f14,f18&secids="+as.join(",")+"&_="+Date.now();var r=await fetch(u);var j=await r.json();if(!j.data||!j.data.diff)return;var pm={};j.data.diff.forEach(function(d){pm[d.f12]={pct:d.f3,price:d.f2}});document.querySelectorAll(".sr[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".sp"),spp=r.querySelector(".spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==null&&pr!==0)sp.textContent=pr.toFixed(2);else if(sp&&sp.textContent&&sp.textContent.includes("NaN"))sp.textContent="--";if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="sp"+cl;spp.className="spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});document.querySelectorAll(".rs-row[data-secid]").forEach(function(r){var si=r.dataset.secid,sc=si.split(".")[1],d=pm[sc]||pm[si];if(!d)return;var sp=r.querySelector(".rs-sp"),spp=r.querySelector(".rs-spp"),be=r.querySelector(".pct-bar");var pr=parseFloat(d.price),pc=parseFloat(d.pct);if(!isNaN(pr)&&pr!==null&&pr!==0)sp.textContent=pr.toFixed(2);else if(sp&&sp.textContent&&sp.textContent.includes("NaN"))sp.textContent="--";if(!isNaN(pc)){var cl=pc>=0?" up":" dn";sp.className="rs-sp"+cl;spp.className="rs-spp"+cl;spp.textContent=(pc>=0?"+":"")+pc.toFixed(2)+"%";if(be)be.className="pct-bar "+(pc>=0?"up":"dn")}});var d2=document.getElementById("live-dot"),t2=document.getElementById("live-text");if(d2&&t2){if(iT()){d2.className="live-dot live";t2.textContent="盘中 · "+ts()}else{d2.className="live-dot after-hours";t2.textContent="✓ 当日已收盘"}}}catch(e){}}
 fq();var ti=null;function sp2(){if(ti)return;if(iT()){ti=setInterval(function(){if(iT())fq();else{clearInterval(ti);ti=null}},5000)}}sp2();setInterval(sp2,30000);
-setInterval(function(){var d2=document.getElementById("live-dot"),t2=document.getElementById("live-text");if(d2&&t2){if(iT()){d2.className="live-dot live";t2.textContent="盘中 · "+ts()}else if(iM()){d2.className="live-dot after-hours";t2.textContent="盘后 · "+ts()}else{d2.className="live-dot closed";t2.textContent="非交易日 · "+ts()}}},1000);
+setInterval(function(){var d2=document.getElementById("live-dot"),t2=document.getElementById("live-text");if(d2&&t2){if(iT()){d2.className="live-dot live";t2.textContent="盘中 · "+ts()}else{d2.className="live-dot after-hours";t2.textContent="✓ 当日已收盘"}}},1000);
 // Export watchlist
 function toggleExport(){document.getElementById("export-modal").style.display="block";document.getElementById("export-overlay").style.display="block"}
 function closeExport(){document.getElementById("export-modal").style.display="none";document.getElementById("export-overlay").style.display="none"}
 function exportWatchlist(fmt){try{var cm={};Object.entries(ED.secidMap).forEach(function(e){var c=e[1].split(".")[1];if(!cm[c])cm[c]=[];cm[c].push(e[0])});var codes=Object.keys(cm).sort();var ct;if(fmt==="em"){ct=codes.join("\n")}else{ct=codes.map(function(c){return c+","+cm[c].join("·")}).join("\n")}var dt2=ED.edition.date,dp2=dt2.split("-"),y2=dp2[0],m2=dp2[1],d2=dp2[2],dw2=gwd(new Date(dt2+"T12:00:00+08:00").getDay()),vl2=ED.edition.label,fn="蓝宝书Max自选股_"+y2+"年"+m2+"月"+d2+"日_"+dw2+"_"+vl2+".txt";var du="data:text/plain;charset=utf-8,"+encodeURIComponent(ct);var a=document.createElement("a");a.setAttribute("href",du);a.setAttribute("download",fn);a.style.position="fixed";a.style.left="-9999px";a.style.top="0";document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a)},2000)}catch(e){alert("导出失败，请使用下方📋复制代码按钮");console.error(e)}}
 function copyWatchlist(){var cm={};Object.entries(ED.secidMap).forEach(function(e){var c=e[1].split(".")[1];if(!cm[c])cm[c]=[];cm[c].push(e[0])});var codes=Object.keys(cm).sort();var ct=codes.join("\n");navigator.clipboard.writeText(ct).then(function(){var b=document.querySelector(".em-btn-copy");if(b){var orig=b.innerHTML;b.innerHTML="<strong>✅ 已复制</strong><span>"+codes.length+"个代码已复制到剪贴板</span>";setTimeout(function(){b.innerHTML=orig},2000)}}).catch(function(){alert("复制失败，请手动选择文本框内容")})}
 document.getElementById("export-overlay").addEventListener("click",closeExport);
+
+// Floating header shadow
+(function(){var fb=document.getElementById("float-bar");if(fb){window.addEventListener("scroll",function(){if(window.scrollY>10){fb.style.boxShadow="0 2px 12px rgba(0,0,0,.15)"}else{fb.style.boxShadow="none"}})}})();
 </script>
 </body>
 </html>
