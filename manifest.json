@@ -1,223 +1,364 @@
 {
-  "name": "蓝宝书Max",
-  "description": "Alpha派蓝宝书热点自动抓取与分析报告",
-  "last_updated": "2026-06-29T08:02:00+08:00",
-  "updated": "2026-06-29T08:02:00.000Z",
-  "total_reports": 24,
-  "reports": [
-    {
-      "file": "gv-20260629.html",
-      "edition": "gv",
-      "label": "全球版",
-      "date": "20260629",
-      "date_display": "2026年06月29日",
-      "title": "蓝宝书Max 全球版 - 2026年06月29日",
-      "stock_count": 39
-    },
+  "entries": [
     {
       "file": "ev-20260629.html",
       "edition": "ev",
-      "date": "20260629",
-      "title": "蓝宝书Max报告",
-      "stock_count": 139
+      "date": "2026-06-29",
+      "label": "晚间版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260629.html",
       "edition": "pm",
+      "date": "2026-06-29",
       "label": "午间版",
-      "date": "20260629",
-      "date_display": "2026年06月29日",
-      "title": "蓝宝书Max 午间版 - 2026年06月29日",
-      "stock_count": 73
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "mc-20260629.html",
       "edition": "mc",
+      "date": "2026-06-29",
       "label": "晨会版",
-      "date": "20260629",
-      "date_display": "2026年06月29日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月29日",
-      "stock_count": 124
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260629.html",
+      "edition": "gv",
+      "date": "2026-06-29",
+      "label": "全球版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260628.html",
       "edition": "ev",
+      "date": "2026-06-28",
       "label": "晚间版",
-      "date": "20260628",
-      "date_display": "2026年06月28日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月28日",
-      "stock_count": 135
+      "displayDate": "2026年6月28日",
+      "updateTime": "2026-06-28 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260627.html",
       "edition": "ev",
+      "date": "2026-06-27",
       "label": "晚间版",
-      "date": "20260627",
-      "date_display": "2026年06月27日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月27日",
-      "stock_count": 91
+      "displayDate": "2026年6月27日",
+      "updateTime": "2026-06-27 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260626.html",
       "edition": "ev",
+      "date": "2026-06-26",
       "label": "晚间版",
-      "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月26日",
-      "stock_count": 21
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260626.html",
       "edition": "pm",
+      "date": "2026-06-26",
       "label": "午间版",
-      "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 午间版 - 2026年06月26日",
-      "stock_count": 20
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "mc-20260626.html",
       "edition": "mc",
+      "date": "2026-06-26",
       "label": "晨会版",
-      "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月26日",
-      "stock_count": 103
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "gv-20260626.html",
       "edition": "gv",
+      "date": "2026-06-26",
       "label": "全球版",
-      "date": "20260626",
-      "date_display": "2026年06月26日",
-      "title": "蓝宝书Max 全球版 - 2026年06月26日",
-      "stock_count": 29
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260625.html",
       "edition": "ev",
+      "date": "2026-06-25",
       "label": "晚间版",
-      "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月25日",
-      "stock_count": 139
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260625.html",
       "edition": "pm",
+      "date": "2026-06-25",
       "label": "午间版",
-      "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 午间版 - 2026年06月25日",
-      "stock_count": 66
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "mc-20260625.html",
       "edition": "mc",
+      "date": "2026-06-25",
       "label": "晨会版",
-      "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月25日",
-      "stock_count": 132
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "gv-20260625.html",
       "edition": "gv",
+      "date": "2026-06-25",
       "label": "全球版",
-      "date": "20260625",
-      "date_display": "2026年06月25日",
-      "title": "蓝宝书Max 全球版 - 2026年06月25日",
-      "stock_count": 47
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260624.html",
       "edition": "ev",
+      "date": "2026-06-24",
       "label": "晚间版",
-      "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月24日",
-      "stock_count": 118
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260624.html",
       "edition": "pm",
+      "date": "2026-06-24",
       "label": "午间版",
-      "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 午间版 - 2026年06月24日",
-      "stock_count": 0
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "mc-20260624.html",
       "edition": "mc",
+      "date": "2026-06-24",
       "label": "晨会版",
-      "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月24日",
-      "stock_count": 0
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "gv-20260624.html",
       "edition": "gv",
+      "date": "2026-06-24",
       "label": "全球版",
-      "date": "20260624",
-      "date_display": "2026年06月24日",
-      "title": "蓝宝书Max 全球版 - 2026年06月24日",
-      "stock_count": 0
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260623.html",
       "edition": "ev",
+      "date": "2026-06-23",
       "label": "晚间版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月23日",
-      "stock_count": 0
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260623.html",
       "edition": "pm",
+      "date": "2026-06-23",
       "label": "午间版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 午间版 - 2026年06月23日",
-      "stock_count": 0
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "mc-20260623.html",
       "edition": "mc",
+      "date": "2026-06-23",
       "label": "晨会版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 晨会版 - 2026年06月23日",
-      "stock_count": 0
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "gv-20260623.html",
       "edition": "gv",
+      "date": "2026-06-23",
       "label": "全球版",
-      "date": "20260623",
-      "date_display": "2026年06月23日",
-      "title": "蓝宝书Max 全球版 - 2026年06月23日",
-      "stock_count": 0
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "ev-20260622.html",
       "edition": "ev",
+      "date": "2026-06-22",
       "label": "晚间版",
-      "date": "20260622",
-      "date_display": "2026年06月22日",
-      "title": "蓝宝书Max 晚间版 - 2026年06月22日",
-      "stock_count": 0
+      "displayDate": "2026年6月22日",
+      "updateTime": "2026-06-22 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     },
     {
       "file": "pm-20260621.html",
       "edition": "pm",
+      "date": "2026-06-21",
       "label": "午间版",
-      "date": "20260621",
-      "date_display": "2026年06月21日",
-      "title": "蓝宝书Max 午间版 - 2026年06月21日",
-      "stock_count": 0
+      "displayDate": "2026年6月21日",
+      "updateTime": "2026-06-21 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
     }
   ]
 }
