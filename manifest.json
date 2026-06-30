@@ -793,6 +793,15 @@
         "stocks": 100,
         "crossCount": 5
       }
+    },
+    {
+      "file": "mc-20260701.html",
+      "edition": "mc",
+      "label": "晨会版",
+      "date": "20260701",
+      "date_display": "2026年07月01日",
+      "title": "蓝宝书Max 晨会版 - 2026年07月01日",
+      "stock_count": 125
     }
   ]
 }
