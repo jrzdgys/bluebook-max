@@ -180,7 +180,7 @@ body{
 .week-header:hover{background:rgba(0,0,0,.03)}
 .week-header .week-arrow{font-size:12px;color:#AEAEB2;flex-shrink:0}
 .week-header .count{font-size:12px;font-weight:400;color:#AEAEB2;margin-left:auto}
-.week-cards{overflow:hidden;max-height:0;transition:max-height .35s ease}.week-cards.open{max-height:6000px!important}
+.week-cards{overflow:hidden;max-height:6000px;transition:max-height .35s ease}.week-cards.open{max-height:6000px!important}
 .week-cards .date-group{margin:0 18px 16px}
 .week-cards .date-group:first-child{margin-top:4px}
 .week-subgroup{margin:0 0 2px 0;border-radius:0;border:none;background:rgba(0,0,0,.02)}
@@ -588,7 +588,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
           var dg={};
           var isThis=(wk===cw.key);var wkArr=isThis?'\u25be':'\u25b8';var wkMax=isThis?'6000px':'0px';var wkDataC=isThis?'':' data-c="1"';
           h+='<div class="week-group"><div class="week-header"'+wkDataC+' onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.classList.add(\'open\');}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.classList.remove(\'open\');}}(this))"><span class="week-arrow">'+wkArr+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
-            '<div class="week-cards" class="week-cards"+((typeof isThis!=='undefined'&&isThis)?' open':'')>';
+            '<div class="week-cards" style="max-height:'+wkMax+'">';
           inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
           Object.keys(dg).sort().reverse().forEach(function(dk){
             var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
@@ -607,7 +607,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       if(earlierItems.length){
         var totalEarlier=earlierItems.length;
         h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.classList.add(\'open\');}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.classList.remove(\'open\');}}(this))"><span class="week-arrow">\u25b8</span><span class="week-label">\u66f4\u65e9</span><span class="count">'+totalEarlier+'\u4efd</span></div>'+
-          '<div class="week-cards" class="week-cards">';
+          '<div class="week-cards" style="max-height:0px">';
         // Group earlier items by week, then by date
         var ewM={};
         earlierItems.forEach(function(it){
