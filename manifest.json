@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "file": "mc-20260630.html",
+      "edition": "mc",
+      "date": "2026-06-30",
+      "label": "晨会版",
+      "displayDate": "2026年6月30日",
+      "updateTime": "2026-06-30 07:06",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 73,
+        "stocks": 147,
+        "crossCount": 23
+      }
+    },
+    {
       "file": "ev-20260629.html",
       "edition": "ev",
       "date": "2026-06-29",
@@ -360,5 +375,7 @@
         "crossCount": 5
       }
     }
-  ]
+  ],
+  "last_updated": "2026-06-30T09:28:00+08:00",
+  "total_reports": 25
 }
