@@ -520,7 +520,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   }
   fetch('manifest.json?'+Date.now()).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();})
   .then(function(mf){
-    var rps=(mf.reports||[]).filter(function(r){return r.date!=='test';})
+    var rps=(mf.entries||mf.reports||[]).filter(function(r){return r.date!=='test';})
       .sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
     document.getElementById('stat-reports').textContent=rps.length||'\u2014';
     // stock count will be calculated after tR population
