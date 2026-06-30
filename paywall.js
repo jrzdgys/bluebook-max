@@ -233,6 +233,20 @@
         var date = Paywall.getExpiryDate(); if (!date) return '';
         return date.getFullYear() + '/' + String(date.getMonth()+1).padStart(2,'0') + '/' + String(date.getDate()).padStart(2,'0');
       },
+      refreshExpiryFromWorker: function() {
+        var t = localStorage.getItem(AUTH_KEY);
+        if (!t) return Promise.resolve(null);
+        return fetch(WORKER_URL + '/verify', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: t })
+        }).then(function(r) { return r.json(); }).then(function(d) {
+          if (d.ok && d.data && d.data.expiresAt) {
+            var e = typeof d.data.expiresAt === 'string' ? new Date(d.data.expiresAt).getTime() : (d.data.expiresAt || 0);
+            if (e) { localStorage.setItem(EXPIRES_KEY, String(e)); return new Date(e).toISOString().slice(0, 10); }
+          }
+          return Paywall.getExpiryDate() ? Paywall.getExpiryDate().toISOString().slice(0, 10) : null;
+        }).catch(function() { return Paywall.getExpiryDate() ? Paywall.getExpiryDate().toISOString().slice(0, 10) : null; });
+      },
       unlockBadge: function() {
         var expiry = Paywall.formatExpiry();
         var text = expiry ? '已订阅 · 有效期至 ' + expiry : '已订阅';

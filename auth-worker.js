@@ -88,7 +88,7 @@ async function handleVerify(body) {
       cursor = result.cursor;
     } while (cursor && !found);
   } catch (e) {}
-  return found ? json({ ok: true, code: found }) : json({ ok: false, error: '未找到匹配的激活码' });
+  return found ? json({ ok: true, code: found, data: JSON.parse(await AUTH_CODES.get(found) || '{}') }) : json({ ok: false, error: '未找到匹配的激活码' });
 }
 
 function handleUnbind(body) {

@@ -573,7 +573,8 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot"></span>\u6700\u65b0<span class="count">1\u4efd</span></div><div class="reports-grid">'+
         renderCard(rps[0],rps[0].file===freeEvFile,isAuth,edLbl)+'</div></div>';
     }
-    document.getElementById('report-count').textContent='\u5171 '+rps.length+' \u4efd';
+    Paywall.refreshExpiryFromWorker().then(function(e){if(e){document.querySelectorAll('.unlock-badge').forEach(function(el){var txt=el.textContent;if(txt.indexOf('有效期')>=0)el.textContent='已订阅 · 有效期至 '+e;});var nb=document.getElementById('auth-badge');if(nb){nb.textContent='已订阅 · 有效期至 '+e;}}});
+        document.getElementById('report-count').textContent='\u5171 '+rps.length+' \u4efd';
         var wkKeys=Object.keys(wM).sort(function(a,b){return(wM[b].year*100+wM[b].week)-(wM[a].year*100+wM[a].week);});
     var cw=getWeekInfo(today);
     var lw='W'+String(cw.week-1<=0?52:cw.week-1).padStart(2,'0');
