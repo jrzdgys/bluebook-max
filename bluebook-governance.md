@@ -30,7 +30,8 @@
 ### 1.4 文件命名规范
 - 报告文件：`{版型代码}-{YYYYMMDD}.html`（mc=晨会版, pm=午间版, ev=晚间版, gv=全球版）
 - 导航页：`index.html`
-- 测试版：文件名加 `-test` 后缀（如 `index-test.html`、`mc-20260630-test.html`）
+- 测试版（仅当商讨升级/迭代模板时使用）：文件名加 `-test` 后缀
+- 日常报告生成直接出正式版，不走测试版流程
 
 ### 1.5 Worker 鉴权逻辑
 - expiresAt 类型安全转换（ISO字符串 → 时间戳）
@@ -64,7 +65,6 @@ ED JSON → 注入 template-v3.html → 替换静态 title/og:title → 推送
 ### 2.4 HTML/JS 操作规范
 - JS 字符串拼接中的引号转义注意：`\'` 在 JS 单引号字符串内是转义的单引号，在表达式上下文是语法错误
 - 若需条件渲染 HTML 属性，使用**变量预定义**方式而非内联三元（避免转义问题）
-- 修改 index.html 后同时同步修改 index-test.html（反之亦然）
 
 ---
 
@@ -97,12 +97,12 @@ ED JSON → 注入 template-v3.html → 替换静态 title/og:title → 推送
 
 ### 4.1 标准工作流
 ```
-需求分析 → 先改测试版（*-test） → 验证通过 → 同步到正式版 → 推送GitHub
+日常报告 → 直接生成正式版 → 推送GitHub
+升级/迭代模板 → 生成测试版 → 验证通过 → 同步到正式版
 ```
 
 ### 4.2 提交规范
 - 提交信息清晰描述变更内容
-- 测试版和正式版的同步修改放在同一个 commit
 
 ---
 
@@ -111,27 +111,18 @@ ED JSON → 注入 template-v3.html → 替换静态 title/og:title → 推送
 ### 常用路径
 | 用途 | 路径 |
 |------|------|
-| 导航页（正式） | `index.html` |
-| 导航页（测试） | `index-test.html` |
-| 报告模板（正式） | `template-v3.html` |
-| 报告模板（测试） | `template-v3-test.html` |
+| 导航页 | `index.html` |
+| 报告模板 | `template-v3.html` |
 | 鉴权 Worker | `auth-worker.js` |
 | 前端鉴权 | `paywall.js` |
 | 激活码管理 | `codes.js` + `admin.html` |
 | 报告清单 | `manifest.json` |
 
-### 测试版 → 正式版同步检查清单
-- [ ] 测试版新增的 CSS 规则是否全部迁移
-- [ ] 测试版新增的 JS 逻辑是否全部迁移
-- [ ] 测试版新增的 HTML 结构是否全部迁移
-- [ ] 测试版的测试相关标记（badge/notice）是否**未**迁移到正式版
-- [ ] 正式版的 title/og:title 是否保持生产环境名称
-
 ### 历史踩坑记录
 | 问题 | 原因 | 修复 |
 |------|------|------|
 | Worker token 过期 NaN | expiresAt 存 ISO 字符串，Math.max(string, number) => NaN | 加类型安全转换 |
-| 上周折叠 HTML 属性断裂 | 内联三元拼接导致 class 和 data-c 的引号冲突 | 改用变量预定义方式 |
 | 非A股显示股价栏 | 未过滤 secidMap 中不存在或非A股的标的 | 添加 startsWith 过滤 |
 | CDN 缓存导致旧代码 | GitHub Pages CDN 约 2-5 分钟生效 | 刷新后加 `?v=N` 参数 |
 | Worker 部署 10021 错误 | Content-Type 用错 | 改用 application/javascript+module |
+| secid 前缀错误 | 润建股份(002929)和亚康股份(301085)使用1.前缀但API需0.前缀 | 使用0.前缀统一 |
