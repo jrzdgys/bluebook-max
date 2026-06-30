@@ -586,8 +586,9 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
         var inf=wM[wk];
         if(wk===cw.key||wk===lw){
           var dg={};
-          h+='<div class="week-group"><div class="week-header" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">\u25be</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
-            '<div class="week-cards" style="max-height:6000px">';
+          var isThis=(wk===cw.key);var wkArr=isThis?'\u25be':'\u25b8';var wkMax=isThis?'6000px':'0px';
+h+='<div class="week-group"><div class="week-header'+(isThis?'':' data-c=\"1\"')+'" onclick="void(function(el){var b=el.nextElementSibling,c=el.getAttribute(\'data-c\');if(c===\'1\'){el.setAttribute(\'data-c\',\'0\');el.querySelector(\'.week-arrow\').textContent=\'\u25be\';b.style.maxHeight=b.scrollHeight+\'px\';}else{el.setAttribute(\'data-c\',\'1\');el.querySelector(\'.week-arrow\').textContent=\'\u25b8\';b.style.maxHeight=\'0\';}}(this))"><span class="week-arrow">'+wkArr+'</span><span class="week-label">'+wkLabel(wk,inf)+'</span><span class="count">'+inf.items.length+'\u4efd</span></div>'+
+            '<div class="week-cards" style="max-height:'+wkMax+'">';
           inf.items.forEach(function(it){var d=it.r.date||'unknown';if(!dg[d])dg[d]=[];dg[d].push(it);});
           Object.keys(dg).sort().reverse().forEach(function(dk){
             var dp=(dk||'').match(/(\d{4})(\d{2})(\d{2})/);
