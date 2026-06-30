@@ -562,8 +562,7 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
         wM[wk.key].dates[r.date]=true;
       }
     });
-    var ts=tR.reduce(function(s,it){return s+(it.r.stock_count||0);},0);
-    document.getElementById('stat-stocks').textContent=ts>0?ts:'\u2014';
+    fetch('today-unique-'+today+'.json?'+Date.now()).then(function(r){if(!r.ok)throw Error();return r.json();}).then(function(d){document.getElementById('stat-stocks').textContent=d.count>0?d.count:'\u2014';}).catch(function(){document.getElementById('stat-stocks').textContent='\u2014';});
     var tg=document.getElementById('today-reports');
     if(tR.length){
       tg.innerHTML='<div class="date-group"><div class="date-label"><span class="dot today-dot"></span>\u4eca\u5929<span class="count">'+tR.length+'\u4efd</span></div><div class="reports-grid">'+
