@@ -28,8 +28,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .live-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
 .live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6);animation:pulse 1.5s infinite}
-.live-dot.closed{background:#AEAEB2}
-.live-dot.after-hours{background:#FF9500}
+.live-dot.closed{background:#C4433A}
+.live-dot.premarket{background:#FF9500}
 @keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
 #update-time{margin-left:auto;opacity:.7}
 .ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
@@ -111,7 +111,7 @@ document.querySelector('meta[property="og:description"]').setAttribute("content"
 
 var liveDot = document.getElementById("live-dot");
 var liveText = document.getElementById("live-text");
-liveDot.className = "live-dot after-hours";
+liveDot.className = "live-dot premarket";
 liveText.textContent = "已更新 · " + g.edition.updateTime.split(" ")[1];
 
 // Render sections
