@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- 蓝宝书Max Template Global v1-test → 头部对齐 v3 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+    <title>蓝宝书Max</title>
+    <meta property="og:title" content="蓝宝书Max">
+    <meta property="og:description" content="机构级投研情报">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="蓝宝书Max">
+    <meta property="og:image" content="https://jrzdgys.github.io/bluebook-max/logo.png">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1000">
+    <meta property="og:image:type" content="image/jpeg">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
+.w{max-width:900px;margin:0 auto}
+
+/* === 浮动栏（新增）=== */
+.float-bar{position:sticky;top:0;z-index:101;height:40px;display:flex;align-items:center;padding:0 16px;background:#0071E3;border-bottom:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;transition:box-shadow .2s}
+.float-bar .fb-left{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* === sh（圆角改0，由浮动栏接管）=== */
+.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:0}
+.sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+.sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
+.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}
+.sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}
+.sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
+
+/* === 会员提示行（新增，对齐v3）=== */
+.member-notice{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 0 10px;font-size:12px;color:rgba(255,255,255,.85);flex-wrap:wrap}
+.member-notice .mn-icon{flex-shrink:0}
+.member-notice .mn-text{white-space:nowrap}
+.member-notice .mn-dot{opacity:.5}
+.member-notice .mn-link{color:#fff;font-weight:700;text-decoration:none;padding:2px 14px;border-radius:20px;background:rgba(255,255,255,.15);white-space:nowrap;transition:background .15s}
+.member-notice .mn-link:hover{background:rgba(255,255,255,.25)}
+
+/* === 微信按钮（新增，置于live-row右侧）=== */
+.live-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
+.live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6);animation:pulse 1.5s infinite}
+.live-dot.closed{background:#C4433A}
+.live-dot.premarket{background:#FF9500}
+.live-dot.holiday{background:#C4433A}
+@keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+#update-time{margin-left:auto;opacity:.7}
+.live-row .wx-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:rgba(255,255,255,.85);text-decoration:none;padding:2px 10px;border-radius:12px;background:rgba(255,255,255,.08);cursor:pointer;transition:background .15s;white-space:nowrap}
+.live-row .wx-btn:hover{background:rgba(255,255,255,.18)}
+.live-row .wx-btn svg{width:14px;height:14px;flex-shrink:0}
+.live-row .wx-btn .wx-copy-ok{display:none;color:#34C759}
+.live-row .wx-btn .wx-copy-ok.show{display:inline}
+
+/* === 统计卡片（保持1行3列不变）=== */
+.stats-row{display:flex;gap:14px;flex-wrap:wrap}
+.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
+.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+
+/* === 内容区 === */
+.ct{background:#fff;padding:16px 20px 24px;border-radius:0 0 16px 16px;margin-bottom:0}
+.sc{margin-bottom:16px}
+.sc-hd{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#F8F9FC;border-radius:10px;margin-bottom:10px}
+.sc-icon{font-size:16px}
+.sc-title{font-size:14px;font-weight:700;flex:1}
+.sc-sub{font-size:11px;color:#86868B;font-weight:600}
+.sc-body{padding:0 0 0 4px}
+.news-card{border-left:3px solid #E5E5EA;padding:10px 14px;margin-bottom:12px;border-radius:0 8px 8px 0;transition:all .15s}
+.news-card:hover{border-left-color:#0071E3;background:#F8F9FC}
+.news-num{font-size:10px;color:#AEAEB2;font-weight:600;margin-bottom:2px}
+.news-title{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.5}
+.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:8px}
+.stock-tags{display:flex;flex-wrap:wrap;gap:6px}
+.stock-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0071E3;background:rgba(0,113,227,.06);padding:3px 10px;border-radius:20px}
+.stock-tag .note{font-size:11px;font-weight:400;color:#86868B}
+
+/* === 底部（完全不动）=== */
+.fo{padding:16px 20px 24px;text-align:center}
+.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px;line-height:1.5}
+.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:12px}
+.fo .fo-line3{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-top:10px;border-top:1px solid #EFEFF4;font-size:11px;color:#AEAEB2}
+.fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
+.fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
+.fo .fo-email{color:#AEAEB2}
+
+/* === 响应式 === */
+@media(max-width:640px){
+body{padding:12px}
+.float-bar{height:36px;padding:0 12px}
+.float-bar .fb-left{font-size:12px}
+.sh{padding:16px 14px 14px}
+.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}
+.sh h1 .brand-slogan{font-size:11px}
+.sh-date{font-size:16px}
+.sh-edition{font-size:11px;padding:3px 10px}
+.sh-top{gap:6px}
+.member-notice{font-size:11px;padding:0 0 8px;justify-content:center}
+.member-notice .mn-link{font-size:11px;padding:1px 10px}
+.ct{padding:12px 12px 18px}
+.news-card{padding:12px 14px}
+.news-title{font-size:14px}
+.news-body{font-size:12px}
+.stock-tag{font-size:11px;padding:2px 8px}
+.stock-tag .note{font-size:10px}
+.fo{padding:14px 10px}
+.fo .fo-line1{font-size:10px}
+.fo .fo-line2{font-size:9px}
+.fo .fo-line3{gap:8px;flex-direction:column}
+.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}
+.stats-row .st strong{font-size:20px}
+.stats-row .st span{font-size:10px}
+.live-row{gap:4px;font-size:11px}
+.live-row .wx-btn{font-size:11px;padding:1px 8px}
+}
+</style>
+</head>
+<body>
+<div class="w">
+
+<!-- === 浮动栏（新增）=== -->
+<div class="float-bar" id="float-bar">
+<span class="fb-left">
+<span class="fb-brand">蓝宝书Max</span><span class="fb-sep"> · </span><span class="fb-info" id="fb-info"></span>
+</span>
+</div>
+
+<div class="sh">
+
+<!-- === 会员提示行（新增）=== -->
+<div class="member-notice"><span class="mn-icon">🔒</span><span class="mn-text">本报告仅供付费会员查阅</span><span class="mn-dot">·</span><a href="https://t.zsxq.com/6iVvp" target="_blank" class="mn-link">新用户订阅 → 知识星球</a></div>
+
+<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span></h1>
+<div class="live-row"><span class="live-dot premarket" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新于 · ...</span>
+<a href="#" onclick="copyWx()" class="wx-btn" id="wx-btn">
+<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM12 2C6.48 2 2 6.48 2 12c0 1.82.5 3.53 1.36 5L2 22l5.36-1.36A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+bluebookmax
+<span class="wx-copy-ok" id="gv-copy-ok">✅ 已复制</span>
+</a>
+</div>
+<div class="stats-row">
+<div class="st"><strong id="stat-news">—</strong><span>全部新闻</span></div>
+<div class="st"><strong id="stat-stocks">—</strong><span>涉及标的</span></div>
+<div class="st"><strong id="stat-sections">—</strong><span>分类板块</span></div>
+</div>
+</div>
+<div class="ct" id="content-area">
+</div>
+<div class="fo">
+<div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益</div>
+<div class="fo-line2">蓝宝书Max · 全球财经资讯聚合 · 自动更新 · v1.0</div>
+<div class="fo-line3">
+<a href="mailto:bluebookmax@gmail.com" class="fo-email">📧 bluebookmax@gmail.com</a>
+<a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener">📚 知识星球：蓝宝书Max</a>
+</div>
+</div>
+</div>
+
+<script id="global-data">
+GD = {"edition": {"type": "gv", "label": "全球版", "date": "2026-07-01", "dateDisplay": "2026年7月1日", "weekday": "周三", "updateTime": "2026-07-01 11:35"}, "stats": {"newsCount": 20, "stockCount": 27, "sectionCount": 2}, "sections": [{"name": "隔夜美股复盘", "icon": "🌍", "news": [{"id": 1, "title": "市场整体：科技股强势反弹，纳指创2020年来最佳季度表现", "body": "隔夜美股市场在季度末表现强劲，标普500指数和纳斯达克指数均创下自2020年以来的最佳季度表现。", "stocks": []}, {"id": 2, "title": "AI基础设施板块走强，数据中心电力成新焦点", "body": "AI数据中心对电力的巨大需求推动了Bloom Energy(BE)等基础设施股票的上涨。", "stocks": []}, {"id": 3, "title": "半导体板块普涨，设备与存储芯片股领跑", "body": "受韩国芯片巨头大规模投资计划刺激，ASML(ASML)股价创历史新高。", "stocks": []}, {"id": 4, "title": "Nike(NKE)因前景疲软股价下跌4%", "body": "尽管盈利超预期，但全年营收下滑指引导致股价下跌。", "stocks": []}, {"id": 5, "title": "呼叫中心类股因AI颠覆担忧而重挫", "body": "Concentrix(CNXC)下调营收预期后暴跌超15%。", "stocks": []}, {"id": 6, "title": "无人机与国防科技股因AeroVironment强劲财报上涨", "body": "AeroVironment(AVAV)业绩远超预期，股价飙升超20%。", "stocks": []}, {"id": 7, "title": "航空与工业领域个股动态分化", "body": "Joby Aviation(JOBY)宣布与丰田成立合资企业。", "stocks": []}, {"id": 8, "title": "部分软件与服务公司因收购及指数调整上涨", "body": "DigitalOcean(DOCN)纳入罗素1000指数后上涨近5%。", "stocks": []}]}, {"name": "全球重点事件梳理", "icon": "🌐", "news": [{"id": 9, "title": "三星与SK海力士宣布投资8800亿美元建芯片中心", "body": "韩国宣布联合三星和SK海力士投资超8800亿美元打造全球最大芯片集群。", "stocks": [{"name": "ASML", "note": "光刻机龙头"}, {"name": "AMAT", "note": "设备龙头"}, {"name": "LRCX", "note": "设备"}, {"name": "KLAC", "note": "过程控制"}]}, {"id": 10, "title": "美国最高法院受理苹果Epic案上诉", "body": "最高法院审理苹果反垄断藐视法庭裁决。", "stocks": [{"name": "AAPL", "note": "当事方"}, {"name": "SPOT", "note": "受益方"}, {"name": "MTCH", "note": "受政策影响"}]}, {"id": 11, "title": "美墨加贸易协定审查临近", "body": "特朗普政府预计不延长USMCA协定，引入政策不确定性。", "stocks": [{"name": "F", "note": "汽车"}, {"name": "GM", "note": "汽车"}, {"name": "CP", "note": "铁路"}]}, {"id": 12, "title": "英国央行警告AI自主代理系统性风险", "body": "AI代理可能引发市场崩盘，监管需设熔断机制。", "stocks": []}, {"id": 13, "title": "Anthropic发布科研AI工具", "body": "Claude Science面向科研自动化，加州政府合作推广。", "stocks": [{"name": "NVDA", "note": "算力"}, {"name": "AMZN", "note": "云服务"}]}, {"id": 14, "title": "全球央行计划减持美元储备", "body": "三年来首次净减持趋势，增持黄金和人民币。", "stocks": [{"name": "GLD", "note": "黄金ETF"}, {"name": "NEM", "note": "黄金生产商"}]}, {"id": 15, "title": "Visa万事达等推出新稳定币Open USD", "body": "财团挑战Tether主导地位，加速加密合规化。", "stocks": [{"name": "V", "note": "联盟成员"}, {"name": "MA", "note": "联盟成员"}, {"name": "COIN", "note": "基础设施"}]}, {"id": 16, "title": "AI芯片初创Etched获8亿美元融资", "body": "推理芯片公司挑战英伟达，与台积电合作。", "stocks": [{"name": "NVDA", "note": "面临竞争"}, {"name": "TSM", "note": "代工"}, {"name": "AVGO", "note": "定制芯片"}]}, {"id": 17, "title": "施耐德31亿美元收购工业AI公司Cognite", "body": "增强工业软件AI能力。", "stocks": [{"name": "ROK", "note": "竞争对手"}, {"name": "EMR", "note": "工业自动化"}, {"name": "PTC", "note": "物联网"}]}, {"id": 18, "title": "美国国会调查药企在华临床试验", "body": "默克、艾伯维等五家公司被调查。", "stocks": [{"name": "MRK", "note": "被调查"}, {"name": "ABBV", "note": "被调查"}, {"name": "LLY", "note": "同类药企"}]}, {"id": 19, "title": "法拉利宝马转向铝制线束", "body": "替代铜线，受铜价飙升驱动。", "stocks": [{"name": "AA", "note": "铝"}, {"name": "FCX", "note": "铜"}]}, {"id": 20, "title": "美国职位空缺数微升", "body": "5月JOLTS 759万，消费者信心悲观。", "stocks": []}]}]}
+</script>
+<script>
+(function(){
+var g = GD;
+if(!g) return;
+
+// === 浮动栏信息 ===
+document.getElementById("fb-info").textContent = g.edition.dateDisplay + " " + g.edition.weekday + " · " + g.edition.label;
+
+// Edition badge
+var ei = "🌍", ec = "#30B46E", ebg = "rgba(48,180,110,.15)";
+document.getElementById("header-date").textContent = g.edition.dateDisplay + " " + g.edition.weekday;
+var he = document.getElementById("header-edition");
+he.textContent = ei + " " + g.edition.label;
+he.style.background = ebg;
+he.style.color = ec;
+
+document.getElementById("update-time").textContent = "更新于 · " + g.edition.updateTime;
+document.getElementById("stat-news").textContent = g.stats.newsCount;
+document.getElementById("stat-stocks").textContent = g.stats.stockCount;
+document.getElementById("stat-sections").textContent = g.stats.sectionCount;
+
+document.title = "蓝宝书Max · " + g.edition.dateDisplay + " " + g.edition.weekday + " " + g.edition.label;
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+
+var liveDot = document.getElementById("live-dot");
+var liveText = document.getElementById("live-text");
+liveDot.className = "live-dot premarket";
+liveText.textContent = "已更新 · " + g.edition.updateTime.split(" ")[1];
+
+// === 浮动栏阴影（滚动时）===
+(function(){
+var fb = document.getElementById("float-bar");
+if(fb){
+window.addEventListener("scroll",function(){
+fb.style.boxShadow = window.scrollY > 10 ? "0 2px 12px rgba(0,0,0,.15)" : "none";
+});
+}
+})();
+
+// Render sections
+var ca = document.getElementById("content-area");
+var html = "";
+g.sections.forEach(function(s, si){
+  html += '<div class="sc">';
+  html += '<div class="sc-hd"><span class="sc-icon">' + (s.icon || "") + '</span><span class="sc-title">' + s.name + '</span><span class="sc-sub">' + s.news.length + '条</span></div>';
+  html += '<div class="sc-body">';
+  s.news.forEach(function(n){
+    html += '<div class="news-card">';
+    html += '<div class="news-num">#' + n.id + '</div>';
+    html += '<div class="news-title">' + n.title + '</div>';
+    html += '<div class="news-body">' + n.body + '</div>';
+    if(n.stocks && n.stocks.length > 0){
+      html += '<div class="stock-tags">';
+      n.stocks.forEach(function(st){
+        html += '<span class="stock-tag">' + st.name + '<span class="note">' + st.note + '</span></span>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div></div>';
+});
+ca.innerHTML = html;
+
+// OG meta
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+})();
+
+// === 微信复制 ===
+function copyWx(){
+navigator.clipboard.writeText('bluebookmax').then(function(){
+var e = document.getElementById('gv-copy-ok');
+if(e){
+e.classList.add('show');
+setTimeout(function(){e.classList.remove('show')}, 2000);
+}
+}).catch(function(){alert('复制失败，请手动添加: bluebookmax')});
+return false;
+}
+</script>
+</body>
+</html>
