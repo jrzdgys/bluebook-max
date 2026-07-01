@@ -33,6 +33,22 @@
       "title": "蓝宝书Max·2026年7月1日 周三 午间版"
     },
     {
+      "file": "ev-20260701.html",
+      "edition": "ev",
+      "date": "2026-07-01",
+      "label": "晚间版",
+      "displayDate": "2026年7月1日",
+      "updateTime": "2026-07-01 20:06",
+      "stats": {
+        "topics": 22,
+        "opportunities": 2,
+        "avgHeat": 77,
+        "stocks": 160,
+        "crossCount": 8
+      },
+      "title": "蓝宝书Max·2026年7月1日 周三 晚间版"
+    },
+    {
       "file": "ev-20260630.html",
       "edition": "ev",
       "date": "2026-06-30",
