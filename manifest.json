@@ -1,6 +1,8 @@
 [
   {
     "file": "ev-20260701.html",
-    "edition": "ev"
+    "edition": "ev",
+    "note": "修复JSON转义问题",
+    "sha": "8bd8992"
   }
 ]
