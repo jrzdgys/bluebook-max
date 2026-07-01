@@ -245,7 +245,7 @@ function sl(h){if(h>=85)return"🔥主升";if(h>=70)return"📈发酵";return"�
 var CH={};["2026-01-01","2026-01-02","2026-01-03","2026-02-15","2026-02-16","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-21","2026-04-04","2026-04-05","2026-04-06","2026-05-01","2026-05-02","2026-05-03","2026-05-04","2026-05-05","2026-06-25","2026-06-26","2026-06-27","2026-06-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02","2026-10-03","2026-10-04","2026-10-05","2026-10-06","2026-10-07"].forEach(function(d){CH[d]=1});
 function iH(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"})),ds=c.getFullYear()+"-"+String(c.getMonth()+1).padStart(2,"0")+"-"+String(c.getDate()).padStart(2,"0");return CH[ds]||false}
 function iM(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"}));var d=c.getDay();if(d===0||d===6)return false;return !iH()}
-function iT(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"})),h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(!iM())return false;return t>=570&&t<900}
+function iT(){var n=new Date(),c=new Date(n.toLocaleString("en-US",{timeZone:"Asia/Shanghai"})),h=c.getHours(),m=c.getMinutes(),t=h*60+m;if(!iM())return false;return (t>=555&&t<690)||(t>=780&&t<900)}
 function ts(){return new Date().toLocaleString("zh-CN",{timeZone:"Asia/Shanghai",hour:"2-digit",minute:"2-digit",second:"2-digit"})}
 document.title="蓝宝书Max · "+ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" "+ED.edition.label;
 document.getElementById("fb-info").textContent=ED.edition.dateDisplay+" "+gwd(new Date(ED.edition.date+"T12:00:00+08:00").getDay())+" · "+ED.edition.label;
