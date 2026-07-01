@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 蓝宝书Max Template Global v1.0 -->
+<!-- 蓝宝书Max Template Global v1-test → 头部对齐 v3 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -9,11 +9,21 @@
     <meta property="og:description" content="机构级投研情报">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="蓝宝书Max">
+    <meta property="og:image" content="https://jrzdgys.github.io/bluebook-max/logo.png">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1000">
+    <meta property="og:image:type" content="image/jpeg">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
 .w{max-width:900px;margin:0 auto}
-.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:16px 16px 0 0}
+
+/* === 浮动栏（新增）=== */
+.float-bar{position:sticky;top:0;z-index:101;height:40px;display:flex;align-items:center;padding:0 16px;background:#0071E3;border-bottom:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;transition:box-shadow .2s}
+.float-bar .fb-left{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* === sh（圆角改0，由浮动栏接管）=== */
+.sh{background:#0071E3;color:#fff;padding:24px 28px 20px;border-radius:0}
 .sh-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .sh-date{font-size:20px;font-weight:800;letter-spacing:-0.3px}
 .sh-edition{font-size:13px;padding:4px 14px;border-radius:20px;font-weight:700;background:rgba(255,255,255,.12);white-space:nowrap}
@@ -21,51 +31,119 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}
 .sh h1 .brand-dot{font-size:16px;font-weight:300;opacity:.55;margin:0 1px}
 .sh h1 .brand-slogan{font-size:14px;font-weight:300;opacity:.82;letter-spacing:1.5px;text-transform:uppercase}
-.stats-row{display:flex;gap:14px;flex-wrap:wrap}
-.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
-.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
-.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+
+/* === 会员提示行（新增，对齐v3）=== */
+.member-notice{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 0 10px;font-size:12px;color:rgba(255,255,255,.85);flex-wrap:wrap}
+.member-notice .mn-icon{flex-shrink:0}
+.member-notice .mn-text{white-space:nowrap}
+.member-notice .mn-dot{opacity:.5}
+.member-notice .mn-link{color:#fff;font-weight:700;text-decoration:none;padding:2px 14px;border-radius:20px;background:rgba(255,255,255,.15);white-space:nowrap;transition:background .15s}
+.member-notice .mn-link:hover{background:rgba(255,255,255,.25)}
+
+/* === 微信按钮（新增，置于live-row右侧）=== */
 .live-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.75);flex-wrap:wrap}
 .live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .live-dot.live{background:#34C759;box-shadow:0 0 6px rgba(52,199,89,.6);animation:pulse 1.5s infinite}
 .live-dot.closed{background:#C4433A}
 .live-dot.premarket{background:#FF9500}
+.live-dot.holiday{background:#C4433A}
 @keyframes pulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
 #update-time{margin-left:auto;opacity:.7}
-.ct{padding:20px 28px 28px;background:#FDFCF9;border-radius:0 0 16px 16px}
-.sc{margin-bottom:16px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #E5E5EA}
-.sc-hd{background:#0071E3;padding:10px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.sc-hd .sc-icon{font-size:16px}
-.sc-hd .sc-title{font-size:14px;font-weight:700;color:#fff}
-.sc-hd .sc-sub{font-size:10px;color:rgba(255,255,255,.65)}
-.sc-body{padding:14px 16px}
-.news-card{background:#F9F8F6;border-radius:12px;padding:16px 18px;margin-bottom:10px;transition:all .15s}
-.news-card:hover{border-color:#30B46E;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.news-num{font-size:11px;font-weight:700;color:#30B46E;margin-bottom:4px}
-.news-title{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.5;color:#1D1D1F}
-.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:10px}
+.live-row .wx-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:rgba(255,255,255,.85);text-decoration:none;padding:2px 10px;border-radius:12px;background:rgba(255,255,255,.08);cursor:pointer;transition:background .15s;white-space:nowrap}
+.live-row .wx-btn:hover{background:rgba(255,255,255,.18)}
+.live-row .wx-btn svg{width:14px;height:14px;flex-shrink:0}
+.live-row .wx-btn .wx-copy-ok{display:none;color:#34C759}
+.live-row .wx-btn .wx-copy-ok.show{display:inline}
+
+/* === 统计卡片（保持1行3列不变）=== */
+.stats-row{display:flex;gap:14px;flex-wrap:wrap}
+.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
+.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+
+/* === 内容区 === */
+.ct{background:#fff;padding:16px 20px 24px;border-radius:0 0 16px 16px;margin-bottom:0}
+.sc{margin-bottom:16px}
+.sc-hd{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#F8F9FC;border-radius:10px;margin-bottom:10px}
+.sc-icon{font-size:16px}
+.sc-title{font-size:14px;font-weight:700;flex:1}
+.sc-sub{font-size:11px;color:#86868B;font-weight:600}
+.sc-body{padding:0 0 0 4px}
+.news-card{border-left:3px solid #E5E5EA;padding:10px 14px;margin-bottom:12px;border-radius:0 8px 8px 0;transition:all .15s}
+.news-card:hover{border-left-color:#0071E3;background:#F8F9FC}
+.news-num{font-size:10px;color:#AEAEB2;font-weight:600;margin-bottom:2px}
+.news-title{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.5}
+.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:8px}
 .stock-tags{display:flex;flex-wrap:wrap;gap:6px}
-.stock-tag{font-size:12px;font-weight:600;color:#1D1D1F;background:#EDECE9;padding:3px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
-.stock-tag .note{font-weight:400;color:#86868B;font-size:11px}
-.fo{text-align:center;padding:20px 16px;font-size:11px;color:#C7C7CC;line-height:1.8}
-.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px}
-.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:10px}
+.stock-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0071E3;background:rgba(0,113,227,.06);padding:3px 10px;border-radius:20px}
+.stock-tag .note{font-size:11px;font-weight:400;color:#86868B}
+
+/* === 底部（完全不动）=== */
+.fo{padding:16px 20px 24px;text-align:center}
+.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px;line-height:1.5}
+.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:12px}
 .fo .fo-line3{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-top:10px;border-top:1px solid #EFEFF4;font-size:11px;color:#AEAEB2}
 .fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
 .fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
 .fo .fo-email{color:#AEAEB2}
-.member-badge{font-size:10px;padding:3px 12px;border-radius:20px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;white-space:nowrap;letter-spacing:0.5px;border:1px solid rgba(255,255,255,.25)}
-.header-sub-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 18px;border-radius:20px;background:#007AFF;color:#fff!important;font-weight:700;font-size:12px;box-shadow:0 3px 12px rgba(0,122,255,.4);transition:all .2s;text-decoration:none;white-space:nowrap}
-.header-sub-btn:hover{background:#0066D6;transform:translateY(-2px);box-shadow:0 5px 16px rgba(0,122,255,.5)}
-@media(max-width:640px){body{padding:12px}.sh{padding:16px 14px 16px}.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}.sh h1 .brand-slogan{font-size:11px}.sh-date{font-size:16px}.sh-edition{font-size:11px;padding:3px 10px}.sh-top{gap:6px}.ct{padding:12px 12px 18px}.news-card{padding:12px 14px}.news-title{font-size:14px}.news-body{font-size:12px}.stock-tag{font-size:11px;padding:2px 8px}.stock-tag .note{font-size:10px}.fo{padding:14px 10px}.fo .fo-line1{font-size:10px}.fo .fo-line2{font-size:9px}.fo .fo-line3{gap:8px;flex-direction:column}.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}.header-sub-btn{font-size:10px;padding:4px 10px}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}.stats-row .st strong{font-size:20px}.stats-row .st span{font-size:10px}}
+
+/* === 响应式 === */
+@media(max-width:640px){
+body{padding:12px}
+.float-bar{height:36px;padding:0 12px}
+.float-bar .fb-left{font-size:12px}
+.sh{padding:16px 14px 14px}
+.sh h1{font-size:20px;flex-wrap:wrap;gap:6px}
+.sh h1 .brand-slogan{font-size:11px}
+.sh-date{font-size:16px}
+.sh-edition{font-size:11px;padding:3px 10px}
+.sh-top{gap:6px}
+.member-notice{font-size:11px;padding:0 0 8px;justify-content:center}
+.member-notice .mn-link{font-size:11px;padding:1px 10px}
+.ct{padding:12px 12px 18px}
+.news-card{padding:12px 14px}
+.news-title{font-size:14px}
+.news-body{font-size:12px}
+.stock-tag{font-size:11px;padding:2px 8px}
+.stock-tag .note{font-size:10px}
+.fo{padding:14px 10px}
+.fo .fo-line1{font-size:10px}
+.fo .fo-line2{font-size:9px}
+.fo .fo-line3{gap:8px;flex-direction:column}
+.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}
+.stats-row .st strong{font-size:20px}
+.stats-row .st span{font-size:10px}
+.live-row{gap:4px;font-size:11px}
+.live-row .wx-btn{font-size:11px;padding:1px 8px}
+}
 </style>
 </head>
 <body>
 <div class="w">
+
+<!-- === 浮动栏（新增）=== -->
+<div class="float-bar" id="float-bar">
+<span class="fb-left">
+<span class="fb-brand">蓝宝书Max</span><span class="fb-sep"> · </span><span class="fb-info" id="fb-info"></span>
+</span>
+</div>
+
 <div class="sh">
-<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span><a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener" class="header-sub-btn">💡 立即订阅 →</a></div>
-<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span><span class="member-badge">🔒 仅供会员查阅</span></h1>
-<div class="live-row"><span class="live-dot closed" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新 ...</span></div>
+
+<!-- === 会员提示行（新增）=== -->
+<div class="member-notice"><span class="mn-icon">🔒</span><span class="mn-text">本报告仅供付费会员查阅</span><span class="mn-dot">·</span><a href="https://t.zsxq.com/6iVvp" target="_blank" class="mn-link">新用户订阅 → 知识星球</a></div>
+
+<div class="sh-top"><span class="sh-date" id="header-date"></span><span class="sh-edition" id="header-edition"></span></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span></h1>
+<div class="live-row"><span class="live-dot premarket" id="live-dot"></span><span id="live-text">加载中</span><span id="update-time">更新于 · ...</span>
+<a href="#" onclick="copyWx()" class="wx-btn" id="wx-btn">
+<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM12 2C6.48 2 2 6.48 2 12c0 1.82.5 3.53 1.36 5L2 22l5.36-1.36A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+bluebookmax
+<span class="wx-copy-ok" id="gv-copy-ok">✅ 已复制</span>
+</a>
+</div>
 <div class="stats-row">
 <div class="st"><strong id="stat-news">—</strong><span>全部新闻</span></div>
 <div class="st"><strong id="stat-stocks">—</strong><span>涉及标的</span></div>
@@ -92,7 +170,10 @@ GD = null
 var g = GD;
 if(!g) return;
 
-// Edition
+// === 浮动栏信息 ===
+document.getElementById("fb-info").textContent = g.edition.dateDisplay + " " + g.edition.weekday + " · " + g.edition.label;
+
+// Edition badge
 var ei = "🌍", ec = "#30B46E", ebg = "rgba(48,180,110,.15)";
 document.getElementById("header-date").textContent = g.edition.dateDisplay + " " + g.edition.weekday;
 var he = document.getElementById("header-edition");
@@ -113,6 +194,16 @@ var liveDot = document.getElementById("live-dot");
 var liveText = document.getElementById("live-text");
 liveDot.className = "live-dot premarket";
 liveText.textContent = "已更新 · " + g.edition.updateTime.split(" ")[1];
+
+// === 浮动栏阴影（滚动时）===
+(function(){
+var fb = document.getElementById("float-bar");
+if(fb){
+window.addEventListener("scroll",function(){
+fb.style.boxShadow = window.scrollY > 10 ? "0 2px 12px rgba(0,0,0,.15)" : "none";
+});
+}
+})();
 
 // Render sections
 var ca = document.getElementById("content-area");
@@ -143,6 +234,18 @@ ca.innerHTML = html;
 document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
 document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
 })();
+
+// === 微信复制 ===
+function copyWx(){
+navigator.clipboard.writeText('bluebookmax').then(function(){
+var e = document.getElementById('gv-copy-ok');
+if(e){
+e.classList.add('show');
+setTimeout(function(){e.classList.remove('show')}, 2000);
+}
+}).catch(function(){alert('复制失败，请手动添加: bluebookmax')});
+return false;
+}
 </script>
 </body>
 </html>
