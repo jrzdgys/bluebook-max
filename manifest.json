@@ -1,8 +1,463 @@
-[
-  {
-    "file": "ev-20260701.html",
-    "edition": "ev",
-    "note": "修复JSON转义问题",
-    "sha": "8bd8992"
-  }
-]
+{
+  "entries": [
+    {
+      "file": "mc-20260701.html",
+      "edition": "mc",
+      "date": "2026-07-01",
+      "label": "晨会版",
+      "displayDate": "2026年7月1日",
+      "updateTime": "2026-07-01 07:06",
+      "stats": {
+        "topics": 22,
+        "opportunities": 2,
+        "avgHeat": 77,
+        "stocks": 125,
+        "crossCount": 1
+      },
+      "title": "蓝宝书Max·2026年7月1日 周三 晨会版"
+    },
+    {
+      "file": "pm-20260701.html",
+      "edition": "pm",
+      "date": "2026-07-01",
+      "label": "午间版",
+      "displayDate": "2026年7月1日",
+      "updateTime": "2026-07-01 11:35",
+      "stats": {
+        "topics": 10,
+        "opportunities": 0,
+        "avgHeat": 86,
+        "stocks": 63,
+        "crossCount": 3
+      },
+      "title": "蓝宝书Max·2026年7月1日 周三 午间版"
+    },
+    {
+      "file": "ev-20260701.html",
+      "edition": "ev",
+      "date": "2026-07-01",
+      "label": "晚间版",
+      "displayDate": "2026年7月1日",
+      "updateTime": "2026-07-01 20:06",
+      "stats": {
+        "topics": 22,
+        "opportunities": 2,
+        "avgHeat": 77,
+        "stocks": 151,
+        "crossCount": 8
+      },
+      "title": "蓝宝书Max·2026年7月1日 周三 晚间版",
+      "note": "修复JSON转义问题"
+    },
+    {
+      "file": "ev-20260630.html",
+      "edition": "ev",
+      "date": "2026-06-30",
+      "label": "晚间版",
+      "displayDate": "2026年6月30日",
+      "updateTime": "2026-06-30 20:06",
+      "stock_count": 160,
+      "stats": {
+        "topics": 22,
+        "opportunities": 2,
+        "avgHeat": 77,
+        "stocks": 160,
+        "crossCount": 10
+      }
+    },
+    {
+      "date": "2026-06-30",
+      "file": "pm-20260630.html",
+      "edition": "pm",
+      "title": "蓝宝书Max·2026年6月30日 周二 午间版"
+    },
+    {
+      "date": "2026-06-30",
+      "file": "gv-20260630.html",
+      "edition": "gv",
+      "title": "蓝宝书Max·2026年6月30日 周二 全球版"
+    },
+    {
+      "file": "mc-20260630.html",
+      "edition": "mc",
+      "date": "2026-06-30",
+      "label": "晨会版",
+      "displayDate": "2026年6月30日",
+      "updateTime": "2026-06-30 07:06",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 73,
+        "stocks": 147,
+        "crossCount": 23
+      }
+    },
+    {
+      "file": "ev-20260629.html",
+      "edition": "ev",
+      "date": "2026-06-29",
+      "label": "晚间版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260629.html",
+      "edition": "pm",
+      "date": "2026-06-29",
+      "label": "午间版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "mc-20260629.html",
+      "edition": "mc",
+      "date": "2026-06-29",
+      "label": "晨会版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260629.html",
+      "edition": "gv",
+      "date": "2026-06-29",
+      "label": "全球版",
+      "displayDate": "2026年6月29日",
+      "updateTime": "2026-06-29 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260628.html",
+      "edition": "ev",
+      "date": "2026-06-28",
+      "label": "晚间版",
+      "displayDate": "2026年6月28日",
+      "updateTime": "2026-06-28 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260627.html",
+      "edition": "ev",
+      "date": "2026-06-27",
+      "label": "晚间版",
+      "displayDate": "2026年6月27日",
+      "updateTime": "2026-06-27 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260626.html",
+      "edition": "ev",
+      "date": "2026-06-26",
+      "label": "晚间版",
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260626.html",
+      "edition": "pm",
+      "date": "2026-06-26",
+      "label": "午间版",
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "mc-20260626.html",
+      "edition": "mc",
+      "date": "2026-06-26",
+      "label": "晨会版",
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260626.html",
+      "edition": "gv",
+      "date": "2026-06-26",
+      "label": "全球版",
+      "displayDate": "2026年6月26日",
+      "updateTime": "2026-06-26 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260625.html",
+      "edition": "ev",
+      "date": "2026-06-25",
+      "label": "晚间版",
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260625.html",
+      "edition": "pm",
+      "date": "2026-06-25",
+      "label": "午间版",
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "mc-20260625.html",
+      "edition": "mc",
+      "date": "2026-06-25",
+      "label": "晨会版",
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260625.html",
+      "edition": "gv",
+      "date": "2026-06-25",
+      "label": "全球版",
+      "displayDate": "2026年6月25日",
+      "updateTime": "2026-06-25 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260624.html",
+      "edition": "ev",
+      "date": "2026-06-24",
+      "label": "晚间版",
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260624.html",
+      "edition": "pm",
+      "date": "2026-06-24",
+      "label": "午间版",
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "mc-20260624.html",
+      "edition": "mc",
+      "date": "2026-06-24",
+      "label": "晨会版",
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260624.html",
+      "edition": "gv",
+      "date": "2026-06-24",
+      "label": "全球版",
+      "displayDate": "2026年6月24日",
+      "updateTime": "2026-06-24 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260623.html",
+      "edition": "ev",
+      "date": "2026-06-23",
+      "label": "晚间版",
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260623.html",
+      "edition": "pm",
+      "date": "2026-06-23",
+      "label": "午间版",
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "mc-20260623.html",
+      "edition": "mc",
+      "date": "2026-06-23",
+      "label": "晨会版",
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260623.html",
+      "edition": "gv",
+      "date": "2026-06-23",
+      "label": "全球版",
+      "displayDate": "2026年6月23日",
+      "updateTime": "2026-06-23 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "ev-20260622.html",
+      "edition": "ev",
+      "date": "2026-06-22",
+      "label": "晚间版",
+      "displayDate": "2026年6月22日",
+      "updateTime": "2026-06-22 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "pm-20260621.html",
+      "edition": "pm",
+      "date": "2026-06-21",
+      "label": "午间版",
+      "displayDate": "2026年6月21日",
+      "updateTime": "2026-06-21 07:00",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 75,
+        "stocks": 100,
+        "crossCount": 5
+      }
+    },
+    {
+      "file": "gv-20260701.html",
+      "edition": "gv",
+      "date": "2026-07-01",
+      "label": "全球版",
+      "displayDate": "2026年7月1日"
+    }
+  ]
+}
