@@ -434,6 +434,13 @@
         "stocks": 100,
         "crossCount": 5
       }
+    },
+    {
+      "file": "gv-20260701.html",
+      "edition": "gv",
+      "date": "2026-07-01",
+      "label": "全球版",
+      "displayDate": "2026年7月1日"
     }
   ],
   "last_updated": "2026-06-30T09:28:00+08:00",
