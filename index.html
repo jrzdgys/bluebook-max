@@ -494,7 +494,9 @@ function renderCard(r, isFirst, isAuth, editionLabels) {
   var freeBadge = (!isAuth && isFirst) ? '<span class="r-free">🎁 免费</span>' : '';
   var lockInfo = (!isAuth && !isFirst) ? '<span class="r-lock">🔒 付费</span>' : '';
   var authTag = isAuth ? '<span class="r-auth">✓ 已解锁</span>' : '';
-  return '<a href="' + (canView ? (r.file || '#') : '#') + '" class="report-card ' + cssEd + '" ' +
+  var isMobile = window.innerWidth < 768 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
+  var targetAttr = isMobile ? '' : 'target="_blank"';
+  return '<a href="' + (canView ? (r.file || '#') : '#') + '" ' + targetAttr + ' class="report-card ' + cssEd + '" ' +
     onclick + ' style="' + (!canView ? 'cursor:default;opacity:.65' : '') + '">' +
     '<div class="report-card-header">' +
     '<span class="r-badge ' + ed + '">' + label + '</span>' +
