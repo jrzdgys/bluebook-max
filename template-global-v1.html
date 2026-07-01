@@ -71,6 +71,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .stock-tags{display:flex;flex-wrap:wrap;gap:6px}
 .stock-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0071E3;background:rgba(0,113,227,.06);padding:3px 10px;border-radius:20px}
 .stock-tag .note{font-size:11px;font-weight:400;color:#86868B}
+.stock-tag .stock-ticker{font-weight:700;color:#0051A8}
+.stock-tag .stock-ticker{font-weight:700;color:#0051A8}
 
 /* === 底部（完全不动）=== */
 .fo{padding:16px 20px 24px;text-align:center}
@@ -185,7 +187,7 @@ g.sections.forEach(function(s){
     html += '<div class="news-card"><div class="news-num">#' + n.id + '</div><div class="news-title">' + n.title + '</div><div class="news-body">' + n.body + '</div>';
     if(n.stocks && n.stocks.length > 0){
       html += '<div class="stock-tags">';
-      n.stocks.forEach(function(st){html += '<span class="stock-tag">' + st.name + '<span class="note">' + st.note + '</span></span>';});
+      n.stocks.forEach(function(st){var dn=st.displayName||st.name;html += '<span class="stock-tag"><span class="stock-company">'+dn+'</span>(<span class="stock-ticker">'+st.name+'</span>)<span class="note"> · '+(st.note||'')+'</span></span>';});
       html += '</div>';
     }
     html += '</div>';
