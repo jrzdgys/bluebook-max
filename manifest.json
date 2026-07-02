@@ -488,6 +488,22 @@
         "sectionCount": 2
       },
       "title": "蓝宝书Max·2026年7月2日 周四 全球版"
+    },
+    {
+      "file": "pm-20260702.html",
+      "edition": "pm",
+      "date": "2026-07-02",
+      "label": "午间版",
+      "displayDate": "2026年7月2日",
+      "updateTime": "2026-07-02 11:35",
+      "stats": {
+        "topics": 10,
+        "opportunities": 0,
+        "avgHeat": 86,
+        "stocks": 59,
+        "crossCount": 5
+      },
+      "title": "蓝宝书Max·2026年07月02日 周四 午间版"
     }
   ]
 }
