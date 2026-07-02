@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- 蓝宝书Max Template Global v2.0 → 精确对齐v3头部 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+    <title>蓝宝书Max·2026年7月2日 周四 全球版</title>
+    <meta property="og:title" content="蓝宝书Max·2026年7月2日 周四 全球版">
+    <meta property="og:description" content="20条全球新闻·18只相关标的">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="蓝宝书Max">
+    <meta property="og:image" content="https://jrzdgys.github.io/bluebook-max/logo.png">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1000">
+    <meta property="og:image:type" content="image/jpeg">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:#E4E1DC;color:#1D1D1F;line-height:1.6;padding:24px}
+.w{max-width:900px;margin:0 auto}
+
+/* === 浮动栏（v3精确）=== */
+.float-bar{position:sticky;top:0;z-index:101;height:40px;display:flex;align-items:center;padding:0 16px;background:#0071E3;border-bottom:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;transition:box-shadow .2s}
+.float-bar .fb-left{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* === sh === */
+.sh{background:#0071E3;color:#fff;padding:28px 28px 20px;border-radius:0}
+
+/* === 会员提示行（v3精确）=== */
+.member-notice{padding:6px 28px;font-size:12px;color:rgba(255,255,255,.75);background:rgba(255,255,255,.06);text-align:center;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.member-notice .mn-icon{font-size:11px;opacity:.7}
+.member-notice .mn-text{color:rgba(255,255,255,.7)}
+.member-notice .mn-dot{color:rgba(255,255,255,.3);font-size:8px}
+.member-notice .mn-link{display:inline-flex;align-items:center;gap:4px;padding:2px 12px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;font-weight:700;font-size:12px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:all .2s}
+.member-notice .mn-link:hover{background:rgba(255,255,255,.25)}
+
+/* === h1 品牌（v3精确）=== */
+.sh h1{font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;letter-spacing:-0.5px}
+.sh h1 .brand-name{font-size:26px;font-weight:800;letter-spacing:-0.5px}
+.sh h1 .brand-dot{font-size:20px;font-weight:300;opacity:.65;margin:0 2px}
+.sh h1 .brand-slogan{font-size:20px;font-weight:800;opacity:1;letter-spacing:1.5px}
+
+/* === info-row（v3精确）=== */
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:0 0 14px;font-size:13px;color:rgba(255,255,255,.78)}
+.info-row .info-right{color:rgba(255,255,255,.78)}
+.info-row .info-left{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}
+.biz-wx{cursor:pointer;color:#fff;font-weight:700;font-size:14px;padding:2px 10px;border-radius:14px;background:rgba(255,255,255,.13);transition:all .2s;user-select:none;display:inline-flex;align-items:center;gap:4px}
+.biz-wx:hover{background:rgba(255,255,255,.22)}
+.biz-wx svg{width:14px;height:14px;flex-shrink:0}
+.biz-copy-ok{display:none;color:#34C759;font-size:12px;margin-left:2px;font-weight:600}
+.biz-copy-ok.show{display:inline}
+
+/* === 统计卡片（v3样式适配3列）=== */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0}
+.stats-row .st{text-align:center;min-width:72px;background:rgba(255,255,255,.08);padding:10px 16px;border-radius:10px;backdrop-filter:blur(4px)}
+.stats-row .st strong{display:block;font-size:24px;font-weight:800;line-height:1.2}
+.stats-row .st span{font-size:10px;color:rgba(255,255,255,.5)}
+
+/* === 内容区 === */
+.ct{background:#fff;padding:16px 20px 24px;border-radius:0 0 16px 16px;margin-bottom:0}
+.sc{margin-bottom:16px}
+.sc-hd{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#0071E3;border-radius:10px;margin-bottom:10px}
+.sc-icon{font-size:16px}
+.sc-title{font-size:14px;font-weight:700;color:#fff;flex:1}
+.sc-sub{font-size:11px;color:rgba(255,255,255,.65);font-weight:600}
+.sc-body{padding:0 0 0 4px}
+.news-card{border-left:3px solid #E5E5EA;padding:10px 14px;margin-bottom:12px;border-radius:0 8px 8px 0;transition:all .15s}
+.news-card:hover{border-left-color:#0071E3;background:#F8F9FC}
+.news-num{font-size:10px;color:#AEAEB2;font-weight:600;margin-bottom:2px}
+.news-title{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.5}
+.news-body{font-size:13px;color:#515154;line-height:1.7;margin-bottom:8px}
+.stock-tags{display:flex;flex-wrap:wrap;gap:6px}
+.stock-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#0071E3;background:rgba(0,113,227,.06);padding:3px 10px;border-radius:20px}
+.stock-tag .note{font-size:11px;font-weight:400;color:#86868B}
+.stock-tag .stock-ticker{font-weight:700;color:#0051A8}
+.stock-tag .stock-ticker{font-weight:700;color:#0051A8}
+
+/* === 底部（完全不动）=== */
+.fo{padding:16px 20px 24px;text-align:center}
+.fo .fo-line1{font-size:11px;color:#AEAEB2;margin-bottom:6px;line-height:1.5}
+.fo .fo-line2{font-size:10px;color:#C7C7CC;margin-bottom:12px}
+.fo .fo-line3{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-top:10px;border-top:1px solid #EFEFF4;font-size:11px;color:#AEAEB2}
+.fo .fo-line3 a{color:#0071E3;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;background:rgba(0,113,227,.06);transition:all .15s}
+.fo .fo-line3 a:hover{background:rgba(0,113,227,.12);color:#005BB5}
+.fo .fo-email{color:#AEAEB2}
+
+/* === 响应式 === */
+@media(max-width:640px){
+.sh{padding:16px 14px 14px}
+body{padding:12px}
+.float-bar{height:36px;padding:0 12px}
+.float-bar .fb-left{font-size:12px}
+.sh h1{font-size:22px;flex-wrap:nowrap;gap:6px}
+.sh h1 .brand-slogan{font-size:18px}
+.member-notice{padding:5px 14px;font-size:12px;gap:4px}
+.member-notice .mn-link{font-size:11px;padding:1px 10px}
+.info-row{padding:0 0 10px;flex-wrap:wrap;gap:4px;font-size:12px;color:rgba(255,255,255,.78)}
+.info-row .info-left{gap:3px}
+.info-row .info-right{flex:0 0 100%;margin-left:0;text-align:left;font-size:10px;opacity:.6}
+.ct{padding:12px 12px 18px}
+.news-card{padding:12px 14px}
+.news-title{font-size:14px}
+.news-body{font-size:12px}
+.stock-tag{font-size:11px;padding:2px 8px}
+.stock-tag .note{font-size:10px}
+.fo{padding:14px 10px}
+.fo .fo-line1{font-size:10px}
+.fo .fo-line2{font-size:9px}
+.fo .fo-line3{gap:8px;flex-direction:column}
+.fo .fo-line3 a{padding:6px 14px;font-size:10px;width:100%;justify-content:center}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0}
+.stats-row .st{min-width:auto;padding:8px 6px;border-radius:8px}
+.stats-row .st strong{font-size:20px}
+.stats-row .st span{font-size:10px}
+}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="float-bar" id="float-bar">
+<span class="fb-left">
+<span class="fb-brand">蓝宝书Max</span><span class="fb-sep"> · </span><span class="fb-info" id="fb-info"></span>
+</span>
+</div>
+<div class="sh">
+<div class="member-notice"><span class="mn-icon">🔒</span><span class="mn-text">本报告仅供付费会员查阅</span><span class="mn-dot">·</span><a href="https://t.zsxq.com/6iVvp" target="_blank" class="mn-link">新用户订阅 → 知识星球</a></div>
+<h1><span class="brand-name">蓝宝书Max</span><span class="brand-dot">·</span><span class="brand-slogan">机构级投研情报</span></h1>
+<div class="info-row">
+<span class="info-left">
+<span class="biz-wx" onclick="copyWx()" title="点击复制微信号"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM12 2C6.48 2 2 6.48 2 12c0 1.82.5 3.53 1.36 5L2 22l5.36-1.36A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>商务微信 bluebookmax</span>
+<span class="biz-copy-ok" id="gv-copy-ok">✓已复制</span>
+</span>
+<span class="info-right" id="update-time">更新于 · ...</span>
+</div>
+<div class="stats-row">
+<div class="st"><strong id="stat-news">—</strong><span>全部新闻</span></div>
+<div class="st"><strong id="stat-stocks">—</strong><span>涉及标的</span></div>
+<div class="st"><strong id="stat-sections">—</strong><span>分类板块</span></div>
+</div>
+</div>
+<div class="ct" id="content-area"></div>
+<div class="fo">
+<div class="fo-line1">⚠️所有内容仅供参考，不构成投资建议 · ❗️股市有风险，投资需谨慎。过往表现不预示未来收益</div>
+<div class="fo-line2">蓝宝书Max · 全球财经资讯聚合 · 自动更新 · v1.0</div>
+<div class="fo-line3">
+<a href="mailto:bluebookmax@gmail.com" class="fo-email">📧 bluebookmax@gmail.com</a>
+<a href="https://t.zsxq.com/6iVvp" target="_blank" rel="noopener">📚 知识星球：蓝宝书Max</a>
+</div>
+</div>
+</div>
+
+<script id="global-data">{"edition": {"type": "gv", "label": "全球版", "date": "2026-07-02", "dateDisplay": "2026年7月2日", "weekday": "周四", "updateTime": "2026-07-02 08:03"}, "stats": {"newsCount": 20, "stockCount": 18, "sectionCount": 2}, "sections": [{"name": "隔夜美股复盘", "icon": "🌍", "news": [{"body": "隔夜美股市场表现分化，走势震荡。道指盘中创下历史新高，但收盘时与标普500指数基本持平，而以科技股为主的纳斯达克指数则收低。市场主要受到两大对冲力量影响：一方面，Meta(+8%) 宣布计划进军云计算业务，出售闲置AI算力，股价大幅上涨，提振了部分市场情绪；另一方面，半导体板块遭遇广泛抛售，拖累了科技股整体表现。宏观方面，美国6月ISM制造业指数从近四年高位回落至53.3，但仍处于扩张区间，其中价格支付指数创下近两年来最大单月降幅，缓解了部分通胀担忧。美联储主席沃什在欧洲央行论坛上表示通胀风险有所下降，但重申了抗通胀决心并拒绝提供前瞻指引，其言论对市场影响复杂。", "id": 1, "stocks": [], "title": "市场整体"}, {"body": "Meta Platforms(META) 股价在公司计划建立云计算业务以出售闲置AI计算能力的消息传出后大幅上涨。此举被视为Meta对其昂贵AI投资进行变现的尝试，旨在开辟新的收入来源。该消息在AI基础设施领域引发“蝴蝶效应”，直接竞争对手如CoreWeave和Nebius(NBIS) 的股价因此承压下跌。", "id": 2, "stocks": [], "title": "Meta进军云计算引发市场震动，股价大涨"}, {"body": "在科技股内部轮动和获利了结的压力下，半导体板块隔夜遭遇重挫。AMD(AMD)、SanDisk(SNDK) 和 Taiwan Semiconductor(TSM)(-6%) 等芯片股普遍下跌。此外，Super Micro Computer(SMCI) 因其台湾员工卷入英伟达芯片走私调查的消息而股价走低。整个AI硬件相关的股票，如Oracle(ORCL)，也经历了自1990年以来最差的单月表现，反映出市场对AI资本支出过热的担忧情绪加剧。", "id": 3, "stocks": [], "title": "半导体板块集体回调，AI硬件股普遍承压"}, {"body": "消费品和工业领域公司表现各异。General Mills(GIS) 因季度业绩超出预期，股价上涨9%。Constellation Brands(STZ) 在公布强劲的第一季度财报并上调2027财年指引后，股价走高。然而，Nike(NKE) 因对销售复苏乏力的持续担忧，股价跌至52周新低。工业分销商MSC Industrial(MSM) 在公布超预期的第三季度财报后，股价创下52周新高。", "id": 4, "stocks": [], "title": "消费与工业品公司财报及动态分化"}, {"body": "部分软件和服务公司股价表现强劲。Salesforce(CRM)(+4%) 在获得Guggenheim的看涨评级后股价大涨，分析师认为其前期抛售过度。ServiceNow(NOW) 因与埃森哲合作推出AI服务以及获得Guggenheim上调评级而上涨。Datadog(DDOG) 在宣布收购强化学习初创公司Adaptive ML以加速AI研发后，股价走高。", "id": 5, "stocks": [], "title": "软件与服务板块表现亮眼，Salesforce领涨"}, {"body": "美股IPO市场热度不减。拥有Vimeo和AOL的意大利科技公司Bending Spoons(SPOO) 在其美国市场首次亮相时股价飙升39%，此前其IPO定价已高于目标区间，成功募资16.8亿美元。此外，由Uber支持的电动滑板车运营商Lime(LIME) 在纳斯达克上市首日股价上涨4%，估值达到约17亿美元。", "id": 6, "stocks": [], "title": "IPO市场保持活跃，Bending Spoons上市首日大涨"}, {"body": "部分高波动性股票隔夜表现突出。二手车零售商Carvana(CVNA) 在宣布第二季度财报日期并预计零售单位和EBITDA将创纪录后，股价飙升。房地产科技公司Opendoor Technologies(OPEN) 在散户推动下延续了上涨势头。燃料电池公司FuelCell Energy(FCEL) 和Plug Power(PLUG) 股价在近期大幅上涨后出现波动，市场在消化其最新的欧洲业务进展。", "id": 7, "stocks": [], "title": "部分成长股与“Meme股”大幅波动"}, {"body": "美国6月ISM制造业指数从上月的四年高位回落至53.3，增速放缓但仍连续第六个月处于扩张状态。值得注意的是，原材料价格支付指数创下自2022年7月以来的最大单月降幅，表明成本压力显著缓解。同时，ADP数据显示6月私营部门新增就业9.8万人，低于预期但表明劳动力市场保持平稳。", "id": 8, "stocks": [], "title": "宏观数据发布，制造业扩张放缓但价格压力减轻"}]}, {"name": "全球重点事件梳理", "icon": "🌐", "news": [{"body": "美国政府已正式宣布，将不会寻求延长《美墨加协定》（USMCA）的长期框架，而是转向一种充满不确定性的年度审查机制。此举标志着美国贸易政策的重大转变，旨在通过持续施压，迫使墨西哥和加拿大在制造业回流、贸易逆差和限制中国影响等方面做出更多让步。这一决定为北美近2万亿美元的贸易体系和高度整合的供应链带来了长期的不确定性，显著削弱了企业的投资信心。未来，围绕汽车原产地规则、中国投资限制和劳工标准的谈判预计将更加激烈和持久。", "id": 1, "stocks": [], "title": "美国决定不续签美墨加协定，转为年度审查机制"}, {"body": "Meta Platforms正计划进入云基础设施市场，通过向外部客户出售其富余的AI计算能力和模型访问权限来创造新的收入来源。此举是Meta在对数据中心和自研芯片进行巨额投资后，寻求基础设施资产变现的关键一步。这一战略转型使Meta将与亚马逊、微软和谷歌等现有云服务巨头展开直接竞争，可能重塑AI算力服务的市场格局。此消息已引发AI基础设施相关股票的连锁反应，显示出市场对竞争加剧的预期。", "id": 2, "stocks": [{"displayName": "Meta Platforms", "name": "META", "note": "开辟新增长曲线，提升资产回报率"}], "title": "Meta计划推出云计算业务，出售闲置AI算力"}, {"body": "由AI热潮驱动的全球内存芯片（尤其是HBM）短缺问题正持续恶化，已达到“极端短缺”的程度，迫使苹果等巨头寻求非常规解决方案。为缓解供应链压力和成本飙升，苹果公司正积极游说美国政府，寻求从被列入美国黑名单的中国芯片制造商长鑫存储（CXMT）和长江存储（YMTC）采购内存，用于仅在中国市场销售的设备。此举凸显了AI供应链瓶颈的严重性，同时也使苹果面临复杂的政治和监管风险。分析普遍认为，内存短缺预计将持续到2027年，并将继续成为影响科技硬件行业成本和生产的关键因素。", "id": 3, "stocks": [{"displayName": "Micron Technology", "name": "MU", "note": "作为HBM主要供应商，直接受益于价格上涨和需求强劲"}, {"displayName": "Western Digital", "name": "WDC", "note": "旗下SanDisk是NAND市场主要玩家，同样受益于供应紧张"}], "title": "全球内存芯片短缺加剧，苹果寻求从中国采购"}, {"body": "美联储主席凯文·沃什（Kevin Warsh）已任命英国央行前行长默文·金（Mervyn King）共同领导一个新成立的沟通工作组。此举是沃什全面改革美联储运作方式的一部分，旨在重新评估和改造美联储与市场及公众的沟通机制，包括未来如何发布政策指引和利率信号。这项改革与另外四个工作组（涵盖资产负债表、数据使用等）并行，预示着美联储的政策制定和沟通框架可能迎来重大转变。同时，沃什明确表示，实质性的缩表最早要到2027年才会开启，缓解了市场对短期内流动性收紧的担忧。", "id": 4, "stocks": [], "title": "美联储主席沃什任命默文·金重塑央行沟通策略"}, {"body": "索尼集团正式宣布，将从2028年1月起停止为所有新发行的PlayStation游戏生产实体光盘，全面转向数字发行。此举使索尼成为首家彻底放弃物理介质的主要游戏机制造商，是游戏行业数字化转型过程中的一个里程碑事件。这一决策顺应了消费者购买习惯向线上迁移的长期趋势，但同时也引发了玩家社区关于数字内容所有权和游戏保存问题的广泛担忧与争议。此举将对游戏零售商的商业模式构成长期挑战。", "id": 5, "stocks": [{"displayName": "Sony", "name": "SONY", "note": "有望通过降低分销成本和强化数字商店生态来提升利润率"}, {"displayName": "Electronic Arts", "name": "EA", "note": ""}, {"displayName": "Take-Two Interactive", "name": "TTWO", "note": "作为大型发行商，将加速向纯数字分销转型"}], "title": "索尼宣布2028年起停止生产PlayStation实体光盘"}, {"body": "尽管美国整体劳动力市场保持稳定，但数据显示，人工智能（AI）的渗透已对特定行业产生显著的就业冲击。2026年，AI应用最广泛的科技和金融两大行业平均每月裁员2.8万人，成为拖累整体就业增长的一个因素。这一现象表明，企业在为AI投入巨额资本后，正通过裁员和缩减招聘来控制成本，尤其是行政和办公辅助类岗位面临的风险最大。这揭示了AI在宏观层面提升生产力的同时，也在微观层面引发了结构性的劳动力市场置换。", "id": 6, "stocks": [{"displayName": "ServiceNow", "name": "NOW", "note": "提供企业自动化工作流程软件，帮助企业提高效率"}, {"displayName": "Accenture", "name": "ACN", "note": "作为IT咨询公司，帮助企业实施AI转型，但自身也面临业务模式重塑"}], "title": "美国科技与金融业因AI每月裁员约2.8万人"}, {"body": "美国商务部解除了对AI初创公司Anthropic旗下先进模型（包括Fable 5和Mythos 5）的出口管制，此前这些模型因国家安全担忧被暂停向海外用户提供。Anthropic通过承诺加强网络安全防护并与政府合作制定未来模型标准，成功解决了监管机构的顾虑。此次解禁被视为美国政府在探索前沿AI技术监管路径上的一个重要案例，缓解了业界对AI出口管制可能扼杀创新的担忧。目前，功能更强大的Fable 5模型已在全球范围内对合作伙伴重新开放。", "id": 7, "stocks": [{"displayName": "Amazon", "name": "AMZN", "note": ""}, {"displayName": "Google", "name": "GOOGL", "note": "作为Anthropic的主要云合作伙伴和投资者，将受益于其模型在全球范围内的推广和应用"}], "title": "美国政府解除对Anthropic公司AI模型的出口限制"}, {"body": "由阿布扎比政府支持的投资公司MGX宣布，其首只专注于人工智能的基金已成功募资490亿美元，超过原定目标，成为有史以来规模最大的AI专项基金之一。该基金已投资OpenAI和xAI等头部公司，并计划未来每年投入百亿美元。这一事件与Together AI（融资8亿美元）、Twelve Labs（融资1亿美元）等初创公司的成功融资一道，凸显了全球主权财富基金和私人资本正以前所未有的规模涌入AI领域，旨在抢占从芯片到数据中心的战略制高点。", "id": 8, "stocks": [{"displayName": "Nvidia", "name": "NVDA", "note": "作为AI芯片的核心供应商，是巨额资本投入的主要受益者"}, {"displayName": "Equinix", "name": "EQIX", "note": "作为数据中心REIT，受益于算力基础设施的持续扩张"}], "title": "阿布扎比MGX为AI基金成功募资490亿美元"}, {"body": "位于加州的核能初创公司Valar Atomics，近日成功利用其研发的先进反应堆产生的电力，驱动了一枚英伟达Blackwell AI芯片。这是美国首次实现利用下一代核反应堆为AI硬件直接供电，标志着解决AI巨大能耗问题的探索迈出了新的一步。尽管该反应堆尚处早期阶段，但Valar Atomics已与Nvidia(NVDA) 达成合作协议，旨在共同开发由核能驱动的数据中心。这一跨界合作开辟了为未来AI基础设施提供稳定、清洁、高密度能源的新路径。", "id": 9, "stocks": [{"displayName": "Nvidia", "name": "NVDA", "note": "合作有助于解决其客户面临的电力瓶颈"}, {"displayName": "Oklo", "name": "OKLO", "note": "作为已上市的小型核反应堆公司，受益于市场对核能供电数据中心概念的关注度提升"}], "title": "核能初创公司首次利用先进反应堆为AI芯片供电"}, {"body": "根据Edmunds.com的数据，2026年第二季度，美国新车的平均月供攀升至777美元的历史新高，平均贷款总额也达到44,156美元的峰值。超过五分之一的购车者月供超过1000美元，反映出美国汽车市场正面临严重的支付能力危机。这一趋势表明，在高通胀和高车价的双重压力下，美国家庭正通过延长贷款期限和承担更高利息来维持汽车消费，增加了消费者违约风险和长期财务压力。这可能对汽车销售和汽车金融公司的未来业绩构成挑战。", "id": 10, "stocks": [{"displayName": "Carvana", "name": "CVNA", "note": "受益于消费者转向价格更低的二手车市场"}, {"displayName": "AutoZone", "name": "AZO", "note": "车主可能延长旧车使用年限，增加对汽车维修和零部件的需求"}], "title": "美国新车月均还款额升至777美元创历史新高"}, {"body": "法国集装箱航运巨头达飞集团（CMA CGM）已接近达成协议，将以14亿美元现金收购联邦快递（FedEx）旗下的第三方物流业务。这笔交易是达飞集团在物流领域，特别是在美国市场进行扩张的又一重要举措。对于FedEx(FDX) 而言，出售非核心的物流部门有助于其聚焦核心的快递运输业务。这笔交易也反映出全球航运和物流行业在经历了疫情期间的繁荣后，正通过并购重组来优化业务结构和提升竞争力。", "id": 11, "stocks": [{"displayName": "FedEx", "name": "FDX", "note": "通过资产剥离优化业务结构，回笼资金"}], "title": "法国达飞集团将以14亿美元收购联邦快递物流部门"}, {"body": "美国农业部（USDA）宣布将提供5亿美元资金，用于支持新建和扩建美国本土的化肥生产设施。该政策旨在应对近年来因地缘政治、关税和供应链中断导致的化肥价格飙升问题。此举是美国政府保障本国粮食安全和降低农业生产成本系列措施的一部分，优先支持能够立即投产的氮肥项目。这反映出在供应链“武器化”的背景下，确保关键生产资料的本土供应已成为美国的国家战略重点。", "id": 12, "stocks": [{"displayName": "CF Industries", "name": "CF", "note": ""}, {"displayName": "Nutrien", "name": "NTR", "note": "作为北美主要的氮肥生产商，将直接受益于政府的资金支持和行业扶持政策"}], "title": "美国农业部投资5亿美元以加速本土化肥设施建设"}]}]}</script>
+<script>
+(function(){
+var g = GD;
+if(!g) return;
+
+// 浮动栏
+document.getElementById("fb-info").textContent = g.edition.dateDisplay + " " + g.edition.weekday + " · " + g.edition.label;
+
+// info-row
+document.getElementById("update-time").textContent = "更新于 · " + g.edition.updateTime;
+
+// 统计卡片
+document.getElementById("stat-news").textContent = g.stats.newsCount;
+document.getElementById("stat-stocks").textContent = g.stats.stockCount;
+document.getElementById("stat-sections").textContent = g.stats.sectionCount;
+
+// 页面标题
+document.title = "蓝宝书Max · " + g.edition.dateDisplay + " " + g.edition.weekday + " " + g.edition.label;
+document.querySelector('meta[property="og:title"]').setAttribute("content", document.title);
+document.querySelector('meta[property="og:description"]').setAttribute("content", g.stats.newsCount + "条全球新闻 · " + g.stats.stockCount + "只相关标的");
+
+// 浮动栏阴影
+(function(){
+var fb = document.getElementById("float-bar");
+if(fb){window.addEventListener("scroll",function(){fb.style.boxShadow = window.scrollY > 10 ? "0 2px 12px rgba(0,0,0,.15)" : "none";})}
+})();
+
+// 渲染内容
+var ca = document.getElementById("content-area");
+var html = "";
+g.sections.forEach(function(s){
+  html += '<div class="sc"><div class="sc-hd"><span class="sc-icon">' + (s.icon || "") + '</span><span class="sc-title">' + s.name + '</span><span class="sc-sub">' + s.news.length + '条</span></div><div class="sc-body">';
+  s.news.forEach(function(n){
+    html += '<div class="news-card"><div class="news-num">#' + n.id + '</div><div class="news-title">' + n.title + '</div><div class="news-body">' + n.body + '</div>';
+    if(n.stocks && n.stocks.length > 0){
+      html += '<div class="stock-tags">';
+      n.stocks.forEach(function(st){var dn=st.displayName||st.name;html += '<span class="stock-tag"><span class="stock-company">'+dn+'</span>(<span class="stock-ticker">'+st.name+'</span>)<span class="note"> · '+(st.note||'')+'</span></span>';});
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div></div>';
+});
+ca.innerHTML = html;
+})();
+
+function copyWx(){
+navigator.clipboard.writeText('bluebookmax').then(function(){
+var e = document.getElementById('gv-copy-ok');
+if(e){e.classList.add('show');setTimeout(function(){e.classList.remove('show')},2000)}
+}).catch(function(){});
+return false;
+}
+</script>
+</body>
+</html>
