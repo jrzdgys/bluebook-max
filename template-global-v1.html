@@ -160,7 +160,7 @@ if(!g) return;
 document.getElementById("fb-info").textContent = g.edition.dateDisplay + " " + g.edition.weekday + " · " + g.edition.label;
 
 // info-row
-document.getElementById("update-time").textContent = "更新于 · " + g.edition.updateTime;
+var u=g.edition.updateTime||"",tp=u.split(" ");document.getElementById("update-time").textContent="更新于 · "+(tp[1]||"");
 
 // 统计卡片
 document.getElementById("stat-news").textContent = g.stats.newsCount;
