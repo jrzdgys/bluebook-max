@@ -458,6 +458,22 @@
       "date": "2026-07-01",
       "label": "全球版",
       "displayDate": "2026年7月1日"
+    },
+    {
+      "file": "mc-20260702.html",
+      "edition": "mc",
+      "date": "2026-07-02",
+      "label": "晨会版",
+      "displayDate": "2026年7月2日",
+      "updateTime": "2026-07-02 07:06",
+      "stats": {
+        "topics": 20,
+        "opportunities": 2,
+        "avgHeat": 78,
+        "stocks": 175,
+        "crossCount": 18
+      },
+      "title": "蓝宝书Max·2026年7月2日 周四 晨会版"
     }
   ]
 }
